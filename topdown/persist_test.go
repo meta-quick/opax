@@ -69,7 +69,7 @@ func TestCountAdd(t *testing.T) {
 	compiler := compileModules([]string{
 		`
 		package test
-		p { timed.Counter.Add("api",10,1000) > 10}
+		p { timed.Counter.Add("api",100,1000) > 100}
 		`,
 	})
 
