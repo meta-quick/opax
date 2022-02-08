@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/internal/file/archive"
+	"github.com/meta-quick/opa/internal/file/archive"
 
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/util/test"
 )
 
 const testReadLimit = (1024 * 1024) + 1

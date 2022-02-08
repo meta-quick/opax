@@ -8,8 +8,8 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/topdown/builtins"
 )
 
 func builtinRegoParseModule(a, b ast.Value) (ast.Value, error) {

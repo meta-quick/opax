@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/cockroachdb/pebble"
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/meta-quick/opa/ast"
 	"strconv"
 	"time"
 )

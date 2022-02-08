@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/loader"
+	"github.com/meta-quick/opa/loader"
 
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/util/test"
 )
 
 func TestBuildProducesBundle(t *testing.T) {

@@ -121,7 +121,7 @@ The `quick_start.yaml` manifest defines the following resources:
     ```live:example:output
     ```
 
-    An example of the complete input received by OPA can be seen [here](https://github.com/open-policy-agent/opa-envoy-plugin/tree/main/examples/istio#example-input).
+    An example of the complete input received by OPA can be seen [here](https://github.com/meta-quick/opa-envoy-plugin/tree/main/examples/istio#example-input).
 
     > In typical deployments the policy would either be built into the OPA container
     > image or it would fetched dynamically via the [Bundle
@@ -192,4 +192,4 @@ This tutorial also showed a sample OPA policy that returns a `boolean` decision
 to indicate whether a request should be allowed or not.
 
 More details about the tutorial can be seen
-[here](https://github.com/open-policy-agent/opa-envoy-plugin/tree/main/examples/istio).
+[here](https://github.com/meta-quick/opa-envoy-plugin/tree/main/examples/istio).

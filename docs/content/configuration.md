@@ -610,10 +610,10 @@ plugins:
 package plugins
 
 import (
-	"github.com/open-policy-agent/opa/plugins"
-	"github.com/open-policy-agent/opa/plugins/rest"
-	"github.com/open-policy-agent/opa/runtime"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opa/plugins/rest"
+	"github.com/meta-quick/opa/runtime"
+	"github.com/meta-quick/opa/util"
 )
 
 type Config struct {

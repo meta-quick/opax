@@ -437,7 +437,7 @@ Parameter | Input/Output | Type | Description
 # Test Suite
 
 The OPA repository contains a [test
-suite](https://github.com/open-policy-agent/opa/tree/main/test/cases/testdata)
+suite](https://github.com/meta-quick/opa/tree/main/test/cases/testdata)
 that is used internally to validate both the Go interpreter and the Wasm
 compiler. If you are implementing your own compiler or interpreter we highly
 recommend integrating the test suite into your own development environment so
@@ -448,10 +448,10 @@ cases. Each test cases specifies a query, set of modules, data values, and
 expected outputs or expected error conditions.
 
 To get started with the test suite, see the [Hello
-World](https://github.com/open-policy-agent/opa/blob/main/test/cases/testdata/helloworld/test-helloworld-1.yaml)
+World](https://github.com/meta-quick/opa/blob/main/test/cases/testdata/helloworld/test-helloworld-1.yaml)
 example.
 
 The following examples show how the test suite is used internally:
 
-* [`github.com/open-policy-agent/opa/topdown#TestRego`](https://github.com/open-policy-agent/opa/blob/main/topdown/exported_test.go)
-* [`github.com/open-policy-agent/opa/test/wasm/cmd/wasm-rego-testgen`](https://github.com/open-policy-agent/opa/blob/main/test/wasm/cmd/wasm-rego-testgen/main.go)
+* [`github.com/meta-quick/opa/topdown#TestRego`](https://github.com/meta-quick/opa/blob/main/topdown/exported_test.go)
+* [`github.com/meta-quick/opa/test/wasm/cmd/wasm-rego-testgen`](https://github.com/meta-quick/opa/blob/main/test/wasm/cmd/wasm-rego-testgen/main.go)

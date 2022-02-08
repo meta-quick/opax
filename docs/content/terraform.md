@@ -23,7 +23,7 @@ and delete auto-scaling groups and servers.
 This tutorial requires
 
 * [Terraform 0.12.6](https://releases.hashicorp.com/terraform/0.12.6/)
-* [OPA](https://github.com/open-policy-agent/opa/releases)
+* [OPA](https://github.com/meta-quick/opa/releases)
 
 (This tutorial *should* also work with the [latest version of Terraform](https://www.terraform.io/downloads.html), but
 it is untested.  Contributions welcome!)

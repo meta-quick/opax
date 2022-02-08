@@ -27,7 +27,7 @@ algolia_api_key = "26fa0633923a7cb9432cf2851b77dca6"
 twitter = "OpenPolicyAgent"
 medium = "https://blog.openpolicyagent.org"
 slack = "https://slack.openpolicyagent.org"
-github = "https://github.com/open-policy-agent/opa"
+github = "https://github.com/meta-quick/opa"
 discussions = "https://github.com/open-policy-agent/feedback/discussions"
 
 [params.logos]

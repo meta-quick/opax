@@ -13,8 +13,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/test/e2e"
-	"github.com/open-policy-agent/opa/tracing"
+	"github.com/meta-quick/opa/test/e2e"
+	"github.com/meta-quick/opa/tracing"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/sdk/trace"

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/util/test"
 )
 
 const formatted = `package test

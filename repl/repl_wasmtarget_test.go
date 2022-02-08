@@ -11,7 +11,7 @@ import (
 	"context"
 	"testing"
 
-	_ "github.com/open-policy-agent/opa/features/wasm"
+	_ "github.com/meta-quick/opa/features/wasm"
 )
 
 func TestReplWasmTarget(t *testing.T) {

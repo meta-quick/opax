@@ -7,8 +7,8 @@ package topdown
 import (
 	"strconv"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/topdown/builtins"
 )
 
 func builtinToNumber(a ast.Value) (ast.Value, error) {

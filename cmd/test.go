@@ -12,17 +12,17 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/compile"
-	"github.com/open-policy-agent/opa/cover"
-	"github.com/open-policy-agent/opa/internal/runtime"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/storage/inmem"
-	"github.com/open-policy-agent/opa/tester"
-	"github.com/open-policy-agent/opa/topdown"
-	"github.com/open-policy-agent/opa/topdown/lineage"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/bundle"
+	"github.com/meta-quick/opa/compile"
+	"github.com/meta-quick/opa/cover"
+	"github.com/meta-quick/opa/internal/runtime"
+	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opa/tester"
+	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opa/topdown/lineage"
+	"github.com/meta-quick/opa/util"
 )
 
 const (

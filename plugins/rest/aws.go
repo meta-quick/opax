@@ -23,7 +23,7 @@ import (
 
 	"github.com/go-ini/ini"
 
-	"github.com/open-policy-agent/opa/logging"
+	"github.com/meta-quick/opa/logging"
 )
 
 const (

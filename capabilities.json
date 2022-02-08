@@ -3424,6 +3424,40 @@
       }
     },
     {
+      "name": "timed.Counter.Add",
+      "decl": {
+        "args": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "result": {
+          "type": "number"
+        },
+        "type": "function"
+      }
+    },
+    {
+      "name": "timed.Counter.Del",
+      "decl": {
+        "args": [
+          {
+            "type": "string"
+          }
+        ],
+        "result": {
+          "type": "boolean"
+        },
+        "type": "function"
+      }
+    },
+    {
       "name": "to_number",
       "decl": {
         "args": [

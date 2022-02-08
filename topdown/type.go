@@ -5,7 +5,7 @@
 package topdown
 
 import (
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/meta-quick/opa/ast"
 )
 
 func builtinIsNumber(a ast.Value) (ast.Value, error) {

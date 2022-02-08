@@ -15,11 +15,11 @@ import (
 
 	"github.com/ghodss/yaml"
 
-	"github.com/open-policy-agent/opa/internal/strvals"
-	"github.com/open-policy-agent/opa/keys"
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/plugins/rest"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/internal/strvals"
+	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opa/plugins/rest"
+	"github.com/meta-quick/opa/util"
 )
 
 // ServiceOptions stores the options passed to ParseServicesConfig

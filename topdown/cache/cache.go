@@ -8,11 +8,11 @@ package cache
 import (
 	"container/list"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/meta-quick/opa/ast"
 
 	"sync"
 
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/util"
 )
 
 const (

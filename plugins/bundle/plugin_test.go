@@ -23,20 +23,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-policy-agent/opa/internal/file/archive"
+	"github.com/meta-quick/opa/internal/file/archive"
 
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/util/test"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/config"
-	"github.com/open-policy-agent/opa/download"
-	"github.com/open-policy-agent/opa/keys"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/plugins"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/storage/inmem"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/bundle"
+	"github.com/meta-quick/opa/config"
+	"github.com/meta-quick/opa/download"
+	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opa/util"
 )
 
 func TestPluginOneShot(t *testing.T) {

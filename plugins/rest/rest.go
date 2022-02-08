@@ -16,10 +16,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/open-policy-agent/opa/internal/version"
-	"github.com/open-policy-agent/opa/keys"
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/internal/version"
+	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opa/util"
 )
 
 const (

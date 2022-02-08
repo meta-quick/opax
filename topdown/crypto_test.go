@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/internal/jwx/jwk"
+	"github.com/meta-quick/opa/internal/jwx/jwk"
 )
 
 func TestX509ParseAndVerify(t *testing.T) {

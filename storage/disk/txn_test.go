@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/util"
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opa/util/test"
 )
 
 func randomString(n int) string {

@@ -13,9 +13,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/types"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opa/util"
 )
 
 func TestOutputVarsForNode(t *testing.T) {
@@ -4574,7 +4574,7 @@ dataref = true { data }`,
 func TestCompilerCheckDynamicRecursion(t *testing.T) {
 	// This test tries to circumvent the recursion check by using dynamic
 	// references.  For more background info, see
-	// <https://github.com/open-policy-agent/opa/issues/1565>.
+	// <https://github.com/meta-quick/opa/issues/1565>.
 
 	for note, mod := range map[string]*Module{
 		"recursion": MustParseModule(`

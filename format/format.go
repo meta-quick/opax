@@ -11,7 +11,7 @@ import (
 	"regexp"
 	"sort"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/meta-quick/opa/ast"
 )
 
 // defaultLocationFile is the file name used in `Ast()` for terms

@@ -5,8 +5,8 @@
 package ast
 
 import (
-	"github.com/open-policy-agent/opa/types"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opa/util"
 )
 
 // TypeEnv contains type info for static analysis such as type checking.

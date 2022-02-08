@@ -101,11 +101,11 @@ standard GitHub fork workflow. See [OPA Dev Instructions](DEVELOPMENT.md)
 
    > Note: Only OPA maintainers will have permissions to perform this step.
 
-1. Open browser and go to [https://github.com/open-policy-agent/opa/releases](https://github.com/open-policy-agent/opa/releases)
+1. Open browser and go to [https://github.com/meta-quick/opa/releases](https://github.com/meta-quick/opa/releases)
 
 1. Update the draft release (may take up to 20 min for the draft to become
    available, track its process under
-   [https://github.com/open-policy-agent/opa/actions](https://github.com/open-policy-agent/opa/actions)).
+   [https://github.com/meta-quick/opa/actions](https://github.com/meta-quick/opa/actions)).
    Ensure everything looks OK and publish when ready.
 
 ## Notes

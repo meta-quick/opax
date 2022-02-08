@@ -3,7 +3,7 @@ package jwk
 import (
 	"github.com/pkg/errors"
 
-	"github.com/open-policy-agent/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opa/internal/jwx/jwa"
 )
 
 // Convenience constants for common JWK parameters

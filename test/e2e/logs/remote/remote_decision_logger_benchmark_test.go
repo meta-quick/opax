@@ -16,11 +16,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/open-policy-agent/opa/test/authz"
-	testAuthz "github.com/open-policy-agent/opa/test/authz"
-	"github.com/open-policy-agent/opa/test/e2e"
-	testLogs "github.com/open-policy-agent/opa/test/e2e/logs"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/test/authz"
+	testAuthz "github.com/meta-quick/opa/test/authz"
+	"github.com/meta-quick/opa/test/e2e"
+	testLogs "github.com/meta-quick/opa/test/e2e/logs"
+	"github.com/meta-quick/opa/util"
 )
 
 var testRuntime *e2e.TestRuntime

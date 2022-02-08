@@ -15,7 +15,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/collectors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/open-policy-agent/opa/metrics"
+	"github.com/meta-quick/opa/metrics"
 )
 
 // Provider wraps a metrics.Metrics provider with a Prometheus registry that can

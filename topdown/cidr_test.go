@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/storage/inmem"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opa/storage/inmem"
 )
 
 func TestNetCIDRExpandCancellation(t *testing.T) {

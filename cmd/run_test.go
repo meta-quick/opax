@@ -9,7 +9,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/open-policy-agent/opa/test/e2e"
+	"github.com/meta-quick/opa/test/e2e"
 )
 
 func TestRunServerBase(t *testing.T) {

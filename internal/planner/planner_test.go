@@ -10,8 +10,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/ir"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/internal/ir"
 )
 
 func TestPlannerHelloWorld(t *testing.T) {
@@ -65,7 +65,7 @@ func TestPlannerHelloWorld(t *testing.T) {
 			queries: []string{"not input.x.y = 1"},
 		},
 		{
-			note:    "not and known vars", // https://github.com/open-policy-agent/opa/issues/3279
+			note:    "not and known vars", // https://github.com/meta-quick/opa/issues/3279
 			queries: []string{`x = "foo"; not data.tenants[x]`},
 		},
 		{

@@ -17,9 +17,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/server/types"
-	"github.com/open-policy-agent/opa/topdown/print"
+	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opa/server/types"
+	"github.com/meta-quick/opa/topdown/print"
 	"github.com/sirupsen/logrus"
 )
 
@@ -118,11 +118,11 @@ func (h *LoggingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
 
 	if _, ok := params["watch"]; ok {
-		h.logger.Warn("Deprecated 'watch' parameter specified in request. See https://github.com/open-policy-agent/opa/releases/tag/v0.23.0 for details.")
+		h.logger.Warn("Deprecated 'watch' parameter specified in request. See https://github.com/meta-quick/opa/releases/tag/v0.23.0 for details.")
 	}
 
 	if _, ok := params["partial"]; ok {
-		h.logger.Warn("Deprecated 'partial' parameter specified in request. See https://github.com/open-policy-agent/opa/releases/tag/v0.23.0 for details.")
+		h.logger.Warn("Deprecated 'partial' parameter specified in request. See https://github.com/meta-quick/opa/releases/tag/v0.23.0 for details.")
 	}
 
 	h.inner.ServeHTTP(recorder, r)

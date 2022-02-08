@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/open-policy-agent/opa/logging"
+	"github.com/meta-quick/opa/logging"
 	"github.com/sirupsen/logrus"
 )
 

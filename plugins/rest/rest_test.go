@@ -30,13 +30,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/internal/jwx/jwa"
-	"github.com/open-policy-agent/opa/internal/jwx/jws"
-	"github.com/open-policy-agent/opa/keys"
+	"github.com/meta-quick/opa/bundle"
+	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opa/internal/jwx/jws"
+	"github.com/meta-quick/opa/keys"
 
-	"github.com/open-policy-agent/opa/internal/version"
-	"github.com/open-policy-agent/opa/util/test"
+	"github.com/meta-quick/opa/internal/version"
+	"github.com/meta-quick/opa/util/test"
 )
 
 const keyID = "key1"
@@ -1468,7 +1468,7 @@ func TestOauth2ClientCredentialsJwtAuthentication(t *testing.T) {
 	}
 }
 
-// https://github.com/open-policy-agent/opa/issues/3255
+// https://github.com/meta-quick/opa/issues/3255
 func TestS3SigningInstantiationInitializesLogger(t *testing.T) {
 	config := `{
 			"name": "foo",

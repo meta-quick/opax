@@ -67,8 +67,8 @@ import (
     "fmt"
     "strings"
 
-    "github.com/open-policy-agent/opa/ast"
-    "github.com/open-policy-agent/opa/topdown/builtins"
+    "github.com/meta-quick/opa/ast"
+    "github.com/meta-quick/opa/topdown/builtins"
 )
 
 // implements topdown.BuiltinFunc
@@ -138,7 +138,7 @@ cases:
 
 The above test cases can be run separate from all other tests through: `go test ./topdown -v -run 'TestRego/repeat'`
 
-See [test/cases/testdata/helloworld](https://github.com/open-policy-agent/opa/blob/main/test/cases/testdata/helloworld)
+See [test/cases/testdata/helloworld](https://github.com/meta-quick/opa/blob/main/test/cases/testdata/helloworld)
 for a more detailed example of how to implement tests for your built-in functions.
 
 > Note: We can manually test our new built-in function by [building](../contrib-development#getting-started) 

@@ -6,7 +6,7 @@ import (
 	"crypto/rand"
 	"io"
 
-	"github.com/open-policy-agent/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opa/internal/jwx/jwa"
 
 	"github.com/pkg/errors"
 )

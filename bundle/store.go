@@ -11,11 +11,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/json/patch"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opa/internal/json/patch"
+	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opa/util"
 )
 
 // BundlesBasePath is the storage path used for storing bundle metadata

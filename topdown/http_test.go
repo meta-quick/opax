@@ -26,14 +26,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-policy-agent/opa/internal/version"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/topdown/builtins"
-	"github.com/open-policy-agent/opa/tracing"
+	"github.com/meta-quick/opa/internal/version"
+	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opa/tracing"
 
-	iCache "github.com/open-policy-agent/opa/topdown/cache"
+	iCache "github.com/meta-quick/opa/topdown/cache"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/meta-quick/opa/ast"
 )
 
 // The person Type

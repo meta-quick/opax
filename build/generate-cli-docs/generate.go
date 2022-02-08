@@ -12,7 +12,7 @@ import (
 
 	"github.com/spf13/cobra/doc"
 
-	"github.com/open-policy-agent/opa/cmd"
+	"github.com/meta-quick/opa/cmd"
 )
 
 const fileHeader = `---

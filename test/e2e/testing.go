@@ -21,12 +21,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-policy-agent/opa/internal/uuid"
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/logging/test"
-	"github.com/open-policy-agent/opa/runtime"
-	"github.com/open-policy-agent/opa/server/types"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/meta-quick/opa/internal/uuid"
+	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opa/logging/test"
+	"github.com/meta-quick/opa/runtime"
+	"github.com/meta-quick/opa/server/types"
+	"github.com/meta-quick/opa/util"
 )
 
 const (
