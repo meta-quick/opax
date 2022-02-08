@@ -1,3 +1,5 @@
+# github.com/DataDog/zstd v1.4.5
+github.com/DataDog/zstd
 # github.com/OneOfOne/xxhash v1.2.8
 ## explicit
 github.com/OneOfOne/xxhash
@@ -19,6 +21,57 @@ github.com/cenkalti/backoff/v4
 github.com/cespare/xxhash
 # github.com/cespare/xxhash/v2 v2.1.2
 github.com/cespare/xxhash/v2
+# github.com/cockroachdb/errors v1.8.1
+github.com/cockroachdb/errors
+github.com/cockroachdb/errors/assert
+github.com/cockroachdb/errors/barriers
+github.com/cockroachdb/errors/contexttags
+github.com/cockroachdb/errors/domains
+github.com/cockroachdb/errors/errbase
+github.com/cockroachdb/errors/errorspb
+github.com/cockroachdb/errors/errutil
+github.com/cockroachdb/errors/hintdetail
+github.com/cockroachdb/errors/issuelink
+github.com/cockroachdb/errors/markers
+github.com/cockroachdb/errors/oserror
+github.com/cockroachdb/errors/report
+github.com/cockroachdb/errors/safedetails
+github.com/cockroachdb/errors/secondary
+github.com/cockroachdb/errors/stdstrings
+github.com/cockroachdb/errors/telemetrykeys
+github.com/cockroachdb/errors/withstack
+# github.com/cockroachdb/logtags v0.0.0-20190617123548-eb05cc24525f
+github.com/cockroachdb/logtags
+# github.com/cockroachdb/pebble v0.0.0-20220205134134-9faac799ba03
+## explicit
+github.com/cockroachdb/pebble
+github.com/cockroachdb/pebble/internal/arenaskl
+github.com/cockroachdb/pebble/internal/base
+github.com/cockroachdb/pebble/internal/batchskl
+github.com/cockroachdb/pebble/internal/bytealloc
+github.com/cockroachdb/pebble/internal/cache
+github.com/cockroachdb/pebble/internal/crc
+github.com/cockroachdb/pebble/internal/fastrand
+github.com/cockroachdb/pebble/internal/humanize
+github.com/cockroachdb/pebble/internal/intern
+github.com/cockroachdb/pebble/internal/invariants
+github.com/cockroachdb/pebble/internal/keyspan
+github.com/cockroachdb/pebble/internal/manifest
+github.com/cockroachdb/pebble/internal/manual
+github.com/cockroachdb/pebble/internal/private
+github.com/cockroachdb/pebble/internal/rangekey
+github.com/cockroachdb/pebble/internal/rate
+github.com/cockroachdb/pebble/internal/rawalloc
+github.com/cockroachdb/pebble/record
+github.com/cockroachdb/pebble/sstable
+github.com/cockroachdb/pebble/vfs
+github.com/cockroachdb/pebble/vfs/atomicfs
+# github.com/cockroachdb/redact v1.0.8
+github.com/cockroachdb/redact
+github.com/cockroachdb/redact/internal
+github.com/cockroachdb/redact/internal/fmtsort
+# github.com/cockroachdb/sentry-go v0.6.1-cockroachdb.2
+github.com/cockroachdb/sentry-go
 # github.com/cpuguy83/go-md2man/v2 v2.0.1
 github.com/cpuguy83/go-md2man/v2/md2man
 # github.com/davecgh/go-spew v1.1.1
@@ -76,6 +129,8 @@ github.com/gobwas/glob/util/runes
 github.com/gobwas/glob/util/strings
 # github.com/gogo/protobuf v1.3.2
 github.com/gogo/protobuf/proto
+github.com/gogo/protobuf/sortkeys
+github.com/gogo/protobuf/types
 # github.com/golang/glog v1.0.0
 ## explicit
 github.com/golang/glog
@@ -113,8 +168,11 @@ github.com/klauspost/compress/huff0
 github.com/klauspost/compress/internal/snapref
 github.com/klauspost/compress/zstd
 github.com/klauspost/compress/zstd/internal/xxhash
+# github.com/kr/pretty v0.2.0
+github.com/kr/pretty
 # github.com/kr/text v0.2.0
 ## explicit
+github.com/kr/text
 # github.com/mattn/go-runewidth v0.0.9
 github.com/mattn/go-runewidth
 # github.com/matttproud/golang_protobuf_extensions v1.0.1
@@ -238,6 +296,8 @@ go.opentelemetry.io/proto/otlp/trace/v1
 go.uber.org/automaxprocs/internal/cgroups
 go.uber.org/automaxprocs/internal/runtime
 go.uber.org/automaxprocs/maxprocs
+# golang.org/x/exp v0.0.0-20200513190911-00229845015e
+golang.org/x/exp/rand
 # golang.org/x/net v0.0.0-20211111083644-e5c967477495
 ## explicit
 golang.org/x/net/bpf

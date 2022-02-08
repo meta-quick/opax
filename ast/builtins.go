@@ -265,6 +265,11 @@ var DefaultBuiltins = [...]*Builtin{
 	// Printing
 	Print,
 	InternalPrint,
+
+	//Timed Counter
+	//TimedCounter,
+	TimedCounterAdd,
+	TimedCounterDelete,
 }
 
 // BuiltinMap provides a convenient mapping of built-in names to
@@ -2387,6 +2392,38 @@ var InternalPrint = &Builtin{
 	Decl: types.NewFunction([]types.Type{types.NewArray(nil, types.NewSet(types.A))}, nil),
 }
 
+//Timed Counters
+var TimedCounter = &Builtin{
+	Name: "timed.Counter",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+		),
+		types.NewObject(nil, types.NewDynamicProperty(types.S, types.A)),
+	),
+}
+
+var TimedCounterAdd = &Builtin{
+	Name: "timed.Counter.Add",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+			types.N,
+			types.N,
+		),
+		types.N,
+	),
+}
+
+var TimedCounterDelete = &Builtin{
+	Name: "timed.Counter.Del",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+		),
+		types.B,
+	),
+}
 /**
  * Deprecated built-ins.
  */
