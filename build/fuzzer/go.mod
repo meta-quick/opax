@@ -1,4 +1,4 @@
-module github.com/open-policy-agent/fuzz-opa
+module github.com/meta-quick/fuzz-opa
 
 go 1.15
 
