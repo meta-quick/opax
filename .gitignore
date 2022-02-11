@@ -20,7 +20,7 @@ policy.wasm
 .go
 release-notes.md
 bundle.tar.gz
-
+vendor/github.com/bytecodealliance/wasmtime-go/build/*
 # ci artifacts
 fuzzit
 ast-fuzzer
