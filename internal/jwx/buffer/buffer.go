@@ -6,7 +6,7 @@ package buffer
 import (
 	"encoding/base64"
 	"encoding/binary"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 
 	"github.com/pkg/errors"
 )
@@ -99,14 +99,14 @@ func (b Buffer) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to encode to base64")
 	}
-	return json.Marshal(string(v))
+	return sonic.Marshal(string(v))
 }
 
 // UnmarshalJSON unmarshals from a JSON string into a Buffer, after decoding it
 // with base64.RawURLEncoding
 func (b *Buffer) UnmarshalJSON(data []byte) error {
 	var x string
-	if err := json.Unmarshal(data, &x); err != nil {
+	if err := sonic.Unmarshal(data, &x); err != nil {
 		return errors.Wrap(err, "failed to unmarshal JSON")
 	}
 	return b.Base64Decode([]byte(x))

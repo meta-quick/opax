@@ -1,9 +1,10 @@
 package topdown
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
+	//"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/cockroachdb/pebble"
 	"github.com/meta-quick/opa/ast"
 	"strconv"
@@ -191,14 +192,14 @@ func CounterAdd(key,value,duration ast.Value) ( output ast.Value, err error){
 		if value, err := store.GetBytes(lkey.String()) ; err == nil {
 		    lduration, _ :=	lduration.Int64()
 			counter = NewCounter(lduration)
-			json.Unmarshal(value,&counter)
+			sonic.Unmarshal(value,&counter)
 		} else {
 			lduration, _ :=	lduration.Int64()
 			counter = NewCounter(lduration)
 		}
 		lvalue, _ := lvalue.Int64()
 		counter.Add(lvalue)
-		value, _ := json.Marshal(counter)
+		value, _ := sonic.Marshal(counter)
 		store.SetBytes(lkey.String(),value)
 		output = ast.Number(fmt.Sprintf("%d", counter.GetValue()))
 	} else {

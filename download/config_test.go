@@ -5,7 +5,7 @@
 package download
 
 import (
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"testing"
 	"time"
 )
@@ -79,7 +79,7 @@ func TestConfigValidation(t *testing.T) {
 
 		var config Config
 
-		if err := json.Unmarshal([]byte(test.input), &config); err != nil {
+		if err := sonic.Unmarshal([]byte(test.input), &config); err != nil {
 			t.Fatal(err)
 		}
 

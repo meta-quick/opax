@@ -7,7 +7,7 @@ package types
 import (
 	"encoding/json"
 	"fmt"
-
+	//"github.com/bytedance/sonic"
 	"github.com/meta-quick/opa/util"
 )
 

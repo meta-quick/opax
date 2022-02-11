@@ -7,15 +7,14 @@ package bundle
 import (
 	"context"
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
-	"strings"
-
+	"github.com/bytedance/sonic"
 	"github.com/meta-quick/opa/ast"
 	"github.com/meta-quick/opa/internal/json/patch"
 	"github.com/meta-quick/opa/metrics"
 	"github.com/meta-quick/opa/storage"
 	"github.com/meta-quick/opa/util"
+	"strings"
 )
 
 // BundlesBasePath is the storage path used for storing bundle metadata
@@ -137,7 +136,7 @@ func ReadWasmMetadataFromStore(ctx context.Context, store storage.Store, txn sto
 		return nil, err
 	}
 
-	bs, err := json.Marshal(value)
+	bs, err := sonic.Marshal(value)
 	if err != nil {
 		return nil, fmt.Errorf("corrupt wasm manifest data")
 	}
@@ -397,7 +396,7 @@ func activateDeltaBundles(opts *ActivateOpts, bundles map[string]*Bundle) error 
 			return err
 		}
 
-		bs, err := json.Marshal(value)
+		bs, err := sonic.Marshal(value)
 		if err != nil {
 			return fmt.Errorf("corrupt manifest data: %w", err)
 		}

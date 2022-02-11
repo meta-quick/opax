@@ -6,7 +6,9 @@ package ast
 
 import (
 	"bytes"
-	"encoding/json"
+	"github.com/bytedance/sonic"
+
+	//"encoding/json"
 	"fmt"
 	"math/rand"
 	"strings"
@@ -248,7 +250,7 @@ type (
 )
 
 func (s *Annotations) String() string {
-	bs, _ := json.Marshal(s)
+	bs, _ := sonic.Marshal(s)
 	return string(bs)
 }
 
@@ -331,7 +333,7 @@ func (s *SchemaAnnotation) Compare(other *SchemaAnnotation) int {
 }
 
 func (s *SchemaAnnotation) String() string {
-	bs, _ := json.Marshal(s)
+	bs, _ := sonic.Marshal(s)
 	return string(bs)
 }
 
@@ -967,7 +969,7 @@ func (body Body) MarshalJSON() ([]byte, error) {
 	if len(body) == 0 {
 		return []byte(`[]`), nil
 	}
-	return json.Marshal([]*Expr(body))
+	return sonic.Marshal([]*Expr(body))
 }
 
 // Append adds the expr to the body and updates the expr's index accordingly.

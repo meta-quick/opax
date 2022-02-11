@@ -7,6 +7,8 @@ package ast
 
 import (
 	"bytes"
+	"github.com/bytedance/sonic"
+
 	"encoding/json"
 	"fmt"
 	"io"
@@ -414,7 +416,7 @@ func (term *Term) MarshalJSON() ([]byte, error) {
 		"type":  TypeName(term.Value),
 		"value": term.Value,
 	}
-	return json.Marshal(d)
+	return sonic.Marshal(d)
 }
 
 func (term *Term) String() string {
@@ -707,7 +709,7 @@ func (Number) IsGround() bool {
 
 // MarshalJSON returns JSON encoded bytes representing num.
 func (num Number) MarshalJSON() ([]byte, error) {
-	return json.Marshal(json.Number(num))
+	return sonic.Marshal(json.Number(num))
 }
 
 func (num Number) String() string {
@@ -1196,7 +1198,7 @@ func (arr *Array) MarshalJSON() ([]byte, error) {
 	if len(arr.elems) == 0 {
 		return []byte(`[]`), nil
 	}
-	return json.Marshal(arr.elems)
+	return sonic.Marshal(arr.elems)
 }
 
 func (arr *Array) String() string {
@@ -1536,7 +1538,7 @@ func (s *set) MarshalJSON() ([]byte, error) {
 	if s.keys == nil {
 		return []byte(`[]`), nil
 	}
-	return json.Marshal(s.keys)
+	return sonic.Marshal(s.keys)
 }
 
 // Sorted returns an Array that contains the sorted elements of s.
@@ -2009,7 +2011,7 @@ func (obj *object) MarshalJSON() ([]byte, error) {
 	for i, node := range obj.keys {
 		sl[i] = Item(node.key, node.value)
 	}
-	return json.Marshal(sl)
+	return sonic.Marshal(sl)
 }
 
 // Merge returns a new Object containing the non-overlapping keys of obj and other. If there are

@@ -5,8 +5,8 @@
 package ast
 
 import (
-	"encoding/json"
-
+	//"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/meta-quick/opa/util"
 )
 
@@ -36,7 +36,7 @@ func (vs *ValueMap) MarshalJSON() ([]byte, error) {
 		})
 		return false
 	})
-	return json.Marshal(tmp)
+	return sonic.Marshal(tmp)
 }
 
 // Copy returns a shallow copy of the ValueMap.

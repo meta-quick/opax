@@ -8,8 +8,8 @@ package compile
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"io"
 	"regexp"
 	"sort"
@@ -212,7 +212,7 @@ func (c *Compiler) Build(ctx context.Context) error {
 			return err
 		}
 
-		bs, err := json.Marshal(c.policy)
+		bs, err := sonic.Marshal(c.policy)
 		if err != nil {
 			return err
 		}

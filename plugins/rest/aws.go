@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"encoding/xml"
 	"errors"
 	"fmt"
@@ -306,7 +306,7 @@ func (cs *awsMetadataCredentialService) refreshFromService() error {
 	}
 
 	var payload metadataPayload
-	err = json.Unmarshal(body, &payload)
+	err = sonic.Unmarshal(body, &payload)
 	if err != nil {
 		return errors.New("failed to parse credential response from metadata service: " + err.Error())
 	}

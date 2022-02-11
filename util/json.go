@@ -7,6 +7,7 @@ package util
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/bytedance/sonic"
 	"fmt"
 	"io"
 	"reflect"
@@ -65,7 +66,7 @@ func MustUnmarshalJSON(bs []byte) interface{} {
 // If the data cannot be encoded, this function will panic. This function is for
 // test purposes.
 func MustMarshalJSON(x interface{}) []byte {
-	bs, err := json.Marshal(x)
+	bs, err := sonic.Marshal(x)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +79,7 @@ func MustMarshalJSON(x interface{}) []byte {
 // rego.Input and inmem's Write operations. Works with both references and
 // values.
 func RoundTrip(x *interface{}) error {
-	bs, err := json.Marshal(x)
+	bs, err := sonic.Marshal(x)
 	if err != nil {
 		return err
 	}

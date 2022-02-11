@@ -9,6 +9,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"github.com/bytedance/sonic"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -377,7 +378,7 @@ func createHTTPRequest(bctx BuiltinContext, obj ast.Object) (*http.Request, *htt
 				return nil, nil, err
 			}
 
-			bodyValBytes, err := json.Marshal(bodyValInterface)
+			bodyValBytes, err := sonic.Marshal(bodyValInterface)
 			if err != nil {
 				return nil, nil, err
 			}
@@ -906,7 +907,7 @@ func (c *interQueryCacheData) formatToAST(forceJSONDecode bool) (ast.Value, erro
 }
 
 func (c *interQueryCacheData) toCacheValue() (*interQueryCacheValue, error) {
-	b, err := json.Marshal(c)
+	b, err := sonic.Marshal(c)
 	if err != nil {
 		return nil, err
 	}

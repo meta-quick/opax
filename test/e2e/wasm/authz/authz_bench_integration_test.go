@@ -9,7 +9,6 @@ package authz
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"flag"
 	"io/ioutil"
 	"os"

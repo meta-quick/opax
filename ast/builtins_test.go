@@ -5,22 +5,21 @@
 package ast
 
 import (
-	"encoding/json"
 	"testing"
-
+	"github.com/bytedance/sonic"
 	"github.com/meta-quick/opa/types"
 )
 
 func TestBuiltinDeclRoundtrip(t *testing.T) {
 
-	bs, err := json.Marshal(Plus)
+	bs, err := sonic.Marshal(Plus)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	var cpy Builtin
 
-	if err := json.Unmarshal(bs, &cpy); err != nil {
+	if err := sonic.Unmarshal(bs, &cpy); err != nil {
 		t.Fatal(err)
 	}
 

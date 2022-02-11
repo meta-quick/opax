@@ -5,7 +5,7 @@ package authz
 
 import (
 	"bytes"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"flag"
 	"io/ioutil"
 	"os"
@@ -111,7 +111,7 @@ func runAuthzBenchmark(b *testing.B, mode testAuthz.InputMode, numPaths int) {
 			Result bool `json:"result"`
 		}{}
 
-		err = json.Unmarshal(body, &parsedBody)
+		err = sonic.Unmarshal(body, &parsedBody)
 		if err != nil {
 			b.Fatalf("Failed to parse body: \n\nActual: %s\n\nExpected: {\"result\": BOOL}\n\nerr = %s ", string(body), err)
 		}

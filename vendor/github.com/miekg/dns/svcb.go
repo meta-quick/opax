@@ -10,7 +10,6 @@ import (
 	"strings"
 )
 
-// SVCBKey is the type of the keys used in the SVCB RR.
 type SVCBKey uint16
 
 // Keys defined in draft-ietf-dnsop-svcb-https-01 Section 12.3.2.
@@ -512,13 +511,8 @@ func (s *SVCBIPv4Hint) parse(b string) error {
 }
 
 func (s *SVCBIPv4Hint) copy() SVCBKeyValue {
-	hint := make([]net.IP, len(s.Hint))
-	for i, ip := range s.Hint {
-		hint[i] = copyIP(ip)
-	}
-
 	return &SVCBIPv4Hint{
-		Hint: hint,
+		append([]net.IP(nil), s.Hint...),
 	}
 }
 
@@ -635,13 +629,8 @@ func (s *SVCBIPv6Hint) parse(b string) error {
 }
 
 func (s *SVCBIPv6Hint) copy() SVCBKeyValue {
-	hint := make([]net.IP, len(s.Hint))
-	for i, ip := range s.Hint {
-		hint[i] = copyIP(ip)
-	}
-
 	return &SVCBIPv6Hint{
-		Hint: hint,
+		append([]net.IP(nil), s.Hint...),
 	}
 }
 

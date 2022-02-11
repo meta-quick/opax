@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/OneOfOne/xxhash v1.2.8
 	github.com/bytecodealliance/wasmtime-go v0.34.0
+	github.com/bytedance/sonic v1.0.0
 	github.com/cockroachdb/pebble v0.0.0-20220211000144-3dce07ae5dee
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/fortytw2/leaktest v1.3.0

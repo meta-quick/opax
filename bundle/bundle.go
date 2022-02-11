@@ -11,6 +11,7 @@ import (
 	"compress/gzip"
 	"encoding/hex"
 	"encoding/json"
+	"github.com/bytedance/sonic"
 	"fmt"
 	"io"
 	"net/url"
@@ -567,7 +568,7 @@ func (r *Reader) Read() (Bundle, error) {
 	if r.includeManifestInData {
 		var metadata map[string]interface{}
 
-		b, err := json.Marshal(&bundle.Manifest)
+		b, err := sonic.Marshal(&bundle.Manifest)
 		if err != nil {
 			return bundle, errors.Wrap(err, "bundle load failed on manifest marshal")
 		}
@@ -845,7 +846,7 @@ func hashBundleFiles(hash SignatureHasher, b *Bundle) ([]FileInfo, error) {
 	// Parse the manifest into a JSON structure;
 	// then recursively order the fields of all objects alphabetically and then apply
 	// the hash function to result to compute the hash.
-	mbs, err := json.Marshal(b.Manifest)
+	mbs, err := sonic.Marshal(b.Manifest)
 	if err != nil {
 		return files, err
 	}
