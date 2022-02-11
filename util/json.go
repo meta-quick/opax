@@ -7,10 +7,11 @@ package util
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/bytedance/sonic"
 	"fmt"
 	"io"
 	"reflect"
+
+	"github.com/bytedance/sonic"
 
 	"github.com/ghodss/yaml"
 )
@@ -79,11 +80,15 @@ func MustMarshalJSON(x interface{}) []byte {
 // rego.Input and inmem's Write operations. Works with both references and
 // values.
 func RoundTrip(x *interface{}) error {
-	bs, err := sonic.Marshal(x)
-	if err != nil {
-		return err
-	}
-	return UnmarshalJSON(bs, x)
+	// bs, err := sonic.Marshal(x)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// sonic.Unmarshal(bs, x)
+
+	//return UnmarshalJSON(bs, x)
+	return nil
 }
 
 // Reference returns a pointer to its argument unless the argument already is
