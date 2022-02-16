@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -2082,3 +2083,77 @@ func TestGenerateJSON(t *testing.T) {
 	)
 	assertEval(t, r, `[["converted-input"]]`)
 }
+
+func TestShuffleToObject(t *testing.T) {
+	input := `
+{
+  "a": {
+	"b": {
+	  "c": "100"
+	}
+  },
+  "d": {
+	"e": {
+	  "f": "1000xx",
+      "g": [
+          {"x":100},
+          {"x":200}
+       ]
+	}
+  }
+}
+`
+	model := `
+{
+   "filters" : {
+      "denied": [
+          "a/b/c" 
+       ]
+   },
+   "shuffle" : {
+      "d/e/f" : {
+         "mx.pfe.mask_string": [ 
+            "2"
+          ]
+      },
+	 "d/e/g/:/x" : {
+         "mx.pfe.mask_string": [ 
+            "1"
+          ]
+      }
+   }
+}
+`
+
+	topdown.ShuffleModelAddString("/api",model)
+	ctx := context.Background()
+
+	module := `
+		package test
+		p = output { 
+          output := json.shuffle(input,"/api",[{"op": "add", "path": "/a/bar", "value": 2}])
+}
+`
+
+	var v interface{}
+	sonic.Unmarshal([]byte(input), &v)
+
+	r := New(
+		Query("data.test.p"),
+		Module("", module),
+	)
+
+	pq, err := r.PrepareForEval(ctx)
+	if err != nil {
+		t.Fatalf("Unexpected error: %s", err.Error())
+	}
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	output, err := pq.Eval(ctx,EvalInput(v))
+	ret,_ :=sonic.Marshal(output)
+    fmt.Println(string(ret[:]))
+}
+

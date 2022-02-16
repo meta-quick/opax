@@ -166,6 +166,7 @@ var DefaultBuiltins = [...]*Builtin{
 	JSONFilter,
 	JSONRemove,
 	JSONPatch,
+	JSONShuffle,
 
 	// Tokens
 	JWTDecode,
@@ -1259,6 +1260,27 @@ var JSONPatch = &Builtin{
 	Decl: types.NewFunction(
 		types.Args(
 			types.A,
+			types.NewArray(
+				nil,
+				types.NewObject(
+					[]*types.StaticProperty{
+						{Key: "op", Value: types.S},
+						{Key: "path", Value: types.A},
+					},
+					types.NewDynamicProperty(types.A, types.A),
+				),
+			),
+		),
+		types.A,
+	),
+}
+
+var JSONShuffle = &Builtin{
+	Name: "json.shuffle",
+	Decl: types.NewFunction(
+		types.Args(
+			types.A,
+			types.S,
 			types.NewArray(
 				nil,
 				types.NewObject(

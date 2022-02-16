@@ -166,6 +166,14 @@ func (illegalResolver) Resolve(ref Ref) (interface{}, error) {
 // ValueToInterface returns the Go representation of an AST value.  The AST
 // value should not contain any values that require evaluation (e.g., vars,
 // comprehensions, etc.)
+
+func ValueToInterfaceX(v Value) (interface{}, error) {
+	return valueToInterface(v, illegalResolver{}, JSONOpt{})
+}
+
+// ValueToInterface returns the Go representation of an AST value.  The AST
+// value should not contain any values that require evaluation (e.g., vars,
+// comprehensions, etc.)
 func ValueToInterface(v Value, resolver Resolver) (interface{}, error) {
 	return valueToInterface(v, resolver, JSONOpt{})
 }

@@ -3,6 +3,8 @@ github.com/DataDog/zstd
 # github.com/OneOfOne/xxhash v1.2.8
 ## explicit
 github.com/OneOfOne/xxhash
+# github.com/PaesslerAG/gval v1.1.2
+github.com/PaesslerAG/gval
 # github.com/beorn7/perks v1.0.1
 github.com/beorn7/perks/quantile
 # github.com/bytecodealliance/wasmtime-go v0.34.0
@@ -191,6 +193,15 @@ github.com/kr/text
 github.com/mattn/go-runewidth
 # github.com/matttproud/golang_protobuf_extensions v1.0.1
 github.com/matttproud/golang_protobuf_extensions/pbutil
+# github.com/meta-quick/jsonpath v0.1.2
+## explicit
+github.com/meta-quick/jsonpath
+# github.com/meta-quick/mask v0.1.4
+## explicit
+github.com/meta-quick/mask/anonymity
+github.com/meta-quick/mask/jsonmask
+github.com/meta-quick/mask/types
+github.com/meta-quick/mask/utils
 # github.com/miekg/dns v1.1.41
 github.com/miekg/dns
 # github.com/olekukonko/tablewriter v0.0.5

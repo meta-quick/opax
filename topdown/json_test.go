@@ -5,9 +5,11 @@
 package topdown
 
 import (
-	"testing"
-
+	"fmt"
+	"github.com/bytedance/sonic"
+	"github.com/meta-quick/jsonpath"
 	"github.com/meta-quick/opa/ast"
+	"testing"
 )
 
 func TestFiltersToObject(t *testing.T) {
@@ -100,4 +102,38 @@ func TestFiltersToObject(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestJsonPath(t *testing.T) {
+	input := `
+{
+ "a": {
+	"b": {
+	  "c": "100"
+	}
+ },
+ "d": {
+	"e": {
+	  "f": 1000,
+     "g": [
+         {"x":100},
+         {"x":200},
+         {"x":300, "y": [{"z": "abc"}, {"z": "def"}]},
+         {"x":300, "y": [{"z": "xx"}, {"z": "yyy"}]}
+      ]
+	}
+ }
+}
+`
+
+	var data interface{}
+	sonic.Unmarshal([]byte(input), &data)
+
+	out, err := jsonpath.Get("$.d.e.g[:].y[:].z",&data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(out)
 }
