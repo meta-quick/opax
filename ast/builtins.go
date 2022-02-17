@@ -2426,7 +2426,7 @@ var TimedCounter = &Builtin{
 }
 
 var TimedCounterAdd = &Builtin{
-	Name: "timed.Counter.Add",
+	Name: "timed.Gauge.Add",
 	Decl: types.NewFunction(
 		types.Args(
 			types.S,
@@ -2438,7 +2438,7 @@ var TimedCounterAdd = &Builtin{
 }
 
 var TimedCounterDelete = &Builtin{
-	Name: "timed.Counter.Del",
+	Name: "timed.Gauge.Del",
 	Decl: types.NewFunction(
 		types.Args(
 			types.S,

@@ -480,15 +480,15 @@ func toIndex(arr *ast.Array, term *ast.Term) (*IndexRange, error) {
 // patchWorkerris a worker that modifies a direct child of a term located
 // at the given key.  It returns the new term, and optionally a result that
 // is passed back to the caller.
-type patchWorker = func(parent, key *ast.Term) (updated, result *ast.Term)
+type patchWorker = func(parent, key *ast.Term) (updated *ast.Term, result *ast.Term, expanded_path []ast.Ref)
 
 func jsonPatchTraverse(
 	target *ast.Term,
 	path ast.Ref,
 	worker patchWorker,
-) (*ast.Term, *ast.Term) {
+) (*ast.Term, *ast.Term,[]ast.Ref) {
 	if len(path) < 1 {
-		return nil, nil
+		return nil, nil,nil
 	}
 
 	key := path[0]
@@ -498,13 +498,22 @@ func jsonPatchTraverse(
 
 	success := false
 	var updated, result *ast.Term
+	var updated_path = []ast.Ref{}
 	switch parent := target.Value.(type) {
 	case ast.Object:
 		obj := ast.NewObject()
 		parent.Foreach(func(k, v *ast.Term) {
 			if k.Equal(key) {
-				if v, result = jsonPatchTraverse(v, path[1:], worker); v != nil {
+				var _path []ast.Ref
+				if v, result,_path = jsonPatchTraverse(v, path[1:], worker); v != nil {
 					obj.Insert(k, v)
+					for _,__path := range _path {
+						tmp_path := ast.Ref{path[0]}
+						for _,part := range __path {
+							tmp_path = tmp_path.Append(part)
+						}
+						updated_path = append(updated_path,tmp_path)
+					}
 					success = true
 				}
 			} else {
@@ -516,17 +525,25 @@ func jsonPatchTraverse(
 	case *ast.Array:
 		idx, err := toIndex(parent, key)
 		if err != nil || idx == nil {
-			return nil, nil
+			return nil, nil, nil
 		}
 		arr := ast.NewArray()
 		_results := ast.NewArray()
 		for i := 0; i < parent.Len(); i++ {
 			v := parent.Elem(i)
 			if i >= idx.Start && i < idx.End {
-				if v, ret := jsonPatchTraverse(v, path[1:], worker); v != nil {
+				if v, ret,_path := jsonPatchTraverse(v, path[1:], worker); v != nil {
 					arr = arr.Append(v)
                     if ret != nil {
 						_results = _results.Append(ret)
+					}
+
+					for _,__path := range _path {
+						tmp_path := ast.Ref{ast.IntNumberTerm(i)}
+						for _,part := range __path {
+							tmp_path = tmp_path.Append(part)
+						}
+						updated_path = append(updated_path,tmp_path)
 					}
 					success = true
 				}
@@ -543,8 +560,16 @@ func jsonPatchTraverse(
 		set := ast.NewSet()
 		parent.Foreach(func(k *ast.Term) {
 			if k.Equal(key) {
-				if k, result = jsonPatchTraverse(k, path[1:], worker); k != nil {
+				var _path  []ast.Ref
+				if k, result,_path = jsonPatchTraverse(k, path[1:], worker); k != nil {
 					set.Add(k)
+					for _,__path := range _path {
+						tmp_path := ast.Ref{path[0]}
+						for _,part := range __path {
+							tmp_path = tmp_path.Append(part)
+						}
+						updated_path = append(updated_path,tmp_path)
+					}
 					success = true
 				}
 			} else {
@@ -555,10 +580,10 @@ func jsonPatchTraverse(
 	}
 
 	if success {
-		return updated, result
+		return updated, result,updated_path
 	}
 
-	return nil, nil
+	return nil, nil, nil
 }
 
 // jsonPatchGet goes one step further than jsonPatchTraverse and returns the
@@ -569,29 +594,36 @@ func jsonPatchTraverse(
 // Because it uses jsonPatchTraverse, it makes shallow copies of the objects
 // along the path.  We could possibly add a signaling mechanism that we didn't
 // make any changes to avoid this.
-func jsonPatchGet(target *ast.Term, path ast.Ref) *ast.Term {
+func jsonPatchGet(target *ast.Term, path ast.Ref) (*ast.Term,[]ast.Ref) {
 	// Special case: get entire document.
 	if len(path) == 0 {
-		return target
+		return target,nil
 	}
 
-	_, result := jsonPatchTraverse(target, path, func(parent, key *ast.Term) (*ast.Term, *ast.Term) {
+	_, result,_path := jsonPatchTraverse(target, path, func(parent, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
 		switch v := parent.Value.(type) {
 		case ast.Object:
-			return parent, v.Get(key)
+			return parent, v.Get(key),[]ast.Ref{ast.Ref{key}}
 		case *ast.Array:
-			i, err := toIndex(v, key)
+			idx, err := toIndex(v, key)
 			if err == nil {
-				return parent, v.Elem(i.Start)
+				__result := ast.NewArray()
+				__path := []ast.Ref{}
+				for i := idx.Start; i< idx.End; i++ {
+					__result = __result.Append(v.Elem(i))
+					tmp_path := ast.Ref{ast.IntNumberTerm(i)}
+					__path = append(__path,tmp_path)
+				}
+				return parent, ast.NewTerm(__result),__path
 			}
 		case ast.Set:
 			if v.Contains(key) {
-				return parent, key
+				return parent, key,[]ast.Ref{ast.Ref{key}}
 			}
 		}
-		return nil, nil
+		return nil, nil,nil
 	})
-	return result
+	return result,_path
 }
 
 func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
@@ -600,7 +632,7 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 		return value
 	}
 
-	target, _ = jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term) {
+	target, _,_ = jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
 		switch original := parent.Value.(type) {
 		case ast.Object:
 			obj := ast.NewObject()
@@ -608,11 +640,11 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 				obj.Insert(k, v)
 			})
 			obj.Insert(key, value)
-			return ast.NewTerm(obj), nil
+			return ast.NewTerm(obj), nil,nil
 		case *ast.Array:
 			idx, err := toIndex(original, key)
 			if err != nil || idx == nil {
-				return nil, nil
+				return nil, nil,nil
 			}
 			arr := ast.NewArray()
 			for i := 0; i < idx.Start; i++ {
@@ -624,22 +656,22 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 				arr = arr.Append(value)
 			}
 
-			for i := idx.End; i < original.Len(); i++ {
+			for i := idx.Start; i < original.Len(); i++ {
 				arr = arr.Append(original.Elem(i))
 			}
-			return ast.NewTerm(arr), nil
+			return ast.NewTerm(arr), nil,nil
 		case ast.Set:
 			if !key.Equal(value) {
-				return nil, nil
+				return nil, nil,nil
 			}
 			set := ast.NewSet()
 			original.Foreach(func(k *ast.Term) {
 				set.Add(k)
 			})
 			set.Add(key)
-			return ast.NewTerm(set), nil
+			return ast.NewTerm(set), nil,nil
 		}
-		return nil, nil
+		return nil, nil,nil
 	})
 
 	return target
@@ -651,7 +683,7 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 		return nil, nil
 	}
 
-	target, removed := jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term) {
+	target, removed,_ := jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
 		var removed *ast.Term
 		switch original := parent.Value.(type) {
 		case ast.Object:
@@ -663,11 +695,11 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 					obj.Insert(k, v)
 				}
 			})
-			return ast.NewTerm(obj), removed
+			return ast.NewTerm(obj), removed,nil
 		case *ast.Array:
 			idx, err := toIndex(original, key)
 			if err != nil || idx == nil {
-				return nil, nil
+				return nil, nil,nil
 			}
 			arr := ast.NewArray()
 			for i := 0; i < idx.Start; i++ {
@@ -683,7 +715,7 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 			for i := idx.End; i < original.Len(); i++ {
 				arr = arr.Append(original.Elem(i))
 			}
-			return ast.NewTerm(arr), removed
+			return ast.NewTerm(arr), removed,nil
 		case ast.Set:
 			set := ast.NewSet()
 			original.Foreach(func(k *ast.Term) {
@@ -693,9 +725,9 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 					set.Add(k)
 				}
 			})
-			return ast.NewTerm(set), removed
+			return ast.NewTerm(set), removed,nil
 		}
-		return nil, nil
+		return nil, nil,nil
 	})
 
 	if target != nil && removed != nil {
@@ -730,7 +762,7 @@ func jsonPatchMove(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
 }
 
 func jsonPatchCopy(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
-	value := jsonPatchGet(target, from)
+	value,_ := jsonPatchGet(target, from)
 	if value == nil {
 		return nil
 	}
@@ -739,7 +771,7 @@ func jsonPatchCopy(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
 }
 
 func jsonPatchTest(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
-	actual := jsonPatchGet(target, path)
+	actual,_:= jsonPatchGet(target, path)
 	if actual == nil {
 		return nil
 	}
@@ -975,11 +1007,11 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 					case map[string]interface{}:
 						for path, fn := range shfl {
 							path,_ := parsePath(ast.StringTerm(path))
-							origin := jsonPatchGet(target,path)
+							origin,extpath := jsonPatchGet(target,path)
 							if origin != nil {
 								switch vv := origin.Value.(type) {
 								case *ast.Array:
-									extpath,_ := extendPath(path,vv.Len())
+									//extpath,_ := extendPath(path,vv.Len())
 									for i := 0; i < vv.Len(); i++ {
 										v := vv.Elem(i)
 										step,_ := ast.ValueToInterfaceX(v.Value)
@@ -1027,8 +1059,8 @@ func typeCasting(d interface{}) string {
 	case float64:
 		return strconv.FormatFloat(c, 'f', -1, 64)
 	case json.Number:
-		output,_ := strconv.ParseInt(c.String(),10,64)
-		return fmt.Sprintf("%d",output)
+		tt,_ := strconv.ParseFloat(c.String(),64)
+		return strconv.FormatFloat(tt, 'f', -1, 64)
 	default:
 		return fmt.Sprint(d)
 	}

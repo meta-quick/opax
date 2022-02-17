@@ -29,6 +29,7 @@ type persistApi interface {
 
 type pebbleStorage struct {
   db *pebble.DB;
+  cache map[string][]byte;
 }
 
 func NewPebbleStorage(path string, options pebble.Options) persistApi {
@@ -36,7 +37,8 @@ func NewPebbleStorage(path string, options pebble.Options) persistApi {
   if err != nil {
 	panic(err)
   }
-  return &pebbleStorage{db: db}
+  _cache := make(map[string][]byte)
+  return &pebbleStorage{db: db,cache: _cache}
 }
 
 func (this *pebbleStorage ) Set(key string, value interface{}) error {
@@ -44,16 +46,22 @@ func (this *pebbleStorage ) Set(key string, value interface{}) error {
    case string:
 	   val := []byte(v)
 	   this.db.Set([]byte(key), val,nil);
+	   this.cache[key] = val;
    case []byte:
 	   this.db.Set([]byte(key), v,nil);
+	   this.cache[key] = v;
    case int:
 	   this.db.Set([]byte(key), []byte(fmt.Sprintf("%d", v)),nil);
+	   this.cache[key] = []byte(fmt.Sprintf("%d", v));
    case float64:
 	   this.db.Set([]byte(key), []byte( fmt.Sprintf("%v", v)),nil);
+	   this.cache[key] = []byte(fmt.Sprintf("%v", v));
    case bool:
 	   this.db.Set([]byte(key), []byte(fmt.Sprintf("%t", v)),nil);
+	   this.cache[key] = []byte(fmt.Sprintf("%t", v));
    case nil:
 	   this.db.Set([]byte(key), []byte(""),nil);
+	   this.cache[key] = []byte("");
    default:
 	   println("Unsupported type",v);
 	   return errors.New("Unsupported type");
@@ -82,64 +90,101 @@ func (this *pebbleStorage ) SetBytes(key string, value []byte) error {
 }
 
 func (this *pebbleStorage ) Get(key string) (interface{},error) {
-  value, _, err := this.db.Get([]byte(key))
-  return value, err
+	if val,ok := this.cache[key]; ok {
+		return val,nil;
+	}
+    value, _, err := this.db.Get([]byte(key))
+	this.cache[key] = value
+
+    return value, err
 }
 
 func (this *pebbleStorage ) GetString(key string) (string,error) {
+	if val,ok := this.cache[key]; ok {
+		return string(val),nil;
+	}
 	value, _, err := this.db.Get([]byte(key))
 	if err != nil {
 		panic(err)
 	}
+	this.cache[key] = value
+
 	return string(value),nil
 }
 
 
 func (this *pebbleStorage ) GetInteger(key string) (int64,error) {
+	if val,ok := this.cache[key]; ok {
+		return strconv.ParseInt(string(val),10,64);
+	}
+
 	value, _, err := this.db.Get([]byte(key))
 	if err != nil {
 		panic(err)
 	}
+	this.cache[key] = value
+
 	return strconv.ParseInt(string(value), 10, 64)
 }
 
 func (this *pebbleStorage ) GetBool(key string) (bool, error) {
+	if val,ok := this.cache[key]; ok {
+		return strconv.ParseBool(string(val));
+	}
 	value, _, err := this.db.Get([]byte(key))
 	if err != nil {
 		panic(err)
 	}
+	this.cache[key] = value
+
 	return strconv.ParseBool(string(value))
 }
 
 func (this *pebbleStorage ) GetFloat(key string) (float64,error) {
+	if val,ok := this.cache[key]; ok {
+		return strconv.ParseFloat(string(val),64);
+	}
+
 	value, _, err := this.db.Get([]byte(key))
 	if err != nil {
 		panic(err)
 	}
+	this.cache[key] = value
+
 	return strconv.ParseFloat(string(value), 64)
 }
 
 func (this *pebbleStorage ) GetBytes(key string) ([]byte,error) {
+	if val,ok := this.cache[key]; ok {
+		return val,nil;
+	}
+
 	value, _, err := this.db.Get([]byte(key))
+	this.cache[key] = value
+
 	return value,err
 }
 
 
 func (this *pebbleStorage ) Delete(key string)  error {
+  if _,ok := this.cache[key]; ok {
+	  delete(this.cache,key);
+  }
+
   return this.db.Delete([]byte(key),nil)
 }
 
-type Counter struct {
+type Gauge struct {
 	Value int64;
 	Duration int64;
 	Timestamp map[int64]int64;
 }
 
-func NewCounter(duration int64) Counter {
-	return Counter{0,duration,make(map[int64]int64)}
+func NewGauge(duration int64) Gauge {
+	return Gauge{0,duration,make(map[int64]int64)}
 }
 
-func (this *Counter) GetValue() int64 {
+func (this *Gauge) GetValue() int64 {
 	now := time.Now().Unix();
 	this.Value = 0;
 	for k, v := range this.Timestamp {
@@ -150,7 +195,7 @@ func (this *Counter) GetValue() int64 {
 	return this.Value;
 }
 
-func (this *Counter) Add(val int64) {
+func (this *Gauge) Add(val int64) {
 	now := time.Now().Unix();
 	for k, _ := range this.Timestamp {
 		if now - k > this.Duration {
@@ -165,37 +210,37 @@ func (this *Counter) Add(val int64) {
 	}
 }
 
-func (this *Counter) Inc() {
+func (this *Gauge) Inc() {
 	this.Add(1);
 }
 
-func (this *Counter) Dec() {
+func (this *Gauge) Dec() {
 	this.Add(-1);
 }
 
-func (this *Counter) Reset() {
+func (this *Gauge) Reset() {
 	this.Timestamp = make(map[int64]int64);
 	this.Value = 0
 }
 
-func (this *Counter) GetDuration() int64{
+func (this *Gauge) GetDuration() int64{
 	return this.Duration;
 }
 
-func CounterAdd(key,value,duration ast.Value) ( output ast.Value, err error){
+func GaugeAdd(key,value,duration ast.Value) ( output ast.Value, err error){
 	lkey, ok1 := key.(ast.String)
 	lvalue, ok2 := value.(ast.Number)
 	lduration, ok3 := duration.(ast.Number)
 
 	if ok1 && ok2 && ok3 {
-		var counter Counter;
+		var counter Gauge;
 		if value, err := store.GetBytes(lkey.String()) ; err == nil {
 		    lduration, _ :=	lduration.Int64()
-			counter = NewCounter(lduration)
+			counter = NewGauge(lduration)
 			sonic.Unmarshal(value,&counter)
 		} else {
 			lduration, _ :=	lduration.Int64()
-			counter = NewCounter(lduration)
+			counter = NewGauge(lduration)
 		}
 		lvalue, _ := lvalue.Int64()
 		counter.Add(lvalue)
@@ -209,7 +254,7 @@ func CounterAdd(key,value,duration ast.Value) ( output ast.Value, err error){
 	return
 }
 
-func CounterDelete(key ast.Value) (output ast.Value, err error){
+func GaugeDelete(key ast.Value) (output ast.Value, err error){
 	lkey, ok1 := key.(ast.String)
 	if ok1 {
 		if err = store.Delete(lkey.String()); err == nil {
@@ -220,9 +265,23 @@ func CounterDelete(key ast.Value) (output ast.Value, err error){
 	return ast.Boolean(false), err
 }
 
+type Counter struct {
+	Value int64;
+}
+
+func NewCounter() *Counter {
+	return &Counter{0}
+}
+
+func (this *Counter) Add(key string,val int64) int64 {
+	this.Value += val;
+	store.SetInteger(key,this.Value)
+	return this.Value
+}
+
 var store = NewPebbleStorage("/tmp/test.db",pebble.Options{});
 func init(){
-	//RegisterFunctionalBuiltin2("Counter.Get", CounterGet)
-	RegisterFunctionalBuiltin1(ast.TimedCounterDelete.Name, CounterDelete)
-	RegisterFunctionalBuiltin3(ast.TimedCounterAdd.Name, CounterAdd)
+	//RegisterFunctionalBuiltin2("Gauge.Get", CounterGet)
+	RegisterFunctionalBuiltin1(ast.TimedCounterDelete.Name, GaugeDelete)
+	RegisterFunctionalBuiltin3(ast.TimedCounterAdd.Name, GaugeAdd)
 }

@@ -2087,41 +2087,71 @@ func TestGenerateJSON(t *testing.T) {
 func TestShuffleToObject(t *testing.T) {
 	input := `
 {
-  "a": {
+ "a": {
 	"b": {
 	  "c": "100"
 	}
-  },
-  "d": {
+ },
+ "d": {
 	"e": {
 	  "f": "1000xx",
-      "g": [
-          {"x":100},
-          {"x":200}
-       ]
+     "g": [
+         {"x":1000000},
+         {"x":200}
+      ],
+	  "h": ["abc", "def"]
 	}
-  }
+ }
 }
 `
 	model := `
 {
-   "filters" : {
-      "denied": [
-          "a/b/c" 
+"filters" : {
+   "denied": [
+       "a/b/c"
+    ]
+},
+"shuffle" : {
+   "d/e/f" : {
+      "mx.pfe.mask_string": [
+         "2"
        ]
    },
-   "shuffle" : {
-      "d/e/f" : {
-         "mx.pfe.mask_string": [ 
-            "2"
-          ]
-      },
 	 "d/e/g/:/x" : {
-         "mx.pfe.mask_string": [ 
-            "1"
-          ]
-      }
+      "mx.pfe.mask_number": [
+         "1"
+       ]
+   },
+  "d/e/h/:" : {
+      "mx.pfe.mask_string": [
+         "1"
+       ]
    }
+}
+}
+`
+	input = `
+{
+
+ "d": {
+	"e": {
+      "g": [
+         {"x":1000000000.12}
+       ]
+	}
+ }
+}
+`
+
+	model = `
+{
+"shuffle" : {
+  	 "d/e/g/:/x" : {
+     "mx.pfe.mask_number": [
+        "1"
+      ]
+  }
+}
 }
 `
 
@@ -2131,7 +2161,7 @@ func TestShuffleToObject(t *testing.T) {
 	module := `
 		package test
 		p = output { 
-          output := json.shuffle(input,"/api",[{"op": "add", "path": "/a/bar", "value": 2}])
+          output := json.shuffle(input,"/api",[])
 }
 `
 

@@ -14,7 +14,7 @@ import (
 
 func TestPersist(t *testing.T) {
 	// Register the storage
-	store := NewPebbleStorage("/tmp/test.db", pebble.Options{});
+	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{});
 	store.SetInteger("key",100)
 	store.SetString("key2","xxx")
 	value1,_ := store.GetInteger("key");
@@ -24,9 +24,9 @@ func TestPersist(t *testing.T) {
 }
 
 func TestCounters(t *testing.T) {
-   c := NewCounter(10);
+   c := NewGauge(10);
    for i := 0; i < 20; i++ {
-	  time.Sleep(time.Second * 1)
+	  //time.Sleep(time.Second * 1)
 	  c.Add(int64(i))
 	  println("add", i)
 	  println("value", c.GetValue())
@@ -34,8 +34,8 @@ func TestCounters(t *testing.T) {
 }
 
 func TestPersistCounter(t *testing.T) {
-	store := NewPebbleStorage("/tmp/test.db", pebble.Options{});
-	c := NewCounter(100000);
+	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{});
+	c := NewGauge(100000);
 	c.Add(10)
 	time.Sleep(time.Second * 1)
 	c.Add(29)
@@ -53,7 +53,7 @@ func TestPersistCounter(t *testing.T) {
 
 	store.SetBytes("api5s",b)
 
-	cc := NewCounter(1)
+	cc := NewGauge(1)
 
 	bb,_ := store.GetBytes("api5s")
 
@@ -65,11 +65,11 @@ func TestCountAdd(t *testing.T) {
 
 	ctx := context.Background()
 	// net.cidr_expand("1.0.0.0/1")
-	// timed.Counter.Add("api",10)
+	// timed.Gauge.Add("api",10)
 	compiler := compileModules([]string{
 		`
 		package test
-		p { timed.Counter.Add("api",100,1000) > 100}
+		p { timed.Gauge.Add("api",100,1000) > 100}
 		`,
 	})
 
@@ -100,11 +100,11 @@ func TestCountDelete(t *testing.T) {
 
 	ctx := context.Background()
 	// net.cidr_expand("1.0.0.0/1")
-	// timed.Counter.Add("api",10)
+	// timed.Gauge.Add("api",10)
 	compiler := compileModules([]string{
 		`
 		package test
-		p { timed.Counter.Del("api") }
+		p { timed.Gauge.Del("api") }
 		`,
 	})
 

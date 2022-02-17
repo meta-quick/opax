@@ -1078,3 +1078,11 @@ func assertToString(t *testing.T, val Value, expected string) {
 		t.Errorf("Expected %v but got %v", expected, result)
 	}
 }
+
+func TestJsonNumber(t *testing.T) {
+	var jn interface{} = json.Number("1000088888888000.123456")
+	switch v := jn.(type) {
+	case json.Number:
+		fmt.Println(v.String())
+	}
+}
