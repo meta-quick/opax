@@ -2133,35 +2133,35 @@ func TestShuffleToObject(t *testing.T) {
 	input = `
 {
 
- "d": {
+"d": {
 	"e": {
-      "g": [
-         {"x":1000000000.12}
-       ]
+     "g": [
+        {"x":1000000000}
+      ]
 	}
- }
+}
 }
 `
 
 	model = `
 {
 "shuffle" : {
-  	 "d/e/g/:/x" : {
-     "mx.pfe.mask_number": [
-        "1"
-      ]
-  }
+ 	 "d/e/g/:/x" : {
+    "mx.pfe.mask_number": [
+       "1"
+     ]
+ }
 }
 }
 `
 
-	topdown.ShuffleModelAddString("/api",model)
+	ShuffleModelAddString("oa","api",model)
 	ctx := context.Background()
 
 	module := `
 		package test
 		p = output { 
-          output := json.shuffle(input,"/api",[])
+        output := json.shuffle(input,"oa","api",[])
 }
 `
 

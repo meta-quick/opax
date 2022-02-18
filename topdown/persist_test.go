@@ -17,8 +17,9 @@ func TestPersist(t *testing.T) {
 	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{});
 	store.SetInteger("key",100)
 	store.SetString("key2","xxx")
-	value1,_ := store.GetInteger("key");
 	value2,_ := store.GetString("key2");
+	value1,_ := store.GetInteger("key");
+
 	println("value", value1,value2);
 	// Close the storage
 }
@@ -61,7 +62,7 @@ func TestPersistCounter(t *testing.T) {
 	fmt.Println("json", cc)
 }
 
-func TestCountAdd(t *testing.T) {
+func TestGuageAdd(t *testing.T) {
 
 	ctx := context.Background()
 	// net.cidr_expand("1.0.0.0/1")
@@ -69,7 +70,7 @@ func TestCountAdd(t *testing.T) {
 	compiler := compileModules([]string{
 		`
 		package test
-		p { timed.Gauge.Add("api",100,1000) > 100}
+		p { timed.Gauge.Add("","api",100,1000) > 100}
 		`,
 	})
 
@@ -96,7 +97,7 @@ func TestCountAdd(t *testing.T) {
 	println("result", fmt.Sprintf("%v",qrs))
 }
 
-func TestCountDelete(t *testing.T) {
+func TestGuageDelete(t *testing.T) {
 
 	ctx := context.Background()
 	// net.cidr_expand("1.0.0.0/1")
@@ -104,7 +105,7 @@ func TestCountDelete(t *testing.T) {
 	compiler := compileModules([]string{
 		`
 		package test
-		p { timed.Gauge.Del("api") }
+		p { timed.Gauge.Del("","api") }
 		`,
 	})
 
@@ -127,5 +128,44 @@ func TestCountDelete(t *testing.T) {
 
 	if err != nil && err.(*Error).Code != CancelErr {
 		println("Expected cancel error but got: %v (err: %v)", qrs, err)
+	}
+}
+
+func TestCounter(t *testing.T) {
+
+	ctx := context.Background()
+	compiler := compileModules([]string{
+		`
+		package test
+		p {
+             timed.Counter.Add("oa","api1",1) 
+             timed.Counter.Add("oa","api1",2) 
+             timed.Counter.Get("oa","api1") < 15
+             timed.Counter.Del("oa","api1")
+        }
+		`,
+	})
+
+	store := inmem.NewFromObject(map[string]interface{}{})
+	txn := storage.NewTransactionOrDie(ctx, store)
+	cancel := NewCancel()
+
+	query := NewQuery(ast.MustParseBody("x = data.test.p")).
+		WithCompiler(compiler).
+		WithStore(store).
+		WithTransaction(txn)
+
+	go func() {
+		time.Sleep(time.Millisecond * 50)
+		cancel.Cancel()
+	}()
+
+	qrs, err := query.Run(ctx)
+
+	if err != nil {
+		fmt.Println("error", err)
+	}
+	for r := range qrs {
+		fmt.Println("!", r)
 	}
 }

@@ -267,9 +267,12 @@ var DefaultBuiltins = [...]*Builtin{
 	Print,
 	InternalPrint,
 
-	//Timed Counter
-	//TimedCounter,
+	//Timed Statistics
+	TimedGaugeAdd,
+	TimedGaugeGet,
+	TimedGaugeDelete,
 	TimedCounterAdd,
+	TimedCounterGet,
 	TimedCounterDelete,
 }
 
@@ -1280,6 +1283,7 @@ var JSONShuffle = &Builtin{
 	Decl: types.NewFunction(
 		types.Args(
 			types.A,
+			types.S,
 			types.S,
 			types.NewArray(
 				nil,
@@ -2415,20 +2419,11 @@ var InternalPrint = &Builtin{
 }
 
 //Timed Counters
-var TimedCounter = &Builtin{
-	Name: "timed.Counter",
-	Decl: types.NewFunction(
-		types.Args(
-			types.S,
-		),
-		types.NewObject(nil, types.NewDynamicProperty(types.S, types.A)),
-	),
-}
-
-var TimedCounterAdd = &Builtin{
+var TimedGaugeAdd = &Builtin{
 	Name: "timed.Gauge.Add",
 	Decl: types.NewFunction(
 		types.Args(
+			types.S,
 			types.S,
 			types.N,
 			types.N,
@@ -2437,13 +2432,59 @@ var TimedCounterAdd = &Builtin{
 	),
 }
 
-var TimedCounterDelete = &Builtin{
+var TimedGaugeDelete = &Builtin{
 	Name: "timed.Gauge.Del",
 	Decl: types.NewFunction(
 		types.Args(
 			types.S,
+			types.S,
 		),
 		types.B,
+	),
+}
+
+var TimedGaugeGet = &Builtin{
+	Name: "timed.Gauge.Get",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+			types.S,
+		),
+		types.N,
+	),
+}
+
+var TimedCounterAdd = &Builtin{
+	Name: "timed.Counter.Add",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+			types.S,
+			types.N,
+		),
+		types.N,
+	),
+}
+
+var TimedCounterDelete = &Builtin{
+	Name: "timed.Counter.Del",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+			types.S,
+		),
+		types.B,
+	),
+}
+
+var TimedCounterGet = &Builtin{
+	Name: "timed.Counter.Get",
+	Decl: types.NewFunction(
+		types.Args(
+			types.S,
+			types.S,
+		),
+		types.N,
 	),
 }
 /**

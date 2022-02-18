@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type persistApi interface {
+type PersistApi interface {
   Set(key string, value interface{}) error;
   SetString(key string, value string) error;
   SetInteger(key string, value int64) error;
@@ -32,7 +32,7 @@ type pebbleStorage struct {
   cache map[string][]byte;
 }
 
-func NewPebbleStorage(path string, options pebble.Options) persistApi {
+func NewPebbleStorage(path string, options pebble.Options) PersistApi {
   db, err := pebble.Open(path, &options)
   if err != nil {
 	panic(err)
@@ -51,6 +51,9 @@ func (this *pebbleStorage ) Set(key string, value interface{}) error {
 	   this.db.Set([]byte(key), v,nil);
 	   this.cache[key] = v;
    case int:
+	   this.db.Set([]byte(key), []byte(fmt.Sprintf("%d", v)),nil);
+	   this.cache[key] = []byte(fmt.Sprintf("%d", v));
+   case int64:
 	   this.db.Set([]byte(key), []byte(fmt.Sprintf("%d", v)),nil);
 	   this.cache[key] = []byte(fmt.Sprintf("%d", v));
    case float64:
@@ -227,13 +230,21 @@ func (this *Gauge) GetDuration() int64{
 	return this.Duration;
 }
 
-func GaugeAdd(key,value,duration ast.Value) ( output ast.Value, err error){
+func GaugeAdd(ns,key,value,duration ast.Value) ( output ast.Value, err error){
 	lkey, ok1 := key.(ast.String)
 	lvalue, ok2 := value.(ast.Number)
 	lduration, ok3 := duration.(ast.Number)
+	namespace, ok4 := ns.(ast.String)
+
+	if !ok4 {
+		namespace = "gauge/default"
+	} else {
+		namespace = "gauge/" + namespace
+	}
 
 	if ok1 && ok2 && ok3 {
 		var counter Gauge;
+		lkey = namespace + "/" + lkey
 		if value, err := store.GetBytes(lkey.String()) ; err == nil {
 		    lduration, _ :=	lduration.Int64()
 			counter = NewGauge(lduration)
@@ -254,9 +265,39 @@ func GaugeAdd(key,value,duration ast.Value) ( output ast.Value, err error){
 	return
 }
 
-func GaugeDelete(key ast.Value) (output ast.Value, err error){
+func GaugeGet(ns,key ast.Value) (output ast.Value, err error){
 	lkey, ok1 := key.(ast.String)
+	namespace, ok2 := ns.(ast.String)
+	if !ok2 {
+		namespace = "gauge/default"
+	} else {
+		namespace = "gauge/" + namespace
+	}
+
 	if ok1 {
+		lkey = namespace + "/" + lkey
+		if value, err := store.GetBytes(lkey.String()) ; err == nil {
+			counter := Gauge{}
+			sonic.Unmarshal(value,&counter)
+			output = ast.Number(fmt.Sprintf("%d", counter.GetValue()))
+			return output,err
+		}
+	}
+
+	return ast.Boolean(false), err
+}
+
+func GaugeDelete(ns,key ast.Value) (output ast.Value, err error){
+	lkey, ok1 := key.(ast.String)
+	namespace, ok2 := ns.(ast.String)
+	if !ok2 {
+		namespace = "gauge/default"
+	} else {
+		namespace = "gauge/" + namespace
+	}
+
+	if ok1 {
+		lkey = namespace + "/" + lkey
 		if err = store.Delete(lkey.String()); err == nil {
 			return ast.Boolean(true), err
 		}
@@ -269,19 +310,101 @@ type Counter struct {
 	Value int64;
 }
 
-func NewCounter() *Counter {
-	return &Counter{0}
+func NewCounter() Counter {
+	return Counter{0}
 }
 
-func (this *Counter) Add(key string,val int64) int64 {
+func (this *Counter) Add(val int64) int64 {
 	this.Value += val;
-	store.SetInteger(key,this.Value)
 	return this.Value
 }
 
-var store = NewPebbleStorage("/tmp/test.db",pebble.Options{});
+func CounterAdd(ns,key,value ast.Value) ( output ast.Value, err error){
+	lkey, ok1 := key.(ast.String)
+	lvalue, ok2 := value.(ast.Number)
+	namespace, ok3 := ns.(ast.String)
+
+	if !ok3 {
+		namespace = "counter/default"
+	} else {
+		namespace = "counter/" + namespace
+	}
+
+	if ok1 && ok2 {
+		var counter Counter;
+		lkey = namespace + "/" + lkey
+		if value, err := store.GetBytes(lkey.String()) ; err == nil {
+			counter = NewCounter()
+			sonic.Unmarshal(value,&counter)
+		} else {
+			counter = NewCounter()
+		}
+		lvalue, _ := lvalue.Int64()
+		counter.Add(lvalue)
+		value, _ := sonic.Marshal(counter)
+		store.SetBytes(lkey.String(),value)
+		output = ast.Number(fmt.Sprintf("%d", counter.Value))
+	} else {
+		err = errors.New("Invalid input type")
+		output = ast.Number("0")
+	}
+	return
+}
+
+func CounterGet(ns,key ast.Value) (output ast.Value, err error){
+	lkey, ok1 := key.(ast.String)
+	namespace, ok2 := ns.(ast.String)
+	if !ok2 {
+		namespace = "counter/default"
+	} else {
+		namespace = "counter/" + namespace
+	}
+
+	if ok1 {
+		lkey = namespace + "/" + lkey
+		if value, err := store.GetBytes(lkey.String()) ; err == nil {
+			counter := NewCounter()
+			sonic.Unmarshal(value,&counter)
+			output = ast.Number(fmt.Sprintf("%d", counter.Value))
+			return output, err
+		}
+	}
+
+	return ast.Boolean(false), err
+}
+
+func CounterDelete(ns,key ast.Value) (output ast.Value, err error){
+	lkey, ok1 := key.(ast.String)
+	namespace, ok2 := ns.(ast.String)
+	if !ok2 {
+		namespace = "counter/default"
+	} else {
+		namespace = "counter/" + namespace
+	}
+
+	if ok1 {
+		lkey = namespace + "/" + lkey
+		if err = store.Delete(lkey.String()); err == nil {
+			return ast.Boolean(true), err
+		}
+	}
+
+	return ast.Boolean(false), err
+}
+
+var store PersistApi;
+
+func RegisterPebbleStore(path string){
+	store = NewPebbleStorage(path,pebble.Options{})
+}
+
 func init(){
-	//RegisterFunctionalBuiltin2("Gauge.Get", CounterGet)
-	RegisterFunctionalBuiltin1(ast.TimedCounterDelete.Name, GaugeDelete)
-	RegisterFunctionalBuiltin3(ast.TimedCounterAdd.Name, GaugeAdd)
+	RegisterPebbleStore("/tmp/store.db")
+	RegisterFunctionalBuiltin2(ast.TimedGaugeGet.Name, GaugeGet)
+	RegisterFunctionalBuiltin2(ast.TimedGaugeDelete.Name, GaugeDelete)
+	RegisterFunctionalBuiltin4(ast.TimedGaugeAdd.Name, GaugeAdd)
+
+	RegisterFunctionalBuiltin2(ast.TimedCounterGet.Name, CounterGet)
+	RegisterFunctionalBuiltin2(ast.TimedCounterDelete.Name, CounterDelete)
+	RegisterFunctionalBuiltin3(ast.TimedCounterAdd.Name, CounterAdd)
 }

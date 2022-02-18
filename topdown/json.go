@@ -885,10 +885,13 @@ func builtinJSONPatch(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Ter
 func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Term) error) error {
 	// JSON patch supports arrays, objects as well as values as the target.
 	target := ast.NewTerm(operands[0].Value)
-	// Shuffle model.
-	model := ast.NewTerm(operands[1].Value)
+	// Shuffle model namesapce.
+	model := string(operands[1].Value.(ast.String))
+	// Shuffle model namesapce.
+	model = model + "/" + string(operands[2].Value.(ast.String))
+
 	// Expect an array of operations.
-	operations, err := builtins.ArrayOperand(operands[2].Value, 2)
+	operations, err := builtins.ArrayOperand(operands[3].Value, 2)
 	if err != nil {
 		return err
 	}
@@ -979,7 +982,7 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 		}
 	}
 
-	shuffle := ShuffleModelGet(string(model.Value.(ast.String)))
+	shuffle := ShuffleModelGet(model)
 	if shuffle !=nil {
         // Remove denied fields
 		switch v := (*shuffle).(type) {
@@ -1054,6 +1057,8 @@ func typeCasting(d interface{}) string {
 	switch c := d.(type) {
 	case string:
 		return c
+	case int32:
+		return fmt.Sprint(c)
 	case int64:
 		return fmt.Sprint(c)
 	case float64:

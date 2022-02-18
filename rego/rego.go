@@ -2532,3 +2532,36 @@ func newFunction(decl *Function, f topdown.BuiltinFunc) func(*Rego) {
 func generateJSON(term *ast.Term, ectx *EvalContext) (interface{}, error) {
 	return ast.JSONWithOpt(term.Value, ast.JSONOpt{SortSets: ectx.sortSets})
 }
+
+// RegisterPebbleStore ty: 1: PebbleStore, 2: Redis
+func RegisterPebbleStore(address string,ty int)  {
+    if ty == 1 {
+		topdown.RegisterPebbleStore(address)
+	} else if ty == 2 {
+		panic("not support redis")
+	}
+}
+
+// ShuffleModelAddString ns: namespace, key: key, value: value
+func ShuffleModelAddString(ns,key,value string) {
+	lkey := ns + "/" + key
+	topdown.ShuffleModelAddString(lkey,value)
+}
+
+// ShuffleModelAdd ns: namespace, key: key, value: value
+func ShuffleModelAdd(ns,key string,value *interface{}) {
+	lkey := ns + "/" + key
+	topdown.ShuffleModelAdd(lkey,value)
+}
+
+// ShuffleModelDelete ns: namespace, key: key
+func ShuffleModelDelete(ns,key string) {
+	lkey := ns + "/" + key
+	topdown.ShuffleModelDel(lkey)
+}
+
+// ShuffleModelGet ns: namespace, key: key
+func ShuffleModelGet(ns,key string) *interface{}{
+	lkey := ns + "/" + key
+	return topdown.ShuffleModelGet(lkey)
+}
