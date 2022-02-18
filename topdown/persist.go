@@ -180,15 +180,16 @@ func (this *pebbleStorage ) Delete(key string)  error {
 type Gauge struct {
 	Value int64;
 	Duration int64;
+	_duration int64;
 	Timestamp map[int64]int64;
 }
 
-func NewGauge(duration int64) Gauge {
-	return Gauge{0,duration,make(map[int64]int64)}
+func NewGauge(duration int64) Gauge { // 10 ms represents
+	return Gauge{Value: 0,Duration:duration/10,_duration:duration,Timestamp: make(map[int64]int64)}
 }
 
 func (this *Gauge) GetValue() int64 {
-	now := time.Now().Unix();
+	now := time.Now().UnixMilli() / 10  //10 ms resolution
 	this.Value = 0;
 	for k, v := range this.Timestamp {
 		if  now - k < this.Duration {
@@ -199,13 +200,13 @@ func (this *Gauge) GetValue() int64 {
 }
 
 func (this *Gauge) Add(val int64) {
-	now := time.Now().Unix();
+	now := time.Now().UnixMilli() / 10 //10 ms resolution
 	for k, _ := range this.Timestamp {
 		if now - k > this.Duration {
 			delete(this.Timestamp, k)
 		}
 	}
-	key := time.Now().Unix()
+	key := time.Now().UnixMilli() / 10 //10 ms resolution
 	if _, ok := this.Timestamp[key]; ok {
 		this.Timestamp[key] += val;
 	} else {
@@ -227,7 +228,7 @@ func (this *Gauge) Reset() {
 }
 
 func (this *Gauge) GetDuration() int64{
-	return this.Duration;
+	return this._duration;
 }
 
 func GaugeAdd(ns,key,value,duration ast.Value) ( output ast.Value, err error){
