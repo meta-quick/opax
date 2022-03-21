@@ -231,6 +231,11 @@ func (this *Gauge) GetDuration() int64{
 	return this._duration;
 }
 
+func (this *Gauge) SetDuration(duration int64) {
+	this._duration = duration;
+	this.Duration = duration/10;
+}
+
 func GaugeAdd(ns,key,value,duration ast.Value) ( output ast.Value, err error){
 	lkey, ok1 := key.(ast.String)
 	lvalue, ok2 := value.(ast.Number)
@@ -250,9 +255,12 @@ func GaugeAdd(ns,key,value,duration ast.Value) ( output ast.Value, err error){
 		    lduration, _ :=	lduration.Int64()
 			counter = NewGauge(lduration)
 			sonic.Unmarshal(value,&counter)
+			//overwrite the duration
+			counter.SetDuration(lduration)
 		} else {
 			lduration, _ :=	lduration.Int64()
 			counter = NewGauge(lduration)
+			counter.SetDuration(lduration)
 		}
 		lvalue, _ := lvalue.Int64()
 		counter.Add(lvalue)
