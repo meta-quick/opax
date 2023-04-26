@@ -19,7 +19,7 @@ import (
 
 var (
 	shuffle_mutex sync.Mutex
-	shuffleModel = make(map[string]*interface{})
+	shuffleModel  = make(map[string]*interface{})
 )
 
 func ShuffleModelAddString(key string, value string) {
@@ -35,7 +35,7 @@ func ShuffleModelAdd(key string, value *interface{}) {
 
 	val := (*value).(map[string]interface{})
 	//Compile shuffle
-    var shuffle	= make(map[string]interface{})
+	var shuffle = make(map[string]interface{})
 	for k, v := range val {
 		if k == "shuffle" {
 			for kk, vv := range v.(map[string]interface{}) {
@@ -45,9 +45,9 @@ func ShuffleModelAdd(key string, value *interface{}) {
 						handle := jsonmask.ProcessHandle{
 							Fn: kkk,
 						}
-                        var args = []string{}
-						for _,vvvv := range tt{
-                            args = append(args,vvvv.(string))
+						var args = []string{}
+						for _, vvvv := range tt {
+							args = append(args, vvvv.(string))
 						}
 						handle.Args = args
 						shuffle[kk] = handle
@@ -258,17 +258,16 @@ func parsePath(path *ast.Term) (ast.Ref, error) {
 	return pathSegments, nil
 }
 
-func extendPath(path ast.Ref,count int) ([]ast.Ref, error) {
+func extendPath(path ast.Ref, count int) ([]ast.Ref, error) {
 	if len(path) == 0 {
 		return []ast.Ref{path}, nil
 	}
-    _result := []ast.Ref{
-	}
+	_result := []ast.Ref{}
 
 	for i := 0; i < len(path); i++ {
 		switch v := path[i].Value.(type) {
 		case ast.Number:
-			if( len(_result) == 0 ){
+			if len(_result) == 0 {
 				_result = append(_result, ast.Ref{path[i]})
 			} else {
 				for m := 0; m < len(_result); m++ {
@@ -276,8 +275,8 @@ func extendPath(path ast.Ref,count int) ([]ast.Ref, error) {
 				}
 			}
 		case ast.String:
-			if strings.Contains(string(v),":")  {
-				parts := strings.Split(string(v),":")
+			if strings.Contains(string(v), ":") {
+				parts := strings.Split(string(v), ":")
 				start := -1
 				end := -1
 				if len(parts) == 2 {
@@ -301,7 +300,7 @@ func extendPath(path ast.Ref,count int) ([]ast.Ref, error) {
 					}
 				}
 
-				if start > -1  && end > -1 {
+				if start > -1 && end > -1 {
 					__results := []ast.Ref{}
 					for m := start; m < end; m++ {
 						for j := 0; j < len(_result); j++ {
@@ -312,7 +311,7 @@ func extendPath(path ast.Ref,count int) ([]ast.Ref, error) {
 					_result = __results
 				} else if start > -1 {
 					__results := []ast.Ref{}
-					for m := start; m < start + count; m++ {
+					for m := start; m < start+count; m++ {
 						for j := 0; j < len(_result); j++ {
 							tt := append(_result[j].Copy(), ast.IntNumberTerm(m))
 							__results = append(__results, tt)
@@ -339,7 +338,7 @@ func extendPath(path ast.Ref,count int) ([]ast.Ref, error) {
 					_result = __results
 				}
 			} else {
-				if( len(_result) == 0 ){
+				if len(_result) == 0 {
 					_result = append(_result, ast.Ref{path[i]})
 				} else {
 					for m := 0; m < len(_result); m++ {
@@ -407,8 +406,8 @@ func toIndex(arr *ast.Array, term *ast.Term) (*IndexRange, error) {
 			return nil, fmt.Errorf("Invalid number type for indexing")
 		}
 	case ast.String:
-		if strings.Contains(string(v),":")  {
-			parts := strings.Split(string(v),":")
+		if strings.Contains(string(v), ":") {
+			parts := strings.Split(string(v), ":")
 			index := IndexRange{
 				Start: 0,
 				End:   arr.Len(),
@@ -438,7 +437,7 @@ func toIndex(arr *ast.Array, term *ast.Term) (*IndexRange, error) {
 				index.Start, index.End = index.End, index.Start
 			}
 
-			if(index.Start < 0) {
+			if index.Start < 0 {
 				index.Start = 0
 			}
 			if index.End > arr.Len() {
@@ -458,7 +457,7 @@ func toIndex(arr *ast.Array, term *ast.Term) (*IndexRange, error) {
 		return nil, fmt.Errorf("Invalid type for indexing")
 	}
 	if i >= arr.Len() {
-		i = arr.Len() -1
+		i = arr.Len() - 1
 	}
 
 	if i < 0 {
@@ -471,7 +470,7 @@ func toIndex(arr *ast.Array, term *ast.Term) (*IndexRange, error) {
 
 	index := IndexRange{
 		Start: i,
-		End:   i+1,
+		End:   i + 1,
 	}
 
 	return &index, nil
@@ -486,9 +485,9 @@ func jsonPatchTraverse(
 	target *ast.Term,
 	path ast.Ref,
 	worker patchWorker,
-) (*ast.Term, *ast.Term,[]ast.Ref) {
+) (*ast.Term, *ast.Term, []ast.Ref) {
 	if len(path) < 1 {
-		return nil, nil,nil
+		return nil, nil, nil
 	}
 
 	key := path[0]
@@ -505,14 +504,14 @@ func jsonPatchTraverse(
 		parent.Foreach(func(k, v *ast.Term) {
 			if k.Equal(key) {
 				var _path []ast.Ref
-				if v, result,_path = jsonPatchTraverse(v, path[1:], worker); v != nil {
+				if v, result, _path = jsonPatchTraverse(v, path[1:], worker); v != nil {
 					obj.Insert(k, v)
-					for _,__path := range _path {
+					for _, __path := range _path {
 						tmp_path := ast.Ref{path[0]}
-						for _,part := range __path {
+						for _, part := range __path {
 							tmp_path = tmp_path.Append(part)
 						}
-						updated_path = append(updated_path,tmp_path)
+						updated_path = append(updated_path, tmp_path)
 					}
 					success = true
 				}
@@ -532,18 +531,18 @@ func jsonPatchTraverse(
 		for i := 0; i < parent.Len(); i++ {
 			v := parent.Elem(i)
 			if i >= idx.Start && i < idx.End {
-				if v, ret,_path := jsonPatchTraverse(v, path[1:], worker); v != nil {
+				if v, ret, _path := jsonPatchTraverse(v, path[1:], worker); v != nil {
 					arr = arr.Append(v)
-                    if ret != nil {
+					if ret != nil {
 						_results = _results.Append(ret)
 					}
 
-					for _,__path := range _path {
+					for _, __path := range _path {
 						tmp_path := ast.Ref{ast.IntNumberTerm(i)}
-						for _,part := range __path {
+						for _, part := range __path {
 							tmp_path = tmp_path.Append(part)
 						}
-						updated_path = append(updated_path,tmp_path)
+						updated_path = append(updated_path, tmp_path)
 					}
 					success = true
 				}
@@ -560,15 +559,15 @@ func jsonPatchTraverse(
 		set := ast.NewSet()
 		parent.Foreach(func(k *ast.Term) {
 			if k.Equal(key) {
-				var _path  []ast.Ref
-				if k, result,_path = jsonPatchTraverse(k, path[1:], worker); k != nil {
+				var _path []ast.Ref
+				if k, result, _path = jsonPatchTraverse(k, path[1:], worker); k != nil {
 					set.Add(k)
-					for _,__path := range _path {
+					for _, __path := range _path {
 						tmp_path := ast.Ref{path[0]}
-						for _,part := range __path {
+						for _, part := range __path {
 							tmp_path = tmp_path.Append(part)
 						}
-						updated_path = append(updated_path,tmp_path)
+						updated_path = append(updated_path, tmp_path)
 					}
 					success = true
 				}
@@ -580,7 +579,7 @@ func jsonPatchTraverse(
 	}
 
 	if success {
-		return updated, result,updated_path
+		return updated, result, updated_path
 	}
 
 	return nil, nil, nil
@@ -594,36 +593,36 @@ func jsonPatchTraverse(
 // Because it uses jsonPatchTraverse, it makes shallow copies of the objects
 // along the path.  We could possibly add a signaling mechanism that we didn't
 // make any changes to avoid this.
-func jsonPatchGet(target *ast.Term, path ast.Ref) (*ast.Term,[]ast.Ref) {
+func jsonPatchGet(target *ast.Term, path ast.Ref) (*ast.Term, []ast.Ref) {
 	// Special case: get entire document.
 	if len(path) == 0 {
-		return target,nil
+		return target, nil
 	}
 
-	_, result,_path := jsonPatchTraverse(target, path, func(parent, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
+	_, result, _path := jsonPatchTraverse(target, path, func(parent, key *ast.Term) (*ast.Term, *ast.Term, []ast.Ref) {
 		switch v := parent.Value.(type) {
 		case ast.Object:
-			return parent, v.Get(key),[]ast.Ref{ast.Ref{key}}
+			return parent, v.Get(key), []ast.Ref{ast.Ref{key}}
 		case *ast.Array:
 			idx, err := toIndex(v, key)
 			if err == nil {
 				__result := ast.NewArray()
 				__path := []ast.Ref{}
-				for i := idx.Start; i< idx.End; i++ {
+				for i := idx.Start; i < idx.End; i++ {
 					__result = __result.Append(v.Elem(i))
 					tmp_path := ast.Ref{ast.IntNumberTerm(i)}
-					__path = append(__path,tmp_path)
+					__path = append(__path, tmp_path)
 				}
-				return parent, ast.NewTerm(__result),__path
+				return parent, ast.NewTerm(__result), __path
 			}
 		case ast.Set:
 			if v.Contains(key) {
-				return parent, key,[]ast.Ref{ast.Ref{key}}
+				return parent, key, []ast.Ref{ast.Ref{key}}
 			}
 		}
-		return nil, nil,nil
+		return nil, nil, nil
 	})
-	return result,_path
+	return result, _path
 }
 
 func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
@@ -632,7 +631,7 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 		return value
 	}
 
-	target, _,_ = jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
+	target, _, _ = jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term, []ast.Ref) {
 		switch original := parent.Value.(type) {
 		case ast.Object:
 			obj := ast.NewObject()
@@ -640,11 +639,11 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 				obj.Insert(k, v)
 			})
 			obj.Insert(key, value)
-			return ast.NewTerm(obj), nil,nil
+			return ast.NewTerm(obj), nil, nil
 		case *ast.Array:
 			idx, err := toIndex(original, key)
 			if err != nil || idx == nil {
-				return nil, nil,nil
+				return nil, nil, nil
 			}
 			arr := ast.NewArray()
 			for i := 0; i < idx.Start; i++ {
@@ -659,19 +658,19 @@ func jsonPatchAdd(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
 			for i := idx.Start; i < original.Len(); i++ {
 				arr = arr.Append(original.Elem(i))
 			}
-			return ast.NewTerm(arr), nil,nil
+			return ast.NewTerm(arr), nil, nil
 		case ast.Set:
 			if !key.Equal(value) {
-				return nil, nil,nil
+				return nil, nil, nil
 			}
 			set := ast.NewSet()
 			original.Foreach(func(k *ast.Term) {
 				set.Add(k)
 			})
 			set.Add(key)
-			return ast.NewTerm(set), nil,nil
+			return ast.NewTerm(set), nil, nil
 		}
-		return nil, nil,nil
+		return nil, nil, nil
 	})
 
 	return target
@@ -683,7 +682,7 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 		return nil, nil
 	}
 
-	target, removed,_ := jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term,[]ast.Ref) {
+	target, removed, _ := jsonPatchTraverse(target, path, func(parent *ast.Term, key *ast.Term) (*ast.Term, *ast.Term, []ast.Ref) {
 		var removed *ast.Term
 		switch original := parent.Value.(type) {
 		case ast.Object:
@@ -695,11 +694,11 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 					obj.Insert(k, v)
 				}
 			})
-			return ast.NewTerm(obj), removed,nil
+			return ast.NewTerm(obj), removed, nil
 		case *ast.Array:
 			idx, err := toIndex(original, key)
 			if err != nil || idx == nil {
-				return nil, nil,nil
+				return nil, nil, nil
 			}
 			arr := ast.NewArray()
 			for i := 0; i < idx.Start; i++ {
@@ -715,7 +714,7 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 			for i := idx.End; i < original.Len(); i++ {
 				arr = arr.Append(original.Elem(i))
 			}
-			return ast.NewTerm(arr), removed,nil
+			return ast.NewTerm(arr), removed, nil
 		case ast.Set:
 			set := ast.NewSet()
 			original.Foreach(func(k *ast.Term) {
@@ -725,9 +724,9 @@ func jsonPatchRemove(target *ast.Term, path ast.Ref) (*ast.Term, *ast.Term) {
 					set.Add(k)
 				}
 			})
-			return ast.NewTerm(set), removed,nil
+			return ast.NewTerm(set), removed, nil
 		}
-		return nil, nil,nil
+		return nil, nil, nil
 	})
 
 	if target != nil && removed != nil {
@@ -762,7 +761,7 @@ func jsonPatchMove(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
 }
 
 func jsonPatchCopy(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
-	value,_ := jsonPatchGet(target, from)
+	value, _ := jsonPatchGet(target, from)
 	if value == nil {
 		return nil
 	}
@@ -771,7 +770,7 @@ func jsonPatchCopy(target *ast.Term, path ast.Ref, from ast.Ref) *ast.Term {
 }
 
 func jsonPatchTest(target *ast.Term, path ast.Ref, value *ast.Term) *ast.Term {
-	actual,_:= jsonPatchGet(target, path)
+	actual, _ := jsonPatchGet(target, path)
 	if actual == nil {
 		return nil
 	}
@@ -885,6 +884,8 @@ func builtinJSONPatch(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Ter
 func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Term) error) error {
 	// JSON patch supports arrays, objects as well as values as the target.
 	target := ast.NewTerm(operands[0].Value)
+	originTarget := target
+
 	// Shuffle model namesapce.
 	model := string(operands[1].Value.(ast.String))
 	// Shuffle model namesapce.
@@ -983,21 +984,24 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 	}
 
 	shuffle := ShuffleModelGet(model)
-	if shuffle !=nil {
-        // Remove denied fields
+	if shuffle != nil {
+		// Remove denied fields
 		switch v := (*shuffle).(type) {
 		case map[string]interface{}:
 			for key, field := range v {
-				if(key == "filters"){
+				if key == "filters" {
 					switch vv := field.(type) {
-					case  map[string]interface{}:
+					case map[string]interface{}:
 						for denied, column := range vv {
-							if(denied == "denied"){
+							if denied == "denied" {
 								switch columns := column.(type) {
 								case []interface{}:
 									for _, field := range columns {
-										path,_ := parsePath(ast.StringTerm(field.(string)))
+										path, _ := parsePath(ast.StringTerm(field.(string)))
 										target, _ = jsonPatchRemove(target, path)
+										if target == nil {
+											return iter(originTarget)
+										}
 									}
 								}
 							}
@@ -1005,41 +1009,47 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 					}
 				}
 
-				if(key == "shuffle"){
+				if key == "shuffle" {
 					switch shfl := field.(type) {
 					case map[string]interface{}:
 						for path, fn := range shfl {
-							path,_ := parsePath(ast.StringTerm(path))
-							origin,extpath := jsonPatchGet(target,path)
+							path, _ := parsePath(ast.StringTerm(path))
+							origin, extpath := jsonPatchGet(target, path)
 							if origin != nil {
 								switch vv := origin.Value.(type) {
 								case *ast.Array:
 									//extpath,_ := extendPath(path,vv.Len())
 									for i := 0; i < vv.Len(); i++ {
 										v := vv.Elem(i)
-										step,_ := ast.ValueToInterfaceX(v.Value)
+										step, _ := ast.ValueToInterfaceX(v.Value)
 										ctx := types.BuiltinContext{
-											Fn: fn.(jsonmask.ProcessHandle).Fn,
-											Args: fn.(jsonmask.ProcessHandle).Args,
+											Fn:      fn.(jsonmask.ProcessHandle).Fn,
+											Args:    fn.(jsonmask.ProcessHandle).Args,
 											Current: typeCasting(step),
 										}
 										types.Eval(&ctx)
-										newValue,err := ast.InterfaceToValue(ctx.Result)
+										newValue, err := ast.InterfaceToValue(ctx.Result)
 										if err == nil {
 											target = jsonPatchReplace(target, extpath[i], ast.NewTerm(newValue))
+											if target == nil {
+												return iter(originTarget)
+											}
 										}
 									}
 								default:
-									step,_ := ast.ValueToInterfaceX(vv)
+									step, _ := ast.ValueToInterfaceX(vv)
 									ctx := types.BuiltinContext{
-										Fn: fn.(jsonmask.ProcessHandle).Fn,
-										Args: fn.(jsonmask.ProcessHandle).Args,
+										Fn:      fn.(jsonmask.ProcessHandle).Fn,
+										Args:    fn.(jsonmask.ProcessHandle).Args,
 										Current: typeCasting(step),
 									}
 									types.Eval(&ctx)
-									newValue,err := ast.InterfaceToValue(ctx.Result)
+									newValue, err := ast.InterfaceToValue(ctx.Result)
 									if err == nil {
 										target = jsonPatchReplace(target, path, ast.NewTerm(newValue))
+										if target == nil {
+											return iter(originTarget)
+										}
 									}
 								}
 							}
@@ -1064,7 +1074,7 @@ func typeCasting(d interface{}) string {
 	case float64:
 		return strconv.FormatFloat(c, 'f', -1, 64)
 	case json.Number:
-		tt,_ := strconv.ParseFloat(c.String(),64)
+		tt, _ := strconv.ParseFloat(c.String(), 64)
 		return strconv.FormatFloat(tt, 'f', -1, 64)
 	default:
 		return fmt.Sprint(d)
