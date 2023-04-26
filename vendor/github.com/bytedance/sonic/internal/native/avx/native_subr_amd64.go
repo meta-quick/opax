@@ -9,52 +9,73 @@ package avx
 func __native_entry__() uintptr
 
 var (
-    _subr__f64toa      = __native_entry__() + 630
-    _subr__i64toa      = __native_entry__() + 3642
-    _subr__lspace      = __native_entry__() + 301
-    _subr__lzero       = __native_entry__() + 13
-    _subr__quote       = __native_entry__() + 4955
-    _subr__skip_array  = __native_entry__() + 16074
-    _subr__skip_object = __native_entry__() + 16109
-    _subr__skip_one    = __native_entry__() + 14295
-    _subr__u64toa      = __native_entry__() + 3735
-    _subr__unquote     = __native_entry__() + 5888
-    _subr__value       = __native_entry__() + 9657
-    _subr__vnumber     = __native_entry__() + 12453
-    _subr__vsigned     = __native_entry__() + 13767
-    _subr__vstring     = __native_entry__() + 11418
-    _subr__vunsigned   = __native_entry__() + 14026
+    _subr__f32toa             = __native_entry__() + 28800
+    _subr__f64toa             = __native_entry__() + 448
+    _subr__get_by_path        = __native_entry__() + 25664
+    _subr__html_escape        = __native_entry__() + 9296
+    _subr__i64toa             = __native_entry__() + 3744
+    _subr__lspace             = __native_entry__() + 80
+    _subr__quote              = __native_entry__() + 5136
+    _subr__skip_array         = __native_entry__() + 18592
+    _subr__skip_number        = __native_entry__() + 22224
+    _subr__skip_object        = __native_entry__() + 20640
+    _subr__skip_one           = __native_entry__() + 22384
+    _subr__skip_one_fast      = __native_entry__() + 22624
+    _subr__u64toa             = __native_entry__() + 3856
+    _subr__unquote            = __native_entry__() + 6928
+    _subr__validate_one       = __native_entry__() + 22448
+    _subr__validate_utf8      = __native_entry__() + 27552
+    _subr__validate_utf8_fast = __native_entry__() + 28224
+    _subr__value              = __native_entry__() + 12480
+    _subr__vnumber            = __native_entry__() + 16256
+    _subr__vsigned            = __native_entry__() + 17872
+    _subr__vstring            = __native_entry__() + 14704
+    _subr__vunsigned          = __native_entry__() + 18240
 )
 
 const (
-    _stack__f64toa = 120
-    _stack__i64toa = 24
+    _stack__f32toa = 48
+    _stack__f64toa = 80
+    _stack__get_by_path = 304
+    _stack__html_escape = 64
+    _stack__i64toa = 16
     _stack__lspace = 8
-    _stack__lzero = 8
-    _stack__quote = 64
-    _stack__skip_array = 136
-    _stack__skip_object = 136
-    _stack__skip_one = 136
+    _stack__quote = 56
+    _stack__skip_array = 128
+    _stack__skip_number = 72
+    _stack__skip_object = 128
+    _stack__skip_one = 128
+    _stack__skip_one_fast = 216
     _stack__u64toa = 8
     _stack__unquote = 88
-    _stack__value = 400
-    _stack__vnumber = 312
+    _stack__validate_one = 128
+    _stack__validate_utf8 = 48
+    _stack__validate_utf8_fast = 24
+    _stack__value = 328
+    _stack__vnumber = 240
     _stack__vsigned = 16
-    _stack__vstring = 128
-    _stack__vunsigned = 8
+    _stack__vstring = 136
+    _stack__vunsigned = 16
 )
 
 var (
+    _ = _subr__f32toa
     _ = _subr__f64toa
+    _ = _subr__get_by_path
+    _ = _subr__html_escape
     _ = _subr__i64toa
     _ = _subr__lspace
-    _ = _subr__lzero
     _ = _subr__quote
     _ = _subr__skip_array
+    _ = _subr__skip_number
     _ = _subr__skip_object
     _ = _subr__skip_one
+    _ = _subr__skip_one_fast
     _ = _subr__u64toa
     _ = _subr__unquote
+    _ = _subr__validate_one
+    _ = _subr__validate_utf8
+    _ = _subr__validate_utf8_fast
     _ = _subr__value
     _ = _subr__vnumber
     _ = _subr__vsigned
@@ -63,16 +84,23 @@ var (
 )
 
 const (
+    _ = _stack__f32toa
     _ = _stack__f64toa
+    _ = _stack__get_by_path
+    _ = _stack__html_escape
     _ = _stack__i64toa
     _ = _stack__lspace
-    _ = _stack__lzero
     _ = _stack__quote
     _ = _stack__skip_array
+    _ = _stack__skip_number
     _ = _stack__skip_object
     _ = _stack__skip_one
+    _ = _stack__skip_one_fast
     _ = _stack__u64toa
     _ = _stack__unquote
+    _ = _stack__validate_one
+    _ = _stack__validate_utf8
+    _ = _stack__validate_utf8_fast
     _ = _stack__value
     _ = _stack__vnumber
     _ = _stack__vsigned

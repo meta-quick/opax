@@ -18,6 +18,7 @@ package rt
 
 import (
     `unsafe`
+    `reflect`
 )
 
 //go:nosplit
@@ -50,5 +51,62 @@ func Str2Mem(s string) (v []byte) {
     return
 }
 
+func BytesFrom(p unsafe.Pointer, n int, c int) (r []byte) {
+    (*GoSlice)(unsafe.Pointer(&r)).Ptr = p
+    (*GoSlice)(unsafe.Pointer(&r)).Len = n
+    (*GoSlice)(unsafe.Pointer(&r)).Cap = c
+    return
+}
+
+func FuncAddr(f interface{}) unsafe.Pointer {
+    if vv := UnpackEface(f); vv.Type.Kind() != reflect.Func {
+        panic("f is not a function")
+    } else {
+        return *(*unsafe.Pointer)(vv.Value)
+    }
+}
+
+func IndexChar(src string, index int) unsafe.Pointer {
+	return unsafe.Pointer(uintptr((*GoString)(unsafe.Pointer(&src)).Ptr) + uintptr(index))
+}
+
+func IndexByte(ptr []byte, index int) unsafe.Pointer {
+	return unsafe.Pointer(uintptr((*GoSlice)(unsafe.Pointer(&ptr)).Ptr) + uintptr(index))
+}
+
 //go:nosplit
-func MoreStack(size uintptr)
+func GuardSlice(buf *[]byte, n int) {
+	c := cap(*buf)
+	l := len(*buf)
+	if c-l < n {
+		c = c>>1 + n + l
+		if c < 32 {
+			c = 32
+		}
+		tmp := make([]byte, l, c)
+		copy(tmp, *buf)
+		*buf = tmp
+	}
+}
+
+//go:nosplit
+func Ptr2SlicePtr(s unsafe.Pointer, l int, c int) unsafe.Pointer {
+    slice := &GoSlice{
+        Ptr: s,
+        Len: l,
+        Cap: c,
+    }
+    return unsafe.Pointer(slice)
+}
+
+//go:nosplit
+func StrPtr(s string) unsafe.Pointer {
+    return (*GoString)(unsafe.Pointer(&s)).Ptr
+}
+
+//go:nosplit
+func StrFrom(p unsafe.Pointer, n int64) (s string) {
+    (*GoString)(unsafe.Pointer(&s)).Ptr = p
+    (*GoString)(unsafe.Pointer(&s)).Len = int(n)
+    return
+}

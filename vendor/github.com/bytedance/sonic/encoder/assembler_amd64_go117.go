@@ -1,4 +1,5 @@
-// +build go1.17,!go1.18
+//go:build go1.17 && !go1.21
+// +build go1.17,!go1.21
 
 /*
  * Copyright 2021 ByteDance Inc.
@@ -80,6 +81,7 @@ const (
 const (
     _FP_loffs = _FP_fargs + _FP_saves
     _FP_offs  = _FP_loffs + _FP_locals
+    // _FP_offs  = _FP_loffs + _FP_locals + _FP_debug
     _FP_size  = _FP_offs + 8     // 8 bytes for the parent frame pointer
     _FP_base  = _FP_size + 8     // 8 bytes for the return address
 )
@@ -90,11 +92,13 @@ const (
 )
 
 const (
-    _IM_null = 0x6c6c756e           // 'null'
-    _IM_true = 0x65757274           // 'true'
-    _IM_fals = 0x736c6166           // 'fals' ('false' without the 'e')
-    _IM_open = 0x00225c22           // '"\"∅'
-    _IM_mulv = -0x5555555555555555
+    _IM_null   = 0x6c6c756e           // 'null'
+    _IM_true   = 0x65757274           // 'true'
+    _IM_fals   = 0x736c6166           // 'fals' ('false' without the 'e')
+    _IM_open   = 0x00225c22           // '"\"∅'
+    _IM_array  = 0x5d5b               // '[]'
+    _IM_object = 0x7d7b               // '{}'
+    _IM_mulv   = -0x5555555555555555
 )
 
 const (
@@ -107,6 +111,7 @@ const (
     _LB_error_too_deep        = "_error_too_deep"
     _LB_error_invalid_number  = "_error_invalid_number"
     _LB_error_nan_or_infinite = "_error_nan_or_infinite"
+    _LB_panic = "_panic"
 )
 
 var (
@@ -128,16 +133,16 @@ var (
 )
 
 var (
-	_ST = jit.Reg("R15")     // can't use R14 since it's always scratched by Go...
-	_RP = jit.Reg("DI")
-	_RL = jit.Reg("SI")
-	_RC = jit.Reg("DX")
+    _ST = jit.Reg("R15")     // can't use R14 since it's always scratched by Go...
+    _RP = jit.Reg("DI")
+    _RL = jit.Reg("SI")
+    _RC = jit.Reg("DX")
 )
 
 var (
     _LR = jit.Reg("R9")
-	_ET = jit.Reg("AX")
-	_EP = jit.Reg("BX")
+    _ET = jit.Reg("AX")
+    _EP = jit.Reg("BX")
 )
 
 var (
@@ -169,15 +174,16 @@ var (
     _REG_ffi = []obj.Addr{ _RP, _RL, _RC}
     _REG_b64 = []obj.Addr{_SP_p, _SP_q}
 
-    _REG_all  = []obj.Addr{_ST, _SP_x, _SP_f, _SP_p, _SP_q, _RP, _RL, _RC}
+    _REG_all = []obj.Addr{_ST, _SP_x, _SP_f, _SP_p, _SP_q, _RP, _RL, _RC}
     _REG_ms  = []obj.Addr{_ST, _SP_x, _SP_f, _SP_p, _SP_q, _LR}
-    _REG_enc = []obj.Addr{_ST, _SP_x, _SP_f, _SP_p, _SP_q}
+    _REG_enc = []obj.Addr{_ST, _SP_x, _SP_f, _SP_p, _SP_q, _RL}
 )
 
 type _Assembler struct {
     jit.BaseAssembler
     p _Program
     x int
+    name string
 }
 
 func newAssembler(p _Program) *_Assembler {
@@ -187,7 +193,7 @@ func newAssembler(p _Program) *_Assembler {
 /** Assembler Interface **/
 
 func (self *_Assembler) Load() _Encoder {
-    return ptoenc(self.BaseAssembler.LoadWithFaker("json_encoder", _FP_size, _FP_args, _Encoder_Shadow))
+    return ptoenc(self.BaseAssembler.Load("encode_"+self.name, _FP_size, _FP_args, argPtrs, localPtrs))
 }
 
 func (self *_Assembler) Init(p _Program) *_Assembler {
@@ -207,6 +213,8 @@ func (self *_Assembler) compile() {
 
 var _OpFuncTab = [256]func(*_Assembler, *_Instr) {
     _OP_null           : (*_Assembler)._asm_OP_null,
+    _OP_empty_arr      : (*_Assembler)._asm_OP_empty_arr,
+    _OP_empty_obj      : (*_Assembler)._asm_OP_empty_obj, 
     _OP_bool           : (*_Assembler)._asm_OP_bool,
     _OP_i8             : (*_Assembler)._asm_OP_i8,
     _OP_i16            : (*_Assembler)._asm_OP_i16,
@@ -277,6 +285,7 @@ func (self *_Assembler) builtins() {
     self.error_too_deep()
     self.error_invalid_number()
     self.error_nan_or_infinite()
+    self.go_panic()
 }
 
 func (self *_Assembler) epilogue() {
@@ -286,9 +295,9 @@ func (self *_Assembler) epilogue() {
     self.Link(_LB_error)
     self.Emit("MOVQ", _ARG_rb, _CX)                 // MOVQ rb<>+0(FP), CX
     self.Emit("MOVQ", _RL, jit.Ptr(_CX, 8))         // MOVQ RL, 8(CX)
-    self.Emit("MOVQ", jit.Imm(0), _ARG_rb)                 // MOVQ AX, rb<>+0(FP)
-    self.Emit("MOVQ", jit.Imm(0), _ARG_vp)                 // MOVQ BX, vp<>+8(FP)
-    self.Emit("MOVQ", jit.Imm(0), _ARG_sb)                 // MOVQ CX, sb<>+16(FP)
+    self.Emit("MOVQ", jit.Imm(0), _ARG_rb)          // MOVQ AX, rb<>+0(FP)
+    self.Emit("MOVQ", jit.Imm(0), _ARG_vp)          // MOVQ BX, vp<>+8(FP)
+    self.Emit("MOVQ", jit.Imm(0), _ARG_sb)          // MOVQ CX, sb<>+16(FP)
     self.Emit("MOVQ", jit.Ptr(_SP, _FP_offs), _BP)  // MOVQ _FP_offs(SP), BP
     self.Emit("ADDQ", jit.Imm(_FP_size), _SP)       // ADDQ $_FP_size, SP
     self.Emit("RET")                                // RET
@@ -528,9 +537,10 @@ func (self *_Assembler) call_encoder(pc obj.Addr) {
 
 func (self *_Assembler) call_marshaler(fn obj.Addr, it *rt.GoType, vt reflect.Type) {
     switch vt.Kind() {
-        case reflect.Interface : self.call_marshaler_i(fn, it)
-        case reflect.Ptr       : self.call_marshaler_v(fn, it, vt, true)
-        default                : self.call_marshaler_v(fn, it, vt, false)
+        case reflect.Interface        : self.call_marshaler_i(fn, it)
+        case reflect.Ptr, reflect.Map : self.call_marshaler_v(fn, it, vt, true)
+        // struct/array of 1 direct iface type can be direct
+        default                       : self.call_marshaler_v(fn, it, vt, !rt.UnpackType(vt).Indirect())
     }
 }
 
@@ -547,6 +557,7 @@ func (self *_Assembler) call_marshaler_i(fn obj.Addr, it *rt.GoType) {
     self.Emit("MOVQ", _BX, _CX)                                     // MOVQ   BX, CX
     self.Emit("MOVQ", _AX, _BX)                                     // MOVQ   AX, BX
     self.prep_buffer_AX()
+    self.Emit("MOVQ", _ARG_fv, _DI)                                 // MOVQ   ARG.fv, DI
     self.call_go(fn)                                                // CALL    $fn
     self.Emit("TESTQ", _ET, _ET)                                    // TESTQ ET, ET
     self.Sjmp("JNZ"  , _LB_error)                                   // JNZ   _error
@@ -571,7 +582,8 @@ func (self *_Assembler) call_marshaler_v(fn obj.Addr, it *rt.GoType, vt reflect.
     }
 
     /* call the encoder, and perform error checks */
-    self.call_go(fn)                                  // CALL  $fn
+    self.Emit("MOVQ", _ARG_fv, _DI)                 // MOVQ   ARG.fv, DI
+    self.call_go(fn)                                // CALL  $fn
     self.Emit("TESTQ", _ET, _ET)                // TESTQ ET, ET
     self.Sjmp("JNZ"  , _LB_error)               // JNZ   _error
     self.load_buffer_AX()
@@ -634,12 +646,24 @@ func (self *_Assembler) error_nan_or_infinite()  {
 
 var (
     _F_quote = jit.Imm(int64(native.S_quote))
+    _F_panic = jit.Func(goPanic)
 )
 
-func (self *_Assembler) encode_string(doubleQuote bool) {
+func (self *_Assembler) go_panic() {
+    self.Link(_LB_panic)
+    self.Emit("MOVQ", _SP_p, _BX)
+    self.call_go(_F_panic)
+}
+
+func (self *_Assembler) encode_string(doubleQuote bool) {       
     self.Emit("MOVQ" , jit.Ptr(_SP_p, 8), _AX)  // MOVQ  8(SP.p), AX
     self.Emit("TESTQ", _AX, _AX)                // TESTQ AX, AX
     self.Sjmp("JZ"   , "_str_empty_{n}")        // JZ    _str_empty_{n}
+    self.Emit("CMPQ", jit.Ptr(_SP_p, 0), jit.Imm(0))
+    self.Sjmp("JNE"   , "_str_next_{n}") 
+    self.Emit("MOVQ", jit.Imm(int64(panicNilPointerOfNonEmptyString)), _AX)
+    self.Sjmp("JMP", _LB_panic)
+    self.Link("_str_next_{n}")
 
     /* openning quote, check for double quote */
     if !doubleQuote {
@@ -724,6 +748,7 @@ var (
 
 var (
     _F_f64toa    = jit.Imm(int64(native.S_f64toa))
+    _F_f32toa    = jit.Imm(int64(native.S_f32toa))
     _F_i64toa    = jit.Imm(int64(native.S_i64toa))
     _F_u64toa    = jit.Imm(int64(native.S_u64toa))
     _F_b64encode = jit.Imm(int64(_subr__b64encode))
@@ -763,6 +788,30 @@ func (self *_Assembler) _asm_OP_null(_ *_Instr) {
     self.Emit("ADDQ", jit.Imm(4), _RL)                             // ADDQ $4, RL
 }
 
+func (self *_Assembler) _asm_OP_empty_arr(_ *_Instr) {
+    self.Emit("BTQ", jit.Imm(int64(bitNoNullSliceOrMap)), _ARG_fv)
+    self.Sjmp("JC", "_empty_arr_{n}")
+    self._asm_OP_null(nil)
+    self.Sjmp("JMP", "_empty_arr_end_{n}")
+    self.Link("_empty_arr_{n}")
+    self.check_size(2)
+    self.Emit("MOVW", jit.Imm(_IM_array), jit.Sib(_RP, _RL, 1, 0)) 
+    self.Emit("ADDQ", jit.Imm(2), _RL)    
+    self.Link("_empty_arr_end_{n}")                  
+}
+
+func (self *_Assembler) _asm_OP_empty_obj(_ *_Instr) {
+    self.Emit("BTQ", jit.Imm(int64(bitNoNullSliceOrMap)), _ARG_fv)
+    self.Sjmp("JC", "_empty_obj_{n}")
+    self._asm_OP_null(nil)
+    self.Sjmp("JMP", "_empty_obj_end_{n}")
+    self.Link("_empty_obj_{n}")
+    self.check_size(2)
+    self.Emit("MOVW", jit.Imm(_IM_object), jit.Sib(_RP, _RL, 1, 0))  
+    self.Emit("ADDQ", jit.Imm(2), _RL) 
+    self.Link("_empty_obj_end_{n}")                                             
+}
+
 func (self *_Assembler) _asm_OP_bool(_ *_Instr) {
     self.Emit("CMPB", jit.Ptr(_SP_p, 0), jit.Imm(0))                // CMPB (SP.p), $0
     self.Sjmp("JE"  , "_false_{n}")                                 // JE   _false_{n}
@@ -787,7 +836,7 @@ func (self *_Assembler) _asm_OP_i16(_ *_Instr) {
 }
 
 func (self *_Assembler) _asm_OP_i32(_ *_Instr) {
-    self.store_int(11, _F_i64toa, "MOVLQSX")
+    self.store_int(17, _F_i64toa, "MOVLQSX")
 }
 
 func (self *_Assembler) _asm_OP_i64(_ *_Instr) {
@@ -803,7 +852,7 @@ func (self *_Assembler) _asm_OP_u16(_ *_Instr) {
 }
 
 func (self *_Assembler) _asm_OP_u32(_ *_Instr) {
-    self.store_int(10, _F_u64toa, "MOVLQZX")
+    self.store_int(16, _F_u64toa, "MOVLQZX")
 }
 
 func (self *_Assembler) _asm_OP_u64(_ *_Instr) {
@@ -819,8 +868,7 @@ func (self *_Assembler) _asm_OP_f32(_ *_Instr) {
     self.save_c()                                       // SAVE     $C_regs
     self.rbuf_di()                                      // MOVQ     RP, DI
     self.Emit("MOVSS"   , jit.Ptr(_SP_p, 0), _X0)       // MOVSS    (SP.p), X0
-    self.Emit("CVTSS2SD", _X0, _X0)                     // CVTSS2SD X0, X0
-    self.call_c(_F_f64toa)                              // CALL_C   f64toa
+    self.call_c(_F_f32toa)                              // CALL_C   f64toa
     self.Emit("ADDQ"    , _AX, _RL)                     // ADDQ     AX, RL
 }
 
@@ -875,10 +923,15 @@ func (self *_Assembler) _asm_OP_quote(_ *_Instr) {
 }
 
 func (self *_Assembler) _asm_OP_number(_ *_Instr) {
-    self.Emit("MOVQ" , jit.Ptr(_SP_p, 0), _AX)          // MOVQ    (SP.p), AX
     self.Emit("MOVQ" , jit.Ptr(_SP_p, 8), _BX)          // MOVQ    (SP.p), BX
     self.Emit("TESTQ", _BX, _BX)                        // TESTQ   BX, BX
     self.Sjmp("JZ"   , "_empty_{n}")
+    self.Emit("MOVQ" , jit.Ptr(_SP_p, 0), _AX)          // MOVQ    (SP.p), AX
+    self.Emit("TESTQ", _AX, _AX)                        // TESTQ   AX, AX
+    self.Sjmp("JNZ"   , "_number_next_{n}") 
+    self.Emit("MOVQ", jit.Imm(int64(panicNilPointerOfNonEmptyString)), _AX)
+    self.Sjmp("JMP", _LB_panic)
+    self.Link("_number_next_{n}")
     self.call_go(_F_isValidNumber)                      // CALL_GO isValidNumber
     self.Emit("CMPB" , _AX, jit.Imm(0))                 // CMPB    AX, $0
     self.Sjmp("JE"   , _LB_error_invalid_number)        // JE      _error_invalid_number
@@ -965,10 +1018,11 @@ func (self *_Assembler) _asm_OP_drop_2(_ *_Instr) {
 
 func (self *_Assembler) _asm_OP_recurse(p *_Instr) {
     self.prep_buffer_AX()                       // MOVE {buf}, (SP)
-    self.Emit("MOVQ", jit.Type(p.vt()), _BX)    // MOVQ $(type(p.vt())), BX
+    vt, pv := p.vp()
+    self.Emit("MOVQ", jit.Type(vt), _BX)    // MOVQ $(type(p.vt())), BX
 
     /* check for indirection */
-    if (p.vf() & rt.F_direct) != 0 {
+    if !rt.UnpackType(vt).Indirect() {
         self.Emit("MOVQ", _SP_p, _CX)           // MOVQ SP.p, CX
     } else {
         self.Emit("MOVQ", _SP_p, _VAR_vp)  // MOVQ SP.p, VAR.vp
@@ -978,6 +1032,9 @@ func (self *_Assembler) _asm_OP_recurse(p *_Instr) {
     /* call the encoder */
     self.Emit("MOVQ" , _ST, _DI)                // MOVQ  ST, DI
     self.Emit("MOVQ" , _ARG_fv, _SI)            // MOVQ  $fv, SI
+    if pv {
+        self.Emit("BTCQ", jit.Imm(bitPointerValue), _SI)  // BTCQ $1, SI
+    }
     self.call_encoder(_F_encodeTypedPointer)    // CALL  encodeTypedPointer
     self.Emit("TESTQ", _ET, _ET)                // TESTQ ET, ET
     self.Sjmp("JNZ"  , _LB_error)               // JNZ   _error

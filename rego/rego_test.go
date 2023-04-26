@@ -2130,32 +2130,32 @@ func TestShuffleToObject(t *testing.T) {
 }
 }
 `
-	input = `
-{
+	//	input = `
+	//{
+	//
+	//"d": {
+	//	"e": {
+	//     "g": [
+	//        {"x":1000000000}
+	//      ]
+	//	}
+	//}
+	//}
+	//`
 
-"d": {
-	"e": {
-     "g": [
-        {"x":1000000000}
-      ]
-	}
-}
-}
-`
+	//	model = `
+	//{
+	//"shuffle" : {
+	// 	 "d/e/g/:/x" : {
+	//    "mx.pfe.mask_number": [
+	//       "1"
+	//     ]
+	// }
+	//}
+	//}
+	//`
 
-	model = `
-{
-"shuffle" : {
- 	 "d/e/g/:/x" : {
-    "mx.pfe.mask_number": [
-       "1"
-     ]
- }
-}
-}
-`
-
-	ShuffleModelAddString("oa","api",model)
+	ShuffleModelAddString("oa", "api", model)
 	ctx := context.Background()
 
 	module := `
@@ -2182,8 +2182,7 @@ func TestShuffleToObject(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	output, err := pq.Eval(ctx,EvalInput(v))
-	ret,_ :=sonic.Marshal(output)
-    fmt.Println(string(ret[:]))
+	output, err := pq.Eval(ctx, EvalInput(v))
+	ret, _ := sonic.Marshal(output)
+	fmt.Println(string(ret[:]))
 }
-

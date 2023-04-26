@@ -21,8 +21,12 @@ import (
     `encoding/json`
     `reflect`
     `runtime`
+    `unsafe`
 
+    `github.com/bytedance/sonic/internal/native`
+    `github.com/bytedance/sonic/internal/native/types`
     `github.com/bytedance/sonic/internal/rt`
+    `github.com/bytedance/sonic/utf8`
     `github.com/bytedance/sonic/option`
 )
 
@@ -30,23 +34,60 @@ import (
 type Options uint64
 
 const (
-    bitSortMapKeys = iota
+    bitSortMapKeys          = iota
+    bitEscapeHTML          
+    bitCompactMarshaler
+    bitNoQuoteTextMarshaler
+    bitNoNullSliceOrMap
+    bitValidateString
+
+    // used for recursive compile
+    bitPointerValue = 63
 )
 
 const (
-    // SortMapKeys indicate that the keys of a map needs to be sorted before
-    // serializing into JSON.
+    // SortMapKeys indicates that the keys of a map needs to be sorted 
+    // before serializing into JSON.
     // WARNING: This hurts performance A LOT, USE WITH CARE.
-    SortMapKeys Options = 1 << bitSortMapKeys
+    SortMapKeys          Options = 1 << bitSortMapKeys
+
+    // EscapeHTML indicates encoder to escape all HTML characters 
+    // after serializing into JSON (see https://pkg.go.dev/encoding/json#HTMLEscape).
+    // WARNING: This hurts performance A LOT, USE WITH CARE.
+    EscapeHTML           Options = 1 << bitEscapeHTML
+
+    // CompactMarshaler indicates that the output JSON from json.Marshaler 
+    // is always compact and needs no validation 
+    CompactMarshaler     Options = 1 << bitCompactMarshaler
+
+    // NoQuoteTextMarshaler indicates that the output text from encoding.TextMarshaler 
+    // is always escaped string and needs no quoting
+    NoQuoteTextMarshaler Options = 1 << bitNoQuoteTextMarshaler
+
+    // NoNullSliceOrMap indicates all empty Array or Object are encoded as '[]' or '{}',
+    // instead of 'null'
+    NoNullSliceOrMap     Options = 1 << bitNoNullSliceOrMap
+
+    // ValidateString indicates that encoder should validate the input string
+    // before encoding it into JSON.
+    ValidateString       Options = 1 << bitValidateString
+  
+    // CompatibleWithStd is used to be compatible with std encoder.
+    CompatibleWithStd Options = SortMapKeys | EscapeHTML | CompactMarshaler
 )
 
 // Encoder represents a specific set of encoder configurations.
 type Encoder struct {
     Opts Options
+    prefix string
+    indent string
 }
 
 // Encode returns the JSON encoding of v.
 func (self *Encoder) Encode(v interface{}) ([]byte, error) {
+    if self.indent != "" || self.prefix != "" { 
+        return EncodeIndented(v, self.prefix, self.indent, self.Opts)
+    }
     return Encode(v, self.Opts)
 }
 
@@ -54,6 +95,50 @@ func (self *Encoder) Encode(v interface{}) ([]byte, error) {
 func (self *Encoder) SortKeys() *Encoder {
     self.Opts |= SortMapKeys
     return self
+}
+
+// SetEscapeHTML specifies if option EscapeHTML opens
+func (self *Encoder) SetEscapeHTML(f bool) {
+    if f {
+        self.Opts |= EscapeHTML
+    } else {
+        self.Opts &= ^EscapeHTML
+    }
+}
+
+// SetValidateString specifies if option ValidateString opens
+func (self *Encoder) SetValidateString(f bool) {
+    if f {
+        self.Opts |= ValidateString
+    } else {
+        self.Opts &= ^ValidateString
+    }
+}
+
+// SetCompactMarshaler specifies if option CompactMarshaler opens
+func (self *Encoder) SetCompactMarshaler(f bool) {
+    if f {
+        self.Opts |= CompactMarshaler
+    } else {
+        self.Opts &= ^CompactMarshaler
+    }
+}
+
+// SetNoQuoteTextMarshaler specifies if option NoQuoteTextMarshaler opens
+func (self *Encoder) SetNoQuoteTextMarshaler(f bool) {
+    if f {
+        self.Opts |= NoQuoteTextMarshaler
+    } else {
+        self.Opts &= ^NoQuoteTextMarshaler
+    }
+}
+
+// SetIndent instructs the encoder to format each subsequent encoded
+// value as if indented by the package-level function EncodeIndent().
+// Calling SetIndent("", "") disables indentation.
+func (enc *Encoder) SetIndent(prefix, indent string) {
+    enc.prefix = prefix
+    enc.indent = indent
 }
 
 // Quote returns the JSON-quoted version of s.
@@ -77,8 +162,10 @@ func Quote(s string) string {
 
 // Encode returns the JSON encoding of val, encoded with opts.
 func Encode(val interface{}, opts Options) ([]byte, error) {
+    var ret []byte
+
     buf := newBytes()
-    err := EncodeInto(&buf, val, opts)
+    err := encodeInto(&buf, val, opts)
 
     /* check for errors */
     if err != nil {
@@ -86,18 +173,39 @@ func Encode(val interface{}, opts Options) ([]byte, error) {
         return nil, err
     }
 
+    /* htmlescape or correct UTF-8 if opts enable */
+    old := buf
+    buf = encodeFinish(old, opts)
+    pbuf := ((*rt.GoSlice)(unsafe.Pointer(&buf))).Ptr
+    pold := ((*rt.GoSlice)(unsafe.Pointer(&old))).Ptr
+
+    /* return when allocated a new buffer */
+    if pbuf != pold {
+        freeBytes(old)
+        return buf, nil
+    }
+
     /* make a copy of the result */
-    ret := make([]byte, len(buf))
+    ret = make([]byte, len(buf))
     copy(ret, buf)
 
-    /* return the buffer into pool */
     freeBytes(buf)
+    /* return the buffer into pool */
     return ret, nil
 }
 
 // EncodeInto is like Encode but uses a user-supplied buffer instead of allocating
 // a new one.
 func EncodeInto(buf *[]byte, val interface{}, opts Options) error {
+    err := encodeInto(buf, val, opts)
+    if err != nil {
+        return err
+    }
+    *buf = encodeFinish(*buf, opts)
+    return err
+}
+
+func encodeInto(buf *[]byte, val interface{}, opts Options) error {
     stk := newStack()
     efv := rt.UnpackEface(val)
     err := encodeTypedPointer(buf, efv.Type, &efv.Value, stk, uint64(opts))
@@ -112,6 +220,28 @@ func EncodeInto(buf *[]byte, val interface{}, opts Options) error {
     runtime.KeepAlive(buf)
     runtime.KeepAlive(efv)
     return err
+}
+
+func encodeFinish(buf []byte, opts Options) []byte {
+    if opts & EscapeHTML != 0 {
+        buf = HTMLEscape(nil, buf)
+    }
+    if opts & ValidateString != 0 && !utf8.Validate(buf) {
+        buf = utf8.CorrectWith(nil, buf, `\ufffd`)
+    }
+    return buf
+}
+
+var typeByte = rt.UnpackType(reflect.TypeOf(byte(0)))
+
+// HTMLEscape appends to dst the JSON-encoded src with <, >, &, U+2028 and U+2029
+// characters inside string literals changed to \u003c, \u003e, \u0026, \u2028, \u2029
+// so that the JSON will be safe to embed inside HTML <script> tags.
+// For historical reasons, web browsers don't honor standard HTML
+// escaping within <script> tags, so an alternative JSON encoding must
+// be used.
+func HTMLEscape(dst []byte, src []byte) []byte {
+    return htmlEscape(dst, src)
 }
 
 // EncodeIndented is like Encode but applies Indent to format the output.
@@ -164,45 +294,35 @@ func Pretouch(vt reflect.Type, opts ...option.CompileOption) error {
         opt(&cfg)
         break
     }
-    return pretouchRec(map[reflect.Type]bool{vt:true}, cfg)
+    return pretouchRec(map[reflect.Type]uint8{vt: 0}, cfg)
 }
 
-func pretouchType(_vt reflect.Type, opts option.CompileOptions) (map[reflect.Type]bool, error) {
-    /* compile function */
-    compiler := newCompiler().apply(opts)
-    encoder := func(vt *rt.GoType) (interface{}, error) {
-        if pp, err := compiler.compile(_vt); err != nil {
-            return nil, err
-        } else {
-            return newAssembler(pp).Load(), nil
+// Valid validates json and returns first non-blank character position,
+// if it is only one valid json value.
+// Otherwise returns invalid character position using start.
+//
+// Note: it does not check for the invalid UTF-8 characters.
+func Valid(data []byte) (ok bool, start int) {
+    n := len(data)
+    if n == 0 {
+        return false, -1
+    }
+    s := rt.Mem2Str(data)
+    p := 0
+    m := types.NewStateMachine()
+    ret := native.ValidateOne(&s, &p, m)
+    types.FreeStateMachine(m)
+
+    if ret < 0 {
+        return false, p-1
+    }
+
+    /* check for trailing spaces */
+    for ;p < n; p++ {
+        if (types.SPACE_MASK & (1 << data[p])) == 0 {
+            return false, p
         }
     }
 
-    /* find or compile */
-    vt := rt.UnpackType(_vt)
-    if val := programCache.Get(vt); val != nil {
-        return nil, nil
-    } else if _, err := programCache.Compute(vt, encoder); err == nil {
-        return compiler.rec, nil
-    } else {
-        return nil, err
-    }
-}
-
-func pretouchRec(vtm map[reflect.Type]bool, opts option.CompileOptions) error {
-    if opts.RecursiveDepth < 0 || len(vtm) == 0 {
-        return nil
-    }
-    next := make(map[reflect.Type]bool)
-    for vt, _ := range(vtm) {
-        sub, err := pretouchType(vt, opts)
-        if err != nil {
-            return err
-        }
-        for svt, _ := range(sub) {
-            next[svt] = true
-        }
-    }
-    opts.RecursiveDepth -= 1
-    return pretouchRec(next, opts)
+    return true, ret
 }

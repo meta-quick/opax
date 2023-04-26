@@ -32,6 +32,8 @@ type _Op uint8
 
 const (
     _OP_null _Op = iota + 1
+    _OP_empty_arr
+    _OP_empty_obj
     _OP_bool
     _OP_i8
     _OP_i16
@@ -84,15 +86,18 @@ const (
 const (
     _INT_SIZE = 32 << (^uint(0) >> 63)
     _PTR_SIZE = 32 << (^uintptr(0) >> 63)
+    _PTR_BYTE = unsafe.Sizeof(uintptr(0))
 )
 
 const (
-    _MAX_STACK = 5          // cutoff at 5 levels of nesting types
     _MAX_ILBUF = 100000     // cutoff at 100k of IL instructions
+    _MAX_FIELDS = 50        // cutoff at 50 fields struct
 )
 
 var _OpNames = [256]string {
     _OP_null           : "null",
+    _OP_empty_arr      : "empty_arr",
+    _OP_empty_obj      : "empty_obj",
     _OP_bool           : "bool",
     _OP_i8             : "i8",
     _OP_i16            : "i16",
@@ -213,6 +218,17 @@ func newInsVt(op _Op, vt reflect.Type) _Instr {
     }
 }
 
+func newInsVp(op _Op, vt reflect.Type, pv bool) _Instr {
+    i := 0
+    if pv {
+        i = 1
+    }
+    return _Instr {
+        u: packOp(op) | rt.PackInt(i),
+        p: unsafe.Pointer(rt.UnpackType(vt)),
+    }
+}
+
 func (self _Instr) op() _Op {
     return _Op(self.u >> 56)
 }
@@ -237,6 +253,10 @@ func (self _Instr) vk() reflect.Kind {
 
 func (self _Instr) vt() reflect.Type {
     return (*rt.GoType)(self.p).Pack()
+}
+
+func (self _Instr) vp() (vt reflect.Type, pv bool) {
+    return (*rt.GoType)(self.p).Pack(), rt.UnpackInt(self.u) == 1
 }
 
 func (self _Instr) i64() int64 {
@@ -341,6 +361,10 @@ func (self *_Program) rtt(op _Op, vt reflect.Type) {
     *self = append(*self, newInsVt(op, vt))
 }
 
+func (self *_Program) vp(op _Op, vt reflect.Type, pv bool) {
+    *self = append(*self, newInsVp(op, vt, pv))
+}
+
 func (self _Program) disassemble() string {
     nb  := len(self)
     tab := make([]bool, nb + 1)
@@ -375,19 +399,21 @@ type _Compiler struct {
     opts option.CompileOptions
     pv   bool
     tab  map[reflect.Type]bool
-    rec  map[reflect.Type]bool
+    rec  map[reflect.Type]uint8
 }
 
 func newCompiler() *_Compiler {
     return &_Compiler {
+        opts: option.DefaultCompileOptions(),
         tab: map[reflect.Type]bool{},
+        rec: map[reflect.Type]uint8{},
     }
 }
 
 func (self *_Compiler) apply(opts option.CompileOptions) *_Compiler {
     self.opts = opts
     if self.opts.RecursiveDepth > 0 {
-        self.rec = map[reflect.Type]bool{}
+        self.rec = map[reflect.Type]uint8{}
     }
     return self
 }
@@ -402,15 +428,15 @@ func (self *_Compiler) rescue(ep *error) {
     }
 }
 
-func (self *_Compiler) compile(vt reflect.Type) (ret _Program, err error) {
+func (self *_Compiler) compile(vt reflect.Type, pv bool) (ret _Program, err error) {
     defer self.rescue(&err)
-    self.compileOne(&ret, 0, vt, false)
+    self.compileOne(&ret, 0, vt, pv)
     return
 }
 
 func (self *_Compiler) compileOne(p *_Program, sp int, vt reflect.Type, pv bool) {
     if self.tab[vt] {
-        p.rtt(_OP_recurse, vt)
+        p.vp(_OP_recurse, vt, pv)
     } else {
         self.compileRec(p, sp, vt, pv)
     }
@@ -481,19 +507,19 @@ func (self *_Compiler) compileOps(p *_Program, sp int, vt reflect.Type) {
     }
 }
 
-func (self *_Compiler) compileNil(p *_Program, sp int, vt reflect.Type, fn func(*_Program, int, reflect.Type)) {
+func (self *_Compiler) compileNil(p *_Program, sp int, vt reflect.Type, nil_op _Op, fn func(*_Program, int, reflect.Type)) {
     x := p.pc()
     p.add(_OP_is_nil)
     fn(p, sp, vt)
     e := p.pc()
     p.add(_OP_goto)
     p.pin(x)
-    p.add(_OP_null)
+    p.add(nil_op)
     p.pin(e)
 }
 
 func (self *_Compiler) compilePtr(p *_Program, sp int, vt reflect.Type) {
-    self.compileNil(p, sp, vt, self.compilePtrBody)
+    self.compileNil(p, sp, vt, _OP_null, self.compilePtrBody)
 }
 
 func (self *_Compiler) compilePtrBody(p *_Program, sp int, vt reflect.Type) {
@@ -505,7 +531,7 @@ func (self *_Compiler) compilePtrBody(p *_Program, sp int, vt reflect.Type) {
 }
 
 func (self *_Compiler) compileMap(p *_Program, sp int, vt reflect.Type) {
-    self.compileNil(p, sp, vt, self.compileMapBody)
+    self.compileNil(p, sp, vt, _OP_empty_obj, self.compileMapBody)
 }
 
 func (self *_Compiler) compileMapBody(p *_Program, sp int, vt reflect.Type) {
@@ -591,7 +617,7 @@ func (self *_Compiler) compileMapBodyUtextPtr(p *_Program, vk reflect.Type) {
 }
 
 func (self *_Compiler) compileSlice(p *_Program, sp int, vt reflect.Type) {
-    self.compileNil(p, sp, vt, self.compileSliceBody)
+    self.compileNil(p, sp, vt, _OP_empty_arr, self.compileSliceBody)
 }
 
 func (self *_Compiler) compileSliceBody(p *_Program, sp int, vt reflect.Type) {
@@ -654,10 +680,14 @@ func (self *_Compiler) compileString(p *_Program, vt reflect.Type) {
 }
 
 func (self *_Compiler) compileStruct(p *_Program, sp int, vt reflect.Type) {
-    if sp >= _MAX_STACK || p.pc() >= _MAX_ILBUF {
-        p.rtt(_OP_recurse, vt)
+    if sp >= self.opts.MaxInlineDepth || p.pc() >= _MAX_ILBUF || (sp > 0 && vt.NumField() >= _MAX_FIELDS) {
+        p.vp(_OP_recurse, vt, self.pv)
         if self.opts.RecursiveDepth > 0 {
-            self.rec[vt] = true
+            if self.pv {
+                self.rec[vt] = 1
+            } else {
+                self.rec[vt] = 0
+            }
         }
     } else {
         self.compileStructBody(p, sp, vt)
@@ -839,7 +869,7 @@ func (self *_Compiler) compileMarshaler(p *_Program, op _Op, vt reflect.Type, mt
     vk := vt.Kind()
 
     /* direct receiver */
-    if vk != reflect.Ptr || !vt.Elem().Implements(mt) {
+    if vk != reflect.Ptr {
         p.rtt(op, vt)
         return
     }

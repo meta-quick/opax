@@ -98,7 +98,8 @@ var findFuncTab = &_FindFuncBucket {
     idx: 1,
 }
 
-func registerFunction(name string, pc uintptr, fp int, args int, size uintptr, argptrs uintptr, localptrs uintptr) {
+func registerFunction(name string, pc uintptr, textSize uintptr, fp int, args int, size uintptr, argPtrs []bool, localPtrs []bool) {
+    mod := new(_ModuleData)
     minpc := pc
     maxpc := pc + size
 
@@ -110,6 +111,9 @@ func registerFunction(name string, pc uintptr, fp int, args int, size uintptr, a
         1,                          // minLC   : 1
         4 << (^uintptr(0) >> 63),   // ptrSize : 4 << (^uintptr(0) >> 63)
     }
+
+    // cache arg and local stackmap
+    argptrs, localptrs := cacheStackmap(argPtrs, localPtrs, mod)
 
     /* add the function name */
     noff := len(pclnt)
@@ -127,8 +131,8 @@ func registerFunction(name string, pc uintptr, fp int, args int, size uintptr, a
         args      : int32(args),
         pcsp      : int32(pcsp),
         nfuncdata : 2,
-        argptrs   : argptrs,
-        localptrs : localptrs,
+        argptrs   : uintptr(argptrs),
+        localptrs : uintptr(localptrs),
     }
 
     /* align the func to 8 bytes */
@@ -148,13 +152,15 @@ func registerFunction(name string, pc uintptr, fp int, args int, size uintptr, a
     }
 
     /* module data */
-    mod := &_ModuleData {
+    *mod = _ModuleData {
         pclntable   : pclnt,
         ftab        : tab,
         findfunctab : findFuncTab,
         minpc       : minpc,
         maxpc       : maxpc,
         modulename  : name,
+        gcdata: uintptr(unsafe.Pointer(&emptyByte)),
+        gcbss: uintptr(unsafe.Pointer(&emptyByte)),
     }
 
     /* verify and register the new module */

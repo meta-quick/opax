@@ -61,8 +61,8 @@ func TestNative_Quote(t *testing.T) {
         require.NoError(t, types.ParsingError(-rv))
     }
     assert.Equal(t, len(s), rv)
-    assert.Equal(t, 27, len(d))
-    assert.Equal(t, `hello\b\f\n\r\t\\\"景world`, string(d))
+    assert.Equal(t, 35, len(d))
+    assert.Equal(t, `hello\u0008\u000c\n\r\t\\\"景world`, string(d))
 }
 
 func TestNative_QuoteNoMem(t *testing.T) {
@@ -71,9 +71,9 @@ func TestNative_QuoteNoMem(t *testing.T) {
     dp := (*rt.GoSlice)(unsafe.Pointer(&d))
     sp := (*rt.GoString)(unsafe.Pointer(&s))
     rv := __quote(sp.Ptr, sp.Len, dp.Ptr, &dp.Len, 0)
-    assert.Equal(t, -8, rv)
-    assert.Equal(t, 9, len(d))
-    assert.Equal(t, `hello\b\f`, string(d))
+    assert.Equal(t, -6, rv)
+    assert.Equal(t, 5, len(d))
+    assert.Equal(t, `hello`, string(d))
 }
 
 func TestNative_DoubleQuote(t *testing.T) {
@@ -86,8 +86,8 @@ func TestNative_DoubleQuote(t *testing.T) {
         require.NoError(t, types.ParsingError(-rv))
     }
     assert.Equal(t, len(s), rv)
-    assert.Equal(t, 36, len(d))
-    assert.Equal(t, `hello\\b\\f\\n\\r\\t\\\\\\\"景world`, string(d))
+    assert.Equal(t, 44, len(d))
+    assert.Equal(t, `hello\\u0008\\u000c\\n\\r\\t\\\\\\\"景world`, string(d))
 }
 
 func TestNative_Unquote(t *testing.T) {
@@ -206,25 +206,59 @@ func TestNative_UnquoteUnicodeReplacement(t *testing.T) {
     assert.Equal(t, "hello\ufffd\ufffdworld", string(d))
 }
 
+func TestNative_HTMLEscape(t *testing.T) {
+    s := "hello\u2029\u2028<&>world"
+    d := make([]byte, 256)
+    dp := (*rt.GoSlice)(unsafe.Pointer(&d))
+    sp := (*rt.GoString)(unsafe.Pointer(&s))
+    rv := __html_escape(sp.Ptr, sp.Len, dp.Ptr, &dp.Len)
+    if rv < 0 {
+        require.NoError(t, types.ParsingError(-rv))
+    }
+    assert.Equal(t, len(s), rv)
+    assert.Equal(t, 40, len(d))
+    assert.Equal(t, `hello\u2029\u2028\u003c\u0026\u003eworld`, string(d))
+}
+
+func TestNative_HTMLEscapeNoMem(t *testing.T) {
+    s := "hello\u2029\u2028<&>world"
+    d := make([]byte, 10)
+    dp := (*rt.GoSlice)(unsafe.Pointer(&d))
+    sp := (*rt.GoString)(unsafe.Pointer(&s))
+    rv := __html_escape(sp.Ptr, sp.Len, dp.Ptr, &dp.Len)
+    assert.Equal(t, -6, rv)
+    assert.Equal(t, 5, len(d))
+    assert.Equal(t, `hello`, string(d))
+}
+
 func TestNative_Vstring(t *testing.T) {
     var v types.JsonState
     i := 0
     s := `test"test\n2"`
-    __vstring(&s, &i, &v)
+    __vstring(&s, &i, &v, 0)
     assert.Equal(t, 5, i)
     assert.Equal(t, -1, v.Ep)
     assert.Equal(t, int64(0), v.Iv)
-    __vstring(&s, &i, &v)
+    __vstring(&s, &i, &v, 0)
     assert.Equal(t, 13, i)
     assert.Equal(t, 9, v.Ep)
     assert.Equal(t, int64(5), v.Iv)
+}
+
+func TestNative_Vstring_ValidUnescapedChars(t *testing.T) {
+    var v types.JsonState
+    valid := uint64(types.F_VALIDATE_STRING)
+    i := 0
+    s := "test\x1f\""
+    __vstring(&s, &i, &v, valid)
+    assert.Equal(t, -int(types.ERR_INVALID_CHAR), int(v.Vt))
 }
 
 func TestNative_VstringEscapeEOF(t *testing.T) {
     var v types.JsonState
     i := 0
     s := `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"x`
-    __vstring(&s, &i, &v)
+    __vstring(&s, &i, &v, 0)
     assert.Equal(t, 95, i)
     assert.Equal(t, 63, v.Ep)
     assert.Equal(t, int64(0), v.Iv)
@@ -240,7 +274,7 @@ func TestNative_VstringHangUpOnRandomData(t *testing.T) {
     p := 1
     s := rt.Mem2Str(v)
     var js types.JsonState
-    __vstring(&s, &p, &js)
+    __vstring(&s, &p, &js, 0)
     fmt.Printf("js: %s\n", spew.Sdump(js))
 }
 
@@ -434,50 +468,126 @@ func TestNative_Vunsigned(t *testing.T) {
 func TestNative_SkipOne(t *testing.T) {
     p := 0
     s := ` {"asdf": [null, true, false, 1, 2.0, -3]}, 1234.5`
-    q := __skip_one(&s, &p, &types.StateMachine{})
+    q := __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 42, p)
     assert.Equal(t, 1, q)
     p = 0
     s = `1 2.5 -3 "asdf\nqwer" true false null {} []`
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 1, p)
     assert.Equal(t, 0, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 5, p)
     assert.Equal(t, 2, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 8, p)
     assert.Equal(t, 6, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 21, p)
     assert.Equal(t, 9, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 26, p)
     assert.Equal(t, 22, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 32, p)
     assert.Equal(t, 27, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 37, p)
     assert.Equal(t, 33, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 40, p)
     assert.Equal(t, 38, q)
-    q = __skip_one(&s, &p, &types.StateMachine{})
+    q = __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, 43, p)
     assert.Equal(t, 41, q)
+}
+
+func TestNative_SkipOne_Error(t *testing.T) {
+    for _, s := range([]string{
+        "-", "+", "0.", "0. ", "+1", "0.0e ", "9e+", "0e-",
+        "tru", "fals", "nul", "trux", "fals ", 
+        `"asdf`, `"\\\"`,
+    }) {
+        p := 0
+        q := __skip_one(&s, &p, &types.StateMachine{}, uint64(0))
+        assert.True(t, q < 0)
+    }
 }
 
 func TestNative_SkipArray(t *testing.T) {
     p := 0
     s := `null, true, false, 1, 2.0, -3, {"asdf": "wqer"}],`
-    __skip_array(&s, &p, &types.StateMachine{})
+    __skip_array(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, p, 48)
 }
 
 func TestNative_SkipObject(t *testing.T) {
     p := 0
     s := `"asdf": "wqer"},`
-    __skip_object(&s, &p, &types.StateMachine{})
+    __skip_object(&s, &p, &types.StateMachine{}, uint64(0))
     assert.Equal(t, p, 15)
+}
+
+func TestNative_SkipNumber(t *testing.T) {
+    p := 0
+    s := `-1.23e+12`
+    q := __skip_number(&s, &p)
+    assert.Equal(t, 9, p)
+    assert.Equal(t, 0, q)
+}
+
+func TestNative_SkipOneFast(t *testing.T) {
+    p := 0
+    s := ` {"asdf": [null, true, false, 1, 2.0, -3]}, 1234.5`
+    q := __skip_one_fast(&s, &p)
+    assert.Equal(t, 42, p)
+    assert.Equal(t, 1, q)
+    p = 0
+    s = `1, 2.5, -3, "asdf\nqwer", true, false, null, {}, [],`
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 1, p)
+    assert.Equal(t, 0, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 6, p)
+    assert.Equal(t, 3, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 10, p)
+    assert.Equal(t, 8, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 24, p)
+    assert.Equal(t, 12, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 30, p)
+    assert.Equal(t, 26, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 37, p)
+    assert.Equal(t, 32, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 43, p)
+    assert.Equal(t, 39, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 47, p)
+    assert.Equal(t, 45, q)
+    p += 1
+    q = __skip_one_fast(&s, &p)
+    assert.Equal(t, 51, p)
+    assert.Equal(t, 49, q)
+}
+
+func TestNative_SkipOneFast_Error(t *testing.T) {
+    for _, s := range([]string{
+        "{{", "[{",  "{{}",
+        `"asdf`, `"\\\"`,
+    }) {
+        p := 0
+        q := __skip_one_fast(&s, &p)
+        assert.True(t, q < 0)
+    }
 }

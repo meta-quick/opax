@@ -18,8 +18,12 @@ package encoder
 
 import (
     `encoding/json`
+    `fmt`
     `reflect`
     `strconv`
+    `unsafe`
+
+    `github.com/bytedance/sonic/internal/rt`
 )
 
 var _ERR_too_deep = &json.UnsupportedValueError {
@@ -40,5 +44,22 @@ func error_number(number json.Number) error {
     return &json.UnsupportedValueError {
         Str   : "invalid number literal: " + strconv.Quote(string(number)),
         Value : reflect.ValueOf(number),
+    }
+}
+
+func error_marshaler(ret []byte, pos int) error {
+    return fmt.Errorf("invalid Marshaler output json syntax at %d: %q", pos, ret)
+}
+
+const (
+    panicNilPointerOfNonEmptyString int = 1 + iota
+)
+
+func goPanic(code int, val unsafe.Pointer) {
+    switch(code){
+    case panicNilPointerOfNonEmptyString:
+        panic(fmt.Sprintf("val: %#v has nil pointer while its length is not zero!", (*rt.GoString)(val)))
+    default:
+        panic("encoder error!")
     }
 }

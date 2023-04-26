@@ -19,12 +19,12 @@ package ast
 import (
     `encoding/json`
     `fmt`
+    `strconv`
     `unsafe`
-
-    `github.com/bytedance/sonic/decoder`
+    `reflect`
+    
     `github.com/bytedance/sonic/internal/native/types`
     `github.com/bytedance/sonic/internal/rt`
-    `github.com/chenzhuoyu/base64x`
 )
 
 const (
@@ -37,7 +37,7 @@ const (
 
 const (
     _V_NONE         types.ValueType = 0
-    _V_NODE_BASE    types.ValueType = 1<<5
+    _V_NODE_BASE    types.ValueType = 1 << 5
     _V_LAZY         types.ValueType = 1 << 7
     _V_RAW          types.ValueType = 1 << 8
     _V_NUMBER                       = _V_NODE_BASE + 1
@@ -59,6 +59,10 @@ const (
     V_STRING = 7
     V_NUMBER = int(_V_NUMBER)
     V_ANY    = int(_V_ANY)
+)
+
+var (
+    byteType = rt.UnpackType(reflect.TypeOf(byte(0)))
 )
 
 type Node struct {
@@ -152,24 +156,22 @@ func (self *Node) Raw() (string, error) {
         buf, err := self.MarshalJSON()
         return rt.Mem2Str(buf), err
     }
-    return addr2str(self.p, self.v), nil
+    return rt.StrFrom(self.p, self.v), nil
 }
 
 func (self *Node) checkRaw() error {
-    if self.IsRaw() {
-        self.parseRaw(false)
-    }
     if err := self.Check(); err != nil {
         return err
+    }
+    if self.IsRaw() {
+        self.parseRaw(false)
     }
     return nil
 }
 
-// Bool_E returns bool value represented by this node
-//
-// If node type is not types.V_TRUE or types.V_FALSE, 
-// V_RAW (must be a bool json value), or V_ANY (must be a bool type)
-// it will return error
+// Bool returns bool value represented by this node, 
+// including types.V_TRUE|V_FALSE|V_NUMBER|V_STRING|V_ANY|V_NULL, 
+// V_NONE will return error
 func (self *Node) Bool() (bool, error) {
     if err := self.checkRaw(); err != nil {
         return false, err
@@ -177,25 +179,111 @@ func (self *Node) Bool() (bool, error) {
     switch self.t {
         case types.V_TRUE  : return true , nil
         case types.V_FALSE : return false, nil
-        case _V_ANY        :        
-            if v, ok := self.packAny().(bool); ok {
-                return v, nil
+        case types.V_NULL  : return false, nil
+        case _V_NUMBER     : 
+            if i, err := numberToInt64(self); err == nil {
+                return i != 0, nil
+            } else if f, err := numberToFloat64(self); err == nil {
+                return f != 0, nil
             } else {
-                return false, ErrUnsupportType
+                return false, err
+            }
+        case types.V_STRING: return strconv.ParseBool(rt.StrFrom(self.p, self.v))
+        case _V_ANY        :   
+            any := self.packAny()     
+            switch v := any.(type) {
+                case bool   : return v, nil
+                case int    : return v != 0, nil
+                case int8   : return v != 0, nil
+                case int16  : return v != 0, nil
+                case int32  : return v != 0, nil
+                case int64  : return v != 0, nil
+                case uint   : return v != 0, nil
+                case uint8  : return v != 0, nil
+                case uint16 : return v != 0, nil
+                case uint32 : return v != 0, nil
+                case uint64 : return v != 0, nil
+                case float32: return v != 0, nil
+                case float64: return v != 0, nil
+                case string : return strconv.ParseBool(v)
+                case json.Number: 
+                    if i, err := v.Int64(); err == nil {
+                        return i != 0, nil
+                    } else if f, err := v.Float64(); err == nil {
+                        return f != 0, nil
+                    } else {
+                        return false, err
+                    }
+                default: return false, ErrUnsupportType
             }
         default            : return false, ErrUnsupportType
     }
 }
 
-// Int64 as above.
+// Int64 casts the node to int64 value, 
+// including V_NUMBER|V_TRUE|V_FALSE|V_ANY|V_STRING
+// V_NONE it will return error
 func (self *Node) Int64() (int64, error) {
     if err := self.checkRaw(); err != nil {
         return 0, err
     }
     switch self.t {
-        case _V_NUMBER        : return numberToInt64(self)
+        case _V_NUMBER, types.V_STRING :
+            if i, err := numberToInt64(self); err == nil {
+                return i, nil
+            } else if f, err := numberToFloat64(self); err == nil {
+                return int64(f), nil
+            } else {
+                return 0, err
+            }
         case types.V_TRUE     : return 1, nil
         case types.V_FALSE    : return 0, nil
+        case types.V_NULL     : return 0, nil
+        case _V_ANY           :  
+            any := self.packAny()
+            switch v := any.(type) {
+                case bool   : if v { return 1, nil } else { return 0, nil }
+                case int    : return int64(v), nil
+                case int8   : return int64(v), nil
+                case int16  : return int64(v), nil
+                case int32  : return int64(v), nil
+                case int64  : return int64(v), nil
+                case uint   : return int64(v), nil
+                case uint8  : return int64(v), nil
+                case uint16 : return int64(v), nil
+                case uint32 : return int64(v), nil
+                case uint64 : return int64(v), nil
+                case float32: return int64(v), nil
+                case float64: return int64(v), nil
+                case string : 
+                    if i, err := strconv.ParseInt(v, 10, 64); err == nil {
+                        return i, nil
+                    } else if f, err := strconv.ParseFloat(v, 64); err == nil {
+                        return int64(f), nil
+                    } else {
+                        return 0, err
+                    }
+                case json.Number: 
+                    if i, err := v.Int64(); err == nil {
+                        return i, nil
+                    } else if f, err := v.Float64(); err == nil {
+                        return int64(f), nil
+                    } else {
+                        return 0, err
+                    }
+                default: return 0, ErrUnsupportType
+            }
+        default               : return 0, ErrUnsupportType
+    }
+}
+
+// StrictInt64 exports underlying int64 value, including V_NUMBER, V_ANY
+func (self *Node) StrictInt64() (int64, error) {
+    if err := self.checkRaw(); err != nil {
+        return 0, err
+    }
+    switch self.t {
+        case _V_NUMBER        : return numberToInt64(self)
         case _V_ANY           :  
             any := self.packAny()
             switch v := any.(type) {
@@ -209,21 +297,82 @@ func (self *Node) Int64() (int64, error) {
                 case uint16: return int64(v), nil
                 case uint32: return int64(v), nil
                 case uint64: return int64(v), nil
+                case json.Number: 
+                    if i, err := v.Int64(); err == nil {
+                        return i, nil
+                    } else {
+                        return 0, err
+                    }
                 default: return 0, ErrUnsupportType
             }
         default               : return 0, ErrUnsupportType
     }
 }
 
-// Number as above.
+func castNumber(v bool) json.Number {
+    if v {
+        return json.Number("1")
+    } else {
+        return json.Number("0")
+    }
+}
+
+// Number casts node to float64, 
+// including V_NUMBER|V_TRUE|V_FALSE|V_ANY|V_STRING|V_NULL,
+// V_NONE it will return error
 func (self *Node) Number() (json.Number, error) {
     if err := self.checkRaw(); err != nil {
         return json.Number(""), err
     }
     switch self.t {
         case _V_NUMBER        : return toNumber(self)  , nil
+        case types.V_STRING : 
+            if _, err := numberToInt64(self); err == nil {
+                return toNumber(self), nil
+            } else if _, err := numberToFloat64(self); err == nil {
+                return toNumber(self), nil
+            } else {
+                return json.Number(""), err
+            }
         case types.V_TRUE     : return json.Number("1"), nil
         case types.V_FALSE    : return json.Number("0"), nil
+        case types.V_NULL     : return json.Number("0"), nil
+        case _V_ANY           :        
+            any := self.packAny()
+            switch v := any.(type) {
+                case bool   : return castNumber(v), nil
+                case int    : return castNumber(v != 0), nil
+                case int8   : return castNumber(v != 0), nil
+                case int16  : return castNumber(v != 0), nil
+                case int32  : return castNumber(v != 0), nil
+                case int64  : return castNumber(v != 0), nil
+                case uint   : return castNumber(v != 0), nil
+                case uint8  : return castNumber(v != 0), nil
+                case uint16 : return castNumber(v != 0), nil
+                case uint32 : return castNumber(v != 0), nil
+                case uint64 : return castNumber(v != 0), nil
+                case float32: return castNumber(v != 0), nil
+                case float64: return castNumber(v != 0), nil
+                case string : 
+                    if _, err := strconv.ParseFloat(v, 64); err == nil {
+                        return json.Number(v), nil
+                    } else {
+                        return json.Number(""), err
+                    }
+                case json.Number: return v, nil
+                default: return json.Number(""), ErrUnsupportType
+            }
+        default               : return json.Number(""), ErrUnsupportType
+    }
+}
+
+// Number exports underlying float64 value, including V_NUMBER, V_ANY of json.Number
+func (self *Node) StrictNumber() (json.Number, error) {
+    if err := self.checkRaw(); err != nil {
+        return json.Number(""), err
+    }
+    switch self.t {
+        case _V_NUMBER        : return toNumber(self)  , nil
         case _V_ANY        :        
             if v, ok := self.packAny().(json.Number); ok {
                 return v, nil
@@ -234,42 +383,118 @@ func (self *Node) Number() (json.Number, error) {
     }
 }
 
-// String returns raw string value if node type is V_STRING.
-// Or return the string representation of other types:
-//  V_NULL => "null",
-//  V_TRUE => "true",
-//  V_FALSE => "false",
-//  V_NUMBER => "[0-9\.]*"
-//  V_ANY => interface{}.(string)
+// String cast node to string, 
+// including V_NUMBER|V_TRUE|V_FALSE|V_ANY|V_STRING|V_NULL,
+// V_NONE it will return error
 func (self *Node) String() (string, error) {
     if err := self.checkRaw(); err != nil {
         return "", err
     }
     switch self.t {
-        case _V_NUMBER       : return toNumber(self).String(), nil
-        case types.V_NULL    : return "null" , nil
+        case types.V_NULL    : return "" , nil
         case types.V_TRUE    : return "true" , nil
         case types.V_FALSE   : return "false", nil
-        case types.V_STRING  : return addr2str(self.p, self.v), nil
-        case _V_ANY        :        
+        case types.V_STRING, _V_NUMBER  : return rt.StrFrom(self.p, self.v), nil
+        case _V_ANY          :        
+        any := self.packAny()
+        switch v := any.(type) {
+            case bool   : return strconv.FormatBool(v), nil
+            case int    : return strconv.Itoa(v), nil
+            case int8   : return strconv.Itoa(int(v)), nil
+            case int16  : return strconv.Itoa(int(v)), nil
+            case int32  : return strconv.Itoa(int(v)), nil
+            case int64  : return strconv.Itoa(int(v)), nil
+            case uint   : return strconv.Itoa(int(v)), nil
+            case uint8  : return strconv.Itoa(int(v)), nil
+            case uint16 : return strconv.Itoa(int(v)), nil
+            case uint32 : return strconv.Itoa(int(v)), nil
+            case uint64 : return strconv.Itoa(int(v)), nil
+            case float32: return strconv.FormatFloat(float64(v), 'g', -1, 64), nil
+            case float64: return strconv.FormatFloat(float64(v), 'g', -1, 64), nil
+            case string : return v, nil 
+            case json.Number: return v.String(), nil
+            default: return "", ErrUnsupportType
+        }
+        default              : return ""     , ErrUnsupportType
+    }
+}
+
+// StrictString returns string value (unescaped), includeing V_STRING, V_ANY of string.
+// In other cases, it will return empty string.
+func (self *Node) StrictString() (string, error) {
+    if err := self.checkRaw(); err != nil {
+        return "", err
+    }
+    switch self.t {
+        case types.V_STRING  : return rt.StrFrom(self.p, self.v), nil
+        case _V_ANY          :        
             if v, ok := self.packAny().(string); ok {
                 return v, nil
             } else {
                 return "", ErrUnsupportType
             }
-        default              : return ""     , ErrUnsupportType
+        default              : return "", ErrUnsupportType
     }
 }
 
-// Float64 as above.
+// Float64 cast node to float64, 
+// including V_NUMBER|V_TRUE|V_FALSE|V_ANY|V_STRING|V_NULL,
+// V_NONE it will return error
 func (self *Node) Float64() (float64, error) {
     if err := self.checkRaw(); err != nil {
         return 0.0, err
     }
     switch self.t {
-        case _V_NUMBER       : return numberToFloat64(self)
+        case _V_NUMBER, types.V_STRING : return numberToFloat64(self)
         case types.V_TRUE    : return 1.0, nil
         case types.V_FALSE   : return 0.0, nil
+        case types.V_NULL    : return 0.0, nil
+        case _V_ANY          :        
+            any := self.packAny()
+            switch v := any.(type) {
+                case bool    : 
+                    if v {
+                        return 1.0, nil
+                    } else {
+                        return 0.0, nil
+                    }
+                case int    : return float64(v), nil
+                case int8   : return float64(v), nil
+                case int16  : return float64(v), nil
+                case int32  : return float64(v), nil
+                case int64  : return float64(v), nil
+                case uint   : return float64(v), nil
+                case uint8  : return float64(v), nil
+                case uint16 : return float64(v), nil
+                case uint32 : return float64(v), nil
+                case uint64 : return float64(v), nil
+                case float32: return float64(v), nil
+                case float64: return float64(v), nil
+                case string : 
+                    if f, err := strconv.ParseFloat(v, 64); err == nil {
+                        return float64(f), nil
+                    } else {
+                        return 0, err
+                    }
+                case json.Number: 
+                    if f, err := v.Float64(); err == nil {
+                        return float64(f), nil
+                    } else {
+                        return 0, err
+                    }
+                default     : return 0, ErrUnsupportType
+            }
+        default             : return 0.0, ErrUnsupportType
+    }
+}
+
+// Float64 exports underlying float64 value, includeing V_NUMBER, V_ANY 
+func (self *Node) StrictFloat64() (float64, error) {
+    if err := self.checkRaw(); err != nil {
+        return 0.0, err
+    }
+    switch self.t {
+        case _V_NUMBER       : return numberToFloat64(self)
         case _V_ANY        :        
             any := self.packAny()
             switch v := any.(type) {
@@ -466,21 +691,24 @@ func (self *Node) AddAny(val interface{}) error {
 }
 
 // GetByPath load given path on demands,
-// which only ensure nodes before this path got parsed
+// which only ensure nodes before this path got parsed.
+//
+// Note, the api expects the json is well-formed at least,
+// otherwise it may return unexpected result.
 func (self *Node) GetByPath(path ...interface{}) *Node {
     if !self.Valid() {
         return self
     }
     var s = self
     for _, p := range path {
-        switch p.(type) {
+        switch p := p.(type) {
         case int:
-            s = s.Index(p.(int))
+            s = s.Index(p)
             if !s.Valid() {
                 return s
             }
         case string:
-            s = s.Get(p.(string))
+            s = s.Get(p)
             if !s.Valid() {
                 return s
             }
@@ -616,7 +844,7 @@ func (self *Node) UnsafeMap() ([]Pair, error) {
     if err := self.skipAllKey(); err != nil {
         return nil, err
     }
-    s := ptr2slice(self.p, int(self.len()), self.cap())
+    s := rt.Ptr2SlicePtr(self.p, int(self.len()), self.cap())
     return *(*[]Pair)(s), nil
 }
 
@@ -715,7 +943,7 @@ func (self *Node) UnsafeArray() ([]Node, error) {
     if err := self.skipAllIndex(); err != nil {
         return nil, err
     }
-    s := ptr2slice(self.p, self.len(), self.cap())
+    s := rt.Ptr2SlicePtr(self.p, self.len(), self.cap())
     return *(*[]Node)(s), nil
 }
 
@@ -733,7 +961,7 @@ func (self *Node) Interface() (interface{}, error) {
         case types.V_FALSE   : return false, nil
         case types.V_ARRAY   : return self.toGenericArray()
         case types.V_OBJECT  : return self.toGenericObject()
-        case types.V_STRING  : return addr2str(self.p, self.v), nil
+        case types.V_STRING  : return rt.StrFrom(self.p, self.v), nil
         case _V_NUMBER       : 
             v, err := numberToFloat64(self)
             if err != nil {
@@ -777,7 +1005,7 @@ func (self *Node) InterfaceUseNumber() (interface{}, error) {
         case types.V_FALSE   : return false, nil
         case types.V_ARRAY   : return self.toGenericArrayUseNumber()
         case types.V_OBJECT  : return self.toGenericObjectUseNumber()
-        case types.V_STRING  : return addr2str(self.p, self.v), nil
+        case types.V_STRING  : return rt.StrFrom(self.p, self.v), nil
         case _V_NUMBER       : return toNumber(self), nil
         case _V_ARRAY_LAZY   :
             if err := self.loadAllIndex(); err != nil {
@@ -1313,13 +1541,19 @@ var (
     emptyObjectNode = Node{t: types.V_OBJECT}
 )
 
-// NewRaw creates a node of raw json, and decides its type by first char.
+// NewRaw creates a node of raw json.
+// If the input json is invalid, NewRaw returns a error Node.
 func NewRaw(json string) Node {
-    if json == "" {
-        panic("empty json string")
+    parser := NewParser(json)
+    start, err := parser.skip()
+    if err != 0 {
+        return *newError(err, err.Message()) 
     }
-    it := switchRawType(json[0])
-    return newRawNode(json, it)
+    it := switchRawType(parser.s[start])
+    if it == _V_NONE {
+        return Node{}
+    }
+    return newRawNode(parser.s[start:parser.p], it)
 }
 
 // NewAny creates a node of type V_ANY if any's type isn't Node or *Node, 
@@ -1344,7 +1578,7 @@ func NewBytes(src []byte) Node {
     if len(src) == 0 {
         panic("empty src bytes")
     }
-    out := base64x.StdEncoding.EncodeToString(src)
+    out := encodeBase64(src)
     return NewString(out)
 }
 
@@ -1377,13 +1611,13 @@ func NewBool(v bool) Node {
 func NewNumber(v string) Node {
     return Node{
         v: int64(len(v) & _LEN_MASK),
-        p: str2ptr(v),
+        p: rt.StrPtr(v),
         t: _V_NUMBER,
     }
 }
 
 func toNumber(node *Node) json.Number {
-    return json.Number(addr2str(node.p, node.v))
+    return json.Number(rt.StrFrom(node.p, node.v))
 }
 
 func numberToFloat64(node *Node) (float64, error) {
@@ -1410,11 +1644,14 @@ func newBytes(v []byte) Node {
     }
 }
 
-// NewString creates a node of type string
+// NewString creates a node of type V_STRING. 
+// v is considered to be a valid UTF-8 string,
+// which means it won't be validated and unescaped.
+// when the node is encoded to json, v will be escaped.
 func NewString(v string) Node {
     return Node{
         t: types.V_STRING,
-        p: str2ptr(v),
+        p: rt.StrPtr(v),
         v: int64(len(v) & _LEN_MASK),
     }
 }
@@ -1504,13 +1741,13 @@ func (self *Node) setLazyObject(p *Parser, v []Pair) {
 func newRawNode(str string, typ types.ValueType) Node {
     return Node{
         t: _V_RAW | typ,
-        p: str2ptr(str),
+        p: rt.StrPtr(str),
         v: int64(len(str) & _LEN_MASK),
     }
 }
 
 func (self *Node) parseRaw(full bool) {
-    raw := addr2str(self.p, self.v)
+    raw := rt.StrFrom(self.p, self.v)
     parser := NewParser(raw)
     if full {
         parser.noLazy = true
@@ -1527,15 +1764,6 @@ func newError(err types.ParsingError, msg string) *Node {
     return &Node{
         t: V_ERROR,
         v: int64(err),
-        p: unsafe.Pointer(&msg),
-    }
-}
-
-func newSyntaxError(err *decoder.SyntaxError) *Node {
-    msg := err.Description()
-    return &Node{
-        t: V_ERROR,
-        v: int64(err.Code),
         p: unsafe.Pointer(&msg),
     }
 }

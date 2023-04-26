@@ -17,12 +17,16 @@
 package decoder
 
 import (
+    `unsafe`
     `encoding/json`
     `reflect`
     `runtime`
 
+    `github.com/bytedance/sonic/internal/native`
+    `github.com/bytedance/sonic/internal/native/types`
     `github.com/bytedance/sonic/internal/rt`
     `github.com/bytedance/sonic/option`
+    `github.com/bytedance/sonic/utf8`
 )
 
 const (
@@ -30,7 +34,30 @@ const (
     _F_use_number
     _F_disable_urc
     _F_disable_unknown
+    _F_copy_string
+    _F_validate_string
+
+    _F_allow_control = 31
 )
+
+type Options uint64
+
+const (
+    OptionUseInt64         Options = 1 << _F_use_int64
+    OptionUseNumber        Options = 1 << _F_use_number
+    OptionUseUnicodeErrors Options = 1 << _F_disable_urc
+    OptionDisableUnknown   Options = 1 << _F_disable_unknown
+    OptionCopyString       Options = 1 << _F_copy_string
+    OptionValidateString   Options = 1 << _F_validate_string
+)
+
+func (self *Decoder) SetOptions(opts Options) {
+    if (opts & OptionUseNumber != 0) && (opts & OptionUseInt64 != 0) {
+        panic("can't set OptionUseInt64 and OptionUseNumber both!")
+    }
+    self.f = uint64(opts)
+}
+
 
 // Decoder is the decoder context object
 type Decoder struct {
@@ -49,9 +76,45 @@ func (self *Decoder) Pos() int {
     return self.i
 }
 
+func (self *Decoder) Reset(s string) {
+    self.s = s
+    self.i = 0
+    // self.f = 0
+}
+
+func (self *Decoder) CheckTrailings() error {
+    pos := self.i
+    buf := self.s
+    /* skip all the trailing spaces */
+    if pos != len(buf) {
+        for pos < len(buf) && (types.SPACE_MASK & (1 << buf[pos])) != 0 {
+            pos++
+        }
+    }
+
+    /* then it must be at EOF */
+    if pos == len(buf) {
+        return nil
+    }
+
+    /* junk after JSON value */
+    return SyntaxError {
+        Src  : buf,
+        Pos  : pos,
+        Code : types.ERR_INVALID_CHAR,
+    }
+}
+
+
 // Decode parses the JSON-encoded data from current position and stores the result
 // in the value pointed to by val.
 func (self *Decoder) Decode(val interface{}) error {
+    /* validate json if needed */
+    if (self.f & (1 << _F_validate_string)) != 0  && !utf8.ValidateString(self.s){
+        dbuf := utf8.CorrectWith(nil, rt.Str2Mem(self.s), "\ufffd")
+        self.s = rt.Mem2Str(dbuf)
+    }
+
     vv := rt.UnpackEface(val)
     vp := vv.Value
 
@@ -65,14 +128,19 @@ func (self *Decoder) Decode(val interface{}) error {
         return &json.InvalidUnmarshalError{Type: vv.Type.Pack()}
     }
 
-    /* create a new stack, and call the decoder */
-    sb, etp := newStack(), rt.PtrElem(vv.Type)
-    nb, err := decodeTypedPointer(self.s, self.i, etp, vp, sb, self.f)
+    etp := rt.PtrElem(vv.Type)
 
-    /* return the stack back */
-    if err != nil {
-        resetStack(sb)
+    /* check the defined pointer type for issue 379 */
+    if vv.Type.IsNamed() {
+        newp := vp
+        etp  = vv.Type
+        vp   = unsafe.Pointer(&newp)
     }
+
+    /* create a new stack, and call the decoder */
+    sb := newStack()
+    nb, err := decodeTypedPointer(self.s, self.i, etp, vp, sb, self.f)
+    /* return the stack back */
     self.i = nb
     freeStack(sb)
 
@@ -81,31 +149,43 @@ func (self *Decoder) Decode(val interface{}) error {
     return err
 }
 
-// UseInt64 causes the Decoder to unmarshal an integer into an interface{} as an
+// UseInt64 indicates the Decoder to unmarshal an integer into an interface{} as an
 // int64 instead of as a float64.
 func (self *Decoder) UseInt64() {
     self.f  |= 1 << _F_use_int64
     self.f &^= 1 << _F_use_number
 }
 
-// UseNumber causes the Decoder to unmarshal a number into an interface{} as a
+// UseNumber indicates the Decoder to unmarshal a number into an interface{} as a
 // json.Number instead of as a float64.
 func (self *Decoder) UseNumber() {
     self.f &^= 1 << _F_use_int64
     self.f  |= 1 << _F_use_number
 }
 
-// UseUnicodeErrors causes the Decoder to return an error when encounter invalid
+// UseUnicodeErrors indicates the Decoder to return an error when encounter invalid
 // UTF-8 escape sequences.
 func (self *Decoder) UseUnicodeErrors() {
     self.f |= 1 << _F_disable_urc
 }
 
-// DisallowUnknownFields causes the Decoder to return an error when the destination
+// DisallowUnknownFields indicates the Decoder to return an error when the destination
 // is a struct and the input contains object keys which do not match any
 // non-ignored, exported fields in the destination.
 func (self *Decoder) DisallowUnknownFields() {
     self.f |= 1 << _F_disable_unknown
+}
+
+// CopyString indicates the Decoder to decode string values by copying instead of referring.
+func (self *Decoder) CopyString() {
+    self.f |= 1 << _F_copy_string
+}
+
+// ValidateString causes the Decoder to validate string values when decoding string value 
+// in JSON. Validation is that, returning error when unescaped control chars(0x00-0x1f) or
+// invalid UTF-8 chars in the string value of JSON.
+func (self *Decoder) ValidateString() {
+    self.f |= 1 << _F_validate_string
 }
 
 // Pretouch compiles vt ahead-of-time to avoid JIT compilation on-the-fly, in
@@ -117,7 +197,6 @@ func Pretouch(vt reflect.Type, opts ...option.CompileOption) error {
     cfg := option.DefaultCompileOptions()
     for _, opt := range opts {
         opt(&cfg)
-        break
     }
     return pretouchRec(map[reflect.Type]bool{vt:true}, cfg)
 }
@@ -125,11 +204,13 @@ func Pretouch(vt reflect.Type, opts ...option.CompileOption) error {
 func pretouchType(_vt reflect.Type, opts option.CompileOptions) (map[reflect.Type]bool, error) {
     /* compile function */
     compiler := newCompiler().apply(opts)
-    decoder := func(vt *rt.GoType) (interface{}, error) {
+    decoder := func(vt *rt.GoType, _ ...interface{}) (interface{}, error) {
         if pp, err := compiler.compile(_vt); err != nil {
             return nil, err
         } else {
-            return newAssembler(pp).Load(), nil
+            as := newAssembler(pp)
+            as.name = _vt.String()
+            return as.Load(), nil
         }
     }
 
@@ -149,15 +230,26 @@ func pretouchRec(vtm map[reflect.Type]bool, opts option.CompileOptions) error {
         return nil
     }
     next := make(map[reflect.Type]bool)
-    for vt, _ := range(vtm) {
+    for vt := range(vtm) {
         sub, err := pretouchType(vt, opts)
         if err != nil {
             return err
         }
-        for svt, _ := range(sub) {
+        for svt := range(sub) {
             next[svt] = true
         }
     }
     opts.RecursiveDepth -= 1
     return pretouchRec(next, opts)
+}
+
+// Skip skips only one json value, and returns first non-blank character position and its ending position if it is valid.
+// Otherwise, returns negative error code using start and invalid character position using end
+func Skip(data []byte) (start int, end int) {
+    s := rt.Mem2Str(data)
+    p := 0
+    m := types.NewStateMachine()
+    ret := native.SkipOne(&s, &p, m, uint64(0))
+    types.FreeStateMachine(m) 
+    return ret, p
 }

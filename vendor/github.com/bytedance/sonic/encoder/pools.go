@@ -21,14 +21,15 @@ import (
     `sync`
     `unsafe`
     `errors`
+    `reflect`
 
     `github.com/bytedance/sonic/internal/caching`
+    `github.com/bytedance/sonic/option`
     `github.com/bytedance/sonic/internal/rt`
 )
 
 const (
-    _MaxStack  = 65536      // 64k states
-    _MaxBuffer = 1048576    // 1MB buffer size
+    _MaxStack  = 4096      // 4k states
 
     _StackSize = unsafe.Sizeof(_Stack{})
 )
@@ -90,7 +91,7 @@ func newBytes() []byte {
     if ret := bytesPool.Get(); ret != nil {
         return ret.([]byte)
     } else {
-        return make([]byte, 0, _MaxBuffer)
+        return make([]byte, 0, option.DefaultEncoderBufferSize)
     }
 }
 
@@ -110,7 +111,7 @@ func newBuffer() *bytes.Buffer {
     if ret := bufferPool.Get(); ret != nil {
         return ret.(*bytes.Buffer)
     } else {
-        return bytes.NewBuffer(make([]byte, 0, _MaxBuffer))
+        return bytes.NewBuffer(make([]byte, 0, option.DefaultEncoderBufferSize))
     }
 }
 
@@ -129,20 +130,64 @@ func freeBuffer(p *bytes.Buffer) {
     bufferPool.Put(p)
 }
 
-func makeEncoder(vt *rt.GoType) (interface{}, error) {
-    if pp, err := newCompiler().compile(vt.Pack()); err != nil {
+func makeEncoder(vt *rt.GoType, ex ...interface{}) (interface{}, error) {
+    if pp, err := newCompiler().compile(vt.Pack(), ex[0].(bool)); err != nil {
         return nil, err
     } else {
-        return newAssembler(pp).Load(), nil
+        as := newAssembler(pp)
+        as.name = vt.String()
+        return as.Load(), nil
     }
 }
 
-func findOrCompile(vt *rt.GoType) (_Encoder, error) {
+func findOrCompile(vt *rt.GoType, pv bool) (_Encoder, error) {
     if val := programCache.Get(vt); val != nil {
         return val.(_Encoder), nil
-    } else if ret, err := programCache.Compute(vt, makeEncoder); err == nil {
+    } else if ret, err := programCache.Compute(vt, makeEncoder, pv); err == nil {
         return ret.(_Encoder), nil
     } else {
         return nil, err
     }
+}
+
+func pretouchType(_vt reflect.Type, opts option.CompileOptions, v uint8) (map[reflect.Type]uint8, error) {
+    /* compile function */
+    compiler := newCompiler().apply(opts)
+    encoder := func(vt *rt.GoType, ex ...interface{}) (interface{}, error) {
+        if pp, err := compiler.compile(_vt, ex[0].(bool)); err != nil {
+            return nil, err
+        } else {
+            as := newAssembler(pp)
+            as.name = vt.String()
+            return as.Load(), nil
+        }
+    }
+
+    /* find or compile */
+    vt := rt.UnpackType(_vt)
+    if val := programCache.Get(vt); val != nil {
+        return nil, nil
+    } else if _, err := programCache.Compute(vt, encoder, v == 1); err == nil {
+        return compiler.rec, nil
+    } else {
+        return nil, err
+    }
+}
+
+func pretouchRec(vtm map[reflect.Type]uint8, opts option.CompileOptions) error {
+    if opts.RecursiveDepth < 0 || len(vtm) == 0 {
+        return nil
+    }
+    next := make(map[reflect.Type]uint8)
+    for vt, v := range vtm {
+        sub, err := pretouchType(vt, opts, v)
+        if err != nil {
+            return err
+        }
+        for svt, v := range sub {
+            next[svt] = v
+        }
+    }
+    opts.RecursiveDepth -= 1
+    return pretouchRec(next, opts)
 }

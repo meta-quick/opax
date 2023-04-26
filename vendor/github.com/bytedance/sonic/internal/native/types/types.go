@@ -18,11 +18,15 @@ package types
 
 import (
     `fmt`
+    `sync`
 )
 
 type ValueType int
 type ParsingError uint
 type SearchingError uint
+
+// NOTE: !NOT MODIFIED ONLY.
+// This definitions are followed in native/types.h.
 
 const (
     V_EOF     ValueType = 1
@@ -44,15 +48,21 @@ const (
 const (
     B_DOUBLE_UNQUOTE  = 0
     B_UNICODE_REPLACE = 1
+    B_VALIDATE_STRING = 5
 )
 
 const (
     F_DOUBLE_UNQUOTE  = 1 << B_DOUBLE_UNQUOTE
     F_UNICODE_REPLACE = 1 << B_UNICODE_REPLACE
+    F_VALIDATE_STRING = 1 << B_VALIDATE_STRING
 )
 
 const (
-    MAX_RECURSE = 65536
+    MAX_RECURSE = 4096
+)
+
+const (
+    SPACE_MASK = (1 << ' ') | (1 << '\t') | (1 << '\r') | (1 << '\n')
 )
 
 const (
@@ -64,6 +74,12 @@ const (
     ERR_INVALID_NUMBER_FMT ParsingError = 6
     ERR_RECURSE_EXCEED_MAX ParsingError = 7
     ERR_FLOAT_INFINITY     ParsingError = 8
+    ERR_MISMATCH           ParsingError = 9
+    ERR_INVALID_UTF8       ParsingError = 10
+
+    // error code used in ast
+    ERR_NOT_FOUND          ParsingError = 33
+    ERR_UNSUPPORT_TYPE     ParsingError = 34
 )
 
 var _ParsingErrors = []string{
@@ -76,6 +92,8 @@ var _ParsingErrors = []string{
     ERR_INVALID_NUMBER_FMT : "invalid number format",
     ERR_RECURSE_EXCEED_MAX : "recursion exceeded max depth",
     ERR_FLOAT_INFINITY     : "float number is infinity",
+    ERR_MISMATCH           : "mismatched type with value",
+    ERR_INVALID_UTF8       : "invalid UTF8",
 }
 
 func (self ParsingError) Error() string {
@@ -103,3 +121,18 @@ type StateMachine struct {
     Sp int
     Vt [MAX_RECURSE]int
 }
+
+var stackPool = sync.Pool{
+    New: func()interface{}{
+        return &StateMachine{}
+    },
+}
+
+func NewStateMachine() *StateMachine {
+    return stackPool.Get().(*StateMachine)
+}
+
+func FreeStateMachine(fsm *StateMachine) {
+    stackPool.Put(fsm)
+}
+

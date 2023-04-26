@@ -42,7 +42,7 @@ func __f64toa(out *byte, val float64) (ret int)
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __lzero(p unsafe.Pointer, n int) (ret int)
+func __f32toa(out *byte, val float32) (ret int)
 
 //go:nosplit
 //go:noescape
@@ -57,17 +57,22 @@ func __quote(sp unsafe.Pointer, nb int, dp unsafe.Pointer, dn *int, flags uint64
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
+func __html_escape(sp unsafe.Pointer, nb int, dp unsafe.Pointer, dn *int) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
 func __unquote(sp unsafe.Pointer, nb int, dp unsafe.Pointer, ep *int, flags uint64) (ret int)
 
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __value(s unsafe.Pointer, n int, p int, v *types.JsonState, allow_control int) (ret int)
+func __value(s unsafe.Pointer, n int, p int, v *types.JsonState, flags uint64) (ret int)
 
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __vstring(s *string, p *int, v *types.JsonState)
+func __vstring(s *string, p *int, v *types.JsonState, flags uint64)
 
 //go:nosplit
 //go:noescape
@@ -87,14 +92,44 @@ func __vunsigned(s *string, p *int, v *types.JsonState)
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __skip_one(s *string, p *int, m *types.StateMachine) (ret int)
+func __skip_one(s *string, p *int, m *types.StateMachine, flags uint64) (ret int)
 
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __skip_array(s *string, p *int, m *types.StateMachine) (ret int)
+func __skip_one_fast(s *string, p *int) (ret int)
 
 //go:nosplit
 //go:noescape
 //goland:noinspection GoUnusedParameter
-func __skip_object(s *string, p *int, m *types.StateMachine) (ret int)
+func __skip_array(s *string, p *int, m *types.StateMachine, flags uint64) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __skip_object(s *string, p *int, m *types.StateMachine, flags uint64) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __skip_number(s *string, p *int) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __validate_one(s *string, p *int, m *types.StateMachine) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __get_by_path(s *string, p *int, path *[]interface{}, m *types.StateMachine) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __validate_utf8(s *string, p *int, m *types.StateMachine) (ret int)
+
+//go:nosplit
+//go:noescape
+//goland:noinspection GoUnusedParameter
+func __validate_utf8_fast(s *string)  (ret int)

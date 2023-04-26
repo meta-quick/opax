@@ -14,24 +14,28 @@
 # limitations under the License.
 #
 
-ARCH			:= avx avx2
+ARCH			:= avx avx2 sse
 TMP_DIR			:= output
 OUT_DIR			:= internal/native
 SRC_FILE		:= native/native.c
 
 CPU_avx			:= amd64
 CPU_avx2		:= amd64
+CPU_sse  		:= amd64
 
 TMPL_avx		:= fastint_amd64_test fastfloat_amd64_test native_amd64_test native_export_amd64
 TMPL_avx2		:= fastint_amd64_test fastfloat_amd64_test native_amd64_test native_export_amd64
+TMPL_sse 		:= fastint_amd64_test fastfloat_amd64_test native_amd64_test native_export_amd64
 
-CFLAGS_avx		:= -msse4 -mavx -mno-avx2 -DUSE_AVX=1 -DUSE_AVX2=0
-CFLAGS_avx2		:= -msse4 -mavx -mavx2    -DUSE_AVX=1 -DUSE_AVX2=1
+CFLAGS_avx		:= -msse -mno-sse4 -mavx -mpclmul -mno-avx2 -DUSE_AVX=1 -DUSE_AVX2=0
+CFLAGS_avx2		:= -msse -mno-sse4 -mavx -mpclmul -mavx2    -DUSE_AVX=1 -DUSE_AVX2=1 
+CFLAGS_sse		:= -msse -mno-sse4 -mno-avx -mno-avx2 -mpclmul
 
 CC_amd64		:= clang
 ASM2ASM_amd64	:= tools/asm2asm/asm2asm.py
 
 CFLAGS			:= -mno-red-zone
+CFLAGS			+= -target x86_64-apple-macos11
 CFLAGS			+= -fno-asynchronous-unwind-tables
 CFLAGS			+= -fno-builtin
 CFLAGS			+= -fno-exceptions
@@ -39,6 +43,7 @@ CFLAGS			+= -fno-rtti
 CFLAGS			+= -fno-stack-protector
 CFLAGS			+= -nostdlib
 CFLAGS			+= -O3
+CFLAGS			+= -Wall -Werror
 
 NATIVE_SRC		:= $(wildcard native/*.h)
 NATIVE_SRC		+= $(wildcard native/*.c)
@@ -95,8 +100,10 @@ endef
 all: ${ARCH}
 
 clean:
-	rm -vfr ${TMP_DIR}/{sse,avx,avx2}
-	rm -vfr ${OUT_DIR}/{sse,avx,avx2}
+	for arch in ${ARCH}; do \
+		rm -vfr ${TMP_DIR}/$${arch}; \
+		rm -vfr ${OUT_DIR}/$${arch}; \
+	done
 
 $(foreach 								\
 	arch,								\

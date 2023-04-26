@@ -32,6 +32,7 @@ type SyntaxError struct {
     Pos  int
     Src  string
     Code types.ParsingError
+    Msg  string
 }
 
 func (self SyntaxError) Error() string {
@@ -39,6 +40,10 @@ func (self SyntaxError) Error() string {
 }
 
 func (self SyntaxError) Description() string {
+    return "Syntax error " + self.description()
+}
+
+func (self SyntaxError) description() string {
     i := 16
     p := self.Pos - i
     q := self.Pos + i
@@ -71,13 +76,20 @@ func (self SyntaxError) Description() string {
 
     /* compose the error description */
     return fmt.Sprintf(
-        "Syntax error at index %d: %s\n\n\t%s\n\t%s^%s\n",
+        "at index %d: %s\n\n\t%s\n\t%s^%s\n",
         self.Pos,
-        self.Code.Message(),
+        self.Message(),
         self.Src[p:q],
         strings.Repeat(".", x),
         strings.Repeat(".", y),
     )
+}
+
+func (self SyntaxError) Message() string {
+    if self.Msg == "" {
+        return self.Code.Message()
+    }
+    return self.Msg
 }
 
 func clamp_zero(v int) int {
@@ -107,6 +119,52 @@ func error_wrap(src string, pos int, code types.ParsingError) error {
 //go:nosplit
 func error_type(vt *rt.GoType) error {
     return &json.UnmarshalTypeError{Type: vt.Pack()}
+}
+
+type MismatchTypeError struct {
+    Pos  int
+    Src  string
+    Type reflect.Type
+}
+
+func swithchJSONType (src string, pos int) string {
+    var val string
+    switch src[pos] {
+        case 'f': fallthrough
+        case 't': val = "bool"
+        case '"': val = "string"
+        case '{': val = "object"
+        case '[': val = "array"
+        case '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9': val = "number"        
+    }
+    return val
+}
+
+func (self MismatchTypeError) Error() string {
+    se := SyntaxError {
+        Pos  : self.Pos,
+        Src  : self.Src,
+        Code : types.ERR_MISMATCH,
+    }
+    return fmt.Sprintf("Mismatch type %s with value %s %q", self.Type.String(), swithchJSONType(self.Src, self.Pos), se.description())
+}
+
+func (self MismatchTypeError) Description() string {
+    se := SyntaxError {
+        Pos  : self.Pos,
+        Src  : self.Src,
+        Code : types.ERR_MISMATCH,
+    }
+    return fmt.Sprintf("Mismatch type %s with value %s %s", self.Type.String(), swithchJSONType(self.Src, self.Pos), se.description())
+}
+
+//go:nosplit
+func error_mismatch(src string, pos int, vt *rt.GoType) error {
+    return &MismatchTypeError {
+        Pos  : pos,
+        Src  : src,
+        Type : vt.Pack(),
+    }
 }
 
 //go:nosplit
