@@ -16,9 +16,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/util/test"
 
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/logging"
 )
 
 // this is usually private; but we need it here

@@ -9,9 +9,9 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"github.com/bytedance/sonic"
 	"encoding/json"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"io/ioutil"
 	"math"
 	"net"
@@ -23,12 +23,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/version"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/tracing"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/version"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/tracing"
+	"github.com/meta-quick/opax/util"
 )
 
 type cachingMode string

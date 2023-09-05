@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // Errors is a wrapper for multiple loader errors.

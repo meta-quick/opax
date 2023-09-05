@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opax/keys"
 )
 
 func TestConfigValidation(t *testing.T) {

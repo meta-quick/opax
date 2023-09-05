@@ -14,14 +14,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/logging"
 
 	"github.com/fortytw2/leaktest"
-	loggingtest "github.com/meta-quick/opa/logging/test"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/sdk"
-	sdktest "github.com/meta-quick/opa/sdk/test"
-	"github.com/meta-quick/opa/version"
+	loggingtest "github.com/meta-quick/opax/logging/test"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/sdk"
+	sdktest "github.com/meta-quick/opax/sdk/test"
+	"github.com/meta-quick/opax/version"
 )
 
 // Plugin creates an empty plugin to test plugin initialization and shutdown

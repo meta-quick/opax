@@ -16,10 +16,10 @@ Docs for the OPA sub-projects each have their own home. Check out their docs to 
 
 ## Docs File Structure 
 
-- [devel/](https://github.com/meta-quick/opa/blob/main/docs/devel) - Developer documentation for OPA (not part of the website)
-- [website/](https://github.com/meta-quick/opa/blob/main/docs/website) - This directory contains all of the Markdown, HTML, Sass/CSS, and other assets needed to build the [openpolicyagent.org](https://openpolicyagent.org) website. See the section below for steps to build the site and test documentation changes locally. This content is not versioned for each release, it is common scaffolding for the website.
-- [content/](https://github.com/meta-quick/opa/blob/main/docs/content) - The raw OPA documentation can be found under the directory. This content is versioned for each release and should have all images and code snippets alongside the markdown content files.
-- [website/data/integrations.yaml](https://github.com/meta-quick/opa/blob/main/docs/website/data/integrations.yaml) - Source for the integrations index. See [Integration Index](https://github.com/meta-quick/opa/blob/main/docs/README.md#integration-index) below for more details.
+- [devel/](https://github.com/meta-quick/opax/blob/main/docs/devel) - Developer documentation for OPA (not part of the website)
+- [website/](https://github.com/meta-quick/opax/blob/main/docs/website) - This directory contains all of the Markdown, HTML, Sass/CSS, and other assets needed to build the [openpolicyagent.org](https://openpolicyagent.org) website. See the section below for steps to build the site and test documentation changes locally. This content is not versioned for each release, it is common scaffolding for the website.
+- [content/](https://github.com/meta-quick/opax/blob/main/docs/content) - The raw OPA documentation can be found under the directory. This content is versioned for each release and should have all images and code snippets alongside the markdown content files.
+- [website/data/integrations.yaml](https://github.com/meta-quick/opax/blob/main/docs/website/data/integrations.yaml) - Source for the integrations index. See [Integration Index](https://github.com/meta-quick/opax/blob/main/docs/README.md#integration-index) below for more details.
 
 ## Markdown Page Structure
 
@@ -41,7 +41,7 @@ To get started, fork the OPA repository and create a local branch for your Docs 
 
 ## Update Existing Docs
 
-Navigate to the [content/](https://github.com/meta-quick/opa/blob/main/docs/content) folder in your local environment. Each top level item in the documentation nav will have an associated markdown file in the content folder. Locate the file you wish to update and confirm the title in the Frontmatter matches. Once you've located the correct page, edit the markdown page as necessary. 
+Navigate to the [content/](https://github.com/meta-quick/opax/blob/main/docs/content) folder in your local environment. Each top level item in the documentation nav will have an associated markdown file in the content folder. Locate the file you wish to update and confirm the title in the Frontmatter matches. Once you've located the correct page, edit the markdown page as necessary. 
 
 ## Adding New Pages
 
@@ -52,12 +52,12 @@ In the case where you want to add a topic that doesn't fit nicely into any of th
 Once you have made your updates, the next step is to test that they look as expected. To test your changes, generate a local preview with your updated files and preview them with Netlify.
 
 Summary of steps:
-1. Install dependencies: [Hugo](https://github.com/meta-quick/opa/tree/main/docs#installing-hugo), [NodeJS](https://nodejs.org), and [Netlify CLI](https://www.netlify.com/products/dev/)
+1. Install dependencies: [Hugo](https://github.com/meta-quick/opax/tree/main/docs#installing-hugo), [NodeJS](https://nodejs.org), and [Netlify CLI](https://www.netlify.com/products/dev/)
 1. Build artifacts: `make build`
 1. Generate HTML files: `make docs-serve-local` (*This can take up to 5 min*)
 1. Start preview server: `netlify dev`
 
-For detailed instructions on setting up local preview, and remote previews with Netlify, check out the docs [README page](https://github.com/meta-quick/opa/blob/main/docs/README.md#how-to-edit-and-test).
+For detailed instructions on setting up local preview, and remote previews with Netlify, check out the docs [README page](https://github.com/meta-quick/opax/blob/main/docs/README.md#how-to-edit-and-test).
 
 ## Submit a Pull Request
 

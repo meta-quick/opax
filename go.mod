@@ -1,4 +1,4 @@
-module github.com/meta-quick/opa
+module github.com/meta-quick/opax
 
 go 1.18
 

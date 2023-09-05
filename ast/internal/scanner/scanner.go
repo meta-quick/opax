@@ -11,7 +11,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/meta-quick/opa/ast/internal/tokens"
+	"github.com/meta-quick/opax/ast/internal/tokens"
 )
 
 const bom = 0xFEFF

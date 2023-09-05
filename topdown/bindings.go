@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 type undo struct {

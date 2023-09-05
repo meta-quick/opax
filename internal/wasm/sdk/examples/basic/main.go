@@ -10,7 +10,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa"
 )
 
 // main demonstrates the loading and executing of OPA produced wasm

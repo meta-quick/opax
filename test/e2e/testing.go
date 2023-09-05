@@ -21,12 +21,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/internal/uuid"
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/logging/test"
-	"github.com/meta-quick/opa/runtime"
-	"github.com/meta-quick/opa/server/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/internal/uuid"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/logging/test"
+	"github.com/meta-quick/opax/runtime"
+	"github.com/meta-quick/opax/server/types"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

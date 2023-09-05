@@ -4,10 +4,10 @@ import (
 	"io"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
 )
 
 // Result holds the evaluation result.

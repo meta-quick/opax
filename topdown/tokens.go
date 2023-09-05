@@ -22,10 +22,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/jwx/jwk"
-	"github.com/meta-quick/opa/internal/jwx/jws"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/jwx/jwk"
+	"github.com/meta-quick/opax/internal/jwx/jws"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 var (

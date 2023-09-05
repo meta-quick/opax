@@ -5,7 +5,7 @@
 package instruction
 
 import (
-	"github.com/meta-quick/opa/internal/wasm/opcode"
+	"github.com/meta-quick/opax/internal/wasm/opcode"
 )
 
 // Drop reprsents a WASM drop instruction.

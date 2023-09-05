@@ -11,11 +11,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/meta-quick/opa/internal/debug"
-	"github.com/meta-quick/opa/internal/gojsonschema"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/internal/debug"
+	"github.com/meta-quick/opax/internal/gojsonschema"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 // CompileErrorLimitDefault is the default number errors a compiler will allow before

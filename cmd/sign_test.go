@@ -12,10 +12,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/internal/file/archive"
-	"github.com/meta-quick/opa/keys"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/internal/file/archive"
+	"github.com/meta-quick/opax/keys"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestWriteTokenToFile(t *testing.T) {

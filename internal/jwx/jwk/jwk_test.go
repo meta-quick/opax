@@ -3,7 +3,7 @@ package jwk_test
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/internal/jwx/jwk"
+	"github.com/meta-quick/opax/internal/jwx/jwk"
 )
 
 func TestNew(t *testing.T) {

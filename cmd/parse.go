@@ -12,10 +12,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/ast"
-	pr "github.com/meta-quick/opa/internal/presentation"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	pr "github.com/meta-quick/opax/internal/presentation"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

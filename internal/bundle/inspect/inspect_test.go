@@ -12,10 +12,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/internal/file/archive"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/internal/file/archive"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestGenerateBundleInfoWithFileDir(t *testing.T) {

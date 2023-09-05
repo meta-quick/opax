@@ -26,14 +26,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/internal/version"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/tracing"
+	"github.com/meta-quick/opax/internal/version"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/tracing"
 
-	iCache "github.com/meta-quick/opa/topdown/cache"
+	iCache "github.com/meta-quick/opax/topdown/cache"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // The person Type

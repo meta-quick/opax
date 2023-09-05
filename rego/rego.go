@@ -14,26 +14,26 @@ import (
 	"strings"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	bundleUtils "github.com/meta-quick/opa/internal/bundle"
-	"github.com/meta-quick/opa/internal/compiler/wasm"
-	"github.com/meta-quick/opa/internal/future"
-	"github.com/meta-quick/opa/internal/ir"
-	"github.com/meta-quick/opa/internal/planner"
-	"github.com/meta-quick/opa/internal/rego/opa"
-	"github.com/meta-quick/opa/internal/wasm/encoding"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/resolver"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
-	"github.com/meta-quick/opa/tracing"
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	bundleUtils "github.com/meta-quick/opax/internal/bundle"
+	"github.com/meta-quick/opax/internal/compiler/wasm"
+	"github.com/meta-quick/opax/internal/future"
+	"github.com/meta-quick/opax/internal/ir"
+	"github.com/meta-quick/opax/internal/planner"
+	"github.com/meta-quick/opax/internal/rego/opa"
+	"github.com/meta-quick/opax/internal/wasm/encoding"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/resolver"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
+	"github.com/meta-quick/opax/tracing"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 const (
@@ -2534,8 +2534,8 @@ func generateJSON(term *ast.Term, ectx *EvalContext) (interface{}, error) {
 }
 
 // RegisterPebbleStore ty: 1: PebbleStore, 2: Redis
-func RegisterPebbleStore(address string,ty int)  {
-    if ty == 1 {
+func RegisterPebbleStore(address string, ty int) {
+	if ty == 1 {
 		topdown.RegisterPebbleStore(address)
 	} else if ty == 2 {
 		panic("not support redis")
@@ -2543,25 +2543,25 @@ func RegisterPebbleStore(address string,ty int)  {
 }
 
 // ShuffleModelAddString ns: namespace, key: key, value: value
-func ShuffleModelAddString(ns,key,value string) {
+func ShuffleModelAddString(ns, key, value string) {
 	lkey := ns + "/" + key
-	topdown.ShuffleModelAddString(lkey,value)
+	topdown.ShuffleModelAddString(lkey, value)
 }
 
 // ShuffleModelAdd ns: namespace, key: key, value: value
-func ShuffleModelAdd(ns,key string,value *interface{}) {
+func ShuffleModelAdd(ns, key string, value *interface{}) {
 	lkey := ns + "/" + key
-	topdown.ShuffleModelAdd(lkey,value)
+	topdown.ShuffleModelAdd(lkey, value)
 }
 
 // ShuffleModelDelete ns: namespace, key: key
-func ShuffleModelDelete(ns,key string) {
+func ShuffleModelDelete(ns, key string) {
 	lkey := ns + "/" + key
 	topdown.ShuffleModelDel(lkey)
 }
 
 // ShuffleModelGet ns: namespace, key: key
-func ShuffleModelGet(ns,key string) *interface{}{
+func ShuffleModelGet(ns, key string) *interface{} {
 	lkey := ns + "/" + key
 	return topdown.ShuffleModelGet(lkey)
 }

@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 func TestInvalidJSONInput(t *testing.T) {

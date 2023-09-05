@@ -10,7 +10,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestUUIDRFC4122SeedingAndCaching(t *testing.T) {

@@ -4,7 +4,7 @@
   "description": "Syntax highlighting for Rego, the open-policy-agent (OPA) policy language",
   "keywords": [
   ],
-  "repository": "https://github.com/meta-quick/opa",
+  "repository": "https://github.com/meta-quick/opax",
   "license": "Apache 2",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

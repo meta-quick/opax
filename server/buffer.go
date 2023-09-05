@@ -7,10 +7,10 @@ package server
 import (
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/topdown"
 )
 
 // Info contains information describing a policy decision.

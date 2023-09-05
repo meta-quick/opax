@@ -610,10 +610,10 @@ plugins:
 package plugins
 
 import (
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/plugins/rest"
-	"github.com/meta-quick/opa/runtime"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/plugins/rest"
+	"github.com/meta-quick/opax/runtime"
+	"github.com/meta-quick/opax/util"
 )
 
 type Config struct {

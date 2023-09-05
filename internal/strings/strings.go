@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/meta-quick/opa/internal/lcss"
+	"github.com/meta-quick/opax/internal/lcss"
 )
 
 // TruncateFilePaths truncates the given file paths to conform to the given

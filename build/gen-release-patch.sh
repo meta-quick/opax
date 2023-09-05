@@ -2,7 +2,7 @@
 
 set -e
 
-OPA_DIR=/go/src/github.com/meta-quick/opa
+OPA_DIR=/go/src/github.com/meta-quick/opax
 
 usage() {
     echo "gen-release-patch.sh --source-url=<git-url>"

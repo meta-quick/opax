@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/meta-quick/opa/test/e2e"
+	"github.com/meta-quick/opax/test/e2e"
 )
 
 var testRuntime *e2e.TestRuntime

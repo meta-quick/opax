@@ -27,10 +27,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jwk"
-	"github.com/meta-quick/opa/internal/jwx/jws/sign"
-	"github.com/meta-quick/opa/internal/jwx/jws/verify"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwk"
+	"github.com/meta-quick/opax/internal/jwx/jws/sign"
+	"github.com/meta-quick/opax/internal/jwx/jws/verify"
 
 	"github.com/pkg/errors"
 )

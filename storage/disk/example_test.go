@@ -10,9 +10,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/disk"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/disk"
+	"github.com/meta-quick/opax/util"
 )
 
 func check(err error) {

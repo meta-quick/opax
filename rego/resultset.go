@@ -3,7 +3,7 @@ package rego
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // ResultSet represents a collection of output from Rego evaluation. An empty

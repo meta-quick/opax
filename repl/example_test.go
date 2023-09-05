@@ -9,8 +9,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/meta-quick/opa/repl"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/repl"
+	"github.com/meta-quick/opax/storage/inmem"
 )
 
 // nolint // example code

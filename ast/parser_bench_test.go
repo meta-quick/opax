@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 // BenchmarkParseModuleRulesBase gives a baseline for parsing modules with

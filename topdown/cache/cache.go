@@ -8,11 +8,11 @@ package cache
 import (
 	"container/list"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 
 	"sync"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

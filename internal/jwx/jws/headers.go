@@ -3,7 +3,7 @@ package jws
 import (
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
 )
 
 // Constants for JWS Common parameters

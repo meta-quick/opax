@@ -9,9 +9,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown"
 )
 
 // Profiler computes and reports on the time spent on expressions.

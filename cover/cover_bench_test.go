@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
 )
 
 func BenchmarkCoverBigLocalVar(b *testing.B) {

@@ -8,10 +8,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
 )
 
 func BenchmarkAuthzForbidAuthn(b *testing.B) {

@@ -11,12 +11,12 @@ import (
 	"io"
 	"math"
 
-	"github.com/meta-quick/opa/internal/leb128"
-	"github.com/meta-quick/opa/internal/wasm/constant"
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/module"
-	"github.com/meta-quick/opa/internal/wasm/opcode"
-	"github.com/meta-quick/opa/internal/wasm/types"
+	"github.com/meta-quick/opax/internal/leb128"
+	"github.com/meta-quick/opax/internal/wasm/constant"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/module"
+	"github.com/meta-quick/opax/internal/wasm/opcode"
+	"github.com/meta-quick/opax/internal/wasm/types"
 )
 
 // WriteModule writes a binary-encoded representation of module to w.

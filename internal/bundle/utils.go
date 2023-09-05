@@ -8,10 +8,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/resolver/wasm"
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/resolver/wasm"
+	"github.com/meta-quick/opax/storage"
 )
 
 // LoadWasmResolversFromStore will lookup all Wasm modules from the store along with the

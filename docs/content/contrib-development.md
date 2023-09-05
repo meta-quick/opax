@@ -40,7 +40,7 @@ with `make check`.
 
 ### Fork, clone, create a branch
 
-Go to [https://github.com/meta-quick/opa](https://github.com/meta-quick/opa) and fork the repository
+Go to [https://github.com/meta-quick/opax](https://github.com/meta-quick/opax) and fork the repository
 into your account by clicking the "Fork" button.
 
 Clone the fork to your local machine:
@@ -48,7 +48,7 @@ Clone the fork to your local machine:
 ```bash
 git clone git@github.com/<GITHUB USERNAME>/opa.git opa
 cd opa
-git remote add upstream https://github.com/meta-quick/opa.git
+git remote add upstream https://github.com/meta-quick/opax.git
 ```
 
 Create a branch for your changes.
@@ -88,7 +88,7 @@ See the official [GitHub Documentation](https://help.github.com/en/github/collab
 for instructions to create the request.
 
 > Hint: You should be prompted to with a "Compare and Pull Request" button
-> that mentions your new branch on [https://github.com/meta-quick/opa](https://github.com/meta-quick/opa)
+> that mentions your new branch on [https://github.com/meta-quick/opax](https://github.com/meta-quick/opax)
 
 Once your Pull Request has been reviewed and signed off please squash your
 commits. If you have a specific reason to leave multiple commits in the
@@ -111,17 +111,17 @@ the results are posted and can be viewed
 ## Dependencies
 
 OPA is a Go module [https://github.com/golang/go/wiki/Modules](https://github.com/golang/go/wiki/Modules)
-and dependencies are tracked with the standard [go.mod](https://github.com/meta-quick/opa/blob/main/go.mod) file.
+and dependencies are tracked with the standard [go.mod](https://github.com/meta-quick/opax/blob/main/go.mod) file.
 
-We also keep a full copy of the dependencies in the [vendor](https://github.com/meta-quick/opa/tree/main/vendor)
-directory. All `go` commands from the [Makefile](https://github.com/meta-quick/opa/blob/main/Makefile) will enable
+We also keep a full copy of the dependencies in the [vendor](https://github.com/meta-quick/opax/tree/main/vendor)
+directory. All `go` commands from the [Makefile](https://github.com/meta-quick/opax/blob/main/Makefile) will enable
 module mode by setting `GO111MODULE=on GOFLAGS=-mod=vendor` which will also
 force using the `vendor` directory.
 
 To update a dependency ensure that `GO111MODULE` is either on, or the repository
 qualifies for `auto` to enable module mode. Then simply use `go get ..` to get
-the version desired. This should update the [go.mod](https://github.com/meta-quick/opa/blob/main/go.mod) and (potentially)
-[go.sum](https://github.com/meta-quick/opa/blob/main/go.sum) files. After this you *MUST* run `go mod vendor` to ensure
+the version desired. This should update the [go.mod](https://github.com/meta-quick/opax/blob/main/go.mod) and (potentially)
+[go.sum](https://github.com/meta-quick/opax/blob/main/go.sum) files. After this you *MUST* run `go mod vendor` to ensure
 that the `vendor` directory is in sync.
 
 Example workflow for updating a dependency:
@@ -138,7 +138,7 @@ If dependencies have been removed ensure to run `go mod tidy` to clean them up.
 
 Sometimes we use some tools which are versioned and vendored
 with OPA as dependencies. For now, we have none, but any we use in the future
-should go in [tools.go](https://github.com/meta-quick/opa/blob/main/tools.go).
+should go in [tools.go](https://github.com/meta-quick/opax/blob/main/tools.go).
 
 More details on the pattern: [https://github.com/go-modules-by-example/index/blob/master/010_tools/README.md](https://github.com/go-modules-by-example/index/blob/master/010_tools/README.md)
 
@@ -155,7 +155,7 @@ files in the root of this repository:
 
 ## CI Configuration
 
-OPA uses Github Actions defined in the [.github/workflows](https://github.com/meta-quick/opa/tree/main/.github/workflows)
+OPA uses Github Actions defined in the [.github/workflows](https://github.com/meta-quick/opax/tree/main/.github/workflows)
 directory.
 
 ### Github Action Secrets
@@ -185,4 +185,4 @@ Below is a list of workflows and links to their status:
 
 | Workflow | Description |
 |----------|-------------|
-| [![Nightly](https://github.com/meta-quick/opa/workflows/Nightly/badge.svg?branch=main)](https://github.com/meta-quick/opa/actions?query=workflow%3A"Nightly") | Runs once per day at 8:00 UTC. |
+| [![Nightly](https://github.com/meta-quick/opax/workflows/Nightly/badge.svg?branch=main)](https://github.com/meta-quick/opax/actions?query=workflow%3A"Nightly") | Runs once per day at 8:00 UTC. |

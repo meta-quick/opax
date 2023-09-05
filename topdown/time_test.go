@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestTimeSeeding(t *testing.T) {

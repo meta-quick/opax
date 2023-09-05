@@ -10,8 +10,8 @@ import (
 	"math"
 	"sort"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown"
 )
 
 // Cover computes and reports on coverage.

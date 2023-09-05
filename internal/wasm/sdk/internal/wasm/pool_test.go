@@ -14,14 +14,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/compile"
-	"github.com/meta-quick/opa/internal/wasm/sdk/internal/wasm"
-	wasm_util "github.com/meta-quick/opa/internal/wasm/util"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/compile"
+	"github.com/meta-quick/opax/internal/wasm/sdk/internal/wasm"
+	wasm_util "github.com/meta-quick/opax/internal/wasm/util"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/util"
 )
 
 func TestOpaEvalGrowMemoryForLargeInput(t *testing.T) {

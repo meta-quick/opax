@@ -28,11 +28,11 @@ This page focuses predominantly on different ways to integrate with OPA's policy
 OPA supports different ways to evaluate policies.
 
 * The [REST API](../rest-api) returns decisions as JSON over HTTP.
-* The [Go API (GoDoc)](https://pkg.go.dev/github.com/meta-quick/opa/rego) returns
+* The [Go API (GoDoc)](https://pkg.go.dev/github.com/meta-quick/opax/rego) returns
   decisions as simple Go types (`bool`, `string`, `map[string]interface{}`,
   etc.)
 * [WebAssembly](../wasm) compiles Rego policies into WASM instructions so they can be embedded and evaluated by any WebAssembly runtime
-* The [SDK](https://pkg.go.dev/github.com/meta-quick/opa/sdk) provides high-level APIs for obtaining the output
+* The [SDK](https://pkg.go.dev/github.com/meta-quick/opax/sdk) provides high-level APIs for obtaining the output
   of query evaluation as simple Go types (`bool`, `string`, `map[string]interface{}`, etc.)
 
 
@@ -169,12 +169,12 @@ API Authorization](../http-api-authorization) tutorial.
 ### Integrating with the Go API
 
 Use the
-[github.com/meta-quick/opa/rego](https://pkg.go.dev/github.com/meta-quick/opa/rego)
+[github.com/meta-quick/opax/rego](https://pkg.go.dev/github.com/meta-quick/opax/rego)
 package to embed OPA as a library inside services written in Go. To get started
 import the `rego` package:
 
 ```go
-import "github.com/meta-quick/opa/rego"
+import "github.com/meta-quick/opax/rego"
 ```
 
 The `rego` package exposes different options for customizing how policies are
@@ -277,7 +277,7 @@ if !results.Allowed() {
 ```
 
 For more examples of embedding OPA as a library see the
-[`rego`](https://pkg.go.dev/github.com/meta-quick/opa/rego#pkg-examples)
+[`rego`](https://pkg.go.dev/github.com/meta-quick/opax/rego#pkg-examples)
 package in the Go documentation.
 
 ### WebAssembly (Wasm)
@@ -289,12 +289,12 @@ See [OPA Wasm docs](../wasm) for more details.
 
 ### SDK
 
-The [SDK](https://pkg.go.dev/github.com/meta-quick/opa/sdk) package contains high-level APIs for embedding OPA
+The [SDK](https://pkg.go.dev/github.com/meta-quick/opax/sdk) package contains high-level APIs for embedding OPA
 inside of Go programs and obtaining the output of query evaluation. To get started
 import the `sdk` package:
 
 ```go
-import "github.com/meta-quick/opa/sdk"
+import "github.com/meta-quick/opax/sdk"
 ```
 
 A typical workflow when using the `sdk` package would involve first creating a new `sdk.OPA` object by calling
@@ -311,8 +311,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/meta-quick/opa/sdk"
-	sdktest "github.com/meta-quick/opa/sdk/test"
+	"github.com/meta-quick/opax/sdk"
+	sdktest "github.com/meta-quick/opax/sdk/test"
 )
 
 func main() {

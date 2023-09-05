@@ -10,7 +10,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 This is a bug fix release that reverts the github.com/prometheus/client_golang
 upgrade in v0.37.0. The upgrade exposed an issue in the serialization of Go
 runtime metrics in the Status API
-([#4319](https://github.com/meta-quick/opa/issues/4319)).
+([#4319](https://github.com/meta-quick/opax/issues/4319)).
 
 ### Miscellaneous
 
@@ -52,7 +52,7 @@ for more details.
 ### Tooling and Runtime
 
 - Bundles bug fix: Roundtrip manifest before hashing to allow changing the manifest
-  and still using signature verification of bundles ([#4233](https://github.com/meta-quick/opa/issues/4233)),
+  and still using signature verification of bundles ([#4233](https://github.com/meta-quick/opax/issues/4233)),
   reported by @CristianJena
 
 - The test runner now also supports custom builtins, when invoked through the Golang
@@ -68,14 +68,14 @@ for more details.
   [See the documentation for details.](https://www.openpolicyagent.org/docs/v0.37.0/ir/).
 
 - Compiler+Bundles: Metadata to be added to a bundle's manifest can now be provided via `WithMetadata`
-  ([#4289](https://github.com/meta-quick/opa/issues/4289)), authored by @marensws, reported by @johanneslarsson
+  ([#4289](https://github.com/meta-quick/opax/issues/4289)), authored by @marensws, reported by @johanneslarsson
 - Plugins: failures in auth plugin resolution are now output, previously panicked, authored by @jcchavezs
-- Plugins: Fix error when initializing empty decision logging or status plugin ([#4291](https://github.com/meta-quick/opa/issues/4291))
+- Plugins: Fix error when initializing empty decision logging or status plugin ([#4291](https://github.com/meta-quick/opax/issues/4291))
 - Bundles: Persisted bundle activation failures are treated like failures with
-  non-persisted bundles ([#3840](https://github.com/meta-quick/opa/issues/3840)), reported by @dsoguet
-- Server: `http.send` caching now works in system policy `system.authz` ([#3946](https://github.com/meta-quick/opa/issues/3946)),
+  non-persisted bundles ([#3840](https://github.com/meta-quick/opax/issues/3840)), reported by @dsoguet
+- Server: `http.send` caching now works in system policy `system.authz` ([#3946](https://github.com/meta-quick/opax/issues/3946)),
   reported by @amrap030.
-- Runtime: Apply credentials masking on `opa.runtime().config` ([#4159](https://github.com/meta-quick/opa/issues/4159))
+- Runtime: Apply credentials masking on `opa.runtime().config` ([#4159](https://github.com/meta-quick/opax/issues/4159))
 - `opa test`: removing deprecated code for `--show-failure-line` (`-l`), authored by @damienjburks
 - `opa eval`: add description to all output formats
 - `opa inspect`: unhide command for [bundle inspection](https://www.openpolicyagent.org/docs/v0.37.0/cli/#opa-inspect)
@@ -84,7 +84,7 @@ for more details.
 
 Built-in function enhancements and fixes:
 
-- `object.union_n`: New built-in for creating the union of more than two objects ([#4012](https://github.com/meta-quick/opa/issues/4012)),
+- `object.union_n`: New built-in for creating the union of more than two objects ([#4012](https://github.com/meta-quick/opax/issues/4012)),
   reported by @eliw00d
 - `graph.reachable_paths`: New built-in to calculate the set of reachable paths in a graph (authored by @justinlindh-wf)
 - `indexof_n`: New built-in function to get all the indexes of a specific substring (or character) from a string (authored by @shuheiktgw)
@@ -94,25 +94,25 @@ Built-in function enhancements and fixes:
 
 Strict-mode features:
 
-- Add _duplicate imports_ check ([#2698](https://github.com/meta-quick/opa/issues/2698)) reported by @mikol
-- _Deprecate_ `any()` and `all()` built-in functions ([#2437](https://github.com/meta-quick/opa/issues/2437))
-- Make `input` and `data` reserved keywords ([#2600](https://github.com/meta-quick/opa/issues/2600)) reported by @jpeach
-- Add _unused local assignment_ check ([#2514](https://github.com/meta-quick/opa/issues/2514))
+- Add _duplicate imports_ check ([#2698](https://github.com/meta-quick/opax/issues/2698)) reported by @mikol
+- _Deprecate_ `any()` and `all()` built-in functions ([#2437](https://github.com/meta-quick/opax/issues/2437))
+- Make `input` and `data` reserved keywords ([#2600](https://github.com/meta-quick/opax/issues/2600)) reported by @jpeach
+- Add _unused local assignment_ check ([#2514](https://github.com/meta-quick/opax/issues/2514))
 
 
 Miscellaneous fixes and enhancements:
 
 - `format`: don't group iterable when one has defaulted location
 - `topdown`: ability to retrieve input and plug bindings in the `Event`, authored by @istalker2
-- `print()` built-in: fix bug when used with `with` modifier and a function call value ([#4227](https://github.com/meta-quick/opa/issues/4227))
+- `print()` built-in: fix bug when used with `with` modifier and a function call value ([#4227](https://github.com/meta-quick/opax/issues/4227))
 - `ast`: don't error when future keyword import is redundant during parsing
 
 ### Documentation
 
 - A [new "CLI" docs section](https://www.openpolicyagent.org/docs/v0.37.0/cli/) describes the various
-  OPA CLI commands and their arguments ([#3915](https://github.com/meta-quick/opa/issues/3915))
+  OPA CLI commands and their arguments ([#3915](https://github.com/meta-quick/opax/issues/3915))
 - Policy Testing: Add reference to rule indexing in the context of test code coverage
-  ([#4170](https://github.com/meta-quick/opa/issues/4170)), reported by @ekcs
+  ([#4170](https://github.com/meta-quick/opax/issues/4170)), reported by @ekcs
 - Management: Add hint that S3 regional endpoint should be used with bundles (authored by @danoliver1)
 - Many broken links were fixed, thanks to @phelewski
 - Fix rendering of details: add detail-tab for collapsable markdown (authored by @bugg123)
@@ -120,14 +120,14 @@ Miscellaneous fixes and enhancements:
 ### WebAssembly
 
 - Add native support for `json.is_valid` built-in function
-  ([#4140](https://github.com/meta-quick/opa/issues/4140)), authored by @kristiansvalland
+  ([#4140](https://github.com/meta-quick/opax/issues/4140)), authored by @kristiansvalland
 - Dependencies: bump wasmtime-go from 0.32.0 to 0.33.1
 
 ### Miscellaneous
 
-- Publish multi-arch image manifest lists including linux/arm64 ([#2233](https://github.com/meta-quick/opa/issues/2233)),
+- Publish multi-arch image manifest lists including linux/arm64 ([#2233](https://github.com/meta-quick/opax/issues/2233)),
   authored by @ngraef, reported by @povilasv
-- `logging`: Remove logger `GetFields` function ([#4114](https://github.com/meta-quick/opa/issues/4114)),
+- `logging`: Remove logger `GetFields` function ([#4114](https://github.com/meta-quick/opax/issues/4114)),
   authored by @viovanov
 - Website: add versioned docs for latest version, so when 0.37.0 is released, both
   https://www.openpolicyagent.org/docs/v0.37.0/ and https://www.openpolicyagent.org/docs/latest
@@ -163,39 +163,39 @@ This release contains a number of fixes and enhancements.
 This release adds OpenTelemetry support to OPA. This makes it possible to emit spans to an OpenTelemetry collector via
 gRPC on both incoming and outgoing (i.e. http.send) calls in the server. See the updated docs on
 [monitoring](https://www.openpolicyagent.org/docs/latest/monitoring/) for more information and configuration options
-([#1469](https://github.com/meta-quick/opa/issues/1469)) authored by @[rvalkenaers](https://github.com/rvalkenaers)
+([#1469](https://github.com/meta-quick/opax/issues/1469)) authored by @[rvalkenaers](https://github.com/rvalkenaers)
 
 This release also adds a new `opa exec` command for doing one-off evaluations of policy against input similar to
 `opa eval`, but using the full capabilities of the server (config file, plugins, etc). This is particularly useful in
 contexts such as CI/CD or when enforcing policy for infrastructure as code, where one might want to run OPA with remote
 bundles and decision logs but without having a running server. See the updated docs on
 [Terraform](https://www.openpolicyagent.org/docs/latest/terraform/) for an example use case.
-([#3525](https://github.com/meta-quick/opa/issues/3525))
+([#3525](https://github.com/meta-quick/opax/issues/3525))
 
 ### Built-in Functions
 
-- Four new functions for working with HMAC (`crypto.hmac.md5`, `crypto.hmac.sha1`, `crypto.hmac.sha256`, and `crypto.hmac.sha512`) was added ([#1740](https://github.com/meta-quick/opa/issues/1740)) reported by @[jshaw86](https://github.com/jshaw86)
-- `array.reverse(array)` and `strings.reverse(string)` was added for reversing arrays and strings ([#3736](https://github.com/meta-quick/opa/issues/3736)) authored by @[kristiansvalland](https://github.com/kristiansvalland) and @[olamiko](https://github.com/olamiko)
-- The `http.send` built-in function now uses a metric for counting inter-query cache hits ([#4023](https://github.com/meta-quick/opa/issues/4023)) authored by @[mirayadav](https://github.com/mirayadav)
-- An overflow issue with dates very far in the future has been fixed in the `time.*` built-in functions ([#4098](https://github.com/meta-quick/opa/issues/4098)) reported by @[morgante](https://github.com/morgante)
+- Four new functions for working with HMAC (`crypto.hmac.md5`, `crypto.hmac.sha1`, `crypto.hmac.sha256`, and `crypto.hmac.sha512`) was added ([#1740](https://github.com/meta-quick/opax/issues/1740)) reported by @[jshaw86](https://github.com/jshaw86)
+- `array.reverse(array)` and `strings.reverse(string)` was added for reversing arrays and strings ([#3736](https://github.com/meta-quick/opax/issues/3736)) authored by @[kristiansvalland](https://github.com/kristiansvalland) and @[olamiko](https://github.com/olamiko)
+- The `http.send` built-in function now uses a metric for counting inter-query cache hits ([#4023](https://github.com/meta-quick/opax/issues/4023)) authored by @[mirayadav](https://github.com/mirayadav)
+- An overflow issue with dates very far in the future has been fixed in the `time.*` built-in functions ([#4098](https://github.com/meta-quick/opax/issues/4098)) reported by @[morgante](https://github.com/morgante)
 
 ### Tooling
 
-- A problem with future keyword import of `in` was fixed for `opa fmt` ([#4111](https://github.com/meta-quick/opa/issues/4111)) reported by @[keshavprasadms](https://github.com/keshavprasadms)
+- A problem with future keyword import of `in` was fixed for `opa fmt` ([#4111](https://github.com/meta-quick/opax/issues/4111)) reported by @[keshavprasadms](https://github.com/keshavprasadms)
 - An issue with `opa fmt` when refs contained operators was fixed (authored by @[jaspervdj-luminal](https://github.com/jaspervdj-luminal))
 - Fix file renaming check in optimization using `opa build` (authored by @[davidmarne-wf](https://github.com/davidmarne-wf))
-- The `allow_net` capability was added, allowing setting limits on what hosts can be reached in built-ins like `http.send` and `net.lookup_ip_addr` ([#3665](https://github.com/meta-quick/opa/issues/3665))
+- The `allow_net` capability was added, allowing setting limits on what hosts can be reached in built-ins like `http.send` and `net.lookup_ip_addr` ([#3665](https://github.com/meta-quick/opax/issues/3665))
 
 ### Server
 
-- A new credential provider for AWS credential files was added ([#2786](https://github.com/meta-quick/opa/issues/2786)) reported by @[rgueldem](https://github.com/rgueldem)
+- A new credential provider for AWS credential files was added ([#2786](https://github.com/meta-quick/opax/issues/2786)) reported by @[rgueldem](https://github.com/rgueldem)
 - The new `--tls-cert-refresh-period` flag can now be provided to `opa run`. If used with a positive duration, such as "5m" (5 minutes),
   "24h", etc, the server will track the certificate and key files' contents. When their content changes, the certificates will be
-  reloaded ([#2500](https://github.com/meta-quick/opa/issues/2500)) reported by @[patoarvizu](https://github.com/patoarvizu)
-- A new `v1/status` endpoint was added, providing the same data as the status plugin would send to a remote endpoint ([#4089](https://github.com/meta-quick/opa/issues/4089))
-- The HTTP router of OPA is now exposed to the plugin manager ([#2777](https://github.com/meta-quick/opa/issues/2777)) authored by @[bhoriuchi](https://github.com/bhoriuchi) reported by @[mneil](https://github.com/mneil)
+  reloaded ([#2500](https://github.com/meta-quick/opax/issues/2500)) reported by @[patoarvizu](https://github.com/patoarvizu)
+- A new `v1/status` endpoint was added, providing the same data as the status plugin would send to a remote endpoint ([#4089](https://github.com/meta-quick/opax/issues/4089))
+- The HTTP router of OPA is now exposed to the plugin manager ([#2777](https://github.com/meta-quick/opax/issues/2777)) authored by @[bhoriuchi](https://github.com/bhoriuchi) reported by @[mneil](https://github.com/mneil)
 - Calling `print` now works in decision masking policies
-- An unintended switch between long/regular polling on 304 HTTP status was fixed ([#3923](https://github.com/meta-quick/opa/issues/3923)) authored by @[floriangasc](https://github.com/floriangasc)
+- An unintended switch between long/regular polling on 304 HTTP status was fixed ([#3923](https://github.com/meta-quick/opax/issues/3923)) authored by @[floriangasc](https://github.com/floriangasc)
 - The error message about prohibited config in the discovery plugin has been improved
 - The discovery plugin no longer panics in Trigger() if downloader is nil
 - The bundle plugin now ignores service errors for file:// resources
@@ -205,10 +205,10 @@ bundles and decision logs but without having a running server. See the updated d
 
 ### Rego
 
-- The error message raised when using `-` with a number and a set is now more specific (as opposed to the correct usage with two sets, or two numbers) ([#1643](https://github.com/meta-quick/opa/issues/1643))
-- Fixed an edge case when using print and arrays in unification ([#4078](https://github.com/meta-quick/opa/issues/4078))
-- Improved performance of some array operations by caching an array's groundness bit ([#3679](https://github.com/meta-quick/opa/issues/3679))
-- ⚠️ Stricter check of arity in undefined function stage ([#4054](https://github.com/meta-quick/opa/issues/4054)).
+- The error message raised when using `-` with a number and a set is now more specific (as opposed to the correct usage with two sets, or two numbers) ([#1643](https://github.com/meta-quick/opax/issues/1643))
+- Fixed an edge case when using print and arrays in unification ([#4078](https://github.com/meta-quick/opax/issues/4078))
+- Improved performance of some array operations by caching an array's groundness bit ([#3679](https://github.com/meta-quick/opax/issues/3679))
+- ⚠️ Stricter check of arity in undefined function stage ([#4054](https://github.com/meta-quick/opax/issues/4054)).
   This change will fail evaluation in some unusual cases where it previously would succeed, but these policies should be very uncommon.
 
   An example policy that previously would succeed but no longer will (wrong arity):
@@ -229,16 +229,16 @@ is_blue(fruit) = y { # doesn't use fruit
 
 ### SDK
 
-- The `opa.runtime()` built-in is now made available to the SDK ([#4050](https://github.com/meta-quick/opa/issues/4050) authored by @[oren-zohar](https://github.com/oren-zohar) and @[cmschuetz](https://github.com/cmschuetz)
+- The `opa.runtime()` built-in is now made available to the SDK ([#4050](https://github.com/meta-quick/opax/issues/4050) authored by @[oren-zohar](https://github.com/oren-zohar) and @[cmschuetz](https://github.com/cmschuetz)
 - Plugins are now exposed on the SDK object
-- The SDK now supports graceful shutdown ([#3980](https://github.com/meta-quick/opa/issues/3980)) reported by @[brianchhun-chime](https://github.com/brianchhun-chime)
+- The SDK now supports graceful shutdown ([#3980](https://github.com/meta-quick/opax/issues/3980)) reported by @[brianchhun-chime](https://github.com/brianchhun-chime)
 - `print` output is now sent to the configured logger
 
 ### Website and Documentation
 
-- All pages in the docs now have a feedback button ([#3664](https://github.com/meta-quick/opa/issues/3664)) authored by @[alan-ma](https://github.com/alan-ma)
+- All pages in the docs now have a feedback button ([#3664](https://github.com/meta-quick/opax/issues/3664)) authored by @[alan-ma](https://github.com/alan-ma)
 - The Kafka docs have been updated to use the new Kafka plugin, and to use the OPA management APIs
-- The Terraform tutorial was updated to use `opa exec` ([#3965](https://github.com/meta-quick/opa/issues/3965))
+- The Terraform tutorial was updated to use `opa exec` ([#3965](https://github.com/meta-quick/opax/issues/3965))
 - The docs on Contributing as well as the Vendor Guidelines have been updated
 - The term "whitelist" has been replaced by "allowlist" across the docs
 - A simple destructuring assignment example was added to the docs
@@ -246,7 +246,7 @@ is_blue(fruit) = y { # doesn't use fruit
 
 ### CI
 
-- SHA256 checksums of CI builds now published to release directory ([#3448](https://github.com/meta-quick/opa/issues/3448)) authored by @[johanneslarsson](https://github.com/johanneslarsson) reported by @[raesene](https://github.com/raesene)
+- SHA256 checksums of CI builds now published to release directory ([#3448](https://github.com/meta-quick/opax/issues/3448)) authored by @[johanneslarsson](https://github.com/johanneslarsson) reported by @[raesene](https://github.com/raesene)
 - golangci-lint upgraded to v1.43.0 (authored by @[shuheiktgw](https://github.com/shuheiktgw))
 - The build now creates an executable for darwin/arm64. This should work as expected, but is currently tested in the CI pipeline like the other binaries
 - PRs targeting the [ecosystem](https://www.openpolicyagent.org/docs/latest/ecosystem/) page are now checked for mistakes using Rego policies
@@ -257,20 +257,20 @@ This release contains a number of fixes and enhancements.
 
 ### Early Exit Optimization
 
-This release adds an early exit optimization to the evaluator. With this optimization, the evaluator stops evaluating rules when an answer has been found and subsequent evaluation would not yield any new answers. The optimization is automatically applied to complete rules and functions that meet specific requirements. For more information see the [Early Exit in Rule Evaluation](https://www.openpolicyagent.org/docs/latest/policy-performance/#early-exit-in-rule-evaluation) section in the docs. [#2092](https://github.com/meta-quick/opa/issues/2092)
+This release adds an early exit optimization to the evaluator. With this optimization, the evaluator stops evaluating rules when an answer has been found and subsequent evaluation would not yield any new answers. The optimization is automatically applied to complete rules and functions that meet specific requirements. For more information see the [Early Exit in Rule Evaluation](https://www.openpolicyagent.org/docs/latest/policy-performance/#early-exit-in-rule-evaluation) section in the docs. [#2092](https://github.com/meta-quick/opax/issues/2092)
 
 ### Built-in Functions
 
-- The `net.lookup_ip_addr` function was added to allow policies to resolve hostnames to IPv4/IPv6 addresses ([#3993](https://github.com/meta-quick/opa/issues/3993))
-- The `http.send` function has been improved to close TCP connections quickly after receiving the HTTP response and avoid creating HTTP clients unnecessarily when a cached response exists ([#4015](https://github.com/meta-quick/opa/issues/4015)). This change reduces the number of open file descriptors required in high-throughput environments and prevents OPA from encountering ulimit errors.
+- The `net.lookup_ip_addr` function was added to allow policies to resolve hostnames to IPv4/IPv6 addresses ([#3993](https://github.com/meta-quick/opax/issues/3993))
+- The `http.send` function has been improved to close TCP connections quickly after receiving the HTTP response and avoid creating HTTP clients unnecessarily when a cached response exists ([#4015](https://github.com/meta-quick/opax/issues/4015)). This change reduces the number of open file descriptors required in high-throughput environments and prevents OPA from encountering ulimit errors.
 
 ### Rego
 
-- `print()` calls in the head of rules no longer cause runtime errors ([#3967](https://github.com/meta-quick/opa/issues/3967))
-- Type errors for calls to undefined functions no longer contain rewritten variable names ([#4031](https://github.com/meta-quick/opa/issues/4031))
-- The `rego.SkipPartialNamespace` option now correctly sets the flag on the partial evaluation queries (previously it would always set the value to `true`) ([#3996](https://github.com/meta-quick/opa/issues/3996)) authored by @[thomascoquet](https://github.com/thomascoquet)
+- `print()` calls in the head of rules no longer cause runtime errors ([#3967](https://github.com/meta-quick/opax/issues/3967))
+- Type errors for calls to undefined functions no longer contain rewritten variable names ([#4031](https://github.com/meta-quick/opax/issues/4031))
+- The `rego.SkipPartialNamespace` option now correctly sets the flag on the partial evaluation queries (previously it would always set the value to `true`) ([#3996](https://github.com/meta-quick/opax/issues/3996)) authored by @[thomascoquet](https://github.com/thomascoquet)
 - The internal set implementation has been updated to insert elements in sorted order rather than lazily sorting during comparisons.
-- Fixed `import` alias parsing bug identified by fuzzer ([#3988](https://github.com/meta-quick/opa/issues/3988))
+- Fixed `import` alias parsing bug identified by fuzzer ([#3988](https://github.com/meta-quick/opax/issues/3988))
 
 ### WebAssembly
 
@@ -280,24 +280,24 @@ This release adds an early exit optimization to the evaluator. With this optimiz
 ### Server
 
 - The decision logger adapts upload chunk sizes based on previous outputs. This allows the decision loggger to encode significantly more decisions into each upload chunk, thereby reducing heap usage for buffered decisions. For more information on the adapative chunking behaviour, see the [Decision Logs](https://www.openpolicyagent.org/docs/latest/management-decision-logs/) page in the docs.
-- The decision logger can be configured to send records to a custom plugin as well as an HTTP endpoint at the same time ([#4013](https://github.com/meta-quick/opa/issues/4013))
-- `print()` calls from the `system.authz` policy are now included in the logs ([#4048](https://github.com/meta-quick/opa/issues/4048))
-- OPA can use an [Azure Managed Identities Token](https://www.openpolicyagent.org/docs/latest/configuration/#azure-managed-identities-token) to authenticate with control plane services ([#3916](https://github.com/meta-quick/opa/issues/3916)) authored by @[Scowluga](https://github.com/Scowluga).
-- The logging configuration will be correctly applied to service clients so that DEBUG logs are surfaced ([#4071](https://github.com/meta-quick/opa/issues/4071))
+- The decision logger can be configured to send records to a custom plugin as well as an HTTP endpoint at the same time ([#4013](https://github.com/meta-quick/opax/issues/4013))
+- `print()` calls from the `system.authz` policy are now included in the logs ([#4048](https://github.com/meta-quick/opax/issues/4048))
+- OPA can use an [Azure Managed Identities Token](https://www.openpolicyagent.org/docs/latest/configuration/#azure-managed-identities-token) to authenticate with control plane services ([#3916](https://github.com/meta-quick/opax/issues/3916)) authored by @[Scowluga](https://github.com/Scowluga).
+- The logging configuration will be correctly applied to service clients so that DEBUG logs are surfaced ([#4071](https://github.com/meta-quick/opax/issues/4071))
 
 ### Tooling
 
-- The `opa fmt` command will not generate a line-break when there are generated variables in a function call ([#4018](https://github.com/meta-quick/opa/issues/4018)) reported by @[torsrex](https://github.com/torsrex)
-- The `opa inspect` command no longer prints a blank namespace when a data.json file is included at the root ([#4022](https://github.com/meta-quick/opa/issues/4022))
+- The `opa fmt` command will not generate a line-break when there are generated variables in a function call ([#4018](https://github.com/meta-quick/opax/issues/4018)) reported by @[torsrex](https://github.com/torsrex)
+- The `opa inspect` command no longer prints a blank namespace when a data.json file is included at the root ([#4022](https://github.com/meta-quick/opax/issues/4022))
 - The `opa build` command will output debug messages if an optimized entrypoint is discarded.
 
 ### Website and Documentation
 
-- The website has been updated to build with Hugo 0.88.1 ([#3787](https://github.com/meta-quick/opa/issues/3787))
-- The version picker in the documentation is now scrollable ([#3955](https://github.com/meta-quick/opa/issues/3955)) authored by @[orweis](https://github.com/orweis)
-- The description of the `urlquery` built-in functions have been clarified ([#1592](https://github.com/meta-quick/opa/issues/1592)) reported by @[klarose](https://github.com/klarose)
-- The decision logger documentation has been improved to cover controls for large-scale environments ([#3976](https://github.com/meta-quick/opa/issues/3976))
-- The "strict built-in errors" mode is now covered in the docs along with built-in function error behaviour ([#3686](https://github.com/meta-quick/opa/issues/3686))
+- The website has been updated to build with Hugo 0.88.1 ([#3787](https://github.com/meta-quick/opax/issues/3787))
+- The version picker in the documentation is now scrollable ([#3955](https://github.com/meta-quick/opax/issues/3955)) authored by @[orweis](https://github.com/orweis)
+- The description of the `urlquery` built-in functions have been clarified ([#1592](https://github.com/meta-quick/opax/issues/1592)) reported by @[klarose](https://github.com/klarose)
+- The decision logger documentation has been improved to cover controls for large-scale environments ([#3976](https://github.com/meta-quick/opax/issues/3976))
+- The "strict built-in errors" mode is now covered in the docs along with built-in function error behaviour ([#3686](https://github.com/meta-quick/opax/issues/3686))
 - The OAuth2 and OIDC examples around key rotation and caching have been improved
 
 ### CI
@@ -307,19 +307,19 @@ This release adds an early exit optimization to the evaluator. With this optimiz
 
 ### Backwards Compatibility
 
-- The diagnostics buffer in the OPA server has been completely removed as part of the deprecation and removal of the diagnostic feature ([#1052](https://github.com/meta-quick/opa/issues/1052))
+- The diagnostics buffer in the OPA server has been completely removed as part of the deprecation and removal of the diagnostic feature ([#1052](https://github.com/meta-quick/opax/issues/1052))
 
 ## 0.34.2
 
 ### Fixes
 
-- ast: Fix print call rewriting for calls in head ([#3967](https://github.com/meta-quick/opa/issues/3967))
+- ast: Fix print call rewriting for calls in head ([#3967](https://github.com/meta-quick/opax/issues/3967))
 
 ## 0.34.1
 
 ### Fixes
 
-- runtime: Fix logging configuration (#3959) ([#3958](https://github.com/meta-quick/opa/issues/3958))
+- runtime: Fix logging configuration (#3959) ([#3958](https://github.com/meta-quick/opax/issues/3958))
 
 ## 0.34.0
 
@@ -397,36 +397,36 @@ section in the docs.
 
 ### Enhancements
 
-- SDK: Allow map of plugins to be passed to SDK ([#3826](https://github.com/meta-quick/opa/issues/3826)) authored by @[edpaget](https://github.com/edpaget)
-- `opa test`: Change exit status when tests are skipped ([#3773](https://github.com/meta-quick/opa/issues/3773)) authored by @[kirk-patton](https://github.com/kirk-patton)
-- Bundles: Improve loading performance ([#3860](https://github.com/meta-quick/opa/issues/3860)) authored by @[0xAP](https://github.com/0xAP)
-- `opa fmt`: Keep new lines in between function arguments ([#3836](https://github.com/meta-quick/opa/issues/3836)) reported by @[anbrsap](https://github.com/anbrsap)
-- `opa inspect`: Add experimental subcommand for bundle inspection ([#3754](https://github.com/meta-quick/opa/issues/3754))
+- SDK: Allow map of plugins to be passed to SDK ([#3826](https://github.com/meta-quick/opax/issues/3826)) authored by @[edpaget](https://github.com/edpaget)
+- `opa test`: Change exit status when tests are skipped ([#3773](https://github.com/meta-quick/opax/issues/3773)) authored by @[kirk-patton](https://github.com/kirk-patton)
+- Bundles: Improve loading performance ([#3860](https://github.com/meta-quick/opax/issues/3860)) authored by @[0xAP](https://github.com/0xAP)
+- `opa fmt`: Keep new lines in between function arguments ([#3836](https://github.com/meta-quick/opax/issues/3836)) reported by @[anbrsap](https://github.com/anbrsap)
+- `opa inspect`: Add experimental subcommand for bundle inspection ([#3754](https://github.com/meta-quick/opax/issues/3754))
 
 ### Fixes
 
 - Bundles/API: When deleting a policy, the check determining if it's bundle-owned was using the path prefix, which would yield false positives under certain circumstances.
-  It now checks the path properly, piece-by-piece. ([#3863](https://github.com/meta-quick/opa/issues/3863) authored by @[edpaget](https://github.com/edpaget)
-- CLI: Using `--set` with null value _again_ translates to empty object ([#3846](https://github.com/meta-quick/opa/issues/3846))
-- Rego: Forbid dynamic recursion with hidden (`system.*`) document ([#3876](https://github.com/meta-quick/opa/issues/3876)
-- Rego: Raise conflict errors in functions when output not captured ([#3912](https://github.com/meta-quick/opa/issues/3912))
+  It now checks the path properly, piece-by-piece. ([#3863](https://github.com/meta-quick/opax/issues/3863) authored by @[edpaget](https://github.com/edpaget)
+- CLI: Using `--set` with null value _again_ translates to empty object ([#3846](https://github.com/meta-quick/opax/issues/3846))
+- Rego: Forbid dynamic recursion with hidden (`system.*`) document ([#3876](https://github.com/meta-quick/opax/issues/3876)
+- Rego: Raise conflict errors in functions when output not captured ([#3912](https://github.com/meta-quick/opax/issues/3912))
 
   This change has the potential to break policies that previously evaluated successfully!
   See _Backwards Compatibility_ notes below for details.
-- Experimental disk storage: React to "txn too big" errors ([#3879](https://github.com/meta-quick/opa/issues/3879)), reported and authored by @[floriangasc](https://github.com/floriangasc)
+- Experimental disk storage: React to "txn too big" errors ([#3879](https://github.com/meta-quick/opax/issues/3879)), reported and authored by @[floriangasc](https://github.com/floriangasc)
 
 ### Documentation
 
-- Kubernetes and Istio: Update tutorials for recent Kubernetes versions ([#3910](https://github.com/meta-quick/opa/issues/3910)) authored by @[olamiko](https://github.com/olamiko)
-- Deployment: Add section about Capabilities ([#3769](https://github.com/meta-quick/opa/issues/3769))
-- Built-in functions: Add warning to `http.send` and extension docs about side-effects in other systems (#3922) ([#3893](https://github.com/meta-quick/opa/issues/3893))
+- Kubernetes and Istio: Update tutorials for recent Kubernetes versions ([#3910](https://github.com/meta-quick/opax/issues/3910)) authored by @[olamiko](https://github.com/olamiko)
+- Deployment: Add section about Capabilities ([#3769](https://github.com/meta-quick/opax/issues/3769))
+- Built-in functions: Add warning to `http.send` and extension docs about side-effects in other systems (#3922) ([#3893](https://github.com/meta-quick/opax/issues/3893))
 - Docker Authorization: The tutorial now uses a Bundles API server.
 - SDK: An example of SDK use is provided.
 
 ### Miscellaneous
 
 - Runtime: Refactor logger usage -- see below for *Backwards Compatibility* notes.
-- Wasm: fix an issue with undefined, plain `input` references ([#3891](https://github.com/meta-quick/opa/issues/3891))
+- Wasm: fix an issue with undefined, plain `input` references ([#3891](https://github.com/meta-quick/opax/issues/3891))
 - test/e2e: Extend TestRuntime to avoid global fixture
 - types: Fix Arity function to return zero when type is known (#3932)
 - Wasm/builder: bump LLVM to 13.0.0, latest versions of wabt and binaryen (#3908)
@@ -484,7 +484,7 @@ section in the docs.
   }
   ```
 
-* The `github.com/meta-quick/opa/runtime#NewLoggingHandler` function now
+* The `github.com/meta-quick/opax/runtime#NewLoggingHandler` function now
   requires a logger instance. Requiring the logger avoids the need for the
   logging handler to depend on the global logrus logger (which is useful for
   test purposes.) This change is unlikely to affect users.
@@ -499,7 +499,7 @@ Thanks to @[iainmcgin](https://github.com/iainmcgin) for reporting.
 
 ### Fixes
 
-- format: make groupIterable sort by row ([#3849](https://github.com/meta-quick/opa/issues/3849))
+- format: make groupIterable sort by row ([#3849](https://github.com/meta-quick/opax/issues/3849))
 
 ## 0.33.0
 
@@ -507,19 +507,19 @@ This release includes a number of improvements and fixes.
 
 ### Built-in Functions
 
-This release introduces `crypto.x509.parse_rsa_private_key` so that policy authors can decode RSA private keys and structure them as JWKs ([#3765](https://github.com/meta-quick/opa/issues/3765)). Authored by @[cris-he](https://github.com/cris-he).
+This release introduces `crypto.x509.parse_rsa_private_key` so that policy authors can decode RSA private keys and structure them as JWKs ([#3765](https://github.com/meta-quick/opax/issues/3765)). Authored by @[cris-he](https://github.com/cris-he).
 
 ### Fixes
 
-- Fix object comparison to avoid sorting keys in-place. This prevents the interpreter from generating non-deterministic results when values are inserted into the partial set memoization cache. ([#3819](https://github.com/meta-quick/opa/issues/3819))
-- Fix data races in `ast` package caused by sorting `types.Any` instances in-place and shallow-copying module comments when a deep-copy should be performed ([#3793](https://github.com/meta-quick/opa/issues/3793)). Reported by @[markushinz](https://github.com/markushinz).
-- Fix "file name too long" error caused by bundle loader treating PEM encoded private keys as file paths ([#3766](https://github.com/meta-quick/opa/issues/3766))
-- Fix plugins to support manual triggering mode when discovery is disabled ([#3797](https://github.com/meta-quick/opa/issues/3797))
+- Fix object comparison to avoid sorting keys in-place. This prevents the interpreter from generating non-deterministic results when values are inserted into the partial set memoization cache. ([#3819](https://github.com/meta-quick/opax/issues/3819))
+- Fix data races in `ast` package caused by sorting `types.Any` instances in-place and shallow-copying module comments when a deep-copy should be performed ([#3793](https://github.com/meta-quick/opax/issues/3793)). Reported by @[markushinz](https://github.com/markushinz).
+- Fix "file name too long" error caused by bundle loader treating PEM encoded private keys as file paths ([#3766](https://github.com/meta-quick/opax/issues/3766))
+- Fix plugins to support manual triggering mode when discovery is disabled ([#3797](https://github.com/meta-quick/opax/issues/3797))
 
 ### Server & Tooling
 
-- The server now supports policy-based health checks that can inspect the state of plugins and other internal components ([#3759](https://github.com/meta-quick/opa/issues/3759)) authored by @[gshively11](https://github.com/gshively11)
-- The bundle reader now loads files lazily to avoid hitting file descriptor limits ([#3777](https://github.com/meta-quick/opa/issues/3777)). Authored by @[bhoriuchi](https://github.com/bhoriuchi)
+- The server now supports policy-based health checks that can inspect the state of plugins and other internal components ([#3759](https://github.com/meta-quick/opax/issues/3759)) authored by @[gshively11](https://github.com/gshively11)
+- The bundle reader now loads files lazily to avoid hitting file descriptor limits ([#3777](https://github.com/meta-quick/opax/issues/3777)). Authored by @[bhoriuchi](https://github.com/bhoriuchi)
 - The `opa eval` sub-command supports a `--timeout` option for limiting how long evaluation can run.
 
 ### Rego
@@ -531,7 +531,7 @@ This release introduces `crypto.x509.parse_rsa_private_key` so that policy autho
 
 - Fix spurious build errors in wasm library.
 - Update wasmtime dependency to v0.30.0.
-- Run PR checks on macOS in addition to Linux ([#3176](https://github.com/meta-quick/opa/issues/3176)).
+- Run PR checks on macOS in addition to Linux ([#3176](https://github.com/meta-quick/opax/issues/3176)).
 
 ### Documentation
 
@@ -539,7 +539,7 @@ This release introduces `crypto.x509.parse_rsa_private_key` so that policy autho
 
 ### Backwards Compatibility
 
-* The `github.com/meta-quick/opa/ast#ArgErrDetail` struct has been
+* The `github.com/meta-quick/opax/ast#ArgErrDetail` struct has been
   modified to use the new `types.FuncArgs` struct to represent the required
   arguments. Callers that depend on the exact structure of the error details
   must update to use the `types.FuncArgs` struct.
@@ -572,40 +572,40 @@ This release includes a number of improvements and fixes.
 
 ### 💾 Disk-based Storage (Experimental)
 
-This release adds a disk-based storage implementation to OPA. The implementation can be found in [github.com/open-policy-agent/storage/disk](https://pkg.go.dev/github.com/meta-quick/opa/storage/disk). There is also an example in the [`rego` package](https://pkg.go.dev/github.com/meta-quick/opa/rego#pkg-examples) that shows how policies can be evaluated with the disk-based store. The disk-based store is currently only available as a library (i.e., it is not integrated into the rest of OPA yet.) In the next few releases, we are planning to integrate the implementation into the OPA server and provide tooling to help leverage the disk-based store.
+This release adds a disk-based storage implementation to OPA. The implementation can be found in [github.com/open-policy-agent/storage/disk](https://pkg.go.dev/github.com/meta-quick/opax/storage/disk). There is also an example in the [`rego` package](https://pkg.go.dev/github.com/meta-quick/opax/rego#pkg-examples) that shows how policies can be evaluated with the disk-based store. The disk-based store is currently only available as a library (i.e., it is not integrated into the rest of OPA yet.) In the next few releases, we are planning to integrate the implementation into the OPA server and provide tooling to help leverage the disk-based store.
 
 ### Built-in Functions
 
 This release includes a few improvements to existing built-in functions:
 
-- The `http.send` function now supports UNIX domain sockets ([#3661](https://github.com/meta-quick/opa/issues/3661)) authored by @[kirk-patton](https://github.com/kirk-patton)
-- The `units.parse_bytes` function now supports E* and P* units ([#2911](https://github.com/meta-quick/opa/issues/2911))
+- The `http.send` function now supports UNIX domain sockets ([#3661](https://github.com/meta-quick/opax/issues/3661)) authored by @[kirk-patton](https://github.com/kirk-patton)
+- The `units.parse_bytes` function now supports E* and P* units ([#2911](https://github.com/meta-quick/opax/issues/2911))
 - The `io.jwt.encode_sign` function uses the built-in context randomization source (which is helpful for replay purposes)
 
 ### Server
 
 This release includes multiple improvements for OPA server deployments in serverless environments:
 
-- Plugins can now be triggered manually within OPA. This feature allows users extending and customizing OPA to control exactly when operations like bundle downloads and decision log uploads occur. The built-in plugins now include a `trigger` configuration that can be set to `manual` or `periodic` (which is the default). When `manual` triggering is enabled, the plugins WILL NOT perform any periodic/background operations. Instead, the plugins will only execute when the [`Trigger`](https://github.com/meta-quick/opa/blob/main/plugins/plugins.go#L101) API is invoked.
-- Plugins can now wait for server initialization. When runtime initialization is finished, plugins can be notified. This allows plugins to synchronize their behaviour with server startup. [#3701](https://github.com/meta-quick/opa/issues/3701) authored by @[gshively11](https://github.com/gshively11).
-- The [Health API](https://www.openpolicyagent.org/docs/latest/rest-api/#health-api) now supports an `exclude-plugin` parameter to control which plugins are checked. [#3713](https://github.com/meta-quick/opa/issues/3713) authored by @[gshively11](https://github.com/gshively11).
+- Plugins can now be triggered manually within OPA. This feature allows users extending and customizing OPA to control exactly when operations like bundle downloads and decision log uploads occur. The built-in plugins now include a `trigger` configuration that can be set to `manual` or `periodic` (which is the default). When `manual` triggering is enabled, the plugins WILL NOT perform any periodic/background operations. Instead, the plugins will only execute when the [`Trigger`](https://github.com/meta-quick/opax/blob/main/plugins/plugins.go#L101) API is invoked.
+- Plugins can now wait for server initialization. When runtime initialization is finished, plugins can be notified. This allows plugins to synchronize their behaviour with server startup. [#3701](https://github.com/meta-quick/opax/issues/3701) authored by @[gshively11](https://github.com/gshively11).
+- The [Health API](https://www.openpolicyagent.org/docs/latest/rest-api/#health-api) now supports an `exclude-plugin` parameter to control which plugins are checked. [#3713](https://github.com/meta-quick/opax/issues/3713) authored by @[gshively11](https://github.com/gshively11).
 
 ### Tooling
 
-- The compiler no longer fetches remote schemas by default when used as as library. Capabilities have been updated to include an `allow_net` field to control whether network operations can be performed ([#3746](https://github.com/meta-quick/opa/issues/3746)). This field is only used to control schema fetching today. In future versions of OPA, the `allow_net` parameter will be used to control other behaviour like `http.send`.
-- The `WebAssembly runtime not supported` error message has been improved [#3739](https://github.com/meta-quick/opa/pull/3739).
+- The compiler no longer fetches remote schemas by default when used as as library. Capabilities have been updated to include an `allow_net` field to control whether network operations can be performed ([#3746](https://github.com/meta-quick/opax/issues/3746)). This field is only used to control schema fetching today. In future versions of OPA, the `allow_net` parameter will be used to control other behaviour like `http.send`.
+- The `WebAssembly runtime not supported` error message has been improved [#3739](https://github.com/meta-quick/opax/pull/3739).
 
 ### Rego
 
-- Added support for `anyOf` and `allOf` keywords in JSON schema support in the type checker ([#3592](https://github.com/meta-quick/opa/issues/3592)) authored by [@jchen10500](https://github.com/jchen10500) and [@juliafriedman8](https://github.com/juliafriedman8).
+- Added support for `anyOf` and `allOf` keywords in JSON schema support in the type checker ([#3592](https://github.com/meta-quick/opax/issues/3592)) authored by [@jchen10500](https://github.com/jchen10500) and [@juliafriedman8](https://github.com/juliafriedman8).
 - Added support for custom JSON result marshalling in the `rego` package.
 - Added a new convenience function (`Allowed() bool`) to the `rego.ResultSet` API.
 - Improved string-representation construction performance for arrays, sets, and objects.
 - Improved the topdown evaluator to support `ast.Value` results from the store so that unnecessary conversions can be avoided.
-- Improved the `rego` package to make the wasmtime-go dependency optional at build-time ([#3545](https://github.com/meta-quick/opa/issues/3545)).
-- Fixed a bug in the comprehension indexer whereby index keys were not constructed correctly leading to incorrect outputs ([#3579](https://github.com/meta-quick/opa/issues/3579)).
-- Fixed a stack overflow during partial evaluation due to incorrect term rewriting in the copy propagation implementation ([#3071](https://github.com/meta-quick/opa/issues/3071)).
-- Fixed a bug in partial evaluation when shallow inlinign is enabled that resulted in built-in functions being invoked instead of saved ([#3681](https://github.com/meta-quick/opa/issues/3681)).
+- Improved the `rego` package to make the wasmtime-go dependency optional at build-time ([#3545](https://github.com/meta-quick/opax/issues/3545)).
+- Fixed a bug in the comprehension indexer whereby index keys were not constructed correctly leading to incorrect outputs ([#3579](https://github.com/meta-quick/opax/issues/3579)).
+- Fixed a stack overflow during partial evaluation due to incorrect term rewriting in the copy propagation implementation ([#3071](https://github.com/meta-quick/opax/issues/3071)).
+- Fixed a bug in partial evaluation when shallow inlinign is enabled that resulted in built-in functions being invoked instead of saved ([#3681](https://github.com/meta-quick/opax/issues/3681)).
 
 ### WebAssembly
 
@@ -617,8 +617,8 @@ This release includes multiple improvements for OPA server deployments in server
 
 This release includes a number of documentation improvements:
 
-- The wasm `opa_eval` arguments have been clarified [#3699](https://github.com/meta-quick/opa/issues/3696)
-- The contributing and development guide have been moved into a dedicated [Contributing](https://www.openpolicyagent.org/docs/latest/contributing/) section on the website [#3751](https://github.com/meta-quick/opa/issues/3751)
+- The wasm `opa_eval` arguments have been clarified [#3699](https://github.com/meta-quick/opax/issues/3696)
+- The contributing and development guide have been moved into a dedicated [Contributing](https://www.openpolicyagent.org/docs/latest/contributing/) section on the website [#3751](https://github.com/meta-quick/opax/issues/3751)
 - The Envoy standalone tutorial includes cleanup steps now (thanks [@princespaghetti](https://github.com/princespaghetti))
 - Various typos have been fixed by multiple folks (thanks [@Tej-Singh-Rana](https://github.com/Tej-Singh-Rana) [@gujun4990](https://github.com/gujun4990))
 - The Kubernetes ingress validation tutorial has been updated to include new mandatory attributes and newer API versions (thanks [@ereslibre](https://github.com/ereslibre))
@@ -633,10 +633,10 @@ This release includes a number of documentation improvements:
 The `rego` package no longer relies on build constraints to enable the Wasm runtime. Instead, library users must opt-in to Wasm runtime support by adding an import statement in the Go code:
 
 ```go
-import _ "github.com/meta-quick/opa/features/wasm"
+import _ "github.com/meta-quick/opax/features/wasm"
 ```
 
-This change ensures that (by default) the wasmtime-go blobs are not vendored in projects that embed OPA as a library. If you are currently relying on the Wasm runtime support in the `rego` package (via the `rego.Target("wasm")` option), please update you code to include the import above. See [#3545](https://github.com/meta-quick/opa/issues/3545) for more details.
+This change ensures that (by default) the wasmtime-go blobs are not vendored in projects that embed OPA as a library. If you are currently relying on the Wasm runtime support in the `rego` package (via the `rego.Target("wasm")` option), please update you code to include the import above. See [#3545](https://github.com/meta-quick/opax/issues/3545) for more details.
 
 ## 0.31.0
 
@@ -652,7 +652,7 @@ See below for details and what to do about that.
 
 #### Partial Sets and Objects Performance
 
-Resolving an issue ([#822](https://github.com/meta-quick/opa/issues/822)) created on July 4th 2018,
+Resolving an issue ([#822](https://github.com/meta-quick/opax/issues/822)) created on July 4th 2018,
 OPA can now cache the results of partial sets and partial objects.
 
 A benchmark that accesses a partial set of increasing size _twice_ shows a saving of more than 50%:
@@ -742,10 +742,10 @@ The performance benefit is huge:
     WasmRego-16    84.3µs ± 6%    15.1µs ± 0%  -82.07%  (p=0.008 n=5+5)
 
 The added `opa_eval` export comes with an ABI bump to version 1.2.
-See [#3627](https://github.com/meta-quick/opa/pull/3627) for all details.
+See [#3627](https://github.com/meta-quick/opax/pull/3627) for all details.
 
 Along the same line, we've examined the processing of query evaluations that are Wasm-backed _through the `rego` package_.
-This allowed us to avoid unneccessary work ([#3666](https://github.com/meta-quick/opa/issues/3666)).
+This allowed us to avoid unneccessary work ([#3666](https://github.com/meta-quick/opax/issues/3666)).
 
 
 #### Unsafe declared variables now cause a compile-time error
@@ -775,27 +775,27 @@ With this release, the erroneous rule no longer goes unnoticed, but is **caught 
 The most likely fix is to remove the rule with the unsafe variable, since it cannot have contributed to a successful
 evaluation in previous OPA versions.
 
-See [#3580](https://github.com/meta-quick/opa/issues/3580) for details.
+See [#3580](https://github.com/meta-quick/opax/issues/3580) for details.
 
 ### Topdown and Rego
 
-- New built-in function: `crypto.x509.parse_and_verify_certificates` ([#3601](https://github.com/meta-quick/opa/issues/3601)), authored by @[jalseth](https://github.com/jalseth)
+- New built-in function: `crypto.x509.parse_and_verify_certificates` ([#3601](https://github.com/meta-quick/opax/issues/3601)), authored by @[jalseth](https://github.com/jalseth)
 
   This function enables you to verify that there is a chain from a leaf certificate back to the trusted root.
-- New built-in function: `rand.intn` generates a random number between `0` and `n` ([#3615](https://github.com/meta-quick/opa/issues/3615)), authored by @[base698](https://github.com/base698)
+- New built-in function: `rand.intn` generates a random number between `0` and `n` ([#3615](https://github.com/meta-quick/opax/issues/3615)), authored by @[base698](https://github.com/base698)
 
   The function takes a string argument to ensure that the same call, within one policy evaluation, returns the same random number.
-- `http.send` enhancement: New `caching_mode` parameter to configure if deserialized or serialized response bodies should be cached ([#3599](https://github.com/meta-quick/opa/issues/3599))
-- Custom built-in function enhancement: let custom builtins halt evaluation ([#3534](https://github.com/meta-quick/opa/issues/3534))
-- Partial evaluation: Fix stack overflow on certain expressions ([#3559](https://github.com/meta-quick/opa/issues/3559))
+- `http.send` enhancement: New `caching_mode` parameter to configure if deserialized or serialized response bodies should be cached ([#3599](https://github.com/meta-quick/opax/issues/3599))
+- Custom built-in function enhancement: let custom builtins halt evaluation ([#3534](https://github.com/meta-quick/opax/issues/3534))
+- Partial evaluation: Fix stack overflow on certain expressions ([#3559](https://github.com/meta-quick/opax/issues/3559))
 
 ### Tooling
 
-- Query Profiling: `opa eval --profile` now supports a `--count=#` flag to gather metrics and profiling data over multiple runs, and displays aggregate statistics for the results ([#3651](https://github.com/meta-quick/opa/issues/3651)).
+- Query Profiling: `opa eval --profile` now supports a `--count=#` flag to gather metrics and profiling data over multiple runs, and displays aggregate statistics for the results ([#3651](https://github.com/meta-quick/opax/issues/3651)).
 
   This allows you to gather more robust numbers to assess policy performance.
 
-- Docker images: Publish static image ([#3633](https://github.com/meta-quick/opa/issues/3633))
+- Docker images: Publish static image ([#3633](https://github.com/meta-quick/opax/issues/3633))
 
   As of this release, you can use the staticly-built Linux binary from a docker image: `openpolicyagent/opa:0.31.0-static`.
   It contains the same binary that has been published since release v0.29.4, statically linked to musl, with evaluating Wasm disabled.
@@ -803,9 +803,9 @@ See [#3580](https://github.com/meta-quick/opa/issues/3580) for details.
 ### Fixes
 
 - Built-in `http.send`: ignore `tls_use_system_certs` setting on Windows. Having this set to _true_ (the default as of v0.29.0) would _always_ return an error on Windows.
-- The console decision logger is no longer tied to the general log level ([#3654](https://github.com/meta-quick/opa/issues/3654))
-- Update query compiler to reject empty queries ([#3625](https://github.com/meta-quick/opa/issues/3625))
-- Partial Evaluation fix: Don't generate comprehension with unsafe variables ([#3557](https://github.com/meta-quick/opa/issues/3557))
+- The console decision logger is no longer tied to the general log level ([#3654](https://github.com/meta-quick/opax/issues/3654))
+- Update query compiler to reject empty queries ([#3625](https://github.com/meta-quick/opax/issues/3625))
+- Partial Evaluation fix: Don't generate comprehension with unsafe variables ([#3557](https://github.com/meta-quick/opax/issues/3557))
 - Parser: modules containing _only_ tabs and spaces no longer lead to a runtime panic.
 - Wasm: ensure that the desired stack space for the C library calls (64KiB) is not reduced by data segments added in the compiler.
    This is achieved by putting the stack first -- stack overflows now become "out of bounds" memory access traps.
@@ -813,15 +813,15 @@ See [#3580](https://github.com/meta-quick/opa/issues/3580) for details.
 
 ### Server and Runtime
 
-- New configuration for Management APIs: using `resource`, the request path for sending decision logs can be configured now ([#3618](https://github.com/meta-quick/opa/issues/3618)), authored by @[cbuto](https://github.com/cbuto)
+- New configuration for Management APIs: using `resource`, the request path for sending decision logs can be configured now ([#3618](https://github.com/meta-quick/opax/issues/3618)), authored by @[cbuto](https://github.com/cbuto)
 
   `/logs` is still the default, but can now be overridden.
   With this change, the `partition_name` config becomes deprecated, since its functionality is subsumed by this new configurable.
 
 ### Documentation
 
-- How to debug? Clarify how to access `Note` events for debugging via explanations ([#3628](https://github.com/meta-quick/opa/issues/3628)) authored by @[enori](https://github.com/enori)
-- Clarify special characters for key, i.e. what `x["y"]` is necessary because `x.y` isn't valid ([#3638](https://github.com/meta-quick/opa/issues/3638)) authored by @[Hongbo-Miao](https://github.com/Hongbo-Miao)
+- How to debug? Clarify how to access `Note` events for debugging via explanations ([#3628](https://github.com/meta-quick/opax/issues/3628)) authored by @[enori](https://github.com/enori)
+- Clarify special characters for key, i.e. what `x["y"]` is necessary because `x.y` isn't valid ([#3638](https://github.com/meta-quick/opax/issues/3638)) authored by @[Hongbo-Miao](https://github.com/Hongbo-Miao)
 - Management APIs: Remove deprecated fields from docs
 - Policy Reference: add missing backtick; `type_name` builtin is natively implemented in Wasm
 
@@ -833,7 +833,7 @@ credentials into the debug log if the AWS STS endpoint is unavailable.
 
 ## 0.30.1
 
-This is a bugfix release to correct the behaviour of the `indexof` builtin ([#3606](https://github.com/meta-quick/opa/issues/3606)).
+This is a bugfix release to correct the behaviour of the `indexof` builtin ([#3606](https://github.com/meta-quick/opax/issues/3606)).
 In v0.30.0, it only checked the first character of the substring to be found: `indexof("foo", "fox")` erroneously returned 0 instead of -1.
 
 ### Miscellaneous
@@ -846,10 +846,10 @@ This release contains a number of enhancements and fixes.
 
 ### Server and Runtime
 
-- Support listening on abstract Unix Domain Sockets ([#3533](https://github.com/meta-quick/opa/issues/3533)) authored by @[amanymous-net](https://github.com/amanymous-net)
-- Support minimum TLS version configuration, default to 1.2 ([#3226](https://github.com/meta-quick/opa/issues/3226)) authored by @[kale-amruta](https://github.com/kale-amruta)
-- Enhancement in REST Plugin: You can now specify a CA cert for remote services implementing the management APIs (bundles, status, decision logs, discovery) ([#1954](https://github.com/meta-quick/opa/issues/1954))
-- Bugfix: treat missing/empty roots as owning all paths ([#3521](https://github.com/meta-quick/opa/issues/3521))
+- Support listening on abstract Unix Domain Sockets ([#3533](https://github.com/meta-quick/opax/issues/3533)) authored by @[amanymous-net](https://github.com/amanymous-net)
+- Support minimum TLS version configuration, default to 1.2 ([#3226](https://github.com/meta-quick/opax/issues/3226)) authored by @[kale-amruta](https://github.com/kale-amruta)
+- Enhancement in REST Plugin: You can now specify a CA cert for remote services implementing the management APIs (bundles, status, decision logs, discovery) ([#1954](https://github.com/meta-quick/opax/issues/1954))
+- Bugfix: treat missing/empty roots as owning all paths ([#3521](https://github.com/meta-quick/opax/issues/3521))
 
   Before, it would have been possible to overwrite a policy that was supplied by a bundle (with an empty manifest, or a manifest without declared roots), due to an erroneous check.
   This will now be forbidden, and return a 400 HTTP status, in accordance with the documentation.
@@ -858,19 +858,19 @@ This release contains a number of enhancements and fixes.
 
 ### Tooling
 
-- `opa build`: Do not write manifest if empty ([#3480](https://github.com/meta-quick/opa/issues/3480)). Under the hood, the manifest metadata is now included in the Equal() function's checks.
-- `opa fmt`: Fix incorrect help text ([#3518](https://github.com/meta-quick/opa/issues/3518)) authored by @[andrehaland](https://github.com/andrehaland)
-- `opa bench`: Do not print nil errors ([#3530](https://github.com/meta-quick/opa/issues/3530))
+- `opa build`: Do not write manifest if empty ([#3480](https://github.com/meta-quick/opax/issues/3480)). Under the hood, the manifest metadata is now included in the Equal() function's checks.
+- `opa fmt`: Fix incorrect help text ([#3518](https://github.com/meta-quick/opax/issues/3518)) authored by @[andrehaland](https://github.com/andrehaland)
+- `opa bench`: Do not print nil errors ([#3530](https://github.com/meta-quick/opax/issues/3530))
 
 ### Rego
 
-- Expose random seeding in rego package ([#3560](https://github.com/meta-quick/opa/issues/3560))
+- Expose random seeding in rego package ([#3560](https://github.com/meta-quick/opax/issues/3560))
 - Enhance `ast.InterfaceToValue` to handle non-native types
 - Enhance indexer to understand function args
 - Enhance static property lookup of objects: Use binary search
-- Fix PE unknown check to avoid saving unnecessarily ([#3552](https://github.com/meta-quick/opa/issues/3552))
-- Fix inlining controls for functions ([#3463](https://github.com/meta-quick/opa/issues/3463))
-- Fix (shallow) partial eval of ref to empty collection in presence of `with` statement ([#3420](https://github.com/meta-quick/opa/issues/3420))
+- Fix PE unknown check to avoid saving unnecessarily ([#3552](https://github.com/meta-quick/opax/issues/3552))
+- Fix inlining controls for functions ([#3463](https://github.com/meta-quick/opax/issues/3463))
+- Fix (shallow) partial eval of ref to empty collection in presence of `with` statement ([#3420](https://github.com/meta-quick/opax/issues/3420))
 - Fix cache value size checking during insert operation
 - Fix `indexof` when using UTF-8 characters
 - Fix `http.send` flaky test
@@ -886,13 +886,13 @@ This release contains a number of enhancements and fixes.
 - `make check` now uses golangci-lint via docker, authored by @[willbeason](https://github.com/willbeason)
 - The statically-built linux binary is properly used in the make targets that need it, and published to edge binaries.
 - Built binaries are now smoke tested on Windows, macos, and Linux.
-- Fix test failing with Go 1.17 rc in gojsonschema ([#3589](https://github.com/meta-quick/opa/issues/3589)) authored by @[olivierlemasle](https://github.com/olivierlemasle)
-- Build: Bump Go version to 1.16.3 ([#3555](https://github.com/meta-quick/opa/issues/3555))
+- Fix test failing with Go 1.17 rc in gojsonschema ([#3589](https://github.com/meta-quick/opax/issues/3589)) authored by @[olivierlemasle](https://github.com/olivierlemasle)
+- Build: Bump Go version to 1.16.3 ([#3555](https://github.com/meta-quick/opax/issues/3555))
 - CI: enable dependabot for wasmtime-go
 
 #### Documentation
 
-- OAuth2/OIDC: Fixed `concat` arguments in metadata discovery method ([#3543](https://github.com/meta-quick/opa/pull/3543), @[iggbom](https://github.com/iggbom))
+- OAuth2/OIDC: Fixed `concat` arguments in metadata discovery method ([#3543](https://github.com/meta-quick/opax/pull/3543), @[iggbom](https://github.com/iggbom))
 - Policy Reference: syntax highlighting EBNF grammar (@[PatMyron](https://github.com/PatMyron))
 - Extending OPA: fix typo (@[dxps](https://github.com/dxps))
 - Extending OPA: marshal the decision log (@[TheLunaticScripter](https://github.com/TheLunaticScripter))
@@ -906,19 +906,19 @@ This is a bugfix release that re-introduces linux binaries that do not depend on
 
 ### Fixes
 
-- build: add static (wasm-disabled) linux build (#3511) ([#3499](https://github.com/meta-quick/opa/issues/3499)) authored by @[srenatus](https://github.com/srenatus)
+- build: add static (wasm-disabled) linux build (#3511) ([#3499](https://github.com/meta-quick/opax/issues/3499)) authored by @[srenatus](https://github.com/srenatus)
 
 ### Miscellaneous
 
-- bundle: Implement a DirectoryLoader for fs.FS (#3493) ([#3489](https://github.com/meta-quick/opa/issues/3489)) authored by @[simongottschlag](https://github.com/simongottschlag)
+- bundle: Implement a DirectoryLoader for fs.FS (#3493) ([#3489](https://github.com/meta-quick/opax/issues/3489)) authored by @[simongottschlag](https://github.com/simongottschlag)
 
 ## 0.29.3
 
-This bugfix release addresses another edge case in function evaluation ([#3505](https://github.com/meta-quick/opa/pull/3505)).
+This bugfix release addresses another edge case in function evaluation ([#3505](https://github.com/meta-quick/opax/pull/3505)).
 
 ## 0.29.2
 
-This is a bugfix release to resolve an issue in topdown's function output caching ([#3501](https://github.com/meta-quick/opa/issues/3501))
+This is a bugfix release to resolve an issue in topdown's function output caching ([#3501](https://github.com/meta-quick/opax/issues/3501))
 
 ## 0.29.1
 
@@ -930,13 +930,13 @@ This release contains a number of enhancements and fixes.
 
 ### SDK
 
-- This release includes a new top-level package to support OPA integrations in Go programs: `github.com/meta-quick/opa/sdk`. Users that want to integrate OPA as a library in Go and expose features like bundles and decision logging should use this package. The package is controlled by specifying an OPA configuration file. Hot reloading is supported out-of-the-box. See the GoDoc for [the package docs](https://pkg.go.dev/github.com/meta-quick/opa@v0.29.0/sdk) for more details.
+- This release includes a new top-level package to support OPA integrations in Go programs: `github.com/meta-quick/opax/sdk`. Users that want to integrate OPA as a library in Go and expose features like bundles and decision logging should use this package. The package is controlled by specifying an OPA configuration file. Hot reloading is supported out-of-the-box. See the GoDoc for [the package docs](https://pkg.go.dev/github.com/meta-quick/opax@v0.29.0/sdk) for more details.
 
 ### Server
 
-- A deadlock in the bundle plugin during shutdown has been resolved ([#3363](https://github.com/meta-quick/opa/issues/3363))
-- An issue between bundle signing and bundle persistence when multiple data.json files are included in the bundle has been resolved ([#3472](https://github.com/meta-quick/opa/issues/3472))
-- The `github.com/meta-quick/opa/runtime#Params` struct now supports a router parameter to enable custom routes on the HTTP server.
+- A deadlock in the bundle plugin during shutdown has been resolved ([#3363](https://github.com/meta-quick/opax/issues/3363))
+- An issue between bundle signing and bundle persistence when multiple data.json files are included in the bundle has been resolved ([#3472](https://github.com/meta-quick/opax/issues/3472))
+- The `github.com/meta-quick/opax/runtime#Params` struct now supports a router parameter to enable custom routes on the HTTP server.
 - The bundle manifest can now include an extra `metadata` key where arbitrary key-value pairs can be stored. Authored by @[viovanov](https://github.com/viovanov)
 - The bundle plugin now supports file:// urls in the `resource` field for test purposes.
 - The decision log plugin emits a clearer message at DEBUG instead of INFO when there is no work to do. Authored by [andrewbanchich](https://github.com/andrewbanchich)
@@ -944,7 +944,7 @@ This release contains a number of enhancements and fixes.
 
 ### Tooling
 
-- The `opa test` timeout as been increased to 30 seconds when benchmarking ([#3107](https://github.com/meta-quick/opa/issues/3107))
+- The `opa test` timeout as been increased to 30 seconds when benchmarking ([#3107](https://github.com/meta-quick/opax/issues/3107))
 - The `opa eval --schema` flag has been fixed to correctly set the schema when a _single_ schema file is passed
 - The `opa build --debug` flag output has been improved for readability
 - The `array.items` JSON schema value is now supported by the type checker
@@ -953,18 +953,18 @@ This release contains a number of enhancements and fixes.
 
 ### Built-in Functions
 
-- The `http.send` built-in function falls back to the system certificate pool when the `tls_ca_cert` or `tls_ca_cert_env_variable` options are not specified ([#2271](https://github.com/meta-quick/opa/issues/2271)) authored by @[olamiko](https://github.com/olamiko)
+- The `http.send` built-in function falls back to the system certificate pool when the `tls_ca_cert` or `tls_ca_cert_env_variable` options are not specified ([#2271](https://github.com/meta-quick/opax/issues/2271)) authored by @[olamiko](https://github.com/olamiko)
 
 ### Evaluation
 
-- The order of support rules emitted by partial evaluation is now deterministic ([#3453](https://github.com/meta-quick/opa/issues/3453)) authored by @[andrehaland](https://github.com/andrehaland)
-- The big number performance regression caught by the fuzzer has been resolved ([#3262](https://github.com/meta-quick/opa/issues/3262))
+- The order of support rules emitted by partial evaluation is now deterministic ([#3453](https://github.com/meta-quick/opax/issues/3453)) authored by @[andrehaland](https://github.com/andrehaland)
+- The big number performance regression caught by the fuzzer has been resolved ([#3262](https://github.com/meta-quick/opax/issues/3262))
 - The evaluator has been updated to memoize calls to rules with arguments (functions) within a single query. This avoids recomputing function results when the same input is passed multiple times (similar to how complete rules are memoized.)
 
 ### WebAssembly
 
-- The `wasm` target no longer panics if the OPA binary does not include a wasm runtime ([#3264](https://github.com/meta-quick/opa/issues/3264))
-- The interrupt handling mechanism has been rewritten to make safe use of the wasmtime package. The SDK also returns structured errors now that are more aligned with topdown. ([#3225](https://github.com/meta-quick/opa/issues/3225))
+- The `wasm` target no longer panics if the OPA binary does not include a wasm runtime ([#3264](https://github.com/meta-quick/opax/issues/3264))
+- The interrupt handling mechanism has been rewritten to make safe use of the wasmtime package. The SDK also returns structured errors now that are more aligned with topdown. ([#3225](https://github.com/meta-quick/opax/issues/3225))
 - The SDK provides the subset of required imports now (which is useful for debugging with opa_println in the runtime library if needed.)
 - The opa_number_float type has been removed from the value library (it was unused after moving to libmpdec)
 - The runtime library builder has been updated to use llvm-12 and the wasmtime-go package has been updated to v0.27.0
@@ -976,7 +976,7 @@ This release contains a number of enhancements and fixes.
 
 ### Infrastructure
 
-- The release-patch script has been improved to deal with _this file_ in bugfix/patch releases ([#2533](https://github.com/meta-quick/opa/issues/2533)) authored by @[jjshanks](https://github.com/jjshanks)
+- The release-patch script has been improved to deal with _this file_ in bugfix/patch releases ([#2533](https://github.com/meta-quick/opax/issues/2533)) authored by @[jjshanks](https://github.com/jjshanks)
 - The Makefile check targets now rely on golangci-lint and many linting errors have been resolved (authored by @[willbeason](https://github.com/willbeason))
 - Multiple nightly fuzzing and data race issues in test cases have been resolved
 
@@ -1024,21 +1024,21 @@ kinds of metadata and additional tooling will be added to leverage them.
 
 ### Server
 
-- The server now automatically sets GOMAXPROCS when running inside of a container that has cgroups applied. This helps the Go runtime avoid consuming too many CPU resources and being throttled by the kernel. ([#3328](https://github.com/meta-quick/opa/issues/3328))
-- The server now logs an error if users enable the `token` authentication mode without a corresponding authorization policy. ([#3380](https://github.com/meta-quick/opa/issues/3380)) authored by @[kale-amruta](https://github.com/kale-amruta)
-- The server now supports a `GET /v1/config` endpoint that returns OPA's active configuration. This API is useful if you need to debug the running configuration in an OPA configured via Discovery. ([#2020](https://github.com/meta-quick/opa/issues/2020))
-- The server now respects the `?pretty` option in the v0 API ([#3332](https://github.com/meta-quick/opa/issues/3332)) authored by @[clarshad](https://github.com/clarshad)
-- The Bundle plugin is more forgiving when it comes to Etag processing on HTTP 304 responses ([#3361](https://github.com/meta-quick/opa/issues/3361))
+- The server now automatically sets GOMAXPROCS when running inside of a container that has cgroups applied. This helps the Go runtime avoid consuming too many CPU resources and being throttled by the kernel. ([#3328](https://github.com/meta-quick/opax/issues/3328))
+- The server now logs an error if users enable the `token` authentication mode without a corresponding authorization policy. ([#3380](https://github.com/meta-quick/opax/issues/3380)) authored by @[kale-amruta](https://github.com/kale-amruta)
+- The server now supports a `GET /v1/config` endpoint that returns OPA's active configuration. This API is useful if you need to debug the running configuration in an OPA configured via Discovery. ([#2020](https://github.com/meta-quick/opax/issues/2020))
+- The server now respects the `?pretty` option in the v0 API ([#3332](https://github.com/meta-quick/opax/issues/3332)) authored by @[clarshad](https://github.com/clarshad)
+- The Bundle plugin is more forgiving when it comes to Etag processing on HTTP 304 responses ([#3361](https://github.com/meta-quick/opax/issues/3361))
 - The Decision Log plugin now supports a "Decision Per Second" rate limit configuration setting.
 - The Status plugin can now be configured to use a custom reporter similar to the Decision Log plugin (e.g., so that Status messages can be sent to AWS Kinesis, etc.)
 - The Status plugin now reports the number of decision logs that are dropped due to buffer limits.
-- The service clients can authenticate with the Azure Identity OAuth2 implementation the client credentials JWT flow is used ([#3372](https://github.com/meta-quick/opa/issues/3372))
+- The service clients can authenticate with the Azure Identity OAuth2 implementation the client credentials JWT flow is used ([#3372](https://github.com/meta-quick/opax/issues/3372))
 - Library users can now customize the logger used by the plugins by providing the `plugins.Logger` option when creating the plugin manager.
 
 ### Tooling
 
 - The various OPA subcommands that accept schema files now accept a directory tree of schemas instead of only a single schema.
-- The `opa refactor move` subcommand was added to support package renaming use cases ([#3290](https://github.com/meta-quick/opa/issues/3290))
+- The `opa refactor move` subcommand was added to support package renaming use cases ([#3290](https://github.com/meta-quick/opax/issues/3290))
 - The `opa check` subcommand now supports a `-s`/`--schema` flag like the `opa eval` subcommand.
 
 ### Documentation
@@ -1047,32 +1047,32 @@ kinds of metadata and additional tooling will be added to leverage them.
 
 ### Security
 
-- OPA now supports PKCS8 encoded EC private keys for JWT verification (which includes service authentication, bundle verification, and verification built-in functions) ([#3283](https://github.com/meta-quick/opa/issues/3283)). Authored by @[andrehaland](https://github.com/andrehaland).
-- The bundle signing and verification APIs have been updated to support custom signers/verififers ([#3336](https://github.com/meta-quick/opa/pull/3336)). Authored by @[gshively11](https://github.com/gshively11).
+- OPA now supports PKCS8 encoded EC private keys for JWT verification (which includes service authentication, bundle verification, and verification built-in functions) ([#3283](https://github.com/meta-quick/opax/issues/3283)). Authored by @[andrehaland](https://github.com/andrehaland).
+- The bundle signing and verification APIs have been updated to support custom signers/verififers ([#3336](https://github.com/meta-quick/opax/pull/3336)). Authored by @[gshively11](https://github.com/gshively11).
 
 ### Evaluation
 
-- The `time.diff` function was added to support calculating differences between date/time values ([#3348](https://github.com/meta-quick/opa/issues/3348)) authored by @[andrehaland](https://github.com/andrehaland)
-- The `units.parse_bytes` function now supports floating-point values ([#3297](https://github.com/meta-quick/opa/issues/3297)) authored by @[andy-paine](https://github.com/andy-paine)
-- The evaluator was fixed to use correct bindings when evaluating the full-extent of a partial rule set. This issue was causing unexpected undefined results and evaluation errors in some rare cases. ([#3369](https://github.com/meta-quick/opa/issues/3369) [#3376](https://github.com/meta-quick/opa/issues/3376))
-- The evaluator was fixed to correctly generate package paths when namespacing is disabled partial evaluation. ([#3302](https://github.com/meta-quick/opa/issues/3302)).
-- The `http.send` function no longer errors out on invalid Expires headers. ([#3284](https://github.com/meta-quick/opa/issues/3284))
-- The inter-query cache now serializes elements on insertion thereby reducing memory usage significantly (because deserialized elements carry a ~20x cost.) ([#3042](https://github.com/meta-quick/opa/issues/3042))
-- The rule indexer was fixed to correctly handle mapped and non-mapped values which could occur with `glob.match` usage ([#3293](https://github.com/meta-quick/opa/issues/3293))
+- The `time.diff` function was added to support calculating differences between date/time values ([#3348](https://github.com/meta-quick/opax/issues/3348)) authored by @[andrehaland](https://github.com/andrehaland)
+- The `units.parse_bytes` function now supports floating-point values ([#3297](https://github.com/meta-quick/opax/issues/3297)) authored by @[andy-paine](https://github.com/andy-paine)
+- The evaluator was fixed to use correct bindings when evaluating the full-extent of a partial rule set. This issue was causing unexpected undefined results and evaluation errors in some rare cases. ([#3369](https://github.com/meta-quick/opax/issues/3369) [#3376](https://github.com/meta-quick/opax/issues/3376))
+- The evaluator was fixed to correctly generate package paths when namespacing is disabled partial evaluation. ([#3302](https://github.com/meta-quick/opax/issues/3302)).
+- The `http.send` function no longer errors out on invalid Expires headers. ([#3284](https://github.com/meta-quick/opax/issues/3284))
+- The inter-query cache now serializes elements on insertion thereby reducing memory usage significantly (because deserialized elements carry a ~20x cost.) ([#3042](https://github.com/meta-quick/opax/issues/3042))
+- The rule indexer was fixed to correctly handle mapped and non-mapped values which could occur with `glob.match` usage ([#3293](https://github.com/meta-quick/opax/issues/3293))
 
 ### WebAssembly
 
-- The `opa eval` subcommand now correctly returns the set of all variable bindings and expression values when the `wasm` target is enabled. Previously it returned only set of variable bindings. ([#3281](https://github.com/meta-quick/opa/issues/3281))
-- The `glob.match` function now handles the default delimiter correctly. ([#3294](https://github.com/meta-quick/opa/issues/3294))
-- The `opa build` subcommand no longer requires a capabilities file when the `wasm` target is enabled. If capabilities are not provided, OPA will use the capabilities for its own version. ([#3270](https://github.com/meta-quick/opa/issues/3270))
+- The `opa eval` subcommand now correctly returns the set of all variable bindings and expression values when the `wasm` target is enabled. Previously it returned only set of variable bindings. ([#3281](https://github.com/meta-quick/opax/issues/3281))
+- The `glob.match` function now handles the default delimiter correctly. ([#3294](https://github.com/meta-quick/opax/issues/3294))
+- The `opa build` subcommand no longer requires a capabilities file when the `wasm` target is enabled. If capabilities are not provided, OPA will use the capabilities for its own version. ([#3270](https://github.com/meta-quick/opax/issues/3270))
 - The `opa build` subcommand now dumps the IR emitted by the planner when `--debug` is specified.
 - The `opa eval` subcommand no longer panics when a policy fails to type check and the `wasm` target is enabled.
-- The comparison functions can now return `false` instead of either being `true` or `undefined`.  ([#3271](https://github.com/meta-quick/opa/issues/3271))
+- The comparison functions can now return `false` instead of either being `true` or `undefined`.  ([#3271](https://github.com/meta-quick/opax/issues/3271))
 - The internal wasm runtime will now correctly return `CancelErr` to indicate cancellation errors (instead of `BuiltinErr` which it returned previously.)
-- The internal wasm runtime now correctly handles non-halt built-in errors ([#3320](https://github.com/meta-quick/opa/issues/3320))
-- The planner no longer generates unexpected scan statements when negation used over base documents under `data` ([#3279](https://github.com/meta-quick/opa/issues/3279)) and ([#3305](https://github.com/meta-quick/opa/issues/3305))
-- The planner now correctly discards out-of-scope variables when exiting comprehensions ([#3325](https://github.com/meta-quick/opa/issues/3325))
-- The `rego` package no longer panics when the `wasm` target is enabled and undefined functions are encountered ([#3251](https://github.com/meta-quick/opa/issues/3251))
+- The internal wasm runtime now correctly handles non-halt built-in errors ([#3320](https://github.com/meta-quick/opax/issues/3320))
+- The planner no longer generates unexpected scan statements when negation used over base documents under `data` ([#3279](https://github.com/meta-quick/opax/issues/3279)) and ([#3305](https://github.com/meta-quick/opax/issues/3305))
+- The planner now correctly discards out-of-scope variables when exiting comprehensions ([#3325](https://github.com/meta-quick/opax/issues/3325))
+- The `rego` package no longer panics when the `wasm` target is enabled and undefined functions are encountered ([#3251](https://github.com/meta-quick/opax/issues/3251))
 - 🎈 The remaining exceptions in the e2e test framework for the internal wasm runtime have been resolved.
 
 ### Build
@@ -1081,27 +1081,27 @@ kinds of metadata and additional tooling will be added to leverage them.
 
 ## 0.27.1
 
-This release contains a fix for crashes experienced when configuring OPA to use S3 signing as service credentials ([#3255](https://github.com/meta-quick/opa/issues/3255)).
+This release contains a fix for crashes experienced when configuring OPA to use S3 signing as service credentials ([#3255](https://github.com/meta-quick/opax/issues/3255)).
 
 In addition to that, we have a small number of enhancements and fixes:
 
 ### Tooling
 
-- The `eval` subcommand now allows using `--import` without using `--package`. Authored by @[onelittlenightmusic](https://github.com/onelittlenightmusic), [#3240](https://github.com/meta-quick/opa/pull/3240).
+- The `eval` subcommand now allows using `--import` without using `--package`. Authored by @[onelittlenightmusic](https://github.com/onelittlenightmusic), [#3240](https://github.com/meta-quick/opax/pull/3240).
 
 ## Compiler
 
-- The `ast` package now exports another method for JSON conversion, `ast.JSONWithOpts`, that allows further options to be set ([#3244](https://github.com/meta-quick/opa/pull/3244).
+- The `ast` package now exports another method for JSON conversion, `ast.JSONWithOpts`, that allows further options to be set ([#3244](https://github.com/meta-quick/opax/pull/3244).
 
 ### Server
 
-- REST plugins using `s3_signing` as credentials method can now include the specified service in the signature (SigV4). Authored by @[cogwirrel](https://github.com/cogwirrel), [#3210](https://github.com/meta-quick/opa/pull/3210).
+- REST plugins using `s3_signing` as credentials method can now include the specified service in the signature (SigV4). Authored by @[cogwirrel](https://github.com/cogwirrel), [#3210](https://github.com/meta-quick/opax/pull/3210).
 
 ### Documentation
 
-- Remove soon-to-be deprecated `any` and `all` from the [Policy Reference](https://www.openpolicyagent.org/docs/v0.27.1/policy-reference/#aggregates) ([#3241](https://github.com/meta-quick/opa/pull/3241)) -- see also [#2437](https://github.com/meta-quick/opa/issues/2437).
-- Add missing `discovery.service` field to [Discovery configuration](https://www.openpolicyagent.org/docs/v0.27.1/configuration/#discovery) table ([#3237](https://github.com/meta-quick/opa/pull/3237)).
-- Fix dead links to the Envoy pages ([#3248](https://github.com/meta-quick/opa/pull/3248)).
+- Remove soon-to-be deprecated `any` and `all` from the [Policy Reference](https://www.openpolicyagent.org/docs/v0.27.1/policy-reference/#aggregates) ([#3241](https://github.com/meta-quick/opax/pull/3241)) -- see also [#2437](https://github.com/meta-quick/opax/issues/2437).
+- Add missing `discovery.service` field to [Discovery configuration](https://www.openpolicyagent.org/docs/v0.27.1/configuration/#discovery) table ([#3237](https://github.com/meta-quick/opax/pull/3237)).
+- Fix dead links to the Envoy pages ([#3248](https://github.com/meta-quick/opax/pull/3248)).
 
 ### WebAssembly
 
@@ -1117,7 +1117,7 @@ This release contains a number of enhancements and bug fixes.
 ### Tooling
 
 - The `eval` subcommand now supports a `-s`/`--schema` flag that accepts a JSON schema for the `input` document. The schema is used when type checking the policy so that invalid references to (or operations on) `input` data are caught at compile time. In the future, the schema support will be expanded to accept multiple schemas and rule-level annotations. See the new [Schemas](https://www.openpolicyagent.org/docs/edge/schemas/) documentation for details. Authored by @[aavarghese](https://github.com/aavarghese) and @[vazirim](https://github.com/vazirim).
-- The `eval`, `test`, `bench` and REPL subcommands now supports a `-t`/`--target` flag to set the evaluation engine to use. The default engine is `rego` referring to the standard Rego interpreter in OPA. Users can now select `wasm` to enable Wasm compilation and execution of policies ([#2878](https://github.com/meta-quick/opa/issues/2878)).
+- The `eval`, `test`, `bench` and REPL subcommands now supports a `-t`/`--target` flag to set the evaluation engine to use. The default engine is `rego` referring to the standard Rego interpreter in OPA. Users can now select `wasm` to enable Wasm compilation and execution of policies ([#2878](https://github.com/meta-quick/opax/issues/2878)).
 - The `eval` subcommand now supports a `raw` option for `-f`/`--format` that is useful in bash scripts. Authored by @[jaspervdj-luminal](https://github.com/jaspervdj-luminal).
 - The test framework now supports "skippable" tests. Prefix the test name with `todo_` to have the test runner skip the test, e.g., `todo_test_allow { ... }`.
 - The `eval` subcommand now correctly supports the `--ignore` flag. Previously the flag was not being applied.
@@ -1127,24 +1127,24 @@ This release contains a number of enhancements and bug fixes.
 - The `POST /v1/compile` API now supports a `?metrics` query parameter similar to other APIs. Authored by @[jkbschmid](https://github.com/jkbschmid).
 - The directory used for persisting downloaded bundles can now be configured. See the [Configuration](https://www.openpolicyagent.org/docs/latest/configuration/) page for details.
 - The HTTP Decision Logger plugin no longer blocks server shutdown for the grace period when there are no logs to upload.
-- The Bundle plugin now unregisters listeners correctly. This issue would cause listeners to be invoked when bundle updates were dispatched even if the listener was unregistered ([#3190](https://github.com/meta-quick/opa/issues/3190)).
-- The server now correctly decodes policy IDs in the HTTP request URL. Authored by @[mattmahn](https://github.com/mattmahn) ([#2116](https://github.com/meta-quick/opa/issues/2116)).
-- The server now configures the `http_request_duration_seconds` metric (for all of the server endpoitns) with smaller, more granular buckets that better map to actual response latencies from OPA.  Authored by @[luong-komorebi](https://github.com/luong-komorebi) ([#3196](https://github.com/meta-quick/opa/issues/3196)).
+- The Bundle plugin now unregisters listeners correctly. This issue would cause listeners to be invoked when bundle updates were dispatched even if the listener was unregistered ([#3190](https://github.com/meta-quick/opax/issues/3190)).
+- The server now correctly decodes policy IDs in the HTTP request URL. Authored by @[mattmahn](https://github.com/mattmahn) ([#2116](https://github.com/meta-quick/opax/issues/2116)).
+- The server now configures the `http_request_duration_seconds` metric (for all of the server endpoitns) with smaller, more granular buckets that better map to actual response latencies from OPA.  Authored by @[luong-komorebi](https://github.com/luong-komorebi) ([#3196](https://github.com/meta-quick/opax/issues/3196)).
 
 ### Security
 
-- PKCS8 keys are now supported when signing bundles and communicating with control plane services. Previously only PKCS1 keys were supported ([#3116](https://github.com/meta-quick/opa/issues/3116)).
-- The built-in OPA HTTP API authorizer policy can now return a _reason_ to explain why a request to the OPA API is denied ([#3056](https://github.com/meta-quick/opa/issues/3056)). See the [Security](https://www.openpolicyagent.org/docs/edge/security/) documentation for details. Thanks to @[ajanthan](https://github.com/ajanthan) for helping improve this.
+- PKCS8 keys are now supported when signing bundles and communicating with control plane services. Previously only PKCS1 keys were supported ([#3116](https://github.com/meta-quick/opax/issues/3116)).
+- The built-in OPA HTTP API authorizer policy can now return a _reason_ to explain why a request to the OPA API is denied ([#3056](https://github.com/meta-quick/opax/issues/3056)). See the [Security](https://www.openpolicyagent.org/docs/edge/security/) documentation for details. Thanks to @[ajanthan](https://github.com/ajanthan) for helping improve this.
 
 ### Compiler
 
 - The compiler can be configured to emit debug messages that explain comprehension indexing decisions. Debug messages can be enabled when running `opa build` with `--debug`.
-- A panic was fixed in one of the rewriting stages when comprehensions were used as object keys ([#2915](https://github.com/meta-quick/opa/issues/2915))
+- A panic was fixed in one of the rewriting stages when comprehensions were used as object keys ([#2915](https://github.com/meta-quick/opax/issues/2915))
 
 ### Evaluation
 
-- A bug in big integer comparison was fixed. This issue was discovered when comparing serial numbers from X.509 certificates. Authored by @[andrehaland](https://github.com/andrehaland) ([#3147](https://github.com/meta-quick/opa/issues/3147)).
-- The `io.jwt.decode_verify` function now uses the environment supplied time-of-day value instead of calling `time.Now()` ([#3105](https://github.com/meta-quick/opa/issues/3105)).
+- A bug in big integer comparison was fixed. This issue was discovered when comparing serial numbers from X.509 certificates. Authored by @[andrehaland](https://github.com/andrehaland) ([#3147](https://github.com/meta-quick/opax/issues/3147)).
+- The `io.jwt.decode_verify` function now uses the environment supplied time-of-day value instead of calling `time.Now()` ([#3105](https://github.com/meta-quick/opax/issues/3105)).
 
 ### Documentation
 
@@ -1153,14 +1153,14 @@ This release contains a number of enhancements and bug fixes.
 
 ### WebAssembly
 
-- The `data` document no longer needs to be initialized to an empty object ([#3130](https://github.com/meta-quick/opa/issues/3130)).
-- The mpd library is now initalized by the module's `Start` function ([#3110](https://github.com/meta-quick/opa/issues/3110)).
-- The planner now longer re-plans rules blindly when `with` statements are encountered ([#3150](https://github.com/meta-quick/opa/issues/3150)).
-- The planner and compiler now support dynamic dispatch. Previously the planner would enumerate all functions and invocation was controlled at runtime ([#2936](https://github.com/meta-quick/opa/issues/2936)).
-- The compiler now inserts memoization instructions into function bodies instead of at callsites. This reduces the number of wasm instructions in the resulting binary ([#3169](https://github.com/meta-quick/opa/pull/3169)).
+- The `data` document no longer needs to be initialized to an empty object ([#3130](https://github.com/meta-quick/opax/issues/3130)).
+- The mpd library is now initalized by the module's `Start` function ([#3110](https://github.com/meta-quick/opax/issues/3110)).
+- The planner now longer re-plans rules blindly when `with` statements are encountered ([#3150](https://github.com/meta-quick/opax/issues/3150)).
+- The planner and compiler now support dynamic dispatch. Previously the planner would enumerate all functions and invocation was controlled at runtime ([#2936](https://github.com/meta-quick/opax/issues/2936)).
+- The compiler now inserts memoization instructions into function bodies instead of at callsites. This reduces the number of wasm instructions in the resulting binary ([#3169](https://github.com/meta-quick/opax/pull/3169)).
 - The wasmtime runtime is now the default runtime used by OPA to execute compiled policies. The new runtime no longer leaks memory when policies are reloaded.
 - The planner and compiler now intern strings and booleans and implement a few micro-optimizations to reduce the size of the resulting binary.
-- The capabilities support has been updated to include an ABI major and minor version for tracking backwards compatibility on compiled policies ([#3120](https://github.com/meta-quick/opa/issues/3120)).
+- The capabilities support has been updated to include an ABI major and minor version for tracking backwards compatibility on compiled policies ([#3120](https://github.com/meta-quick/opax/issues/3120)).
 
 ### Backwards Compatibility
 
@@ -1175,7 +1175,7 @@ This release contains a number of enhancements and bug fixes.
 
 - This release includes a number of built-in function improvements for Wasm compiled policies. The following built-in functions have been implemented natively and no longer need to be supplied by SDKs: `graph.reachable`, `json.filter`, `json.remove`, `object.get`, `object.remove`, and `object.union`.
 
-- This release fixes several bugs in the Wasm implementation of certain `regex` built-in functions ([#2962](https://github.com/meta-quick/opa/issues/2962)), `format_int` ([#2923](https://github.com/meta-quick/opa/issues/2923)) and `round` ([#2999](https://github.com/meta-quick/opa/pull/2999)).
+- This release fixes several bugs in the Wasm implementation of certain `regex` built-in functions ([#2962](https://github.com/meta-quick/opax/issues/2962)), `format_int` ([#2923](https://github.com/meta-quick/opax/issues/2923)) and `round` ([#2999](https://github.com/meta-quick/opax/pull/2999)).
 
 - This release adds `ceil` and `floor` built-in functions. Previously these could be implemented in Rego using `round` however these are more convenient.
 
@@ -1191,28 +1191,28 @@ This release contains a number of enhancements and bug fixes.
 
 ### Fixes
 
-- ast: Fix parsing of numbers to reject leading zeroes ([#2947](https://github.com/meta-quick/opa/issues/2947)) authored by @[LCartwright](https://github.com/LCartwright).
-- bundle: Fix loader to only verify bundle keys if configured to do so ([#3028](https://github.com/meta-quick/opa/issues/3028)).
-- cmd: Fix build to avoid packaging policy.wasm twice ([#3007](https://github.com/meta-quick/opa/issues/3007)).
+- ast: Fix parsing of numbers to reject leading zeroes ([#2947](https://github.com/meta-quick/opax/issues/2947)) authored by @[LCartwright](https://github.com/LCartwright).
+- bundle: Fix loader to only verify bundle keys if configured to do so ([#3028](https://github.com/meta-quick/opax/issues/3028)).
+- cmd: Fix build to avoid packaging policy.wasm twice ([#3007](https://github.com/meta-quick/opax/issues/3007)).
 - cmd: Fix pretty-printed PE output to hide spurious blank lines
-- server: Fix false-positive in bundle root check that would prevent data updates in some cases ([#2868](https://github.com/meta-quick/opa/issues/2868)).
-- server: Fix query cache to respect ?instrument option ([#3000](https://github.com/meta-quick/opa/issues/3000)).
+- server: Fix false-positive in bundle root check that would prevent data updates in some cases ([#2868](https://github.com/meta-quick/opax/issues/2868)).
+- server: Fix query cache to respect ?instrument option ([#3000](https://github.com/meta-quick/opax/issues/3000)).
 - server: Fix server to support discovery on inter-query cache configuration
-- topdown: Fix PE to avoid generating expressions that do not type check ([#3012](https://github.com/meta-quick/opa/issues/3012)).
-- wasm: Fix planner to avoid generating a conflict error in some cases ([#2926](https://github.com/meta-quick/opa/issues/2926)).
-- wasm: Fix planner to generate correct virtual document iteration instructions ([#3065](https://github.com/meta-quick/opa/issues/3065)).
-- wasm, topdown: Fix with keyword handle to ensure last statement wins ([#3010]((https://github.com/meta-quick/opa/issues/3010))).
-- wasm: Fix planner to handle assignment conflicts correctly when else keyword is used ([#3031]((https://github.com/meta-quick/opa/issues/3031))).
+- topdown: Fix PE to avoid generating expressions that do not type check ([#3012](https://github.com/meta-quick/opax/issues/3012)).
+- wasm: Fix planner to avoid generating a conflict error in some cases ([#2926](https://github.com/meta-quick/opax/issues/2926)).
+- wasm: Fix planner to generate correct virtual document iteration instructions ([#3065](https://github.com/meta-quick/opax/issues/3065)).
+- wasm, topdown: Fix with keyword handle to ensure last statement wins ([#3010]((https://github.com/meta-quick/opax/issues/3010))).
+- wasm: Fix planner to handle assignment conflicts correctly when else keyword is used ([#3031]((https://github.com/meta-quick/opax/issues/3031))).
 
 ### Documentation
 
 - Add new section on integrating policies with OAuth2 and OIDC.
 - Update Kubernetes admission control tutorial to work as non-root user.
-- Fix link to signing documentation ([#3027](https://github.com/meta-quick/opa/issues/3027)) authored by @[princespaghetti](https://github.com/princespaghetti).
+- Fix link to signing documentation ([#3027](https://github.com/meta-quick/opax/issues/3027)) authored by @[princespaghetti](https://github.com/princespaghetti).
 
 ### Backwards Compatibility
 
-- Previously, OPA deduplicated sets and objects in all cases except when iterating over/referring directly to values generated by partial rules. This inconsistency would only be noticed when running ad-hoc queries or within policies when aggregating the results of array comprehensions (e.g., `count([1 | p[x]])` could observe duplicates in `p`.) This release removes the inconsistency by deduplicating sets and objects in all cases ([#429](https://github.com/meta-quick/opa/issues/429)). This was the second oldest open issue on the project.
+- Previously, OPA deduplicated sets and objects in all cases except when iterating over/referring directly to values generated by partial rules. This inconsistency would only be noticed when running ad-hoc queries or within policies when aggregating the results of array comprehensions (e.g., `count([1 | p[x]])` could observe duplicates in `p`.) This release removes the inconsistency by deduplicating sets and objects in all cases ([#429](https://github.com/meta-quick/opax/issues/429)). This was the second oldest open issue on the project.
 
 ### Deprecations
 
@@ -1224,7 +1224,7 @@ This release extends the HTTP server authorizer (`--authorization=basic`) to sup
 
 ## 0.25.1
 
-This release contains a fix for running OPA under Docker with a non-default working directory ([#2974](https://github.com/meta-quick/opa/issues/2974)).
+This release contains a fix for running OPA under Docker with a non-default working directory ([#2974](https://github.com/meta-quick/opax/issues/2974)).
 
 ## 0.25.0
 
@@ -1266,48 +1266,48 @@ If you have implemented custom built-in functions and require policy evaluation 
 
 This release includes a few new built-in functions:
 
-- `base64url.encode_no_pad`, `hex.encode`, and `hex.decode` for dealing with encoded data ([#2849](https://github.com/meta-quick/opa/issues/2849)) authored by @[johanneslarsson](https://github.com/johanneslarsson)
-- `json.patch` for applying JSON patches to values inside of policies ([#2839](https://github.com/meta-quick/opa/issues/2839)) authored by @[jaspervdj-luminal](https://github.com/jaspervdj-luminal)
+- `base64url.encode_no_pad`, `hex.encode`, and `hex.decode` for dealing with encoded data ([#2849](https://github.com/meta-quick/opax/issues/2849)) authored by @[johanneslarsson](https://github.com/johanneslarsson)
+- `json.patch` for applying JSON patches to values inside of policies ([#2839](https://github.com/meta-quick/opax/issues/2839)) authored by @[jaspervdj-luminal](https://github.com/jaspervdj-luminal)
 - `json.is_valid` and `yaml.is_valid` for testing validity of encoded values (authored by @[jaspervdj-luminal](https://github.com/jaspervdj-luminal))
 
 There were also a few fixes to existing built-in functions:
 
-- Fix unicode handling in a few string-related functions ([#2799](https://github.com/meta-quick/opa/issues/2799)) authored by @[anderseknert](https://github.com/anderseknert)
-- Fix `http.send` to override `no-cache` HTTP header when `force_cache` specified ([#2841](https://github.com/meta-quick/opa/issues/2841)) authored by @[anderseknert](https://github.com/anderseknert)
-- Fix `strings.replace_n` to replace overlapping patterns deterministically ([#2822](https://github.com/meta-quick/opa/issues/2822))
-- Fix panic in `units.parse_bytes` when passed a zero-length string ([#2901](https://github.com/meta-quick/opa/issues/2901))
+- Fix unicode handling in a few string-related functions ([#2799](https://github.com/meta-quick/opax/issues/2799)) authored by @[anderseknert](https://github.com/anderseknert)
+- Fix `http.send` to override `no-cache` HTTP header when `force_cache` specified ([#2841](https://github.com/meta-quick/opax/issues/2841)) authored by @[anderseknert](https://github.com/anderseknert)
+- Fix `strings.replace_n` to replace overlapping patterns deterministically ([#2822](https://github.com/meta-quick/opax/issues/2822))
+- Fix panic in `units.parse_bytes` when passed a zero-length string ([#2901](https://github.com/meta-quick/opax/issues/2901))
 
 ### Miscellaneous
 
 This release adds new credential providers for management services:
 
-- GCP metadata server ([#2938](https://github.com/meta-quick/opa/pull/2938)) authored by @[kelseyhightower](https://github.com/kelseyhightower)
-- AWS Web Identity credentials ([#2462](https://github.com/meta-quick/opa/pull/2725)) authored by @[RichiCoder1](https://github.com/RichiCoder1)
-- OAuth2 ([#1205](https://github.com/meta-quick/opa/issues/1205)) authored by @[anderseknert](https://github.com/anderseknert)
+- GCP metadata server ([#2938](https://github.com/meta-quick/opax/pull/2938)) authored by @[kelseyhightower](https://github.com/kelseyhightower)
+- AWS Web Identity credentials ([#2462](https://github.com/meta-quick/opax/pull/2725)) authored by @[RichiCoder1](https://github.com/RichiCoder1)
+- OAuth2 ([#1205](https://github.com/meta-quick/opax/issues/1205)) authored by @[anderseknert](https://github.com/anderseknert)
 
 In addition the following server features were added:
 
-- Add shutdown wait period flag to `opa run` (`--shutdown-wait-period`) ([#2764](https://github.com/meta-quick/opa/issues/2764)) authored by @[bcarlsson](https://github.com/bcarlsson)
-- Add bundle file size limit configuration option (`bundles[_].size_limit_bytes`) to override default 1GiB limit ([#2781](https://github.com/meta-quick/opa/issues/2781))
-- Separate decision log and status message logs from access logs (which useful for running OPA at log level `error` while continuing to report decision and status log to console) ([#2733](https://github.com/meta-quick/opa/issues/2733)) authored by @[anderseknert](https://github.com/anderseknert)
+- Add shutdown wait period flag to `opa run` (`--shutdown-wait-period`) ([#2764](https://github.com/meta-quick/opax/issues/2764)) authored by @[bcarlsson](https://github.com/bcarlsson)
+- Add bundle file size limit configuration option (`bundles[_].size_limit_bytes`) to override default 1GiB limit ([#2781](https://github.com/meta-quick/opax/issues/2781))
+- Separate decision log and status message logs from access logs (which useful for running OPA at log level `error` while continuing to report decision and status log to console) ([#2733](https://github.com/meta-quick/opax/issues/2733)) authored by @[anderseknert](https://github.com/anderseknert)
 
 ### Fixes
 
-- Fix panic caused by race condition in the decision logger ([#2835](https://github.com/meta-quick/opa/pull/2948)) authored by @[kubaj](https://github.com/kubaj)
-- Fix decision logger to flush on graceful shutdown ([#780](https://github.com/meta-quick/opa/issues/780)) authored by @[anderseknert](https://github.com/anderseknert)
-- Fix `--verification-key` handling to accept PEM files ([#2796](https://github.com/meta-quick/opa/issues/2796))
-- Fix `--capabilities` flag in `opa build` command ([#2848](https://github.com/meta-quick/opa/issues/2848)) authored by @[srenatus](https://github.com/srenatus)
-- Fix loading of **signed** persisted bundles ([#2824](https://github.com/meta-quick/opa/issues/2824))
-- Fix API response mutation caused by decision log masking ([#2752](https://github.com/meta-quick/opa/issues/2752)) authored by @[gshively11](https://github.com/gshively11)
-- Fix evaluator to prevent `with` statements from mutating original `input` document ([#2813](https://github.com/meta-quick/opa/issues/2813))
-- Fix set iteration runtime to be O(n) instead of O(n^2) ([#2966](https://github.com/meta-quick/opa/pull/2966))
+- Fix panic caused by race condition in the decision logger ([#2835](https://github.com/meta-quick/opax/pull/2948)) authored by @[kubaj](https://github.com/kubaj)
+- Fix decision logger to flush on graceful shutdown ([#780](https://github.com/meta-quick/opax/issues/780)) authored by @[anderseknert](https://github.com/anderseknert)
+- Fix `--verification-key` handling to accept PEM files ([#2796](https://github.com/meta-quick/opax/issues/2796))
+- Fix `--capabilities` flag in `opa build` command ([#2848](https://github.com/meta-quick/opax/issues/2848)) authored by @[srenatus](https://github.com/srenatus)
+- Fix loading of **signed** persisted bundles ([#2824](https://github.com/meta-quick/opax/issues/2824))
+- Fix API response mutation caused by decision log masking ([#2752](https://github.com/meta-quick/opax/issues/2752)) authored by @[gshively11](https://github.com/gshively11)
+- Fix evaluator to prevent `with` statements from mutating original `input` document ([#2813](https://github.com/meta-quick/opax/issues/2813))
+- Fix set iteration runtime to be O(n) instead of O(n^2) ([#2966](https://github.com/meta-quick/opax/pull/2966))
 - Increased OPA version telemetry report timeout from 1 second to 5 seconds to deal with slow networks
 
 ### Documentation
 
 - Improve docs to mention built-in function support in WebAssembly compiled policies
-- Improve docs around JWT HMAC encoding ([#2870](https://github.com/meta-quick/opa/issues/2870)) authored by @[anderseknert](https://github.com/anderseknert)
-- Improve HTTP authorization tutorial steps for zsh ([#2917](https://github.com/meta-quick/opa/issues/2917) authored by @[ClaudenirFreitas](https://github.com/ClaudenirFreitas))
+- Improve docs around JWT HMAC encoding ([#2870](https://github.com/meta-quick/opax/issues/2870)) authored by @[anderseknert](https://github.com/anderseknert)
+- Improve HTTP authorization tutorial steps for zsh ([#2917](https://github.com/meta-quick/opax/issues/2917) authored by @[ClaudenirFreitas](https://github.com/ClaudenirFreitas))
 - Improve docs to describe meaning of Prometheus metrics
 - Remove mention of unsafe (and unsupported) "none" signature algorithm from JWT documentation
 
@@ -1327,7 +1327,7 @@ This release also extends the Wasm compiler in OPA to natively support the follo
 
 ### Backwards Compatibility
 
-- The `--insecure-addr` flag (which was deprecated in v0.10.0) has been removed completely ([#763](https://github.com/meta-quick/opa/issues/763))
+- The `--insecure-addr` flag (which was deprecated in v0.10.0) has been removed completely ([#763](https://github.com/meta-quick/opax/issues/763))
 
 ## 0.24.0
 
@@ -1335,48 +1335,48 @@ This release contains a number of small enhancements and bug fixes.
 
 ### Bundle Persistence
 
-This release adds support for persisting bundles for recovery purposes. When persistence is enabled, OPA will save activated bundles to disk. On startup, OPA checks for persisted bundles and activates them immediately. This allows OPA to startup if the bundle server is unavailable ([#2097](https://github.com/meta-quick/opa/issues/2097)). For more information see the [Bundle](https://www.openpolicyagent.org/docs/latest/management/#bundles) documentation.
+This release adds support for persisting bundles for recovery purposes. When persistence is enabled, OPA will save activated bundles to disk. On startup, OPA checks for persisted bundles and activates them immediately. This allows OPA to startup if the bundle server is unavailable ([#2097](https://github.com/meta-quick/opax/issues/2097)). For more information see the [Bundle](https://www.openpolicyagent.org/docs/latest/management/#bundles) documentation.
 
 ### Built-in Functions
 
 This release includes a few new built-in functions:
 
-- `base64.is_valid` for testing if strings are valid base64 encodings ([#2690](https://github.com/meta-quick/opa/issues/2690)) authored by @[carlpett](https://github.com/carlpett)
-- `net.cidr_merge function` for merging sets of IPs and CIDRs ([#2692](https://github.com/meta-quick/opa/issues/2692))
-- `urlquery.decode_object` for parsing URL query parameters into objects ([#2647](https://github.com/meta-quick/opa/issues/2647)) authored by @[GBrawl](https://github.com/GBrawl)
+- `base64.is_valid` for testing if strings are valid base64 encodings ([#2690](https://github.com/meta-quick/opax/issues/2690)) authored by @[carlpett](https://github.com/carlpett)
+- `net.cidr_merge function` for merging sets of IPs and CIDRs ([#2692](https://github.com/meta-quick/opax/issues/2692))
+- `urlquery.decode_object` for parsing URL query parameters into objects ([#2647](https://github.com/meta-quick/opax/issues/2647)) authored by @[GBrawl](https://github.com/GBrawl)
 
-In addition, `http.send` has been enhanced to support caching overrides and in-band error handling ([#2666](https://github.com/meta-quick/opa/issues/2666) and [#2187](https://github.com/meta-quick/opa/issues/2187)).
+In addition, `http.send` has been enhanced to support caching overrides and in-band error handling ([#2666](https://github.com/meta-quick/opax/issues/2666) and [#2187](https://github.com/meta-quick/opax/issues/2187)).
 
 ### Fixes
 
-- Fix `opa build` to support custom built-in functions ([#2738](https://github.com/meta-quick/opa/issues/2738)) authored by @[gshively11](https://github.com/gshively11)
-- Fix for file watching volume mounted configmaps ([#2588](https://github.com/meta-quick/opa/issues/2588)) authored by @[drewwells](https://github.com/drewwells)
-- Fix discovery plugin to set last request and last successful request timestamps in status updates ([#2630](https://github.com/meta-quick/opa/issues/2630))
-- Fix planner crash on virtual document iteration ([#2601](https://github.com/meta-quick/opa/issues/2601))
-- Fix decision logger to requeue failed chunks ([#2724](https://github.com/meta-quick/opa/pull/2724) authored by @[anderseknert](https://github.com/anderseknert))
+- Fix `opa build` to support custom built-in functions ([#2738](https://github.com/meta-quick/opax/issues/2738)) authored by @[gshively11](https://github.com/gshively11)
+- Fix for file watching volume mounted configmaps ([#2588](https://github.com/meta-quick/opax/issues/2588)) authored by @[drewwells](https://github.com/drewwells)
+- Fix discovery plugin to set last request and last successful request timestamps in status updates ([#2630](https://github.com/meta-quick/opax/issues/2630))
+- Fix planner crash on virtual document iteration ([#2601](https://github.com/meta-quick/opax/issues/2601))
+- Fix decision logger to requeue failed chunks ([#2724](https://github.com/meta-quick/opax/pull/2724) authored by @[anderseknert](https://github.com/anderseknert))
 - Fix object/set implementation in WASM-C library to avoid resizing.
 - Fix JSON parser in WASM-C library to copy memory for strings and numbers.
 - Improve WASM-C library to recycle object and set element structures while growing.
 
 In addition, this release contains several fixes for panics identified by fuzzing:
 
-- ast: Fix compiler to expand exprs in rule args ([#2649](https://github.com/meta-quick/opa/issues/2649))
-- ast: Fix output var analysis to accept refs with non-var heads ([#2678](https://github.com/meta-quick/opa/issues/2678))
-- ast: Fix panic during local var rewriting ([#2720](https://github.com/meta-quick/opa/issues/2720))
-- ast: Fix panic in local var rewriting caused by object corruption ([#2661](https://github.com/meta-quick/opa/issues/2661))
-- ast: Fix panic in parser post-processing of expressions ([#2714](https://github.com/meta-quick/opa/issues/2714))
-- ast: Fix parser to ignore rules with args and key in head ([#2662](https://github.com/meta-quick/opa/issues/2662))
+- ast: Fix compiler to expand exprs in rule args ([#2649](https://github.com/meta-quick/opax/issues/2649))
+- ast: Fix output var analysis to accept refs with non-var heads ([#2678](https://github.com/meta-quick/opax/issues/2678))
+- ast: Fix panic during local var rewriting ([#2720](https://github.com/meta-quick/opax/issues/2720))
+- ast: Fix panic in local var rewriting caused by object corruption ([#2661](https://github.com/meta-quick/opax/issues/2661))
+- ast: Fix panic in parser post-processing of expressions ([#2714](https://github.com/meta-quick/opax/issues/2714))
+- ast: Fix parser to ignore rules with args and key in head ([#2662](https://github.com/meta-quick/opax/issues/2662))
 - ast: Fix object corruption during safety reordering
-- types: Fix panic on reference to object with composite key ([#2648](https://github.com/meta-quick/opa/issues/2648))
+- types: Fix panic on reference to object with composite key ([#2648](https://github.com/meta-quick/opax/issues/2648))
 
 ### Backwards Compatibility
 
 - Renamed `timer_rego_builtin_http.send_ns` to `timer_rego_builtin_http_send_ns` to avoid issues with periods in metric keys.
-- Removed deprecated `watch` package ([#2265](https://github.com/meta-quick/opa/issues/2265))
+- Removed deprecated `watch` package ([#2265](https://github.com/meta-quick/opax/issues/2265))
 
 ### Miscellaneous
 
-- Add support for H2C on HTTP listener ([#2739](https://github.com/meta-quick/opa/issues/2739) thanks @[srenatus](http://github.com/srenatus)!).
+- Add support for H2C on HTTP listener ([#2739](https://github.com/meta-quick/opax/issues/2739) thanks @[srenatus](http://github.com/srenatus)!).
 - Add Go version information to `opa version` output (thanks @[srenatus](http://github.com/srenatus)!)
 - The official OPA build has been updated to Go v1.14.9. Previously it was using v1.13.7 which is no longer supported (thanks @[srenatus](http://github.com/srenatus)!)
 
@@ -1394,7 +1394,7 @@ This release contains a fix for a regression in v0.23.1 around bundle downloadin
 
 ### Fixes
 
-- plugins/discovery: Set the last request and last successful request in discovery status ([#2630](https://github.com/meta-quick/opa/issues/2630))
+- plugins/discovery: Set the last request and last successful request in discovery status ([#2630](https://github.com/meta-quick/opax/issues/2630))
 
 ### Miscellaneous
 
@@ -1445,17 +1445,17 @@ This release includes a new built-in function to test if a string is a valid reg
 
 ### Fixes
 
-- Add a new inter-query cache to cache responses across queries ([#1753](https://github.com/meta-quick/opa/issues/1753))
-- Fix `opa` CLI flags to match documentation ([#2586](https://github.com/meta-quick/opa/issues/2586)) authored by @[OmegaVVeapon](https://github.com/OmegaVVeapon)
-- Fix rule indexing when multiple glob.match mappers are required ([#2617](https://github.com/meta-quick/opa/issues/2617))
-- Fix AST to marshal non-string object keys ([#516](https://github.com/meta-quick/opa/issues/516))
-- Fix signature calculation to include port if necessary ([#2568](https://github.com/meta-quick/opa/issues/2568))
-- Fix partial evaluation to check function output for false values ([#2573](https://github.com/meta-quick/opa/issues/2573))
+- Add a new inter-query cache to cache responses across queries ([#1753](https://github.com/meta-quick/opax/issues/1753))
+- Fix `opa` CLI flags to match documentation ([#2586](https://github.com/meta-quick/opax/issues/2586)) authored by @[OmegaVVeapon](https://github.com/OmegaVVeapon)
+- Fix rule indexing when multiple glob.match mappers are required ([#2617](https://github.com/meta-quick/opax/issues/2617))
+- Fix AST to marshal non-string object keys ([#516](https://github.com/meta-quick/opax/issues/516))
+- Fix signature calculation to include port if necessary ([#2568](https://github.com/meta-quick/opax/issues/2568))
+- Fix partial evaluation to check function output for false values ([#2573](https://github.com/meta-quick/opax/issues/2573))
 
 ### Miscellaneous
 
-- Add `http.send` latency to query metrics ([#2034](https://github.com/meta-quick/opa/issues/2034))
-- Add support for `opa build` unknowns under `data` ([#2581](https://github.com/meta-quick/opa/issues/2581))
+- Add `http.send` latency to query metrics ([#2034](https://github.com/meta-quick/opax/issues/2034))
+- Add support for `opa build` unknowns under `data` ([#2581](https://github.com/meta-quick/opax/issues/2581))
 - Add support to wait for plugin readiness before starting server
 - Add parameter to set wall clock time during evaluation for replay purposes
 - Fix groundness bit on objects during update
@@ -1481,7 +1481,7 @@ This release includes a new built-in function to test if a string is a valid reg
 
 ### Bundle Signing
 
-OPA now supports digital signatures for policy bundles. Specifically, a signed bundle is a normal OPA bundle that includes a file named ".signatures.json" that dictates which files should be included in the bundle, what their SHA hashes are, and of course is cryptographically secure. When OPA receives a new bundle, it checks that it has been properly signed using a key that OPA has been configured with out-of-band. Only if that verification succeeds does OPA activate the new bundle; otherwise, OPA continues using its existing bundle and reports an activation failure via the status API and error logging. For more information see https://openpolicyagent.org/docs/latest/management/#signing. Many thanks to @[ashish246](https://github.com/ashish246) who co-designed the feature and provided valuable input to the development process with his proof-of-concept [#1757](https://github.com/meta-quick/opa/issues/1757).
+OPA now supports digital signatures for policy bundles. Specifically, a signed bundle is a normal OPA bundle that includes a file named ".signatures.json" that dictates which files should be included in the bundle, what their SHA hashes are, and of course is cryptographically secure. When OPA receives a new bundle, it checks that it has been properly signed using a key that OPA has been configured with out-of-band. Only if that verification succeeds does OPA activate the new bundle; otherwise, OPA continues using its existing bundle and reports an activation failure via the status API and error logging. For more information see https://openpolicyagent.org/docs/latest/management/#signing. Many thanks to @[ashish246](https://github.com/ashish246) who co-designed the feature and provided valuable input to the development process with his proof-of-concept [#1757](https://github.com/meta-quick/opax/issues/1757).
 
 ### Optimization Levels
 
@@ -1489,8 +1489,8 @@ OPA now supports digital signatures for policy bundles. Specifically, a signed b
 
 ### Built-in Functions
 
-- `numbers.range` ([#2479](https://github.com/meta-quick/opa/issues/2479)) was added to support policies that need to generate a range of integers (e.g., a network port range).
-- `semver.is_valid` and `semver.compare` ([#2538](https://github.com/meta-quick/opa/pull/2538/)) was added to support policies that need to validate semantic version numbers (authored by @[charlieegan3](https://github.com/charlieegan3)).
+- `numbers.range` ([#2479](https://github.com/meta-quick/opax/issues/2479)) was added to support policies that need to generate a range of integers (e.g., a network port range).
+- `semver.is_valid` and `semver.compare` ([#2538](https://github.com/meta-quick/opax/pull/2538/)) was added to support policies that need to validate semantic version numbers (authored by @[charlieegan3](https://github.com/charlieegan3)).
 
 ### WebAssembly
 
@@ -1498,13 +1498,13 @@ OPA now supports digital signatures for policy bundles. Specifically, a signed b
 
 ### Fixes
 
-- A few small issues in the Go integration and `rego` package examples have been resolved ([#2294](https://github.com/meta-quick/opa/issues/2294)) and [#2367](https://github.com/meta-quick/opa/issues/2367)) authored by @[gaga5lala](https://github.com/gaga5lala).
-- The Kubernetes Admission Controller tutorial as been updated to work with recent versions of Kubernetes ([#2467](https://github.com/meta-quick/opa/issues/2467) authored by @[gaga5lala](https://github.com/gaga5lala)).
-- A few issues in partial evaluation around negation inlining and partial rules have been resolved (e.g., [#2492](https://github.com/meta-quick/opa/issues/2492), [#2491](https://github.com/meta-quick/opa/issues/2491)).
+- A few small issues in the Go integration and `rego` package examples have been resolved ([#2294](https://github.com/meta-quick/opax/issues/2294)) and [#2367](https://github.com/meta-quick/opax/issues/2367)) authored by @[gaga5lala](https://github.com/gaga5lala).
+- The Kubernetes Admission Controller tutorial as been updated to work with recent versions of Kubernetes ([#2467](https://github.com/meta-quick/opax/issues/2467) authored by @[gaga5lala](https://github.com/gaga5lala)).
+- A few issues in partial evaluation around negation inlining and partial rules have been resolved (e.g., [#2492](https://github.com/meta-quick/opax/issues/2492), [#2491](https://github.com/meta-quick/opax/issues/2491)).
 
 ### Miscellaneous
 
-- OPA now supports IMDSv2 for the AWS metadata service. This improves the security posture of OPA deployments in AWS ([#2482](https://github.com/meta-quick/opa/issues/2482)) authored by @[nhw76](https://github.com/nhw76).
+- OPA now supports IMDSv2 for the AWS metadata service. This improves the security posture of OPA deployments in AWS ([#2482](https://github.com/meta-quick/opax/issues/2482)) authored by @[nhw76](https://github.com/nhw76).
 - Several improvements to the project documentation including a policy style discussion, an integration option comparison, and discussion of bootstrapping and fail-open versus fail-closed modes.
 - The project's CI/CD infrastructure has been migrated to GitHub Actions. The new CI/CD infrastructure is designed and implemented to be portable and includes a number of quality-of-life improvements.
 - End-to-end query latency with decision logging enabled has been improved by 10%-15% in real-world cases.
@@ -1518,7 +1518,7 @@ OPA now supports digital signatures for policy bundles. Specifically, a signed b
 
 ## 0.21.1
 
-This release fixes [#2497](https://github.com/meta-quick/opa/issues/2497) where the comprehension indexing optimization produced incorrect results for nested comprehensions that close over variables in the outer scope. This issue only affects policies containing nested comprehensions that are recognized by the indexer (which is a relatively small percentage).
+This release fixes [#2497](https://github.com/meta-quick/opax/issues/2497) where the comprehension indexing optimization produced incorrect results for nested comprehensions that close over variables in the outer scope. This issue only affects policies containing nested comprehensions that are recognized by the indexer (which is a relatively small percentage).
 
 This release also backports the GitHub Actions migration and a fix to the Wasm library build step.
 
@@ -1526,23 +1526,23 @@ This release also backports the GitHub Actions migration and a fix to the Wasm l
 
 ### Features
 
-* Decision log masks can now mutate decision log events. Previously, the masks could only erase data in the events. With this change, users can implement masks that obfuscate or add information to the decision log events before they are emitted. Thanks to @dkiser for implementing this feature [#2379](https://github.com/meta-quick/opa/issues/2379))!
+* Decision log masks can now mutate decision log events. Previously, the masks could only erase data in the events. With this change, users can implement masks that obfuscate or add information to the decision log events before they are emitted. Thanks to @dkiser for implementing this feature [#2379](https://github.com/meta-quick/opax/issues/2379))!
 
-* This release contains a new built-in function for parsing X.509 Certificate Signing Requests (`crypto.x509.parse_certificate_request`). Thanks to @vivekbagade for implementing this feature [#2402](https://github.com/meta-quick/opa/issues/2402)!
+* This release contains a new built-in function for parsing X.509 Certificate Signing Requests (`crypto.x509.parse_certificate_request`). Thanks to @vivekbagade for implementing this feature [#2402](https://github.com/meta-quick/opax/issues/2402)!
 
 * This release adds support for aggregation and bit arithmetic operations for WebAssembly compiled policies. These functions no longer have to be provided by the host environment.
 
 ### Fixes
 
-- cmd: Fix bug in --disable-inlining option parsing ([#2196](https://github.com/meta-quick/opa/issues/2196)) authored by @[Syn3rman](https://github.com/Syn3rman)
-- docs: Improve terraform example to incorporate `child_modules` ([#1772](https://github.com/meta-quick/opa/issues/1772))
-- server: Fix panic caused by compiler misuse with bundles ([#2197](https://github.com/meta-quick/opa/issues/2197))
-- topdown: Fix incorrect memoization during partial evaluation ([#2455](https://github.com/meta-quick/opa/issues/2455))
-- topdown: Fix loss of precision in arithmetic and aggregate builtins ([#2469](https://github.com/meta-quick/opa/issues/2469))
+- cmd: Fix bug in --disable-inlining option parsing ([#2196](https://github.com/meta-quick/opax/issues/2196)) authored by @[Syn3rman](https://github.com/Syn3rman)
+- docs: Improve terraform example to incorporate `child_modules` ([#1772](https://github.com/meta-quick/opax/issues/1772))
+- server: Fix panic caused by compiler misuse with bundles ([#2197](https://github.com/meta-quick/opax/issues/2197))
+- topdown: Fix incorrect memoization during partial evaluation ([#2455](https://github.com/meta-quick/opax/issues/2455))
+- topdown: Fix loss of precision in arithmetic and aggregate builtins ([#2469](https://github.com/meta-quick/opax/issues/2469))
 
 ### Miscellaneous
 
-* Thanks to @Syn3rman for implementing an improvement to our release process to automatically tag external contributors ([#2323](https://github.com/meta-quick/opa/issues/2323))!
+* Thanks to @Syn3rman for implementing an improvement to our release process to automatically tag external contributors ([#2323](https://github.com/meta-quick/opax/issues/2323))!
 
 * The coverage and profiling tracers no longer require variable values from the evaluator. This change improves perfomance significantly when coverage or profiling is enabled and policies inspect large data sets. Benchmarks show anywhere from 0.5x to over 30x speedup depending on the policy.
 
@@ -1561,8 +1561,8 @@ This release also backports the GitHub Actions migration and a fix to the Wasm l
 
 ### Fixes
 
-- compile: Change name of result var for wasm binary ([#2441](https://github.com/meta-quick/opa/issues/2441))
-- format: Deep copy inputs to avoid mutating the caller's copy ([#2439](https://github.com/meta-quick/opa/issues/2439))
+- compile: Change name of result var for wasm binary ([#2441](https://github.com/meta-quick/opax/issues/2441))
+- format: Deep copy inputs to avoid mutating the caller's copy ([#2439](https://github.com/meta-quick/opax/issues/2439))
 
 ### Miscellaneous
 
@@ -1572,20 +1572,20 @@ This release also backports the GitHub Actions migration and a fix to the Wasm l
 
 ### Fixes
 
-- format: Refactor wildcard names to rewrite early ([#2430](https://github.com/meta-quick/opa/issues/2430))
+- format: Refactor wildcard names to rewrite early ([#2430](https://github.com/meta-quick/opax/issues/2430))
 
 ## 0.20.3
 
 ### Fixes
 
-- docs/content small output correction on terraform page ([#1772](https://github.com/meta-quick/opa/issues/1772))
+- docs/content small output correction on terraform page ([#1772](https://github.com/meta-quick/opax/issues/1772))
 - format: Fix wildcards in nested refs
 
 ## 0.20.2
 
 ### Fixes
 
-- format: Fix panic with else blocks and comments ([#2420](https://github.com/meta-quick/opa/issues/2420))
+- format: Fix panic with else blocks and comments ([#2420](https://github.com/meta-quick/opax/issues/2420))
 
 ## 0.20.1
 
@@ -1644,7 +1644,7 @@ This release also includes a few fixes to existing built-in functions:
 
 * `units.parse_bytes` now supports units without the `B` or `b` suffix (thanks to @GBrawl!)
 * `io.jwt.verify_decode` now supports floating-point `nbf` and `exp` claims (thanks to @GBrawl!)
-* `array.slice` clamping logic fixed to prevent panic ([#2320](https://github.com/meta-quick/opa/issues/2320)).
+* `array.slice` clamping logic fixed to prevent panic ([#2320](https://github.com/meta-quick/opax/issues/2320)).
 
 ### Operations
 
@@ -1653,7 +1653,7 @@ This release also includes a few fixes to existing built-in functions:
   This makes it easier to secure sidecar deployments in Kubernetes because the
   main API endpoints can be served on localhost and the diagnostic endpoints can
   be served on 0.0.0.0 so that the kubelet and other components can access them
-  ([#2002](https://github.com/meta-quick/opa/issues/2002)). The envoy
+  ([#2002](https://github.com/meta-quick/opax/issues/2002)). The envoy
   tutorial has been updated to show this in action.
 
 * The AWS credential provided has been updated to support the standard
@@ -1666,21 +1666,21 @@ This release also includes a few fixes to existing built-in functions:
 This release includes a number of improvements for wasm compiled policies.
 
 * UTF-8 and UTF-16 strings are now fully supported in the internal string
-  representation ([#1885](https://github.com/meta-quick/opa/issues/1885))
+  representation ([#1885](https://github.com/meta-quick/opax/issues/1885))
 * Numeric values are implemented on top of arbitrary-precision floating point
   numbers to avoid loss-of-precision issues.
 * The arithemetic, set, array, and type checking built-in function categories
   are now supported by the wasm library. This means they do not have to be
   implemented by the language-specific opa-wasm SDKs.
 * The set and object implementations now use a chained hash set under the hood
-  ([#2225](https://github.com/meta-quick/opa/issues/2225))
+  ([#2225](https://github.com/meta-quick/opax/issues/2225))
 
 ### Performance
 
 * OPA will attempt to index collections generated by comprehensions to ensure
   linear runtime for policies performing "group-by" operations (e.g., inverting
   an objects.) For more information see the [Policy Performance](https://www.openpolicyagent.org/docs/latest/policy-performance/)
-  page ([#2276](https://github.com/meta-quick/opa/issues/2276)).
+  page ([#2276](https://github.com/meta-quick/opax/issues/2276)).
 
 ### Tooling
 
@@ -1693,14 +1693,14 @@ This release includes a number of improvements for wasm compiled policies.
 
 This release includes several improvements to the website and documentation.
 
-* Improved terraform tutorial example ([#1772](https://github.com/meta-quick/opa/issues/1772)) (thanks to @princespaghetti!)
-* Fixed token validation logic in envoy tutorial example ([#2395](https://github.com/meta-quick/opa/issues/2395)) (thanks to @princespaghetti!)
-* Usability issues on the frontpage have been resolved ([#2205](https://github.com/meta-quick/opa/issues/2205), [#2206](https://github.com/meta-quick/opa/issues/2206) (thanks to @arunbsar!)
+* Improved terraform tutorial example ([#1772](https://github.com/meta-quick/opax/issues/1772)) (thanks to @princespaghetti!)
+* Fixed token validation logic in envoy tutorial example ([#2395](https://github.com/meta-quick/opax/issues/2395)) (thanks to @princespaghetti!)
+* Usability issues on the frontpage have been resolved ([#2205](https://github.com/meta-quick/opax/issues/2205), [#2206](https://github.com/meta-quick/opax/issues/2206) (thanks to @arunbsar!)
 * The [Policy Performance](https://www.openpolicyagent.org/docs/latest/policy-performance/)
-  page now includes resource utilization guidelines ([#1601](https://github.com/meta-quick/opa/issues/1601))
+  page now includes resource utilization guidelines ([#1601](https://github.com/meta-quick/opax/issues/1601))
 * By popular demand, the "document model" explanation has been brought back into
   existence. It now lives in the [Philosophy](https://www.openpolicyagent.org/docs/latest/philosophy/#the-opa-document-model)
-  section ([#2284](https://github.com/meta-quick/opa/issues/2284)).
+  section ([#2284](https://github.com/meta-quick/opax/issues/2284)).
 * The [Ecosystem](https://www.openpolicyagent.org/docs/latest/ecosystem/) page
   implements a simple sorting algorithm that ranks items by amount of related
   content.
@@ -1708,12 +1708,12 @@ This release includes several improvements to the website and documentation.
 
 ### Fixes
 
-* REPL now correctly displays booleans in tabled output ([#2338](https://github.com/meta-quick/opa/issues/2338), thanks to @timakin!)
-* Discovery now supports service configuration updates. This makes token refresh easier in distributed environments on AWS. ([#2058](https://github.com/meta-quick/opa/issues/2058))
-* Fixed compiler panic if body omitted from `else` statement ([#2353](https://github.com/meta-quick/opa/issues/2353))
-* Fixed panic in /health API with the envoy plugin ([#2396](https://github.com/meta-quick/opa/issues/2396))
-* Partial Evaluation no longer generates unsafe queries for certain negated expressions ([#2045](https://github.com/meta-quick/opa/issues/2045))
-* Partial Evaluation no longer saves an incorrect binding list in some cases ([#2368](https://github.com/meta-quick/opa/issues/2368))
+* REPL now correctly displays booleans in tabled output ([#2338](https://github.com/meta-quick/opax/issues/2338), thanks to @timakin!)
+* Discovery now supports service configuration updates. This makes token refresh easier in distributed environments on AWS. ([#2058](https://github.com/meta-quick/opax/issues/2058))
+* Fixed compiler panic if body omitted from `else` statement ([#2353](https://github.com/meta-quick/opax/issues/2353))
+* Fixed panic in /health API with the envoy plugin ([#2396](https://github.com/meta-quick/opax/issues/2396))
+* Partial Evaluation no longer generates unsafe queries for certain negated expressions ([#2045](https://github.com/meta-quick/opax/issues/2045))
+* Partial Evaluation no longer saves an incorrect binding list in some cases ([#2368](https://github.com/meta-quick/opax/issues/2368))
 * Output variable analysis no longer visits closures. This makes the analysis easier to use outside of the safety check.
 * Rules parsed from expressions now have location information set correctly.
 
@@ -1733,17 +1733,17 @@ This release includes several improvements to the website and documentation.
   return the valid JSON value and ignore the garbage following it. This change
   is backwards incompatible since clients that were previously transmitting bad
   data will now receive an error, however, we think it's important to surface
-  errors rather than hide them ([#2331](https://github.com/meta-quick/opa/issues/2331)).
+  errors rather than hide them ([#2331](https://github.com/meta-quick/opax/issues/2331)).
 
 * The Go plugin/shared library loading feature that was deprecated in v0.14.0
   has finally been removed completely. If you are interested in extending OPA,
   see the [Extensions](https://www.openpolicyagent.org/docs/latest/extensions/)
-  for how to do so at compile-time ([#2049](https://github.com/meta-quick/opa/issues/2049)).
+  for how to do so at compile-time ([#2049](https://github.com/meta-quick/opax/issues/2049)).
 
-* The `github.com/meta-quick/opa/metrics#Counter` interface has been
+* The `github.com/meta-quick/opax/metrics#Counter` interface has been
   extended to require an `Add(uint64)` function. This change only affects users
   that have implemented their own version of the
-  `github.com/meta-quick/opa/metrics#Metrics` interface (which is the
+  `github.com/meta-quick/opax/metrics#Metrics` interface (which is the
   factory for counters.)
 
 * As mentioned above, the `opa build` command-line syntax has changed. We think
@@ -1769,13 +1769,13 @@ This release includes several improvements to the website and documentation.
 
 ### Fixes
 
-- plugins: Fix race between manager and plugin startup ([#2343](https://github.com/meta-quick/opa/issues/2343))
+- plugins: Fix race between manager and plugin startup ([#2343](https://github.com/meta-quick/opax/issues/2343))
 
 ## 0.19.1
 
 ### Fixes
 
-- cmd/fmt: Only list files if there were changes ([#2295](https://github.com/meta-quick/opa/issues/2295))
+- cmd/fmt: Only list files if there were changes ([#2295](https://github.com/meta-quick/opax/issues/2295))
 
 ## 0.19.0
 
@@ -1792,11 +1792,11 @@ correct questionable behaviour from the old parser. These changes affect
 a very small number of actual policies and we feel confident in the decision to
 break backwards compatibility here.
 
-- Numbers no longer lose-precision [#501](https://github.com/meta-quick/opa/issues/501)
-- Leading commas do not cause objects to lose values [#2198](https://github.com/meta-quick/opa/issues/2198)
-- Rules wrapped with braces no longer parse [#2199](https://github.com/meta-quick/opa/issues/2199)
-- Rule names can no longer contain dots/hyphens [#2200](https://github.com/meta-quick/opa/issues/2200)
-- Object comprehensions now have priority over logical OR in all cases [#2201](https://github.com/meta-quick/opa/issues/2201)
+- Numbers no longer lose-precision [#501](https://github.com/meta-quick/opax/issues/501)
+- Leading commas do not cause objects to lose values [#2198](https://github.com/meta-quick/opax/issues/2198)
+- Rules wrapped with braces no longer parse [#2199](https://github.com/meta-quick/opax/issues/2199)
+- Rule names can no longer contain dots/hyphens [#2200](https://github.com/meta-quick/opax/issues/2200)
+- Object comprehensions now have priority over logical OR in all cases [#2201](https://github.com/meta-quick/opax/issues/2201)
 
 In addition there are a few small changes backwards incompatible changes in APIs:
 
@@ -1805,7 +1805,7 @@ In addition there are a few small changes backwards incompatible changes in APIs
   the input contained invalid syntax. The new parser has slightly more specific
   errors. If you integrated with OPA and implemented error handling based on the
   content of these human-readable error message strings, your integration may be affected.
-- The `github.com/meta-quick/opa/format#Bytes` function has been removed (it was unused.)
+- The `github.com/meta-quick/opax/format#Bytes` function has been removed (it was unused.)
 
 #### Benchmark Results
 
@@ -1872,41 +1872,41 @@ ParseBasicABACModule-16                 36.5k ± 0%      0.7k ± 0%  -98.09%  (p
 
 ### Fixes and Enhancements
 
-- ast: Add rules/functions that contain errors to the type env ([#2155](https://github.com/meta-quick/opa/issues/2155))
-- ast: Fix panic when rule args contain call expressions ([#2081](https://github.com/meta-quick/opa/issues/2081))
-- ast: Fix bug in term rewritten when 'input' is passed as an argument ([#2084](https://github.com/meta-quick/opa/issues/2084))
-- bundle: Remove extra root name in bundle file ids ([#2117](https://github.com/meta-quick/opa/issues/2117))
-- cmd/fmt: Fix to always write formatted file to stdout ([#2235](https://github.com/meta-quick/opa/issues/2235))
-- cmd/test: --explain now turns on verbose output ([#2069](https://github.com/meta-quick/opa/issues/2069))
-- cmd/test: Default `-v` traces show notes and fails ([#2068](https://github.com/meta-quick/opa/issues/2068))
-- docs/website: Fix mobile docs nav menu ([#2074](https://github.com/meta-quick/opa/issues/2074))
-- format: Print var if wildcard is used multiple times ([#2053](https://github.com/meta-quick/opa/issues/2053))
-- plugins/bundle: Update the downloader's e-tag based on bundle activation ([#2220](https://github.com/meta-quick/opa/issues/2220))
-- plugins: Add support to specify bearer token path (which enables token refresh) ([#2241](https://github.com/meta-quick/opa/issues/2241))
-- profiler: Fix panic when location is missing by grouping expressions missing a location ([#2134](https://github.com/meta-quick/opa/issues/2134))
-- rego: Avoid re-using transactions in compiler ([#2197](https://github.com/meta-quick/opa/issues/2197))
-- repl: Add unset-package command ([#2140](https://github.com/meta-quick/opa/issues/2140))
-- server: Do not return partial modules /v1/policies output ([#2036](https://github.com/meta-quick/opa/issues/2036))
-- server: Specify partial evaluation namespace to avoid conflicts ([#2247](https://github.com/meta-quick/opa/issues/2247))
-- topdown: Add time.add_date builtin ([#1990](https://github.com/meta-quick/opa/issues/1990))
-- topdown: Fix partial evaluation to save comprehensions correctly ([#2243](https://github.com/meta-quick/opa/issues/2243))
-- topdown: Improve pretty trace location details ([#2143](https://github.com/meta-quick/opa/issues/2143))
-- topdown: Include HTTP response headers in `http.send` output ([#2238](https://github.com/meta-quick/opa/issues/2238))
-- [Multiple](https://github.com/meta-quick/opa/commit/3eeb09c3e83749aff31e15bdfff5d82f3224c102) [important](https://github.com/meta-quick/opa/commit/29d8fbbef6facc96d03be3e07473d12e38acd843) [improvements](https://github.com/meta-quick/opa/commit/c5c85795aaa3701763f98d16308c5944f05f3da4) [to `http.send()`](https://github.com/meta-quick/opa/commit/ce92d19f655efffd6bda26006a2f4898cbdb69ed) [thanks to](https://github.com/meta-quick/opa/commit/351a7313df35e8de9e9474fd56a1a905cd51e0c1)  @jpeach
+- ast: Add rules/functions that contain errors to the type env ([#2155](https://github.com/meta-quick/opax/issues/2155))
+- ast: Fix panic when rule args contain call expressions ([#2081](https://github.com/meta-quick/opax/issues/2081))
+- ast: Fix bug in term rewritten when 'input' is passed as an argument ([#2084](https://github.com/meta-quick/opax/issues/2084))
+- bundle: Remove extra root name in bundle file ids ([#2117](https://github.com/meta-quick/opax/issues/2117))
+- cmd/fmt: Fix to always write formatted file to stdout ([#2235](https://github.com/meta-quick/opax/issues/2235))
+- cmd/test: --explain now turns on verbose output ([#2069](https://github.com/meta-quick/opax/issues/2069))
+- cmd/test: Default `-v` traces show notes and fails ([#2068](https://github.com/meta-quick/opax/issues/2068))
+- docs/website: Fix mobile docs nav menu ([#2074](https://github.com/meta-quick/opax/issues/2074))
+- format: Print var if wildcard is used multiple times ([#2053](https://github.com/meta-quick/opax/issues/2053))
+- plugins/bundle: Update the downloader's e-tag based on bundle activation ([#2220](https://github.com/meta-quick/opax/issues/2220))
+- plugins: Add support to specify bearer token path (which enables token refresh) ([#2241](https://github.com/meta-quick/opax/issues/2241))
+- profiler: Fix panic when location is missing by grouping expressions missing a location ([#2134](https://github.com/meta-quick/opax/issues/2134))
+- rego: Avoid re-using transactions in compiler ([#2197](https://github.com/meta-quick/opax/issues/2197))
+- repl: Add unset-package command ([#2140](https://github.com/meta-quick/opax/issues/2140))
+- server: Do not return partial modules /v1/policies output ([#2036](https://github.com/meta-quick/opax/issues/2036))
+- server: Specify partial evaluation namespace to avoid conflicts ([#2247](https://github.com/meta-quick/opax/issues/2247))
+- topdown: Add time.add_date builtin ([#1990](https://github.com/meta-quick/opax/issues/1990))
+- topdown: Fix partial evaluation to save comprehensions correctly ([#2243](https://github.com/meta-quick/opax/issues/2243))
+- topdown: Improve pretty trace location details ([#2143](https://github.com/meta-quick/opax/issues/2143))
+- topdown: Include HTTP response headers in `http.send` output ([#2238](https://github.com/meta-quick/opax/issues/2238))
+- [Multiple](https://github.com/meta-quick/opax/commit/3eeb09c3e83749aff31e15bdfff5d82f3224c102) [important](https://github.com/meta-quick/opax/commit/29d8fbbef6facc96d03be3e07473d12e38acd843) [improvements](https://github.com/meta-quick/opax/commit/c5c85795aaa3701763f98d16308c5944f05f3da4) [to `http.send()`](https://github.com/meta-quick/opax/commit/ce92d19f655efffd6bda26006a2f4898cbdb69ed) [thanks to](https://github.com/meta-quick/opax/commit/351a7313df35e8de9e9474fd56a1a905cd51e0c1)  @jpeach
 
 ### Miscellaneous
 
-- [Added `man` target in the Makefile for `man` page generation!](https://github.com/meta-quick/opa/commit/4c81aa75c05e4dd69408b9c879be40f9f4369a2c) (thanks to @olivierlemasle)
-- [Added Sublime Text syntax file](https://github.com/meta-quick/opa/blob/master/misc/syntax/sublime/rego.sublime-syntax)
+- [Added `man` target in the Makefile for `man` page generation!](https://github.com/meta-quick/opax/commit/4c81aa75c05e4dd69408b9c879be40f9f4369a2c) (thanks to @olivierlemasle)
+- [Added Sublime Text syntax file](https://github.com/meta-quick/opax/blob/master/misc/syntax/sublime/rego.sublime-syntax)
 - [Added link to Emacs mode for Rego](https://github.com/psibi/rego-mode) (thanks to @psibi)
-- [Added net.cidr_contains_matches built-in function](https://github.com/meta-quick/opa/pull/2221/commits/6ae4ed9e6578ffb272604a79b1ef9a944cda7782)
-- [Improved support for registering custom built-in functions](https://github.com/meta-quick/opa/blob/84b61c647a0d76e62043d6f52510411e8b00d2f0/docs/content/extensions.md)
+- [Added net.cidr_contains_matches built-in function](https://github.com/meta-quick/opax/pull/2221/commits/6ae4ed9e6578ffb272604a79b1ef9a944cda7782)
+- [Improved support for registering custom built-in functions](https://github.com/meta-quick/opax/blob/84b61c647a0d76e62043d6f52510411e8b00d2f0/docs/content/extensions.md)
 
 ## 0.18.0
 
 ### Features
 
-- Add `opa bench` and `opa test --bench` sub commands for benchmarking policy evaluation. ([#1424](https://github.com/meta-quick/opa/issues/1424))
+- Add `opa bench` and `opa test --bench` sub commands for benchmarking policy evaluation. ([#1424](https://github.com/meta-quick/opax/issues/1424))
 - Permit verifying JWT's with a public key
 - `http.send` improvements:
   - Allow for skipping TLS verification via `tls_insecure_skip_verify` option
@@ -1914,7 +1914,7 @@ ParseBasicABACModule-16                 36.5k ± 0%      0.7k ± 0%  -98.09%  (p
 
 ### New Built-in Functions
 
-- Bitwise operators ([#1919](https://github.com/meta-quick/opa/issues/1919))
+- Bitwise operators ([#1919](https://github.com/meta-quick/opax/issues/1919))
   - `bits.or`
   - `bits.and`
   - `bits.negate`
@@ -1924,19 +1924,19 @@ ParseBasicABACModule-16                 36.5k ± 0%      0.7k ± 0%  -98.09%  (p
 - `json.remove` which works similar to `object.remove` but supports a JSON pointer path.
 
 ### Fixes
-- docs: Render tutorials as list ([#2071](https://github.com/meta-quick/opa/issues/2071))
-- ast: Fix type check for objects with non-json keys ([#2183](https://github.com/meta-quick/opa/issues/2183))
-- ast: Return an error when parsing an empty module ([#2054](https://github.com/meta-quick/opa/issues/2054))
-- docs: Fix broken PAM module link ([#2113](https://github.com/meta-quick/opa/issues/2113))
-- docs: Fix code fence in kubernetes-primer.md ([#2177](https://github.com/meta-quick/opa/issues/2177))
-- topdown: Invoke iterator when evaluating negation ([#2142](https://github.com/meta-quick/opa/issues/2142))
+- docs: Render tutorials as list ([#2071](https://github.com/meta-quick/opax/issues/2071))
+- ast: Fix type check for objects with non-json keys ([#2183](https://github.com/meta-quick/opax/issues/2183))
+- ast: Return an error when parsing an empty module ([#2054](https://github.com/meta-quick/opax/issues/2054))
+- docs: Fix broken PAM module link ([#2113](https://github.com/meta-quick/opax/issues/2113))
+- docs: Fix code fence in kubernetes-primer.md ([#2177](https://github.com/meta-quick/opax/issues/2177))
+- topdown: Invoke iterator when evaluating negation ([#2142](https://github.com/meta-quick/opax/issues/2142))
 - Correct checkptr errors found with Go 1.14
 - `opa parse`: fix panic when parsing invalid JSON
 
 ### Compatibility Notes
 
 - The `ast.ParseModule` helper will now return an error if an empty module is provided.
-  Previously it would return a `nil` error and `nil` module. ([#2054](https://github.com/meta-quick/opa/issues/2054))
+  Previously it would return a `nil` error and `nil` module. ([#2054](https://github.com/meta-quick/opax/issues/2054))
 - The `cmd` and `tester` packages in OPA will now require Go 1.13+ to compile. Most library users should be unaffected.
 
 ### Miscellaneous
@@ -1954,14 +1954,14 @@ ParseBasicABACModule-16                 36.5k ± 0%      0.7k ± 0%  -98.09%  (p
 
 ### Fixes
 
-- Add location information into pretty printed trace output. ([#2070](https://github.com/meta-quick/opa/issues/2070))
-- Add timeout for `http.send` builtin ([#2099](https://github.com/meta-quick/opa/issues/2099))
-- build: Force module mode and using only the vendor directory ([#2063](https://github.com/meta-quick/opa/issues/2063))
-- cover: Exclude `some` expressions in coverage report ([#1972](https://github.com/meta-quick/opa/issues/1972))
-- docs: How to say "ray-go" ([#2106](https://github.com/meta-quick/opa/issues/2106))
-- topdown: Make http.send() caching use full request ([#1980](https://github.com/meta-quick/opa/issues/1980))
-- topdown: Wrap all builtin functions for errors normalization ([#2101](https://github.com/meta-quick/opa/issues/2101))
-- topdown: http.send use provided CA without client certs ([#1976](https://github.com/meta-quick/opa/issues/1976))
+- Add location information into pretty printed trace output. ([#2070](https://github.com/meta-quick/opax/issues/2070))
+- Add timeout for `http.send` builtin ([#2099](https://github.com/meta-quick/opax/issues/2099))
+- build: Force module mode and using only the vendor directory ([#2063](https://github.com/meta-quick/opax/issues/2063))
+- cover: Exclude `some` expressions in coverage report ([#1972](https://github.com/meta-quick/opax/issues/1972))
+- docs: How to say "ray-go" ([#2106](https://github.com/meta-quick/opax/issues/2106))
+- topdown: Make http.send() caching use full request ([#1980](https://github.com/meta-quick/opax/issues/1980))
+- topdown: Wrap all builtin functions for errors normalization ([#2101](https://github.com/meta-quick/opax/issues/2101))
+- topdown: http.send use provided CA without client certs ([#1976](https://github.com/meta-quick/opax/issues/1976))
 
 ### Miscellaneous
 
@@ -1974,7 +1974,7 @@ ParseBasicABACModule-16                 36.5k ± 0%      0.7k ± 0%  -98.09%  (p
 
 ### Fixes
 
-- ast: Fix rewriting vars in rule args ([#2080](https://github.com/meta-quick/opa/issues/2080))
+- ast: Fix rewriting vars in rule args ([#2080](https://github.com/meta-quick/opax/issues/2080))
 
 ## 0.17.0
 
@@ -2001,14 +2001,14 @@ This release includes the following new built-in functions:
 
 - The `glob.match` built-in function was not defaulting the delimiter to "."
   like the documentation described. This was fixed in
-  [#2061](https://github.com/meta-quick/opa/pull/2061) however the fix
+  [#2061](https://github.com/meta-quick/opax/pull/2061) however the fix
   is not backwards compatible. If you are using the `glob.match` built-in
   function, you should ensure that a delimiter is being supplied. A search of
   .rego files on GitHub only revealed a few instances of the `glob.match` in-use
   so we decided to err towards fixing the broken behaviour rather than
   preserving buggy behaviour going forward.
 
-- Related to the fix for [#2031](https://github.com/meta-quick/opa/issues/2031)
+- Related to the fix for [#2031](https://github.com/meta-quick/opax/issues/2031)
   and the changes with OPA v0.16.0 to use `/` separated `path`'s with
   the decision log plugin API. The decision logger will no longer modify
   the `server.Info#Path` field. Older versions would substitute `.` for
@@ -2020,14 +2020,14 @@ This release includes the following new built-in functions:
 
 ### Fixes
 
-- docs: Update Kubernetes apiVersions to use `apps/v1` instead of `extensions/v1` ([#1977](https://github.com/meta-quick/opa/issues/1977))
-- plugins/logs: Leave the path unchanged for decisions ([#2031](https://github.com/meta-quick/opa/issues/2031))
-- plugins/bundle: Include last successful request timestamp in status ([#2009](https://github.com/meta-quick/opa/issues/2009))
-- plugins/bundle: Pass copy of status to bulk listeners ([#1962](https://github.com/meta-quick/opa/issues/1962))
-- rego: Fix panic when partial evaluating with tracers ([#2007](https://github.com/meta-quick/opa/issues/2007))
-- rego: Propagate custom builtins to `PartialResult` ([#1792](https://github.com/meta-quick/opa/issues/1792))
-- server: Update health check to use plugin status ([#2010](https://github.com/meta-quick/opa/issues/2010))
-- topdown: Correct glob default delimeter ([#2039](https://github.com/meta-quick/opa/issues/2039))
+- docs: Update Kubernetes apiVersions to use `apps/v1` instead of `extensions/v1` ([#1977](https://github.com/meta-quick/opax/issues/1977))
+- plugins/logs: Leave the path unchanged for decisions ([#2031](https://github.com/meta-quick/opax/issues/2031))
+- plugins/bundle: Include last successful request timestamp in status ([#2009](https://github.com/meta-quick/opax/issues/2009))
+- plugins/bundle: Pass copy of status to bulk listeners ([#1962](https://github.com/meta-quick/opax/issues/1962))
+- rego: Fix panic when partial evaluating with tracers ([#2007](https://github.com/meta-quick/opax/issues/2007))
+- rego: Propagate custom builtins to `PartialResult` ([#1792](https://github.com/meta-quick/opax/issues/1792))
+- server: Update health check to use plugin status ([#2010](https://github.com/meta-quick/opax/issues/2010))
+- topdown: Correct glob default delimeter ([#2039](https://github.com/meta-quick/opax/issues/2039))
 
 ### Miscellaneous
 
@@ -2044,30 +2044,30 @@ This release includes the following new built-in functions:
 This release includes an important bugfix for users that enable
 tracing and use the "pretty" trace formatter.
 
-- topdown: Fix bug in var rewriting during trace formatting ([#2022](https://github.com/meta-quick/opa/issues/2022))
+- topdown: Fix bug in var rewriting during trace formatting ([#2022](https://github.com/meta-quick/opax/issues/2022))
 
 ## 0.16.1
 
 ### Fixes
 
-- Fix for `*-rootless` Docker images `USER` being set incorrectly ([#1982](https://github.com/meta-quick/opa/issues/1982))
+- Fix for `*-rootless` Docker images `USER` being set incorrectly ([#1982](https://github.com/meta-quick/opax/issues/1982))
 
 ## 0.16.0
 
 ### New Built-in Functions
 
-- Add `json.filter` to mask/filter nested fields ([#1617](https://github.com/meta-quick/opa/issues/1617))
+- Add `json.filter` to mask/filter nested fields ([#1617](https://github.com/meta-quick/opax/issues/1617))
 - Add `net.cidr_expand` to generate CIDR hosts
 
 ### Fixes
 
-- Reduce server latency for indexed policies by ~30-40% by caching prepared queries across requests ([#1958](https://github.com/meta-quick/opa/issues/1567))
-- Improve type checker error and trace output readability ([#1430](https://github.com/meta-quick/opa/issues/1430) and [#1208](https://github.com/meta-quick/opa/issues/1208))
-- Re-create service clients to pickup certificate changes ([#1898](https://github.com/meta-quick/opa/issues/1898))
-- Report full system path for bundle file locations ([#1796](https://github.com/meta-quick/opa/issues/1796))
-- Add `status.console` option to log Status messages to console ([#1937](https://github.com/meta-quick/opa/issues/1937))
-- Fix `io.jwt.decode_verify` to support multiple keys in JWKS ([#1901](https://github.com/meta-quick/opa/issues/1901))
-- Fix `path` decision log field for queries against "/data" ([1532](https://github.com/meta-quick/opa/issues/1532))
+- Reduce server latency for indexed policies by ~30-40% by caching prepared queries across requests ([#1958](https://github.com/meta-quick/opax/issues/1567))
+- Improve type checker error and trace output readability ([#1430](https://github.com/meta-quick/opax/issues/1430) and [#1208](https://github.com/meta-quick/opax/issues/1208))
+- Re-create service clients to pickup certificate changes ([#1898](https://github.com/meta-quick/opax/issues/1898))
+- Report full system path for bundle file locations ([#1796](https://github.com/meta-quick/opax/issues/1796))
+- Add `status.console` option to log Status messages to console ([#1937](https://github.com/meta-quick/opax/issues/1937))
+- Fix `io.jwt.decode_verify` to support multiple keys in JWKS ([#1901](https://github.com/meta-quick/opax/issues/1901))
+- Fix `path` decision log field for queries against "/data" ([1532](https://github.com/meta-quick/opax/issues/1532))
 
 This release also includes:
 
@@ -2099,9 +2099,9 @@ the NodeJS SDK.
 
 ### Fixes
 
-- bundle: Make the DirectoryLoader public ([#1840](https://github.com/meta-quick/opa/issues/1840))
-- topdown: Add raw_body parameter to http.send ([#1903](https://github.com/meta-quick/opa/issues/1903))
-- wasm: Update planner to support with keyword ([#1116](https://github.com/meta-quick/opa/issues/1116))
+- bundle: Make the DirectoryLoader public ([#1840](https://github.com/meta-quick/opax/issues/1840))
+- topdown: Add raw_body parameter to http.send ([#1903](https://github.com/meta-quick/opax/issues/1903))
+- wasm: Update planner to support with keyword ([#1116](https://github.com/meta-quick/opax/issues/1116))
 
 ### Miscellaneous
 
@@ -2142,19 +2142,19 @@ manipulation:
 
 ### Fixes
 
-- tester: Fix --timeout to apply to each test case ([#1788](https://github.com/meta-quick/opa/issues/1788))
-- ast: Check for undefined functions before safety check ([#1141](https://github.com/meta-quick/opa/issues/1141))
-- ast: Fix object corruption during local rewrite ([#1852](https://github.com/meta-quick/opa/issues/1852))
-- ast: Fix virtual predicate used for rule index build ([#1863](https://github.com/meta-quick/opa/issues/1863))
-- discovery: Fix log level message when on HTTP 304 ([#1826](https://github.com/meta-quick/opa/issues/1826))
-- docs: Update Kubernetes primer test to avoid false-positives ([#1794](https://github.com/meta-quick/opa/issues/1794))
-- repl: Fix unknown argument processing ([#1670](https://github.com/meta-quick/opa/issues/1670))
-- topdown: Fix namespacing to use caller bindings ([#1814](https://github.com/meta-quick/opa/issues/1814))
-- topdown: Fix units.parse_bytes implementation to use int64 ([#1815](https://github.com/meta-quick/opa/issues/1815))
-- topdown: Fix base document dereference with composite ([#1057](https://github.com/meta-quick/opa/issues/1057))
-- wasm: Add support for comprehensions ([#1120](https://github.com/meta-quick/opa/issues/1120))
-- wasm: Add support for full virtual document model ([#1117](https://github.com/meta-quick/opa/issues/1117))
-- wasm: Remove memory.grow calls on every malloc ([#1121](https://github.com/meta-quick/opa/issues/1121))
+- tester: Fix --timeout to apply to each test case ([#1788](https://github.com/meta-quick/opax/issues/1788))
+- ast: Check for undefined functions before safety check ([#1141](https://github.com/meta-quick/opax/issues/1141))
+- ast: Fix object corruption during local rewrite ([#1852](https://github.com/meta-quick/opax/issues/1852))
+- ast: Fix virtual predicate used for rule index build ([#1863](https://github.com/meta-quick/opax/issues/1863))
+- discovery: Fix log level message when on HTTP 304 ([#1826](https://github.com/meta-quick/opax/issues/1826))
+- docs: Update Kubernetes primer test to avoid false-positives ([#1794](https://github.com/meta-quick/opax/issues/1794))
+- repl: Fix unknown argument processing ([#1670](https://github.com/meta-quick/opax/issues/1670))
+- topdown: Fix namespacing to use caller bindings ([#1814](https://github.com/meta-quick/opax/issues/1814))
+- topdown: Fix units.parse_bytes implementation to use int64 ([#1815](https://github.com/meta-quick/opax/issues/1815))
+- topdown: Fix base document dereference with composite ([#1057](https://github.com/meta-quick/opax/issues/1057))
+- wasm: Add support for comprehensions ([#1120](https://github.com/meta-quick/opax/issues/1120))
+- wasm: Add support for full virtual document model ([#1117](https://github.com/meta-quick/opax/issues/1117))
+- wasm: Remove memory.grow calls on every malloc ([#1121](https://github.com/meta-quick/opax/issues/1121))
 
 ### Miscellaneous
 
@@ -2174,7 +2174,7 @@ manipulation:
 
 ## 0.14.2
 
-- topdown: Fix namespacing to use caller bindings ([#1814](https://github.com/meta-quick/opa/issues/1814))
+- topdown: Fix namespacing to use caller bindings ([#1814](https://github.com/meta-quick/opax/issues/1814))
 - file/loader: Standardize on forward slash paths
 
 ## 0.14.1
@@ -2206,7 +2206,7 @@ This release includes a few improvements to built-in functions:
 
 * A new function for converting SI strings (e.g., "10MB") to numbers:
   `units.num_bytes(x)`
-  ([#1561](https://github.com/meta-quick/opa/issues/1561)). This
+  ([#1561](https://github.com/meta-quick/opax/issues/1561)). This
   is useful in the context of Kubernetes if you need to deal with
   resource limits and requests.
 
@@ -2217,17 +2217,17 @@ functions to OPA. See the extensions documentation on openpolicyagent.org.
 
 ### Fixes
 
-- ast, rego: Refactor unsafe built-in handling ([#1666](https://github.com/meta-quick/opa/issues/1666))
-- ast: Fix ordering of rule type checking errors ([#1620](https://github.com/meta-quick/opa/issues/1620))
-- ast: Update rule head to track assignments ([#1541](https://github.com/meta-quick/opa/issues/1541))
-- ast: Fix bug that allowed recursion in dynamic refs ([#1565](https://github.com/meta-quick/opa/issues/1565))
-- ast: Fix parsing of var-like scalars ([#1582](https://github.com/meta-quick/opa/issues/1582))
-- docs: Add note about benchmark result page ([#1275](https://github.com/meta-quick/opa/issues/1275))
-- docs: Update to show undefined example with != ([#1626](https://github.com/meta-quick/opa/issues/1626))
-- docs: Update to use live blocks ([#1650](https://github.com/meta-quick/opa/issues/1650))
-- format: Fix formatter to start line after writing comments ([#1560](https://github.com/meta-quick/opa/issues/1560))
-- loader: Update to accept file:// URLs. ([#1505](https://github.com/meta-quick/opa/issues/1505))
-- server: Improve decision log-related error messages ([#1367](https://github.com/meta-quick/opa/issues/1367))
+- ast, rego: Refactor unsafe built-in handling ([#1666](https://github.com/meta-quick/opax/issues/1666))
+- ast: Fix ordering of rule type checking errors ([#1620](https://github.com/meta-quick/opax/issues/1620))
+- ast: Update rule head to track assignments ([#1541](https://github.com/meta-quick/opax/issues/1541))
+- ast: Fix bug that allowed recursion in dynamic refs ([#1565](https://github.com/meta-quick/opax/issues/1565))
+- ast: Fix parsing of var-like scalars ([#1582](https://github.com/meta-quick/opax/issues/1582))
+- docs: Add note about benchmark result page ([#1275](https://github.com/meta-quick/opax/issues/1275))
+- docs: Update to show undefined example with != ([#1626](https://github.com/meta-quick/opax/issues/1626))
+- docs: Update to use live blocks ([#1650](https://github.com/meta-quick/opax/issues/1650))
+- format: Fix formatter to start line after writing comments ([#1560](https://github.com/meta-quick/opax/issues/1560))
+- loader: Update to accept file:// URLs. ([#1505](https://github.com/meta-quick/opax/issues/1505))
+- server: Improve decision log-related error messages ([#1367](https://github.com/meta-quick/opax/issues/1367))
 
 ### Miscellaneous
 
@@ -2246,17 +2246,17 @@ functions to OPA. See the extensions documentation on openpolicyagent.org.
 ## 0.13.5
 
 - Fix panic in OPA HTTP server with `/health?bundle=true` when
-  using bundles loaded from CLI ([#1703](https://github.com/meta-quick/opa/issues/1703)).
+  using bundles loaded from CLI ([#1703](https://github.com/meta-quick/opax/issues/1703)).
 
 ## 0.13.4
 
-- Fix panic in OPA HTTP server caused by concurrent map writes ([#1666](https://github.com/meta-quick/opa/issues/1666))
+- Fix panic in OPA HTTP server caused by concurrent map writes ([#1666](https://github.com/meta-quick/opax/issues/1666))
 
 ## 0.13.3
 
 ### Fixes
 
-- Fix bundle plugin to report error in case bundle manifest roots overlap ([#1635](https://github.com/meta-quick/opa/issues/1635))
+- Fix bundle plugin to report error in case bundle manifest roots overlap ([#1635](https://github.com/meta-quick/opax/issues/1635))
 
 ## 0.13.2
 
@@ -2308,18 +2308,18 @@ decision logging.
 
 ### Fixes
 
-- ast: Report safety errors on line where expression starts ([#1497](https://github.com/meta-quick/opa/issues/1497))
-- ast: Update rule index to support glob.match ([#1496](https://github.com/meta-quick/opa/issues/1496))
-- bundle: Add support for loading YAML files from bundles ([#1471](https://github.com/meta-quick/opa/issues/1471))
-- bundle: Cache compiler on storage context ([#1515](https://github.com/meta-quick/opa/issues/1515))
-- cmd: Fix double print of rego errors ([#1518](https://github.com/meta-quick/opa/issues/1518))
-- docs: Add section on how to express "FOR ALL" in Rego ([#1307](https://github.com/meta-quick/opa/issues/1307))
-- docs: Fix mention of reference head var ([#1477](https://github.com/meta-quick/opa/issues/1477))
-- docs: Remove cast_xyz functions from docs ([#1405](https://github.com/meta-quick/opa/issues/1405))
-- server: Pass transaction in decision log event ([#1543](https://github.com/meta-quick/opa/issues/1543))
-- storage: Add safety checks to in-memory store ([#1594](https://github.com/meta-quick/opa/issues/1594))
-- topdown: Fix corrupt object panic caused by copy propagation ([#1177](https://github.com/meta-quick/opa/issues/1177))
-- topdown: Fix virtual cache to allow composite key terms ([#1197](https://github.com/meta-quick/opa/issues/1197))
+- ast: Report safety errors on line where expression starts ([#1497](https://github.com/meta-quick/opax/issues/1497))
+- ast: Update rule index to support glob.match ([#1496](https://github.com/meta-quick/opax/issues/1496))
+- bundle: Add support for loading YAML files from bundles ([#1471](https://github.com/meta-quick/opax/issues/1471))
+- bundle: Cache compiler on storage context ([#1515](https://github.com/meta-quick/opax/issues/1515))
+- cmd: Fix double print of rego errors ([#1518](https://github.com/meta-quick/opax/issues/1518))
+- docs: Add section on how to express "FOR ALL" in Rego ([#1307](https://github.com/meta-quick/opax/issues/1307))
+- docs: Fix mention of reference head var ([#1477](https://github.com/meta-quick/opax/issues/1477))
+- docs: Remove cast_xyz functions from docs ([#1405](https://github.com/meta-quick/opax/issues/1405))
+- server: Pass transaction in decision log event ([#1543](https://github.com/meta-quick/opax/issues/1543))
+- storage: Add safety checks to in-memory store ([#1594](https://github.com/meta-quick/opax/issues/1594))
+- topdown: Fix corrupt object panic caused by copy propagation ([#1177](https://github.com/meta-quick/opax/issues/1177))
+- topdown: Fix virtual cache to allow composite key terms ([#1197](https://github.com/meta-quick/opax/issues/1197))
 
 ### Miscellaneous
 
@@ -2350,14 +2350,14 @@ decision logging.
 
 ### Fixes
 
-- Fix performance impact of bundle activation on policy queries ([#1516](https://github.com/meta-quick/opa/issues/1516))
-- Fix log masking to use correct transaction ([#1551](https://github.com/meta-quick/opa/pull/1551))
+- Fix performance impact of bundle activation on policy queries ([#1516](https://github.com/meta-quick/opax/issues/1516))
+- Fix log masking to use correct transaction ([#1551](https://github.com/meta-quick/opax/pull/1551))
 
 ## 0.12.1
 
 ### Fixes
 
-- Fix deadlock caused by log masking decision evaluation ([#1543](https://github.com/meta-quick/opa/issues/1543))
+- Fix deadlock caused by log masking decision evaluation ([#1543](https://github.com/meta-quick/opax/issues/1543))
 
 ### Miscellaneous
 
@@ -2384,11 +2384,11 @@ documentation for details.
 
 ### Fixes
 
-* server: Fix deadlock caused by leaked write transaction ([#1478](https://github.com/meta-quick/opa/issues/1478))
+* server: Fix deadlock caused by leaked write transaction ([#1478](https://github.com/meta-quick/opax/issues/1478))
 
 ### Miscellaneous
 
-- server: Add request headers to authorization input ([#1456](https://github.com/meta-quick/opa/issues/1456))
+- server: Add request headers to authorization input ([#1456](https://github.com/meta-quick/opax/issues/1456))
 - rego: Add time zone support to time/date built-in functions
 - eval: Add --instrument flag for profiling evaluation via command line
 
@@ -2445,24 +2445,24 @@ This release includes a few notable features and improvements:
 * The `rego` package has been extended to support prepared
   queries. Prepared queries cache the parsed and compiled query ASTs
   for re-use across multiple `Eval` calls. For small policies the
-  speedup can be significant. See the [GoDoc](https://godoc.org/github.com/meta-quick/opa/rego#example-Rego-PrepareForEval) for details.
+  speedup can be significant. See the [GoDoc](https://godoc.org/github.com/meta-quick/opax/rego#example-Rego-PrepareForEval) for details.
 
 ### Fixes
 
-- Add Kubernetes admission control debugging tips ([#1039](https://github.com/meta-quick/opa/issues/1039))
-- Add docs on health check API endpoint ([#1086](https://github.com/meta-quick/opa/issues/1086))
-- Add hardened configuration example to security page ([#1172](https://github.com/meta-quick/opa/issues/1172))
-- Add support for with keyword stacking ([#802](https://github.com/meta-quick/opa/issues/802))
-- Fix type inferencing on object keys ([#1361](https://github.com/meta-quick/opa/issues/1361))
-- Fix simple Kubernetes deployment example ([#874](https://github.com/meta-quick/opa/issues/874))
-- Fix bug in data mocking that resulted in wrong iteration behavior ([#1261](https://github.com/meta-quick/opa/issues/1261))
-- Fix bug in set deep copy that caused panic ([#1406](https://github.com/meta-quick/opa/issues/1406))
-- Fix bug in REPL that prevented rules from being declared ([#1104](https://github.com/meta-quick/opa/issues/1104))
+- Add Kubernetes admission control debugging tips ([#1039](https://github.com/meta-quick/opax/issues/1039))
+- Add docs on health check API endpoint ([#1086](https://github.com/meta-quick/opax/issues/1086))
+- Add hardened configuration example to security page ([#1172](https://github.com/meta-quick/opax/issues/1172))
+- Add support for with keyword stacking ([#802](https://github.com/meta-quick/opax/issues/802))
+- Fix type inferencing on object keys ([#1361](https://github.com/meta-quick/opax/issues/1361))
+- Fix simple Kubernetes deployment example ([#874](https://github.com/meta-quick/opax/issues/874))
+- Fix bug in data mocking that resulted in wrong iteration behavior ([#1261](https://github.com/meta-quick/opax/issues/1261))
+- Fix bug in set deep copy that caused panic ([#1406](https://github.com/meta-quick/opax/issues/1406))
+- Fix bug in REPL that prevented rules from being declared ([#1104](https://github.com/meta-quick/opax/issues/1104))
 
 ### Miscellaneous
 
-- docs: Better documentation for providing the `input` document over HTTP ([#1293](https://github.com/meta-quick/opa/issues/1293))
-- docs: Add note about HTTP_PROXY  friends ([#1410](https://github.com/meta-quick/opa/issues/1410))
+- docs: Better documentation for providing the `input` document over HTTP ([#1293](https://github.com/meta-quick/opax/issues/1293))
+- docs: Add note about HTTP_PROXY  friends ([#1410](https://github.com/meta-quick/opax/issues/1410))
 - Add CLI config overrides and ENV injection
 - Add additional compiler metrics for each stage
 - Add an “edge” release to the docs
@@ -2486,9 +2486,9 @@ This release publishes the Hugo-based documentation to GitHub Pages :tada:
 
 ### Fixes
 
-- Add `array.slice` built-in function ([#1243](https://github.com/meta-quick/opa/issues/1243))
+- Add `array.slice` built-in function ([#1243](https://github.com/meta-quick/opax/issues/1243))
 - Add `net.cidr_contains` and `net.cidr_intersects` built-ins
-  ([#1289](https://github.com/meta-quick/opa/issues/1289)). This
+  ([#1289](https://github.com/meta-quick/opax/issues/1289)). This
   change deprecates the old `net.cidr_overlap` built-in function. The
   latter will be supported for backwards compatibility but new
   policies should refer to `net.cidr_contains`.
@@ -2516,11 +2516,11 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Fixes
 
-- Fix panic in mod operation ([#1245](https://github.com/meta-quick/opa/issues/1245))
-- Fix eval tree enumeration to return errors ([#1272](https://github.com/meta-quick/opa/issues/1272))
-- Fix http.send to handle non-JSON responses ([#1258](https://github.com/meta-quick/opa/issues/1258))
-- Fix backticks in SSH example that were causing problems ([#1260](https://github.com/meta-quick/opa/issues/1260))
-- Fix IAM examples to use regex instead of glob syntax ([#1282](https://github.com/meta-quick/opa/issues/1282))
+- Fix panic in mod operation ([#1245](https://github.com/meta-quick/opax/issues/1245))
+- Fix eval tree enumeration to return errors ([#1272](https://github.com/meta-quick/opax/issues/1272))
+- Fix http.send to handle non-JSON responses ([#1258](https://github.com/meta-quick/opax/issues/1258))
+- Fix backticks in SSH example that were causing problems ([#1260](https://github.com/meta-quick/opax/issues/1260))
+- Fix IAM examples to use regex instead of glob syntax ([#1282](https://github.com/meta-quick/opax/issues/1282))
 
 ### Miscellaneous
 
@@ -2541,7 +2541,7 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Fixes
 
-- Fix substring built-in bounds checking ([#1235](https://github.com/meta-quick/opa/issues/1235))
+- Fix substring built-in bounds checking ([#1235](https://github.com/meta-quick/opax/issues/1235))
 - Add trailing newlines when pretty printing API responses
 - Add default Go metrics to Prometheus
 - Add pprof endpoint to HTTP server
@@ -2563,15 +2563,15 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 ### Fixes
 
 - Add coverage support to `opa eval` sub-command
-- Fix path checking in server to prevent overlapping base and virtual docs ([#1207](https://github.com/meta-quick/opa/issues/1207))
-- Fix cmd integration tests to cleanup plugin directory ([#1185](https://github.com/meta-quick/opa/issues/1185))
-- Improve TLS support in `http.send` ([#1067](https://github.com/meta-quick/opa/issues/
+- Fix path checking in server to prevent overlapping base and virtual docs ([#1207](https://github.com/meta-quick/opax/issues/1207))
+- Fix cmd integration tests to cleanup plugin directory ([#1185](https://github.com/meta-quick/opax/issues/1185))
+- Improve TLS support in `http.send` ([#1067](https://github.com/meta-quick/opax/issues/
 
 ## 0.10.3
 
 * This release includes support for authentication via client
   certificates (thanks @srenatus!) For improvements to authentication
-  see [#1163](https://github.com/meta-quick/opa/issues/1163).
+  see [#1163](https://github.com/meta-quick/opax/issues/1163).
 
 * This release includes a backwards incompatible change to the
   plugin interface. Specifically, when plugins are registered, callers
@@ -2587,23 +2587,23 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
   handled correctly and decision logs for ad-hoc queries now populate
   the "query" field in the event instead of the "path" field. If you
   are using consuming decision log events in Go, please switch to the
-  decision logger framework documented here: https://github.com/meta-quick/opa/blob/master/docs/book/plugins.md.
+  decision logger framework documented here: https://github.com/meta-quick/opax/blob/master/docs/book/plugins.md.
 
 ### Fixes
 
-- Add OPA version to decision logs ([#1089](https://github.com/meta-quick/opa/issues/1089))
-- Add query metrics to decision logs ([#1033](https://github.com/meta-quick/opa/issues/1033))
-- Add health endpoint to HTTP server ([#1086](https://github.com/meta-quick/opa/issues/1086))
-- Add line of failure in `opa test` ([#961](https://github.com/meta-quick/opa/issues/961))
-- Fix panic caused by assignment rewriting ([#1125](https://github.com/meta-quick/opa/issues/1125))
-- Fix parser to avoid duplicate comments in AST ([#426](https://github.com/meta-quick/opa/issues/426))
-- Fix semantic check for function references ([#1132](https://github.com/meta-quick/opa/issues/1132))
-- Fix query API to return 4xx on bad request ([#1081](https://github.com/meta-quick/opa/issues/1081))
-- Fix incorrect early exit from ref resolver ([#1110](https://github.com/meta-quick/opa/issues/1110))
-- Fix rewriting of assignment values ([#1154](https://github.com/meta-quick/opa/issues/1154))
-- Fix resolution inside references ([#1155](https://github.com/meta-quick/opa/issues/1155))
-- Fix '^' location of lines starting with tabs ([#1129](https://github.com/meta-quick/opa/issues/1129))
-- docs: Update count function doc to mention strings (#1126) ([#1122](https://github.com/meta-quick/opa/issues/1122))
+- Add OPA version to decision logs ([#1089](https://github.com/meta-quick/opax/issues/1089))
+- Add query metrics to decision logs ([#1033](https://github.com/meta-quick/opax/issues/1033))
+- Add health endpoint to HTTP server ([#1086](https://github.com/meta-quick/opax/issues/1086))
+- Add line of failure in `opa test` ([#961](https://github.com/meta-quick/opax/issues/961))
+- Fix panic caused by assignment rewriting ([#1125](https://github.com/meta-quick/opax/issues/1125))
+- Fix parser to avoid duplicate comments in AST ([#426](https://github.com/meta-quick/opax/issues/426))
+- Fix semantic check for function references ([#1132](https://github.com/meta-quick/opax/issues/1132))
+- Fix query API to return 4xx on bad request ([#1081](https://github.com/meta-quick/opax/issues/1081))
+- Fix incorrect early exit from ref resolver ([#1110](https://github.com/meta-quick/opax/issues/1110))
+- Fix rewriting of assignment values ([#1154](https://github.com/meta-quick/opax/issues/1154))
+- Fix resolution inside references ([#1155](https://github.com/meta-quick/opax/issues/1155))
+- Fix '^' location of lines starting with tabs ([#1129](https://github.com/meta-quick/opax/issues/1129))
+- docs: Update count function doc to mention strings (#1126) ([#1122](https://github.com/meta-quick/opax/issues/1122))
 
 ### Miscellaneous
 
@@ -2621,8 +2621,8 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### WebAssembly
 
-- wasm: Add support for composite terms ([#1113](https://github.com/meta-quick/opa/issues/1113))
-- wasm: Add support for not keyword ([#1112](https://github.com/meta-quick/opa/issues/1112))
+- wasm: Add support for composite terms ([#1113](https://github.com/meta-quick/opax/issues/1113))
+- wasm: Add support for not keyword ([#1112](https://github.com/meta-quick/opax/issues/1112))
 - wasm: Add == operator
 - wasm: Add checks on single term and dot stmts
 - wasm: Add support for boolean and null literals
@@ -2639,12 +2639,12 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Fixes
 
-- Add manifest metadata to bundle data (#1079) ([#1062](https://github.com/meta-quick/opa/issues/1062))
-- Add profile command to REPL ([#838](https://github.com/meta-quick/opa/issues/838))
-- Add decision ID note in API docs ([#1061](https://github.com/meta-quick/opa/issues/1061))
-- Fix formatting of trailing comments in composites ([#1060](https://github.com/meta-quick/opa/issues/1060))
-- Fix panic caused by input being set incorrectly ([#1083](https://github.com/meta-quick/opa/issues/1083))
-- Fix partial eval to apply saved terms ([#1074](https://github.com/meta-quick/opa/issues/1074))
+- Add manifest metadata to bundle data (#1079) ([#1062](https://github.com/meta-quick/opax/issues/1062))
+- Add profile command to REPL ([#838](https://github.com/meta-quick/opax/issues/838))
+- Add decision ID note in API docs ([#1061](https://github.com/meta-quick/opax/issues/1061))
+- Fix formatting of trailing comments in composites ([#1060](https://github.com/meta-quick/opax/issues/1060))
+- Fix panic caused by input being set incorrectly ([#1083](https://github.com/meta-quick/opax/issues/1083))
+- Fix partial eval to apply saved terms ([#1074](https://github.com/meta-quick/opax/issues/1074))
 
 ### Miscellaneous
 
@@ -2671,7 +2671,7 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Fixes
 
-- Add show debug command to REPL ([#750](https://github.com/meta-quick/opa/issues/750))
+- Add show debug command to REPL ([#750](https://github.com/meta-quick/opax/issues/750))
 
 ### Miscellaneous
 
@@ -2704,21 +2704,21 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Fixes
 
-- Add builtin to verify and decode JWT ([#884](https://github.com/meta-quick/opa/issues/884))
-- Add GoDoc sample for using rego.Tracer ([#1002](https://github.com/meta-quick/opa/issues/1002))
-- Add built-in function to get runtime info ([#420](https://github.com/meta-quick/opa/issues/420))
-- Add support for YAML encoded input values ([#290](https://github.com/meta-quick/opa/issues/290))
-- Add support for client certificates ([#684](https://github.com/meta-quick/opa/issues/684))
-- Add support for non-zero exit code in eval subcommand ([#981](https://github.com/meta-quick/opa/issues/981))
-- Fix == rewriting on embedded terms ([#995](https://github.com/meta-quick/opa/issues/995))
-- Fix copy propagation panic in comprehensions ([#1012](https://github.com/meta-quick/opa/issues/1012))
-- Implement regex.find_n (#1001) ([#747](https://github.com/meta-quick/opa/issues/747))
-- Improve with modifier target error ([#343](https://github.com/meta-quick/opa/issues/343))
-- Iterate over smaller set when intersecting ([#531](https://github.com/meta-quick/opa/issues/531))
-- Only write one trailing newline at end of file ([#1032](https://github.com/meta-quick/opa/issues/1032))
-- Redirect HTTP requests with trailing slashes ([#972](https://github.com/meta-quick/opa/issues/972))
-- Update bundle reader to allow relative data.json ([#1019](https://github.com/meta-quick/opa/issues/1019))
-- Expose version information via REST API ([#277](https://github.com/meta-quick/opa/issues/277))
+- Add builtin to verify and decode JWT ([#884](https://github.com/meta-quick/opax/issues/884))
+- Add GoDoc sample for using rego.Tracer ([#1002](https://github.com/meta-quick/opax/issues/1002))
+- Add built-in function to get runtime info ([#420](https://github.com/meta-quick/opax/issues/420))
+- Add support for YAML encoded input values ([#290](https://github.com/meta-quick/opax/issues/290))
+- Add support for client certificates ([#684](https://github.com/meta-quick/opax/issues/684))
+- Add support for non-zero exit code in eval subcommand ([#981](https://github.com/meta-quick/opax/issues/981))
+- Fix == rewriting on embedded terms ([#995](https://github.com/meta-quick/opax/issues/995))
+- Fix copy propagation panic in comprehensions ([#1012](https://github.com/meta-quick/opax/issues/1012))
+- Implement regex.find_n (#1001) ([#747](https://github.com/meta-quick/opax/issues/747))
+- Improve with modifier target error ([#343](https://github.com/meta-quick/opax/issues/343))
+- Iterate over smaller set when intersecting ([#531](https://github.com/meta-quick/opax/issues/531))
+- Only write one trailing newline at end of file ([#1032](https://github.com/meta-quick/opax/issues/1032))
+- Redirect HTTP requests with trailing slashes ([#972](https://github.com/meta-quick/opax/issues/972))
+- Update bundle reader to allow relative data.json ([#1019](https://github.com/meta-quick/opax/issues/1019))
+- Expose version information via REST API ([#277](https://github.com/meta-quick/opax/issues/277))
 
 ### Miscellaneous
 
@@ -2738,8 +2738,8 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 
 ### Miscellaneous Fixes
 
-- Add option to enable http redirects ([#921](https://github.com/meta-quick/opa/issues/921))
-- Add copy propagation to support rules ([#911](https://github.com/meta-quick/opa/issues/911))
+- Add option to enable http redirects ([#921](https://github.com/meta-quick/opax/issues/921))
+- Add copy propagation to support rules ([#911](https://github.com/meta-quick/opax/issues/911))
 - Add support for inlining negated expressions in partial evaluation
 - Add deps subcommand to analyze base and virtual document dependencies
 - Add partial evaluation support to eval subcommand
@@ -2747,26 +2747,26 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 - Add `regex.template_match` built-in function (thanks @aeneasr)
 - Add external security audit information (thanks @caniszczyk)
 - Add initial support for plugin loading (thanks @vrnmthr)
-- Fix copy propagator type assertion panic ([#912](https://github.com/meta-quick/opa/issues/912))
-- Fix panic in parser error detail construction ([#948](https://github.com/meta-quick/opa/issues/948))
-- Fix with value rewriting for call terms ([#916](https://github.com/meta-quick/opa/issues/916))
+- Fix copy propagator type assertion panic ([#912](https://github.com/meta-quick/opax/issues/912))
+- Fix panic in parser error detail construction ([#948](https://github.com/meta-quick/opax/issues/948))
+- Fix with value rewriting for call terms ([#916](https://github.com/meta-quick/opax/issues/916))
 - Fix coverage flag for test command (thanks @johscheuer)
 - Fix compile operation timing in REPL
 - Fix to indent 4 spaces instead of a tab (thanks @superbrothers)
 - Fix REPL output in policy guide (thanks @ttripp)
 - Multiple fixes in the Kubernetes admission controller tutorial (thanks @johscheuer)
-- Improve formatting of empty ast.Body ([#909](https://github.com/meta-quick/opa/issues/909))
+- Improve formatting of empty ast.Body ([#909](https://github.com/meta-quick/opax/issues/909))
 - Improve Kubernetes admission control policy loading explanation (thanks @rite2nihkil)
-- Update http.send test to work without internet access ([#945](https://github.com/meta-quick/opa/issues/945))
-- Update test runner to set Fail to true ([#954](https://github.com/meta-quick/opa/issues/954))
+- Update http.send test to work without internet access ([#945](https://github.com/meta-quick/opax/issues/945))
+- Update test runner to set Fail to true ([#954](https://github.com/meta-quick/opax/issues/954))
 
 ### Security Audit Fixes
 
-- Improve token authentication docs and handler ([#901](https://github.com/meta-quick/opa/issues/901))
-- Link to security docs in tutorials ([#917](https://github.com/meta-quick/opa/issues/917))
-- Update bundle reader to cap buffer size ([#920](https://github.com/meta-quick/opa/issues/920))
-- Validate queries by checking unsafe builtins ([#919](https://github.com/meta-quick/opa/issues/919))
-- Fix XSS in debug page ([#918](https://github.com/meta-quick/opa/issues/918))
+- Improve token authentication docs and handler ([#901](https://github.com/meta-quick/opax/issues/901))
+- Link to security docs in tutorials ([#917](https://github.com/meta-quick/opax/issues/917))
+- Update bundle reader to cap buffer size ([#920](https://github.com/meta-quick/opax/issues/920))
+- Validate queries by checking unsafe builtins ([#919](https://github.com/meta-quick/opax/issues/919))
+- Fix XSS in debug page ([#918](https://github.com/meta-quick/opax/issues/918))
 
 ### Miscellaneous
 
@@ -2775,13 +2775,13 @@ pass `"force_json_decode": true` as in the `http.send` parameters.
 ### Fixes
 
 - Add io.jwt.verify_es256 and io.jwt.verify_ps256 built-in functions (@optnfast)
-- Add array.concat built-in function ([#851](https://github.com/meta-quick/opa/issues/851))
-- Add support for command line bundle loading ([#870](https://github.com/meta-quick/opa/issues/870))
+- Add array.concat built-in function ([#851](https://github.com/meta-quick/opax/issues/851))
+- Add support for command line bundle loading ([#870](https://github.com/meta-quick/opax/issues/870))
 - Add regex split built-in function
-- Fix incorrect AST node in Index events ([#859](https://github.com/meta-quick/opa/issues/859))
-- Fix terraform tutorial type check errors ([#888](https://github.com/meta-quick/opa/issues/888))
+- Fix incorrect AST node in Index events ([#859](https://github.com/meta-quick/opax/issues/859))
+- Fix terraform tutorial type check errors ([#888](https://github.com/meta-quick/opax/issues/888))
 - Fix CONTRIBUTING.md to include sign-off step (@optnfast)
-- Improve save set performance ([#860](https://github.com/meta-quick/opa/issues/860))
+- Improve save set performance ([#860](https://github.com/meta-quick/opax/issues/860))
 
 ## 0.9.0
 
@@ -2801,10 +2801,10 @@ This release adds two major features to OPA itself.
 
 ### Fixes
 
-- Add ADOPTERS.md file ([#691](https://github.com/meta-quick/opa/issues/691))
-- Add time.weekday builtin ([#789](https://github.com/meta-quick/opa/issues/789))
-- Fix REPL output for multiple bool exprs ([#850](https://github.com/meta-quick/opa/issues/850))
-- Remove support rule if default value is not needed ([#820](https://github.com/meta-quick/opa/issues/820))
+- Add ADOPTERS.md file ([#691](https://github.com/meta-quick/opax/issues/691))
+- Add time.weekday builtin ([#789](https://github.com/meta-quick/opax/issues/789))
+- Fix REPL output for multiple bool exprs ([#850](https://github.com/meta-quick/opax/issues/850))
+- Remove support rule if default value is not needed ([#820](https://github.com/meta-quick/opax/issues/820))
 
 ### Miscellaneous
 
@@ -2827,27 +2827,27 @@ Here is a short list of notable miscellaneous improvements.
 
 ### Fixes
 
-- Fix virtual document cache invalidation ([#736](https://github.com/meta-quick/opa/issues/736))
-- Fix partial cache invalidation for data changes ([#589](https://github.com/meta-quick/opa/issues/589))
-- Fix query to path conversion in decision logger ([#783](https://github.com/meta-quick/opa/issues/783))
-- Fix handling of pointers to structs ([#722](https://github.com/meta-quick/opa/issues/722), thanks @srenatus)
-- Improve sprintf number handling ([#748](https://github.com/meta-quick/opa/issues/748))
-- Reduce memory overhead of decision logs ([#705](https://github.com/meta-quick/opa/issues/705))
-- Set bundle status in case of HTTP 304 ([#794](https://github.com/meta-quick/opa/issues/794))
+- Fix virtual document cache invalidation ([#736](https://github.com/meta-quick/opax/issues/736))
+- Fix partial cache invalidation for data changes ([#589](https://github.com/meta-quick/opax/issues/589))
+- Fix query to path conversion in decision logger ([#783](https://github.com/meta-quick/opax/issues/783))
+- Fix handling of pointers to structs ([#722](https://github.com/meta-quick/opax/issues/722), thanks @srenatus)
+- Improve sprintf number handling ([#748](https://github.com/meta-quick/opax/issues/748))
+- Reduce memory overhead of decision logs ([#705](https://github.com/meta-quick/opax/issues/705))
+- Set bundle status in case of HTTP 304 ([#794](https://github.com/meta-quick/opax/issues/794))
 
 ### Miscellaneous
 
 - Add docs on best practices around identity
 - Add built-in function to verify JWTs signed with HS246 (thanks @hbouvier)
 - Add built-in function to URL encode objects (thanks @vrnmthr)
-- Add query parameters to authorization policy input ([#786](https://github.com/meta-quick/opa/pull/786))
-- Add support for listening on a UNIX domain socket ([#692](https://github.com/meta-quick/opa/issues/692), thanks @JAORMX)
-- Add trace event for rule index lookups ([#716](https://github.com/meta-quick/opa/issues/716))
+- Add query parameters to authorization policy input ([#786](https://github.com/meta-quick/opax/pull/786))
+- Add support for listening on a UNIX domain socket ([#692](https://github.com/meta-quick/opax/issues/692), thanks @JAORMX)
+- Add trace event for rule index lookups ([#716](https://github.com/meta-quick/opax/issues/716))
 - Add support for multiple listeners in server (thanks @JAORMX)
 - Remove decision log buffer size limit by default
 - Update codebase with various go-fmt/ineffassign/mispell fixes (thanks @srenatus)
 - Update REPL command to set unknowns
-- Update subcommands to support loader filter ([#782](https://github.com/meta-quick/opa/issues/782))
+- Update subcommands to support loader filter ([#782](https://github.com/meta-quick/opax/issues/782))
 - Update evaluator to cache storage reads
 - Update object to keep track of groundness
 
@@ -2855,8 +2855,8 @@ Here is a short list of notable miscellaneous improvements.
 
 ### Fixes
 
-- Handle escaped paths in data writes ([#695](https://github.com/meta-quick/opa/issues/695))
-- Rewrite with modifiers to allow refs as values ([#701](https://github.com/meta-quick/opa/issues/701))
+- Handle escaped paths in data writes ([#695](https://github.com/meta-quick/opax/issues/695))
+- Rewrite with modifiers to allow refs as values ([#701](https://github.com/meta-quick/opax/issues/701))
 
 ### Miscellaneous
 
@@ -2918,14 +2918,14 @@ allowed_methods = ["GET", "HEAD"]
 
 ### Fixes
 
-- Add RS256 JWT signature verification built-in function ([#421](https://github.com/meta-quick/opa/issues/421))
-- Add X.509 certificate parsing built-in function ([#635](https://github.com/meta-quick/opa/issues/635))
-- Fix substring built-in bounds checking ([#465](https://github.com/meta-quick/opa/issues/465))
-- Generate support rules for negated expressions ([#623](https://github.com/meta-quick/opa/issues/623))
-- Ignore some built-in calls during partial eval ([#622](https://github.com/meta-quick/opa/issues/622))
-- Plug comprehensions in partial eval results ([#656](https://github.com/meta-quick/opa/issues/656))
-- Report safety errors for generated vars ([#661](https://github.com/meta-quick/opa/issues/661))
-- Update partial eval to check call args recursively ([#621](https://github.com/meta-quick/opa/issues/621))
+- Add RS256 JWT signature verification built-in function ([#421](https://github.com/meta-quick/opax/issues/421))
+- Add X.509 certificate parsing built-in function ([#635](https://github.com/meta-quick/opax/issues/635))
+- Fix substring built-in bounds checking ([#465](https://github.com/meta-quick/opax/issues/465))
+- Generate support rules for negated expressions ([#623](https://github.com/meta-quick/opax/issues/623))
+- Ignore some built-in calls during partial eval ([#622](https://github.com/meta-quick/opax/issues/622))
+- Plug comprehensions in partial eval results ([#656](https://github.com/meta-quick/opax/issues/656))
+- Report safety errors for generated vars ([#661](https://github.com/meta-quick/opax/issues/661))
+- Update partial eval to check call args recursively ([#621](https://github.com/meta-quick/opax/issues/621))
 
 ### Other Notable Changes
 
@@ -2946,7 +2946,7 @@ As well as many other smaller improvements, refactoring, and fixes.
 
 ### Fixes
 
-- Use rego.ParsedInput to provide input from form ([#571](https://github.com/meta-quick/opa/issues/571))
+- Use rego.ParsedInput to provide input from form ([#571](https://github.com/meta-quick/opax/issues/571))
 
 ### Miscellaneous
 
@@ -2980,15 +2980,15 @@ This release adds and improves a bunch of new built-in functions. See the [Langu
 
 ### Fixes
 
-- Fix REPL assignment support ([#615](https://github.com/meta-quick/opa/issues/615))
-- Fix panic due to nil term value ([#601](https://github.com/meta-quick/opa/issues/601))
-- Fix safety check bug for call args ([#625](https://github.com/meta-quick/opa/issues/625))
-- Update Kubernetes Admission Control tutorial ([#567](https://github.com/meta-quick/opa/issues/567))
-- Update release script to build for Windows ([#573](https://github.com/meta-quick/opa/issues/573))
+- Fix REPL assignment support ([#615](https://github.com/meta-quick/opax/issues/615))
+- Fix panic due to nil term value ([#601](https://github.com/meta-quick/opax/issues/601))
+- Fix safety check bug for call args ([#625](https://github.com/meta-quick/opax/issues/625))
+- Update Kubernetes Admission Control tutorial ([#567](https://github.com/meta-quick/opax/issues/567))
+- Update release script to build for Windows ([#573](https://github.com/meta-quick/opax/issues/573))
 
 ### Miscellaneous
 
-- Add support for DELETE method in Data API ([#609](https://github.com/meta-quick/opa/issues/609)) (thanks @repenno)
+- Add support for DELETE method in Data API ([#609](https://github.com/meta-quick/opax/issues/609)) (thanks @repenno)
 - Add basic query performance instrumentation
 - Add documentation covering how OPA compares to other systems
 - Remove use of unsafe.Pointer for string hashing
@@ -3002,16 +3002,16 @@ produce *new* queries which can be evaluated once inputs become known.
 ### Features
 
 - Add initial implementation of partial evaluation
-- Add sort built-in function ([#465](https://github.com/meta-quick/opa/issues/465))
+- Add sort built-in function ([#465](https://github.com/meta-quick/opax/issues/465))
 - Add built-in function to check value types
 
 ### Fixes
 
-- Fix rule arg type inferencing ([#542](https://github.com/meta-quick/opa/issues/542))
-- Fix documentation on "else" keyword ([#475](https://github.com/meta-quick/opa/issues/475))
-- Fix REPL to deduplicate auto-complete paths ([#432](https://github.com/meta-quick/opa/pull/432)
-- Improve getting started example ([#532](https://github.com/meta-quick/opa/issues/532))
-- Improve handling of forbidden methods in HTTP server ([#445](https://github.com/meta-quick/opa/issues/445))
+- Fix rule arg type inferencing ([#542](https://github.com/meta-quick/opax/issues/542))
+- Fix documentation on "else" keyword ([#475](https://github.com/meta-quick/opax/issues/475))
+- Fix REPL to deduplicate auto-complete paths ([#432](https://github.com/meta-quick/opax/pull/432)
+- Improve getting started example ([#532](https://github.com/meta-quick/opax/issues/532))
+- Improve handling of forbidden methods in HTTP server ([#445](https://github.com/meta-quick/opax/issues/445))
 
 ### Miscellaneous
 
@@ -3021,22 +3021,22 @@ produce *new* queries which can be evaluated once inputs become known.
 
 ### Fixes
 
-- Improve InterfaceToValue to handle other Go types ([#473](https://github.com/meta-quick/opa/issues/473))
-- Fix bug in conflict detection ([#518](https://github.com/meta-quick/opa/issues/518))
+- Improve InterfaceToValue to handle other Go types ([#473](https://github.com/meta-quick/opax/issues/473))
+- Fix bug in conflict detection ([#518](https://github.com/meta-quick/opax/issues/518))
 
 ## 0.5.12
 
 ### Fixes
 
-- Fix eval of objects/sets containing vars ([#505](https://github.com/meta-quick/opa/issues/505))
+- Fix eval of objects/sets containing vars ([#505](https://github.com/meta-quick/opax/issues/505))
 - Fix REPL printing of generated vars
 
 ## 0.5.11
 
 ### Fixes
 
-- Refactor topdown evaluation/unification ([#131](https://github.com/meta-quick/opa/issues/131))
-- Rewrite refs in rule args ([#497](https://github.com/meta-quick/opa/issues/497))
+- Refactor topdown evaluation/unification ([#131](https://github.com/meta-quick/opax/issues/131))
+- Rewrite refs in rule args ([#497](https://github.com/meta-quick/opax/issues/497))
 
 ### Miscellaneous
 
@@ -3048,9 +3048,9 @@ produce *new* queries which can be evaluated once inputs become known.
 
 ### Fixes
 
-- Fix index usage for virtual docs ([#490](https://github.com/meta-quick/opa/issues/490))
-- Fix match error panic ([#494](https://github.com/meta-quick/opa/issues/494))
-- Fix wildcard mangling in rule head ([#480](https://github.com/meta-quick/opa/issues/480))
+- Fix index usage for virtual docs ([#490](https://github.com/meta-quick/opax/issues/490))
+- Fix match error panic ([#494](https://github.com/meta-quick/opax/issues/494))
+- Fix wildcard mangling in rule head ([#480](https://github.com/meta-quick/opax/issues/480))
 
 ### Miscellaneous
 
@@ -3061,7 +3061,7 @@ produce *new* queries which can be evaluated once inputs become known.
 
 ### Fixes
 
-- Fix unsafe var errors on functions ([#471](https://github.com/meta-quick/opa/issues/471), [#467](https://github.com/meta-quick/opa/issues/467))
+- Fix unsafe var errors on functions ([#471](https://github.com/meta-quick/opax/issues/471), [#467](https://github.com/meta-quick/opax/issues/467))
 
 ### Miscellaneous
 
@@ -3075,7 +3075,7 @@ produce *new* queries which can be evaluated once inputs become known.
 
 ### Fixes
 
-- Substitute comprehension terms requring eval ([#453](https://github.com/meta-quick/opa/issues/453))
+- Substitute comprehension terms requring eval ([#453](https://github.com/meta-quick/opax/issues/453))
 
 ### Miscellaneous
 
@@ -3093,11 +3093,11 @@ This release adds a new `test` subcommand to OPA. The `test` subcommand enables 
 
 ### Fixes
 
-- Fix type error marshalling bug ([#391](https://github.com/meta-quick/opa/issues/391))
-- Fix type inference bug ([#381](https://github.com/meta-quick/opa/issues/381))
-- Fix unification bug ([#436](https://github.com/meta-quick/opa/issues/436))
-- Fix type inferecen bug for partial objects with non-string keys ([#440](https://github.com/meta-quick/opa/issues/440))
-- Suppress match errors if closures contained errors ([#438](https://github.com/meta-quick/opa/issues/438))
+- Fix type error marshalling bug ([#391](https://github.com/meta-quick/opax/issues/391))
+- Fix type inference bug ([#381](https://github.com/meta-quick/opax/issues/381))
+- Fix unification bug ([#436](https://github.com/meta-quick/opax/issues/436))
+- Fix type inferecen bug for partial objects with non-string keys ([#440](https://github.com/meta-quick/opax/issues/440))
+- Suppress match errors if closures contained errors ([#438](https://github.com/meta-quick/opax/issues/438))
 
 ## 0.5.6
 
@@ -3105,8 +3105,8 @@ As part of this release, logrus was revendored to deal with the naming issue. If
 
 ### Fixes
 
-- Fix incorrect REPL interpretation of some exprs ([#433](https://github.com/meta-quick/opa/issues/433))
-- Fix inaccurate location information in some parser errors ([#214](https://github.com/meta-quick/opa/issues/214))
+- Fix incorrect REPL interpretation of some exprs ([#433](https://github.com/meta-quick/opax/issues/433))
+- Fix inaccurate location information in some parser errors ([#214](https://github.com/meta-quick/opax/issues/214))
 
 ### Miscellaneous
 
@@ -3141,8 +3141,8 @@ This release adds [Diagnostics](http://www.openpolicyagent.org/docs/rest-api.htm
 
 ### Fixes
 
-- Add support for raw strings ([#265](https://github.com/meta-quick/opa/issues/265))
-- Add support to cancel compilation after some number of errors ([#249](https://github.com/meta-quick/opa/issues/249))
+- Add support for raw strings ([#265](https://github.com/meta-quick/opax/issues/265))
+- Add support to cancel compilation after some number of errors ([#249](https://github.com/meta-quick/opax/issues/249))
 
 ### Miscellaneous
 
@@ -3156,8 +3156,8 @@ This release adds [Diagnostics](http://www.openpolicyagent.org/docs/rest-api.htm
 ### Fixes
 
 - Fix mobile view navigation bug
-- Fix panic in compiler from concurrent map writes ([#379](https://github.com/meta-quick/opa/pull/379)
-- Fix ambiguous syntax around body and set comprehensions ([#377](https://github.com/meta-quick/opa/issues/377))
+- Fix panic in compiler from concurrent map writes ([#379](https://github.com/meta-quick/opax/pull/379)
+- Fix ambiguous syntax around body and set comprehensions ([#377](https://github.com/meta-quick/opax/issues/377))
 
 ### Miscellaneous
 
@@ -3192,7 +3192,7 @@ safety.
 
 The storage layer has been improved to support single-writer/multiple-reader
 concurrency. The storage interfaces have been simplified in the process. Users
-can rely on https://godoc.org/github.com/meta-quick/opa/storage/inmem in
+can rely on https://godoc.org/github.com/meta-quick/opax/storage/inmem in
 place of the old storage package.
 
 ### Website Refresh
@@ -3235,15 +3235,15 @@ The JSON marshalling built-ins have been renamed. Policies that used `json_unmar
 
 This release includes a bunch of cool stuff!
 
-- Basic type checking for queries and virtual docs ([#312](https://github.com/meta-quick/opa/pull/312))
-- Optimizations for HTTP API authorization policies ([#319](https://github.com/meta-quick/opa/pull/319))
+- Basic type checking for queries and virtual docs ([#312](https://github.com/meta-quick/opax/pull/312))
+- Optimizations for HTTP API authorization policies ([#319](https://github.com/meta-quick/opax/pull/319))
 - New /v0 API to support webhook integrations ([docs](http://www.openpolicyagent.org/documentation/references/rest-v0))
 
 ### Fixes
 
-- Add support for namespaced built-ins ([#314](https://github.com/meta-quick/opa/issues/314))
-- Improve logging to include request/response bodies ([#328](https://github.com/meta-quick/opa/pull/328))
-- Add basic performance metrics ([#320](https://github.com/meta-quick/opa/pull/320))
+- Add support for namespaced built-ins ([#314](https://github.com/meta-quick/opax/issues/314))
+- Improve logging to include request/response bodies ([#328](https://github.com/meta-quick/opax/pull/328))
+- Add basic performance metrics ([#320](https://github.com/meta-quick/opax/pull/320))
 
 ### Miscellaneous
 
@@ -3261,9 +3261,9 @@ This release includes a bunch of cool stuff!
 
 ### Fixes
 
-- Fix recursive binding by short-circuiting ref eval ([#298](https://github.com/meta-quick/opa/issues/298))
-- Fix reordering for unsafe ref heads ([#297](https://github.com/meta-quick/opa/issues/297))
-- Fix rewriting of single term exprs ([#299](https://github.com/meta-quick/opa/issues/299))
+- Fix recursive binding by short-circuiting ref eval ([#298](https://github.com/meta-quick/opax/issues/298))
+- Fix reordering for unsafe ref heads ([#297](https://github.com/meta-quick/opax/issues/297))
+- Fix rewriting of single term exprs ([#299](https://github.com/meta-quick/opax/issues/299))
 
 ## 0.4.6
 
@@ -3274,9 +3274,9 @@ This release changes the `run` command options:
 
 ### Fixes
 
-- Add support for additional HTTP listener ([#289](https://github.com/meta-quick/opa/issues/289))
-- Allow slash in policy id/path ([#292](https://github.com/meta-quick/opa/issues/292))
-- Improve request logging ([#281](https://github.com/meta-quick/opa/issues/281))
+- Add support for additional HTTP listener ([#289](https://github.com/meta-quick/opax/issues/289))
+- Allow slash in policy id/path ([#292](https://github.com/meta-quick/opax/issues/292))
+- Improve request logging ([#281](https://github.com/meta-quick/opax/issues/281))
 
 ### Miscellaneous
 
@@ -3297,11 +3297,11 @@ For details on how to secure the OPA API, go to http://openpolicyagent.org/docum
 
 ### Fixes
 
-- Fix stray built-in error messages ([#275](https://github.com/meta-quick/opa/issues/275))
-- Update error codes and messages throughout ([#237](https://github.com/meta-quick/opa/issues/237))
-- [Fix evaluation bug with nested value refs](https://github.com/meta-quick/opa/pull/276/commits/e3336cce130eedda08f224ce4f28e19212447dcb)
-- [Fix rego.Eval to close transactions](https://github.com/meta-quick/opa/pull/276/commits/745bd235127fae6bc22ff870bf62922c9358ccc0)
-- [Fix buggy usage of errors.Cause](https://github.com/meta-quick/opa/pull/276/commits/bdf43b6a52de639e4f66810306311641ed7eea85)
+- Fix stray built-in error messages ([#275](https://github.com/meta-quick/opax/issues/275))
+- Update error codes and messages throughout ([#237](https://github.com/meta-quick/opax/issues/237))
+- [Fix evaluation bug with nested value refs](https://github.com/meta-quick/opax/pull/276/commits/e3336cce130eedda08f224ce4f28e19212447dcb)
+- [Fix rego.Eval to close transactions](https://github.com/meta-quick/opax/pull/276/commits/745bd235127fae6bc22ff870bf62922c9358ccc0)
+- [Fix buggy usage of errors.Cause](https://github.com/meta-quick/opax/pull/276/commits/bdf43b6a52de639e4f66810306311641ed7eea85)
 
 ### Miscellaneous
 
@@ -3311,15 +3311,15 @@ For details on how to secure the OPA API, go to http://openpolicyagent.org/docum
 
 ### Fixes
 
-- Fix issue in high-level Go API ([#261](https://github.com/meta-quick/opa/issues/261))
+- Fix issue in high-level Go API ([#261](https://github.com/meta-quick/opax/issues/261))
 
 ## 0.4.3
 
 ### Fixes
 
-- Fix parsing of inline comments ([#258](https://github.com/meta-quick/opa/issues/258))
-- Fix unset of input/data in REPL ([#259](https://github.com/meta-quick/opa/issues/259))
-- Handle non-string/var values in rule tree lookup ([#257](https://github.com/meta-quick/opa/issues/257))
+- Fix parsing of inline comments ([#258](https://github.com/meta-quick/opax/issues/258))
+- Fix unset of input/data in REPL ([#259](https://github.com/meta-quick/opax/issues/259))
+- Handle non-string/var values in rule tree lookup ([#257](https://github.com/meta-quick/opax/issues/257))
 
 ## 0.4.2
 
@@ -3335,7 +3335,7 @@ Also:
 - Set, array, and object literals now support trailing commas.
 - To declare a set literal with one element, you must include a trailing comma, e.g., `{ foo, }`.
 - Arithmetic and set operations can now be performed with infix notation, e.g., `x = 2 + 1`.
-- Sets can be referred to like objects and arrays now ([#243](https://github.com/meta-quick/opa/issues/243)). E.g., `p[_].foo = 1 # check if element in has attr foo equal to 1`.
+- Sets can be referred to like objects and arrays now ([#243](https://github.com/meta-quick/opax/issues/243)). E.g., `p[_].foo = 1 # check if element in has attr foo equal to 1`.
 
 ### Evaluation
 
@@ -3351,7 +3351,7 @@ This release changes the Data API to return an HTTP 200 response if the document
 
 ### Miscellaneous
 
-- Added high level API for Go users. See `github.com/meta-quick/opa/rego` package.
+- Added high level API for Go users. See `github.com/meta-quick/opax/rego` package.
 - Improved expression String() function to handle infix operators better.
 - Added support for set intersection and union built-ins. See language docs.
 
@@ -3366,8 +3366,8 @@ For more details on these changes see sections in [How Do I Write Policies](http
 
 ### Fixes
 
-- Fix input document definition in REPL ([#231](https://github.com/meta-quick/opa/issues/231))
-- Fix reference evaluation bug ([#238](https://github.com/meta-quick/opa/issues/238))
+- Fix input document definition in REPL ([#231](https://github.com/meta-quick/opax/issues/231))
+- Fix reference evaluation bug ([#238](https://github.com/meta-quick/opax/issues/238))
 
 ### Miscellaneous
 
@@ -3391,7 +3391,7 @@ This release contains a few non-backwards compatible changes to the REST API:
   value under the `"result"` key of the response object.
 
 - The API models have been updated to use snake_case
-  ([#222](https://github.com/meta-quick/opa/issues/222)). This would only
+  ([#222](https://github.com/meta-quick/opax/issues/222)). This would only
   affect you if you were previously consuming error responses or policy ASTs.
 
 The Data API has been updated to support the [POST
@@ -3404,15 +3404,15 @@ The built-in framework has been extended to support simplified built-in
 implementations:
 
 - Refactor topdown built-in functions
-  ([#205](https://github.com/meta-quick/opa/issues/205))
+  ([#205](https://github.com/meta-quick/opax/issues/205))
 
 ### Fixes
 
-- Add cURL note to REST API docs ([#211](https://github.com/meta-quick/opa/issues/211))
-- Fix empty request parameter parsing ([#212](https://github.com/meta-quick/opa/issues/212))
-- Fix handling of missing input document ([#227](https://github.com/meta-quick/opa/issues/227))
-- Improve floating point literal support ([#215](https://github.com/meta-quick/opa/issues/215))
-- Improve module parsing errors ([#213](https://github.com/meta-quick/opa/issues/213))
+- Add cURL note to REST API docs ([#211](https://github.com/meta-quick/opax/issues/211))
+- Fix empty request parameter parsing ([#212](https://github.com/meta-quick/opax/issues/212))
+- Fix handling of missing input document ([#227](https://github.com/meta-quick/opax/issues/227))
+- Improve floating point literal support ([#215](https://github.com/meta-quick/opax/issues/215))
+- Improve module parsing errors ([#213](https://github.com/meta-quick/opax/issues/213))
 - Fix ast.Number hash and equality
 - Fix parsing of escaped strings
 
@@ -3424,9 +3424,9 @@ implementations:
 
 ### Fixes
 
-- Fixed unsafe vars with built-in operator names bug ([#206](https://github.com/meta-quick/opa/issues/206))
-- Fixed body to rule conversion bug ([#202](https://github.com/meta-quick/opa/issues/202))
-- Improved request parameter handling ([#201](https://github.com/meta-quick/opa/issues/201))
+- Fixed unsafe vars with built-in operator names bug ([#206](https://github.com/meta-quick/opax/issues/206))
+- Fixed body to rule conversion bug ([#202](https://github.com/meta-quick/opax/issues/202))
+- Improved request parameter handling ([#201](https://github.com/meta-quick/opax/issues/201))
 
 ### Miscellaneous
 
@@ -3442,9 +3442,9 @@ non-backwards compatible changes to the APIs.
 These changes simplify and clean up the storage.Store interface. This should
 make it easier to implement custom stores in the future.
 
-- Update storage to support context.Context ([#155](https://github.com/meta-quick/opa/issues/155))
-- Update underlying number representation ([#154](https://github.com/meta-quick/opa/issues/154))
-- Updates to use new storage.Path type ([#159](https://github.com/meta-quick/opa/issues/159))
+- Update storage to support context.Context ([#155](https://github.com/meta-quick/opax/issues/155))
+- Update underlying number representation ([#154](https://github.com/meta-quick/opax/issues/154))
+- Updates to use new storage.Path type ([#159](https://github.com/meta-quick/opax/issues/159))
 
 ### The request Document
 
@@ -3455,7 +3455,7 @@ variables.
 
 These changes also update how query arguments are provided via the REST API.
 
-- Updates to how query arguments are handled [#197](https://github.com/meta-quick/opa/pull/197)
+- Updates to how query arguments are handled [#197](https://github.com/meta-quick/opax/pull/197)
 
 ### topdown API changes
 
@@ -3463,11 +3463,11 @@ These changes also update how query arguments are provided via the REST API.
 
 ### Fixes
 
-- Add help topics to REPL ([#172](https://github.com/meta-quick/opa/issues/172))
-- Fix error handling bug in Query API ([#183](https://github.com/meta-quick/opa/issues/183))
-- Fix handling of prefixed paths with -w flag ([#193](https://github.com/meta-quick/opa/issues/193))
-- Improve exit handling in REPL ([#175](https://github.com/meta-quick/opa/issues/175))
-- Update parser support for <var> = <term> rules ([#192](https://github.com/meta-quick/opa/issues/192))
+- Add help topics to REPL ([#172](https://github.com/meta-quick/opax/issues/172))
+- Fix error handling bug in Query API ([#183](https://github.com/meta-quick/opax/issues/183))
+- Fix handling of prefixed paths with -w flag ([#193](https://github.com/meta-quick/opax/issues/193))
+- Improve exit handling in REPL ([#175](https://github.com/meta-quick/opax/issues/175))
+- Update parser support for <var> = <term> rules ([#192](https://github.com/meta-quick/opax/issues/192))
 
 ### Miscellaneous
 
@@ -3479,21 +3479,21 @@ These changes also update how query arguments are provided via the REST API.
 
 ### Fixes
 
-- Add YAML loading and refactor into separate file ([#135](https://github.com/meta-quick/opa/issues/135))
-- Add command line flag to eval, print, and exit ([#152](https://github.com/meta-quick/opa/issues/152))
-- Add compiler check for consistent rule types ([#147](https://github.com/meta-quick/opa/issues/147))
-- Add set_diff built-in ([#133](https://github.com/meta-quick/opa/issues/133))
-- Add simple 'show' command to print current module ([#108](https://github.com/meta-quick/opa/issues/108))
-- Added examples to 'help' output in REPL ([#151](https://github.com/meta-quick/opa/issues/151))
-- Check package declarations for conflicts ([#137](https://github.com/meta-quick/opa/issues/137))
-- Deep copy modules in compiler ([#158](https://github.com/meta-quick/opa/issues/158))
-- Fix evaluation of refs to set literals ([#149](https://github.com/meta-quick/opa/issues/149))
-- Fix indexing usage for refs with intersecting vars ([#153](https://github.com/meta-quick/opa/issues/153))
-- Fix output for references iterating sets ([#148](https://github.com/meta-quick/opa/issues/148))
-- Fix parser handling of keywords in variable names ([#178](https://github.com/meta-quick/opa/issues/178))
-- Improve file loading support ([#163](https://github.com/meta-quick/opa/issues/163))
-- Remove conflict error for same key/value pairs ([#165](https://github.com/meta-quick/opa/issues/165))
-- Support "data" query in REPL ([#150](https://github.com/meta-quick/opa/issues/150))
+- Add YAML loading and refactor into separate file ([#135](https://github.com/meta-quick/opax/issues/135))
+- Add command line flag to eval, print, and exit ([#152](https://github.com/meta-quick/opax/issues/152))
+- Add compiler check for consistent rule types ([#147](https://github.com/meta-quick/opax/issues/147))
+- Add set_diff built-in ([#133](https://github.com/meta-quick/opax/issues/133))
+- Add simple 'show' command to print current module ([#108](https://github.com/meta-quick/opax/issues/108))
+- Added examples to 'help' output in REPL ([#151](https://github.com/meta-quick/opax/issues/151))
+- Check package declarations for conflicts ([#137](https://github.com/meta-quick/opax/issues/137))
+- Deep copy modules in compiler ([#158](https://github.com/meta-quick/opax/issues/158))
+- Fix evaluation of refs to set literals ([#149](https://github.com/meta-quick/opax/issues/149))
+- Fix indexing usage for refs with intersecting vars ([#153](https://github.com/meta-quick/opax/issues/153))
+- Fix output for references iterating sets ([#148](https://github.com/meta-quick/opax/issues/148))
+- Fix parser handling of keywords in variable names ([#178](https://github.com/meta-quick/opax/issues/178))
+- Improve file loading support ([#163](https://github.com/meta-quick/opax/issues/163))
+- Remove conflict error for same key/value pairs ([#165](https://github.com/meta-quick/opax/issues/165))
+- Support "data" query in REPL ([#150](https://github.com/meta-quick/opax/issues/150))
 
 ### Miscellaneous
 

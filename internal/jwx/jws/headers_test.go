@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws"
 )
 
 func TestHeader(t *testing.T) {

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/meta-quick/opa/cmd"
+	"github.com/meta-quick/opax/cmd"
 )
 
 func main() {

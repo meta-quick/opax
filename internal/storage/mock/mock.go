@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
 )
 
 // Transaction is a mock storage.Transaction implementation for use in testing.

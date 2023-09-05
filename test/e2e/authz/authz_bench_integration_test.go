@@ -5,17 +5,17 @@ package authz
 
 import (
 	"bytes"
-	"github.com/bytedance/sonic"
 	"flag"
+	"github.com/bytedance/sonic"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/test/authz"
-	testAuthz "github.com/meta-quick/opa/test/authz"
-	"github.com/meta-quick/opa/test/e2e"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/test/authz"
+	testAuthz "github.com/meta-quick/opax/test/authz"
+	"github.com/meta-quick/opax/test/e2e"
+	"github.com/meta-quick/opax/util"
 )
 
 var testRuntime *e2e.TestRuntime

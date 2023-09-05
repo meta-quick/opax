@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opax/keys"
 )
 
 func assertStringsEqual(t *testing.T, expected string, actual string, label string) {

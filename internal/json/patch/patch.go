@@ -7,7 +7,7 @@ package patch
 import (
 	"strings"
 
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/storage"
 )
 
 // ParsePatchPathEscaped returns a new path for the given escaped str.

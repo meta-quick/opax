@@ -14,7 +14,7 @@ Read this section if you want to extend OPA with custom built-in functions.
 
 {{< info >}}
 This section assumes you are embedding OPA as a library and executing policies
-via the `github.com/meta-quick/opa/rego` package. If you are NOT embedding OPA
+via the `github.com/meta-quick/opax/rego` package. If you are NOT embedding OPA
 as a library and instead want to customize the OPA runtime, read this section
 anyway because it provides useful information on implementing built-in functions.
 For a complete example that shows how to add custom built-in functions to the
@@ -35,9 +35,9 @@ evaluation.
 To get started you need to import three packages:
 
 ```
-import "github.com/meta-quick/opa/ast"
-import "github.com/meta-quick/opa/types"
-import "github.com/meta-quick/opa/rego"
+import "github.com/meta-quick/opax/ast"
+import "github.com/meta-quick/opax/types"
+import "github.com/meta-quick/opax/rego"
 ```
 
 The `ast` and `types` packages contain the types for declarations and runtime
@@ -189,13 +189,13 @@ OPA defines a plugin interface that allows you to customize certain behaviour
 like decision logging or add new behaviour like different query APIs. To
 implement a custom plugin you must implement two interfaces:
 
-- [`Factory`](https://pkg.go.dev/github.com/meta-quick/opa/plugins#Factory)
+- [`Factory`](https://pkg.go.dev/github.com/meta-quick/opax/plugins#Factory)
   to instantiate your plugin.
-- [`Plugin`](https://pkg.go.dev/github.com/meta-quick/opa/plugins#Plugin)
+- [`Plugin`](https://pkg.go.dev/github.com/meta-quick/opax/plugins#Plugin)
   to provide your plugin behavior.
 
 You can register your factory with OPA by calling
-[`RegisterPlugin`](https://pkg.go.dev/github.com/meta-quick/opa/runtime#RegisterPlugin)
+[`RegisterPlugin`](https://pkg.go.dev/github.com/meta-quick/opax/runtime#RegisterPlugin)
 inside your main function.
 
 ### Plugin Status
@@ -218,7 +218,7 @@ that writes events to a stream (e.g., stdout/stderr).
 import (
 	"encoding/json"
 
-	"github.com/meta-quick/opa/plugins/logs"
+	"github.com/meta-quick/opax/plugins/logs"
 )
 
 const PluginName = "println_decision_logger"
@@ -275,8 +275,8 @@ Next, implement a factory function that instantiates your plugin:
 
 ```golang
 import (
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/util"
 )
 
 type Factory struct{}
@@ -302,8 +302,8 @@ latter starts OPA and does not return.
 
 ```golang
 import (
-	"github.com/meta-quick/opa/cmd"
-	"github.com/meta-quick/opa/runtime"
+	"github.com/meta-quick/opax/cmd"
+	"github.com/meta-quick/opax/runtime"
 )
 
 func main() {
@@ -361,7 +361,7 @@ than the example documented.
 ## Setting the OPA Runtime Version
 
 The OPA runtime version is set statically at build-time. The following global variables
-are exported by the `github.com/meta-quick/opa/version` package and can be
+are exported by the `github.com/meta-quick/opax/version` package and can be
 set at build-time:
 
 | Name | Description |
@@ -374,7 +374,7 @@ set at build-time:
 These values can be set on the command-line when building OPA from source:
 
 ```
-go build -o opa++ -ldflags "-X github.com/meta-quick/opa/version.Version=MY_VERSION" main.go
+go build -o opa++ -ldflags "-X github.com/meta-quick/opax/version.Version=MY_VERSION" main.go
 ```
 
 ## Appendix
@@ -391,9 +391,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/types"
 )
 
 func main() {
@@ -464,10 +464,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/cmd"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/cmd"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/types"
 
 )
 

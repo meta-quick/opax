@@ -10,8 +10,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 func builtinFormatInt(a, b ast.Value) (ast.Value, error) {

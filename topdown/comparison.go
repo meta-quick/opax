@@ -4,7 +4,7 @@
 
 package topdown
 
-import "github.com/meta-quick/opa/ast"
+import "github.com/meta-quick/opax/ast"
 
 type compareFunc func(a, b ast.Value) bool
 

@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/storage"
 )
 
 func TestParsePatchPathEscaped(t *testing.T) {

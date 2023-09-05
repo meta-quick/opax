@@ -8,8 +8,8 @@ import (
 	"io"
 	"sort"
 
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa/capabilities"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa/capabilities"
+	"github.com/meta-quick/opax/util"
 )
 
 // Capabilities defines a structure containing data that describes the capablilities
@@ -25,7 +25,7 @@ type Capabilities struct {
 	// As of now, this only controls fetching remote refs for using JSON Schemas in
 	// the type checker.
 	// TODO(sr): support ports to further restrict connection peers
-	// TODO(sr): support restricting `http.send` using the same mechanism (see https://github.com/meta-quick/opa/issues/3665)
+	// TODO(sr): support restricting `http.send` using the same mechanism (see https://github.com/meta-quick/opax/issues/3665)
 	AllowNet []string `json:"allow_net,omitempty"`
 }
 

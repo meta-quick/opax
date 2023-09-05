@@ -11,10 +11,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/storage/internal/errors"
+	"github.com/meta-quick/opax/storage/internal/errors"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/util"
 )
 
 func TestInMemoryRead(t *testing.T) {

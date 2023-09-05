@@ -10,9 +10,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown"
 )
 
 func ExampleQuery_Iter() {

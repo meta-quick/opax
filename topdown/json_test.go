@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/bytedance/sonic"
 	"github.com/meta-quick/jsonpath"
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 	"testing"
 )
 
@@ -129,7 +129,7 @@ func TestJsonPath(t *testing.T) {
 	var data interface{}
 	sonic.Unmarshal([]byte(input), &data)
 
-	out, err := jsonpath.Get("$.d.e.g[:].y[:].z",&data)
+	out, err := jsonpath.Get("$.d.e.g[:].y[:].z", &data)
 
 	if err != nil {
 		panic(err)

@@ -21,12 +21,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws"
-	"github.com/meta-quick/opa/internal/jwx/jws/sign"
-	"github.com/meta-quick/opa/internal/uuid"
-	"github.com/meta-quick/opa/keys"
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jws/sign"
+	"github.com/meta-quick/opax/internal/uuid"
+	"github.com/meta-quick/opax/keys"
+	"github.com/meta-quick/opax/logging"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/meta-quick/opa/rego"
+	"github.com/meta-quick/opax/rego"
 )
 
 func TestResultSetAllowed(t *testing.T) {

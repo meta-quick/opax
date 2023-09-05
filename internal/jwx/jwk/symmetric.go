@@ -3,7 +3,7 @@ package jwk
 import (
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
 )
 
 func newSymmetricKey(key []byte) (*SymmetricKey, error) {

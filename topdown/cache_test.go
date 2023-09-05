@@ -7,7 +7,7 @@ package topdown
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestVirtualCacheCompositeKey(t *testing.T) {

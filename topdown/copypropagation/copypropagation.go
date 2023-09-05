@@ -7,7 +7,7 @@ package copypropagation
 import (
 	"sort"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // CopyPropagator implements a simple copy propagation optimization to remove

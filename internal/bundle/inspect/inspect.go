@@ -11,11 +11,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	initload "github.com/meta-quick/opa/internal/runtime/init"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	initload "github.com/meta-quick/opax/internal/runtime/init"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/util"
 )
 
 // Info represents information about a bundle.

@@ -5,9 +5,9 @@
 package ast
 
 import (
-	"testing"
 	"github.com/bytedance/sonic"
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/types"
+	"testing"
 )
 
 func TestBuiltinDeclRoundtrip(t *testing.T) {

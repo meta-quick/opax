@@ -7,7 +7,7 @@ package file
 import (
 	"time"
 
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa/errors"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa/errors"
 )
 
 // WithFile configures the file to load the bundle from.

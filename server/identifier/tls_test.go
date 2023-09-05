@@ -10,7 +10,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/meta-quick/opa/server/identifier"
+	"github.com/meta-quick/opax/server/identifier"
 )
 
 // Note: In these tests, we don't worry about the server actually verifying the

@@ -13,12 +13,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/internal/presentation"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/internal/presentation"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 // Minimize the number of tests that *actually* run the benchmarks, they are pretty slow.

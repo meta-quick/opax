@@ -3,7 +3,7 @@ package location
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 func TestLocationCompare(t *testing.T) {

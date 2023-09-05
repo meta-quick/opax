@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/storage"
 )
 
 type pathMapper struct {

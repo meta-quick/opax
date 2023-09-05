@@ -7,7 +7,7 @@ package planner
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestFuncstack(t *testing.T) {

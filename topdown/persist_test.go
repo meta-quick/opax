@@ -5,60 +5,60 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/cockroachdb/pebble"
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
 	"testing"
 	"time"
 )
 
 func TestPersist(t *testing.T) {
 	// Register the storage
-	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{});
-	store.SetInteger("key",100)
-	store.SetString("key2","xxx")
-	value2,_ := store.GetString("key2");
-	value1,_ := store.GetInteger("key");
+	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{})
+	store.SetInteger("key", 100)
+	store.SetString("key2", "xxx")
+	value2, _ := store.GetString("key2")
+	value1, _ := store.GetInteger("key")
 
-	println("value", value1,value2);
+	println("value", value1, value2)
 	// Close the storage
 }
 
 func TestCounters(t *testing.T) {
-   c := NewGauge(10);
-   for i := 0; i < 20; i++ {
-	  //time.Sleep(time.Second * 1)
-	  c.Add(int64(i))
-	  println("add", i)
-	  println("value", c.GetValue())
-   }
+	c := NewGauge(10)
+	for i := 0; i < 20; i++ {
+		//time.Sleep(time.Second * 1)
+		c.Add(int64(i))
+		println("add", i)
+		println("value", c.GetValue())
+	}
 }
 
 func TestPersistCounter(t *testing.T) {
-	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{});
-	c := NewGauge(100000);
+	store := NewPebbleStorage("/tmp/testx.db", pebble.Options{})
+	c := NewGauge(100000)
 	c.Add(10)
 	time.Sleep(time.Second * 1)
 	c.Add(29)
 	time.Sleep(time.Second * 1)
 	c.Add(30)
-	c.Timestamp[1] = 1;
-	c.Timestamp[2] = 2;
-	c.Timestamp[3] = 3;
-	c.Timestamp[4] = 4;
-	c.Timestamp[5] = 5;
+	c.Timestamp[1] = 1
+	c.Timestamp[2] = 2
+	c.Timestamp[3] = 3
+	c.Timestamp[4] = 4
+	c.Timestamp[5] = 5
 	b, err := json.Marshal(c)
 	if err != nil {
 		println("error", err)
 	}
 
-	store.SetBytes("api5s",b)
+	store.SetBytes("api5s", b)
 
 	cc := NewGauge(1)
 
-	bb,_ := store.GetBytes("api5s")
+	bb, _ := store.GetBytes("api5s")
 
-    json.Unmarshal(bb,&cc)
+	json.Unmarshal(bb, &cc)
 	fmt.Println("json", cc)
 }
 
@@ -94,7 +94,7 @@ func TestGuageAdd(t *testing.T) {
 	if err != nil && err.(*Error).Code != CancelErr {
 		println("Expected cancel error but got: %v (err: %v)", qrs, err)
 	}
-	println("result", fmt.Sprintf("%v",qrs))
+	println("result", fmt.Sprintf("%v", qrs))
 }
 
 func TestGuageDelete(t *testing.T) {

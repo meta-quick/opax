@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // Path refers to a document in storage.

@@ -14,11 +14,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/compile"
-	"github.com/meta-quick/opa/keys"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/compile"
+	"github.com/meta-quick/opax/keys"
+	"github.com/meta-quick/opax/util"
 )
 
 const defaultPublicKeyID = "default"

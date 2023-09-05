@@ -2,6 +2,7 @@
 // Use of this source code is governed by an Apache2
 // license that can be found in the LICENSE file.
 
+//go:build opa_wasm
 // +build opa_wasm
 
 package rego
@@ -19,13 +20,13 @@ import (
 
 	"github.com/fortytw2/leaktest"
 
-	"github.com/meta-quick/opa/ast"
-	sdk_errors "github.com/meta-quick/opa/internal/wasm/sdk/opa/errors"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown"
-	"github.com/meta-quick/opa/topdown/cache"
+	"github.com/meta-quick/opax/ast"
+	sdk_errors "github.com/meta-quick/opax/internal/wasm/sdk/opa/errors"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown"
+	"github.com/meta-quick/opax/topdown/cache"
 
-	_ "github.com/meta-quick/opa/features/wasm"
+	_ "github.com/meta-quick/opax/features/wasm"
 )
 
 func TestPrepareAndEvalWithWasmTarget(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // saveSet contains a stack of terms that are considered 'unknown' during

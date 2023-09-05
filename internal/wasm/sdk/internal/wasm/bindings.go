@@ -18,12 +18,12 @@ import (
 
 	"github.com/bytecodealliance/wasmtime-go"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
 )
 
 func opaFunctions(dispatcher *builtinDispatcher, store *wasmtime.Store) map[string]wasmtime.AsExtern {

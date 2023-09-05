@@ -12,12 +12,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	storedversion "github.com/meta-quick/opa/internal/version"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	storedversion "github.com/meta-quick/opax/internal/version"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/storage"
 )
 
 // InsertAndCompileOptions contains the input for the operation.

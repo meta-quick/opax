@@ -8,10 +8,10 @@ import (
 	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
-	"github.com/bytedance/sonic"
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -23,7 +23,7 @@ import (
 
 	"github.com/go-ini/ini"
 
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/logging"
 )
 
 const (

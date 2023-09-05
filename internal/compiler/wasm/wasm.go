@@ -13,16 +13,16 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/compiler/wasm/opa"
-	"github.com/meta-quick/opa/internal/debug"
-	"github.com/meta-quick/opa/internal/ir"
-	"github.com/meta-quick/opa/internal/wasm/encoding"
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/module"
-	"github.com/meta-quick/opa/internal/wasm/types"
-	"github.com/meta-quick/opa/internal/wasm/util"
-	opatypes "github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/compiler/wasm/opa"
+	"github.com/meta-quick/opax/internal/debug"
+	"github.com/meta-quick/opax/internal/ir"
+	"github.com/meta-quick/opax/internal/wasm/encoding"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/module"
+	"github.com/meta-quick/opax/internal/wasm/types"
+	"github.com/meta-quick/opax/internal/wasm/util"
+	opatypes "github.com/meta-quick/opax/types"
 )
 
 // Record Wasm ABI version in exported global variable

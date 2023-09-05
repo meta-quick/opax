@@ -3,7 +3,7 @@ package oracle
 import (
 	"errors"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // Error defines the structure of errors returned by the oracle.

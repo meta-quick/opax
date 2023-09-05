@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/util"
 )
 
 // All returns the list of data ast.Refs that the given AST element depends on.

@@ -5,10 +5,10 @@
 package topdown
 
 import (
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/ref"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/ref"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/types"
 )
 
 func builtinObjectUnion(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Term) error) error {

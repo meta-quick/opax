@@ -7,7 +7,7 @@ package ast
 import (
 	"strings"
 
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/types"
 )
 
 // Builtins is the registry of built-in functions supported by OPA.
@@ -2487,6 +2487,7 @@ var TimedCounterGet = &Builtin{
 		types.N,
 	),
 }
+
 /**
  * Deprecated built-ins.
  */

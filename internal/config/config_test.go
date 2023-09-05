@@ -14,7 +14,7 @@ import (
 
 	"github.com/ghodss/yaml"
 
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func setTestEnvVar(t *testing.T, name, value string) string {

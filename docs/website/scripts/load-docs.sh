@@ -17,7 +17,7 @@ GIT_VERSION=$(git --version)
 # Look at the git tags and generate a list of releases
 # that we want to show docs for.
 if [[ -z ${OFFLINE} ]]; then
-    git fetch --tags ${REPOSITORY_URL:-https://github.com/meta-quick/opa.git}
+    git fetch --tags ${REPOSITORY_URL:-https://github.com/meta-quick/opax.git}
 fi
 ALL_RELEASES=$(git tag -l | sort -r -V)
 RELEASES=()
@@ -46,7 +46,7 @@ for release in ${ALL_RELEASES}; do
     fi
 
     # ignore the tag if there is no corresponding OPA binary available on the GitHub Release page
-    BINARY_URL=https://github.com/meta-quick/opa/releases/download/${release}/opa_linux_amd64
+    BINARY_URL=https://github.com/meta-quick/opax/releases/download/${release}/opa_linux_amd64
     curl_exit_code=0
     curl --silent --location --head --fail $BINARY_URL >/dev/null || curl_exit_code=$?
     if [[ $curl_exit_code -ne 0 ]]; then

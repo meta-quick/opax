@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/types"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/types"
 )
 
 type (

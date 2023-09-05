@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opax/plugins"
 )
 
 const (

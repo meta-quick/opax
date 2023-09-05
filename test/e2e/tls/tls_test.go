@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/server"
-	"github.com/meta-quick/opa/test/e2e"
+	"github.com/meta-quick/opax/server"
+	"github.com/meta-quick/opax/test/e2e"
 )
 
 var testRuntime *e2e.TestRuntime

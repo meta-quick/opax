@@ -12,13 +12,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/wasm/sdk/internal/wasm"
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa/errors"
-	sdk_errors "github.com/meta-quick/opa/internal/wasm/sdk/opa/errors"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/wasm/sdk/internal/wasm"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa/errors"
+	sdk_errors "github.com/meta-quick/opax/internal/wasm/sdk/opa/errors"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
 )
 
 var errNotReady = errors.New(errors.NotReadyErr, "")

@@ -1,5 +1,5 @@
 # This file is used to generate the OPA ecosystem page: https://www.openpolicyagent.org/docs/latest/ecosystem/
-# For instructions on how to add an entry, see https://github.com/meta-quick/opa/tree/main/docs#integration-index
+# For instructions on how to add an entry, see https://github.com/meta-quick/opax/tree/main/docs#integration-index
 integrations:
   apache-apisix:
     title: Authorization Integration with Apache APISIX
@@ -295,7 +295,7 @@ integrations:
       - https://github.com/tsandall/minimal-opa-envoy-example/blob/master/README.md
       - https://www.openpolicyagent.org/docs/latest/envoy-introduction/
     code:
-      - https://github.com/meta-quick/opa-istio-plugin
+      - https://github.com/meta-quick/opax-istio-plugin
       - https://github.com/tsandall/minimal-opa-envoy-example
     inventors:
       - styra
@@ -356,11 +356,11 @@ integrations:
       - envoy
       - spire
     tutorials:
-      - https://github.com/meta-quick/opa-istio-plugin/blob/master/README.md
+      - https://github.com/meta-quick/opax-istio-plugin/blob/master/README.md
     code:
-      - https://github.com/meta-quick/opa-istio-plugin
+      - https://github.com/meta-quick/opax-istio-plugin
       - https://github.com/tsandall/minimal-opa-envoy-example
-      - https://github.com/meta-quick/opa-envoy-spire-ext-authz
+      - https://github.com/meta-quick/opax-envoy-spire-ext-authz
     blogs:
       - https://blog.openpolicyagent.org/envoy-external-authorization-with-opa-578213ed567c
     inventors:
@@ -760,7 +760,7 @@ integrations:
       layer: server
       category: container
     code:
-      - https://github.com/meta-quick/opa-docker-authz
+      - https://github.com/meta-quick/opax-docker-authz
     tutorials:
       - https://www.openpolicyagent.org/docs/latest/docker-authorization/
     inventors:

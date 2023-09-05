@@ -8,12 +8,12 @@ package types
 
 import (
 	"encoding/json"
-	"github.com/bytedance/sonic"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"sort"
 	"strings"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 // Sprint returns the string representation of the type.

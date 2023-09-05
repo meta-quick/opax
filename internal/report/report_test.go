@@ -77,7 +77,7 @@ func TestSendReportDecodeError(t *testing.T) {
 func TestSendReportWithOPAUpdate(t *testing.T) {
 	exp := &DataResponse{Latest: ReleaseDetails{
 		Download:      "https://openpolicyagent.org/downloads/v100.0.0/opa_darwin_amd64",
-		ReleaseNotes:  "https://github.com/meta-quick/opa/releases/tag/v100.0.0",
+		ReleaseNotes:  "https://github.com/meta-quick/opax/releases/tag/v100.0.0",
 		LatestRelease: "v100.0.0",
 		OPAUpToDate:   false,
 	}}
@@ -119,7 +119,7 @@ func TestPretty(t *testing.T) {
 		t.Fatalf("Expected empty response but got %v", resp)
 	}
 
-	dr.Latest.ReleaseNotes = "https://github.com/meta-quick/opa/releases/tag/v100.0.0"
+	dr.Latest.ReleaseNotes = "https://github.com/meta-quick/opax/releases/tag/v100.0.0"
 	resp = dr.Pretty()
 
 	if resp != "" {
@@ -131,7 +131,7 @@ func TestPretty(t *testing.T) {
 
 	exp := "Latest Upstream Version: 100.0.0\n" +
 		"Download: https://openpolicyagent.org/downloads/v100.0.0/opa_darwin_amd64\n" +
-		"Release Notes: https://github.com/meta-quick/opa/releases/tag/v100.0.0"
+		"Release Notes: https://github.com/meta-quick/opax/releases/tag/v100.0.0"
 
 	if resp != exp {
 		t.Fatalf("Expected response:\n\n%v\n\nGot:\n\n%v\n\n", exp, resp)

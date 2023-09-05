@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
 )
 
 func newRSAPublicKey(key *rsa.PublicKey) (*RSAPublicKey, error) {

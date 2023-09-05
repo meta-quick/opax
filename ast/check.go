@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 type varRewriter func(Ref) Ref

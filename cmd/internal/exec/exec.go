@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/meta-quick/opa/sdk"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/sdk"
+	"github.com/meta-quick/opax/util"
 )
 
 type Params struct {

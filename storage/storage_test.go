@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
 )
 
 func TestNonEmpty(t *testing.T) {

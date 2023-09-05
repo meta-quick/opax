@@ -12,11 +12,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
+	"github.com/meta-quick/opax/version"
 )
 
 func TestInit(t *testing.T) {

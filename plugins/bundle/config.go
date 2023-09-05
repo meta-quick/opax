@@ -10,12 +10,12 @@ import (
 	"path"
 	"strings"
 
-	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opax/plugins"
 
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/download"
-	"github.com/meta-quick/opa/keys"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/download"
+	"github.com/meta-quick/opax/keys"
+	"github.com/meta-quick/opax/util"
 )
 
 // ParseConfig validates the config and injects default values. This is

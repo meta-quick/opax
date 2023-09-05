@@ -10,8 +10,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 const (

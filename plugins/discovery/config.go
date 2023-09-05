@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opax/keys"
 
-	"github.com/meta-quick/opa/bundle"
+	"github.com/meta-quick/opax/bundle"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/download"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/download"
+	"github.com/meta-quick/opax/util"
 )
 
 // Config represents the configuration for the discovery feature.

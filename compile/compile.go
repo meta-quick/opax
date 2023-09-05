@@ -17,19 +17,19 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/internal/compiler/wasm"
-	"github.com/meta-quick/opa/internal/debug"
-	"github.com/meta-quick/opa/internal/ir"
-	"github.com/meta-quick/opa/internal/planner"
-	"github.com/meta-quick/opa/internal/ref"
-	initload "github.com/meta-quick/opa/internal/runtime/init"
-	"github.com/meta-quick/opa/internal/wasm/encoding"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/internal/compiler/wasm"
+	"github.com/meta-quick/opax/internal/debug"
+	"github.com/meta-quick/opax/internal/ir"
+	"github.com/meta-quick/opax/internal/planner"
+	"github.com/meta-quick/opax/internal/ref"
+	initload "github.com/meta-quick/opax/internal/runtime/init"
+	"github.com/meta-quick/opax/internal/wasm/encoding"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
 )
 
 const (

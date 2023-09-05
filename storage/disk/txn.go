@@ -12,10 +12,10 @@ import (
 
 	badger "github.com/dgraph-io/badger/v3"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/internal/errors"
-	"github.com/meta-quick/opa/storage/internal/ptr"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/internal/errors"
+	"github.com/meta-quick/opax/storage/internal/ptr"
+	"github.com/meta-quick/opax/util"
 )
 
 type transaction struct {

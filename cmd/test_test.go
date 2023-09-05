@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/topdown"
 )
 
 func TestFilterTraceDefault(t *testing.T) {

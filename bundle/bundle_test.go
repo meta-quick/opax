@@ -20,8 +20,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/file/archive"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/file/archive"
 )
 
 func TestManifestAddRoot(t *testing.T) {

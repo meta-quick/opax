@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/util"
 )
 
 const largeEvent = `{

@@ -12,11 +12,11 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/meta-quick/opa/bundle"
-	ib "github.com/meta-quick/opa/internal/bundle/inspect"
-	pr "github.com/meta-quick/opa/internal/presentation"
-	iStrs "github.com/meta-quick/opa/internal/strings"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/bundle"
+	ib "github.com/meta-quick/opax/internal/bundle/inspect"
+	pr "github.com/meta-quick/opax/internal/presentation"
+	iStrs "github.com/meta-quick/opax/internal/strings"
+	"github.com/meta-quick/opax/util"
 
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"

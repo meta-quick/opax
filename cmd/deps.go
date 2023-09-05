@@ -8,15 +8,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/meta-quick/opa/dependencies"
-	"github.com/meta-quick/opa/internal/presentation"
+	"github.com/meta-quick/opax/dependencies"
+	"github.com/meta-quick/opax/internal/presentation"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/loader"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/loader"
+	"github.com/meta-quick/opax/util"
 )
 
 type depsCommandParams struct {

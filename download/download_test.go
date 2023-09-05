@@ -21,11 +21,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/keys"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/plugins/rest"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/keys"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/plugins/rest"
 )
 
 func TestStartStop(t *testing.T) {

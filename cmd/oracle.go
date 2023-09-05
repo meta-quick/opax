@@ -15,11 +15,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/internal/oracle"
-	"github.com/meta-quick/opa/internal/presentation"
-	"github.com/meta-quick/opa/loader"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/internal/oracle"
+	"github.com/meta-quick/opax/internal/presentation"
+	"github.com/meta-quick/opax/loader"
 )
 
 type findDefinitionParams struct {

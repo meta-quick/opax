@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/test/cases"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/test/cases"
 )
 
 func TestRego(t *testing.T) {

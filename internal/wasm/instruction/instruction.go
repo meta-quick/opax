@@ -6,8 +6,8 @@
 package instruction
 
 import (
-	"github.com/meta-quick/opa/internal/wasm/opcode"
-	"github.com/meta-quick/opa/internal/wasm/types"
+	"github.com/meta-quick/opax/internal/wasm/opcode"
+	"github.com/meta-quick/opax/internal/wasm/types"
 )
 
 // NoImmediateArgs indicates the instruction has no immediate arguments.

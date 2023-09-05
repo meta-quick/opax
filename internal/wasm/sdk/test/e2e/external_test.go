@@ -20,12 +20,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/test/cases"
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/test/cases"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 const opaRootDir = "../../../../../"

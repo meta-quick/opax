@@ -2,6 +2,7 @@
 // Use of this source code is governed by an Apache2
 // license that can be found in the LICENSE file.
 
+//go:build opa_wasm
 // +build opa_wasm
 
 package authz
@@ -15,16 +16,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/compile"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/test/authz"
-	testAuthz "github.com/meta-quick/opa/test/authz"
-	"github.com/meta-quick/opa/test/e2e"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/compile"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/test/authz"
+	testAuthz "github.com/meta-quick/opax/test/authz"
+	"github.com/meta-quick/opax/test/e2e"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 var testRuntime *e2e.TestRuntime

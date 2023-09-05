@@ -7,8 +7,8 @@ package ast
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 // SchemaSet holds a map from a path to a schema.

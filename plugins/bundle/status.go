@@ -11,10 +11,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/download"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/server/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/download"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/server/types"
 )
 
 const (

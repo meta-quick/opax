@@ -3,7 +3,7 @@
 
 set -e
 
-OPA_DIR=/go/src/github.com/meta-quick/opa
+OPA_DIR=/go/src/github.com/meta-quick/opax
 BUILD_DIR=$OPA_DIR/build
 
 usage() {
@@ -46,8 +46,8 @@ build_release() {
 }
 
 clone_repo() {
-    git clone $SOURCE_URL /go/src/github.com/meta-quick/opa
-    cd /go/src/github.com/meta-quick/opa
+    git clone $SOURCE_URL /go/src/github.com/meta-quick/opax
+    cd /go/src/github.com/meta-quick/opax
     if [ -n "$VERSION" ]; then
         git checkout v${VERSION}
     fi

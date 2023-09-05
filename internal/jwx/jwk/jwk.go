@@ -8,7 +8,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
 )
 
 // GetPublicKey returns the public key based on the private key type.

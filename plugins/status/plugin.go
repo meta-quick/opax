@@ -14,11 +14,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/plugins/bundle"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/plugins/bundle"
+	"github.com/meta-quick/opax/util"
 )
 
 // Logger defines the interface for status plugins.

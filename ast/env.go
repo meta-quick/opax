@@ -5,8 +5,8 @@
 package ast
 
 import (
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 // TypeEnv contains type info for static analysis such as type checking.

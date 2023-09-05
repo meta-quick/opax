@@ -10,8 +10,8 @@ package capabilities_test
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/capabilities"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/capabilities"
+	"github.com/meta-quick/opax/util"
 )
 
 func TestCapabilitiesEmbedded(t *testing.T) {

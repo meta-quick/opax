@@ -14,13 +14,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/server/identifier"
-	"github.com/meta-quick/opa/server/types"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/server/identifier"
+	"github.com/meta-quick/opax/server/types"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
+	"github.com/meta-quick/opax/util"
 )
 
 type mockHandler struct {

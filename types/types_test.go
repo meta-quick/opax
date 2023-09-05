@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 var dynamicPropertyAnyAny = NewDynamicProperty(A, A)

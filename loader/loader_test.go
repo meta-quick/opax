@@ -15,10 +15,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestLoadJSON(t *testing.T) {

@@ -7,10 +7,10 @@ package wasm
 import (
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/planner"
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/module"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/planner"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/module"
 )
 
 func TestCompilerHelloWorld(t *testing.T) {

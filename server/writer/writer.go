@@ -9,9 +9,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/meta-quick/opa/server/types"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/server/types"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/topdown"
 )
 
 // HTTPStatus is used to set a specific status code

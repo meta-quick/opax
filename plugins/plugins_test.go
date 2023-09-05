@@ -11,12 +11,12 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/internal/storage/mock"
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/logging/test"
-	"github.com/meta-quick/opa/plugins/rest"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown/cache"
+	"github.com/meta-quick/opax/internal/storage/mock"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/logging/test"
+	"github.com/meta-quick/opax/plugins/rest"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown/cache"
 )
 
 func TestManagerCacheTriggers(t *testing.T) {

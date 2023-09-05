@@ -20,10 +20,10 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/test/cases"
-	"github.com/meta-quick/opa/types"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/test/cases"
+	"github.com/meta-quick/opax/types"
+	"github.com/meta-quick/opax/util"
 )
 
 type params struct {

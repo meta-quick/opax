@@ -11,11 +11,11 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws/sign"
-	"github.com/meta-quick/opa/keys"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws/sign"
+	"github.com/meta-quick/opax/keys"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

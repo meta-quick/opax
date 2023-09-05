@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/meta-quick/opa/ast/location"
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/ast/location"
+	"github.com/meta-quick/opax/topdown"
 )
 
 func TestErrorWrapping(t *testing.T) {

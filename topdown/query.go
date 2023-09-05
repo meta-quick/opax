@@ -7,15 +7,15 @@ import (
 	"sort"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/resolver"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/copypropagation"
-	"github.com/meta-quick/opa/topdown/print"
-	"github.com/meta-quick/opa/tracing"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/resolver"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/copypropagation"
+	"github.com/meta-quick/opax/topdown/print"
+	"github.com/meta-quick/opax/tracing"
 )
 
 // QueryResultSet represents a collection of results returned by a query.

@@ -5,8 +5,8 @@
 package topdown
 
 import (
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 // Deprecated in v0.4.2 in favour of minus/infix "-" operation.

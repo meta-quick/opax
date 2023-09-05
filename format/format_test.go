@@ -12,8 +12,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/ast/location"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/ast/location"
 )
 
 func TestFormatNilLocation(t *testing.T) {

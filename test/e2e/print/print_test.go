@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/logging"
-	test_sdk "github.com/meta-quick/opa/sdk/test"
-	"github.com/meta-quick/opa/test/e2e"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/logging"
+	test_sdk "github.com/meta-quick/opax/sdk/test"
+	"github.com/meta-quick/opax/test/e2e"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestEnablePrintStatementsForFilesystemPolicies(t *testing.T) {

@@ -12,10 +12,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/topdown"
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/topdown"
+	"github.com/meta-quick/opax/types"
 )
 
 func TestProfilerLargeArray(t *testing.T) {

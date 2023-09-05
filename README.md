@@ -1,6 +1,6 @@
 # ![logo](./logo/logo-144x144.png) Open Policy Agent
 
-[![Slack Status](http://slack.openpolicyagent.org/badge.svg)](https://slack.openpolicyagent.org) [![Build Status](https://github.com/meta-quick/opa/workflows/Post%20Merge/badge.svg?branch=main)](https://github.com/meta-quick/opa/actions) [![Go Report Card](https://goreportcard.com/badge/open-policy-agent/opa)](https://goreportcard.com/report/open-policy-agent/opa) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1768/badge)](https://bestpractices.coreinfrastructure.org/projects/1768) [![Netlify Status](https://api.netlify.com/api/v1/badges/4a0a092a-8741-4826-a28f-826d4a576cab/deploy-status)](https://app.netlify.com/sites/openpolicyagent/deploys)
+[![Slack Status](http://slack.openpolicyagent.org/badge.svg)](https://slack.openpolicyagent.org) [![Build Status](https://github.com/meta-quick/opax/workflows/Post%20Merge/badge.svg?branch=main)](https://github.com/meta-quick/opax/actions) [![Go Report Card](https://goreportcard.com/badge/open-policy-agent/opa)](https://goreportcard.com/report/open-policy-agent/opa) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1768/badge)](https://bestpractices.coreinfrastructure.org/projects/1768) [![Netlify Status](https://api.netlify.com/api/v1/badges/4a0a092a-8741-4826-a28f-826d4a576cab/deploy-status)](https://app.netlify.com/sites/openpolicyagent/deploys)
 
 Open Policy Agent (OPA) is an open source, general-purpose policy engine that enables unified, context-aware policy enforcement across the entire stack.
 
@@ -22,12 +22,12 @@ OPA is proud to be a graduated project in the [Cloud Native Computing Foundation
 ## Want to get OPA?
 
 - [Docker Hub](https://hub.docker.com/r/openpolicyagent/opa/tags/) for Docker images.
-- [GitHub releases](https://github.com/meta-quick/opa/releases) for binary releases and changelogs.
+- [GitHub releases](https://github.com/meta-quick/opax/releases) for binary releases and changelogs.
 
 ## Want to integrate OPA?
 
 * See
-  [![GoDoc](https://godoc.org/github.com/meta-quick/opa?status.svg)](https://godoc.org/github.com/meta-quick/opa/rego)
+  [![GoDoc](https://godoc.org/github.com/meta-quick/opax?status.svg)](https://godoc.org/github.com/meta-quick/opax/rego)
   to integrate OPA with services written in Go.
 * See [REST API](https://www.openpolicyagent.org/docs/rest-api.html) to
   integrate OPA with services written in other languages.
@@ -36,7 +36,7 @@ OPA is proud to be a graduated project in the [Cloud Native Computing Foundation
 
 * Read the [Contributing Guide](https://www.openpolicyagent.org/docs/latest/contributing/) to learn how to make your first contribution.
 * Use [#development](https://openpolicyagent.slack.com/archives/C02L1TLPN59) in Slack to talk to the OPA maintainers and other contributors.
-* File a [GitHub Issue](https://github.com/meta-quick/opa/issues) to request features or report bugs.
+* File a [GitHub Issue](https://github.com/meta-quick/opax/issues) to request features or report bugs.
 * Join the OPA bi-weekly meetings every other Tuesday at 10:00 (Pacific Timezone):
     * [Meeting Notes](https://docs.google.com/document/d/1v6l2gmkRKAn5UIg3V2QdeeCcXMElxsNzEzDkVlWDVg8/edit?usp=sharing)
     * [Zoom](https://zoom.us/j/97827947600)

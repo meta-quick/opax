@@ -21,10 +21,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/jwx/jwk"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/jwx/jwk"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

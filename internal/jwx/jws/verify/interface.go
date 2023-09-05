@@ -4,7 +4,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/rsa"
 
-	"github.com/meta-quick/opa/internal/jwx/jws/sign"
+	"github.com/meta-quick/opax/internal/jwx/jws/sign"
 )
 
 // Verifier provides a common interface for supported alg verification methods

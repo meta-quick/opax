@@ -2,6 +2,7 @@
 // Use of this source code is governed by an Apache2
 // license that can be found in the LICENSE file.
 
+//go:build opa_wasm
 // +build opa_wasm
 
 package opa_test
@@ -11,10 +12,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa"
-	"github.com/meta-quick/opa/internal/wasm/util"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa"
+	"github.com/meta-quick/opax/internal/wasm/util"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func BenchmarkWasmRego(b *testing.B) {

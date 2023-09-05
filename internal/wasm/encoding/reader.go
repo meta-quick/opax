@@ -13,12 +13,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/leb128"
-	"github.com/meta-quick/opa/internal/wasm/constant"
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/module"
-	"github.com/meta-quick/opa/internal/wasm/opcode"
-	"github.com/meta-quick/opa/internal/wasm/types"
+	"github.com/meta-quick/opax/internal/leb128"
+	"github.com/meta-quick/opax/internal/wasm/constant"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/module"
+	"github.com/meta-quick/opax/internal/wasm/opcode"
+	"github.com/meta-quick/opax/internal/wasm/types"
 )
 
 // ReadModule reads a binary-encoded WASM module from r.

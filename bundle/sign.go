@@ -9,8 +9,8 @@ import (
 	"crypto/rand"
 	"fmt"
 	"github.com/bytedance/sonic"
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws"
 )
 
 const defaultSignerID = "_default"

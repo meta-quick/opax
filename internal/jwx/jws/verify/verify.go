@@ -9,7 +9,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
 )
 
 // New creates a new JWS verifier using the specified algorithm

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opax/metrics"
 )
 
 func TestChunkEncoder(t *testing.T) {

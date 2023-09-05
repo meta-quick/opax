@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 type Tester struct {

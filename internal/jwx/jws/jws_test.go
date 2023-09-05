@@ -12,11 +12,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jwk"
-	"github.com/meta-quick/opa/internal/jwx/jws"
-	"github.com/meta-quick/opa/internal/jwx/jws/sign"
-	"github.com/meta-quick/opa/internal/jwx/jws/verify"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jwk"
+	"github.com/meta-quick/opax/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jws/sign"
+	"github.com/meta-quick/opax/internal/jwx/jws/verify"
 )
 
 const examplePayload = `{"iss":"joe",` + "\r\n" + ` "exp":1300819380,` + "\r\n" + ` "http://example.com/is_root":true}`

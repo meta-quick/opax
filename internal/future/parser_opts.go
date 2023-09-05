@@ -7,7 +7,7 @@ package future
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // ParserOptionsFromFutureImports transforms a slice of `ast.Import`s into the

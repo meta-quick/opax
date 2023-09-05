@@ -5,7 +5,7 @@
 package lineage
 
 import (
-	"github.com/meta-quick/opa/topdown"
+	"github.com/meta-quick/opax/topdown"
 )
 
 // Notes returns a filtered trace that contains Note events and context to

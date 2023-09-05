@@ -11,8 +11,8 @@ import (
 	"compress/gzip"
 	"encoding/hex"
 	"encoding/json"
-	"github.com/bytedance/sonic"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"io"
 	"net/url"
 	"path/filepath"
@@ -21,12 +21,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/format"
-	"github.com/meta-quick/opa/internal/file/archive"
-	"github.com/meta-quick/opa/internal/merge"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/format"
+	"github.com/meta-quick/opax/internal/file/archive"
+	"github.com/meta-quick/opax/internal/merge"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/util"
 )
 
 // Common file extensions and file names.

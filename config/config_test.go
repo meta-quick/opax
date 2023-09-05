@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/version"
 )
 
 func TestConfigPluginNames(t *testing.T) {

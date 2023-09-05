@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestMoveRenamePackage(t *testing.T) {

@@ -12,10 +12,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws"
-	"github.com/meta-quick/opa/internal/jwx/jws/verify"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jws/verify"
+	"github.com/meta-quick/opax/util"
 
 	"github.com/pkg/errors"
 )

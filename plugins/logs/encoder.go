@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/meta-quick/opa/metrics"
+	"github.com/meta-quick/opax/metrics"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/logging"
 )
 
 // LogEntry represents a log message.

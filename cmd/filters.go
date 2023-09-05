@@ -7,7 +7,7 @@ package cmd
 import (
 	"os"
 
-	"github.com/meta-quick/opa/loader"
+	"github.com/meta-quick/opax/loader"
 )
 
 type loaderFilter struct {

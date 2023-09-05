@@ -16,9 +16,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/runtime"
-	"github.com/meta-quick/opa/server"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/runtime"
+	"github.com/meta-quick/opax/server"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

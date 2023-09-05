@@ -921,11 +921,11 @@ curl localhost:8181 -i -d @input.json -H 'Content-Type: application/json'
 ### 5. Try OPA as a Go library
 
 OPA can be embedded inside Go programs as a library. The simplest way to embed
-OPA as a library is to import the `github.com/meta-quick/opa/rego`
+OPA as a library is to import the `github.com/meta-quick/opax/rego`
 package.
 
 ```golang
-import "github.com/meta-quick/opa/rego"
+import "github.com/meta-quick/opax/rego"
 ```
 
 Call the `rego.New` function to create an object that can be prepared or
@@ -938,7 +938,7 @@ r := rego.New(
 ```
 
 The `rego.Rego` supports several options that let you customize evaluation. See
-the [GoDoc](https://godoc.org/github.com/meta-quick/opa/rego) page for
+the [GoDoc](https://godoc.org/github.com/meta-quick/opax/rego) page for
 details. After constructing a new `rego.Rego` object you can call
 `PrepareForEval()` to obtain an executable query. If `PrepareForEval()` fails it
 indicates one of the options passed to the `rego.New()` call was invalid (e.g.,
@@ -997,7 +997,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/meta-quick/opa/rego"
+	"github.com/meta-quick/opax/rego"
 )
 
 func main() {

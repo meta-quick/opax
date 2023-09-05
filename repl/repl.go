@@ -18,22 +18,22 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/meta-quick/opa/compile"
+	"github.com/meta-quick/opax/compile"
 
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/version"
 
 	"github.com/peterh/liner"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/format"
-	"github.com/meta-quick/opa/internal/future"
-	pr "github.com/meta-quick/opa/internal/presentation"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/profiler"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/topdown"
-	"github.com/meta-quick/opa/topdown/lineage"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/format"
+	"github.com/meta-quick/opax/internal/future"
+	pr "github.com/meta-quick/opax/internal/presentation"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/profiler"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/topdown"
+	"github.com/meta-quick/opax/topdown/lineage"
 )
 
 // REPL represents an instance of the interactive shell.

@@ -17,14 +17,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/download"
-	bundleUtils "github.com/meta-quick/opa/internal/bundle"
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/download"
+	bundleUtils "github.com/meta-quick/opax/internal/bundle"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/storage"
 )
 
 // maxActivationRetry represents the maximum number of attempts

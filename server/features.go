@@ -7,4 +7,4 @@
 
 package server
 
-import _ "github.com/meta-quick/opa/features/wasm"
+import _ "github.com/meta-quick/opax/features/wasm"

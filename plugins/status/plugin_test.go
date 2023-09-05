@@ -15,12 +15,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/plugins/bundle"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/plugins/bundle"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/version"
 )
 
 func TestMain(m *testing.M) {

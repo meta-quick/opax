@@ -1,2 +1,2 @@
 go test fuzz v1
-string("github.com/meta-quick/opa/ast")
+string("github.com/meta-quick/opax/ast")

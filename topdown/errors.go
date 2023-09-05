@@ -8,7 +8,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // Halt is a special error type that built-in function implementations return to indicate

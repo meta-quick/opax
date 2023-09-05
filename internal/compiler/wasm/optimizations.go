@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/meta-quick/opa/internal/compiler/wasm/opa"
-	"github.com/meta-quick/opa/internal/wasm/encoding"
-	"github.com/meta-quick/opa/internal/wasm/instruction"
-	"github.com/meta-quick/opa/internal/wasm/module"
+	"github.com/meta-quick/opax/internal/compiler/wasm/opa"
+	"github.com/meta-quick/opax/internal/wasm/encoding"
+	"github.com/meta-quick/opax/internal/wasm/instruction"
+	"github.com/meta-quick/opax/internal/wasm/module"
 )
 
 const warning = `---------------------------------------------------------------

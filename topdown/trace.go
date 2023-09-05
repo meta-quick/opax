@@ -9,10 +9,10 @@ import (
 	"io"
 	"strings"
 
-	iStrs "github.com/meta-quick/opa/internal/strings"
+	iStrs "github.com/meta-quick/opax/internal/strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 const (

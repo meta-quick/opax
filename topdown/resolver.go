@@ -5,9 +5,9 @@
 package topdown
 
 import (
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/resolver"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/resolver"
 )
 
 type resolverTrie struct {

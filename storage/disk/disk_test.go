@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 type testRead struct {

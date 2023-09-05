@@ -18,15 +18,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opax/plugins"
 
 	"github.com/pkg/errors"
 
-	"github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins/rest"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins/rest"
+	"github.com/meta-quick/opax/util"
 )
 
 const (

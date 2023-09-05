@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 // RuleIndex defines the interface for rule indices.

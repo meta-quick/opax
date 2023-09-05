@@ -11,8 +11,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/internal/compiler/wasm/opa"
-	"github.com/meta-quick/opa/internal/wasm/module"
+	"github.com/meta-quick/opax/internal/compiler/wasm/opa"
+	"github.com/meta-quick/opax/internal/wasm/module"
 )
 
 func TestRoundtrip(t *testing.T) {

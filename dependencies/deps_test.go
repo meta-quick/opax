@@ -9,7 +9,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 type testData struct {

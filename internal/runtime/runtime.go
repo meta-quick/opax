@@ -9,9 +9,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/version"
 )
 
 // Params controls the types of runtime information to return.

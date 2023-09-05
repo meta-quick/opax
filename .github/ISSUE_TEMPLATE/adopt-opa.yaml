@@ -10,7 +10,7 @@ body:
         Thank you for supporting the OPA project. Adding your organization to the list of adopters raises awareness for the project and is more help than you think!
 
         Check the current list of adopters:
-        https://github.com/meta-quick/opa/blob/main/ADOPTERS.md
+        https://github.com/meta-quick/opax/blob/main/ADOPTERS.md
   - type: input
     id: org-name
     attributes:
@@ -48,7 +48,7 @@ body:
     attributes:
       label: Source Code Link (optional)
       description: Is your use case open source? Provide a link.
-      placeholder: ex. https://github.com/meta-quick/opa
+      placeholder: ex. https://github.com/meta-quick/opax
     validations:
       required: false
   - type: textarea

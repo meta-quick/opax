@@ -12,7 +12,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/meta-quick/opa/logging"
+	"github.com/meta-quick/opax/logging"
 )
 
 func (s *Server) getCertificate(h *tls.ClientHelloInfo) (*tls.Certificate, error) {

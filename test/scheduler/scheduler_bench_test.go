@@ -12,11 +12,11 @@ import (
 
 	"context"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/util"
 )
 
 // FIXME(tsandall): scheduling policy depends heavily on data indexing to

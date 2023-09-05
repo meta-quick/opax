@@ -10,12 +10,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/util/test"
 
-	"github.com/meta-quick/opa/internal/jwx/jwa"
-	"github.com/meta-quick/opa/internal/jwx/jws"
+	"github.com/meta-quick/opax/internal/jwx/jwa"
+	"github.com/meta-quick/opax/internal/jwx/jws"
 )
 
 func TestGenerateSignedToken(t *testing.T) {

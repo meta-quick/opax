@@ -7,7 +7,7 @@ package ast
 import (
 	//"encoding/json"
 	"github.com/bytedance/sonic"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 // ValueMap represents a key/value map between AST term values. Any type of term

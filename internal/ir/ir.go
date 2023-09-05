@@ -11,7 +11,7 @@ package ir
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/types"
+	"github.com/meta-quick/opax/types"
 )
 
 type (

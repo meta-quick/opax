@@ -19,14 +19,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/internal/report"
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/server"
+	"github.com/meta-quick/opax/internal/report"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/server"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestWatchPaths(t *testing.T) {
@@ -263,7 +263,7 @@ func TestCheckOPAUpdateBadURL(t *testing.T) {
 func TestCheckOPAUpdateWithNewUpdate(t *testing.T) {
 	exp := &report.DataResponse{Latest: report.ReleaseDetails{
 		Download:      "https://openpolicyagent.org/downloads/v100.0.0/opa_darwin_amd64",
-		ReleaseNotes:  "https://github.com/meta-quick/opa/releases/tag/v100.0.0",
+		ReleaseNotes:  "https://github.com/meta-quick/opax/releases/tag/v100.0.0",
 		LatestRelease: "v100.0.0",
 	}}
 
@@ -293,7 +293,7 @@ func TestCheckOPAUpdateLoopNoUpdate(t *testing.T) {
 func TestCheckOPAUpdateLoopWithNewUpdate(t *testing.T) {
 	exp := &report.DataResponse{Latest: report.ReleaseDetails{
 		Download:      "https://openpolicyagent.org/downloads/v100.0.0/opa_darwin_amd64",
-		ReleaseNotes:  "https://github.com/meta-quick/opa/releases/tag/v100.0.0",
+		ReleaseNotes:  "https://github.com/meta-quick/opax/releases/tag/v100.0.0",
 		LatestRelease: "v100.0.0",
 		OPAUpToDate:   false,
 	}}

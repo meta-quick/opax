@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestParseKeysConfig(t *testing.T) {

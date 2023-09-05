@@ -10,8 +10,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/meta-quick/opa/logging"
-	"github.com/meta-quick/opa/plugins"
+	"github.com/meta-quick/opax/logging"
+	"github.com/meta-quick/opax/plugins"
 )
 
 // Options contains parameters to setup and configure OPA.

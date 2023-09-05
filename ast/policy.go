@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/util"
 )
 
 // Initialize seed for term hashing. This is intentionally placed before the

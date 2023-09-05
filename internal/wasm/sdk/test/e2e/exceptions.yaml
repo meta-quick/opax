@@ -1,2 +1,2 @@
 # Exception Format is <test name>: <reason>
-"functions/default": "not supported in topdown, https://github.com/meta-quick/opa/issues/2445"
+"functions/default": "not supported in topdown, https://github.com/meta-quick/opax/issues/2445"

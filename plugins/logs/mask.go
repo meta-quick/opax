@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/meta-quick/opa/internal/deepcopy"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/internal/deepcopy"
+	"github.com/meta-quick/opax/util"
 )
 
 type maskOP string

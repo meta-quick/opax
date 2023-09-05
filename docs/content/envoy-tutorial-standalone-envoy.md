@@ -201,7 +201,7 @@ With the input value above, the answer is:
 ```live:example:output
 ```
 
-An example of the complete input received by OPA can be seen [here](https://github.com/meta-quick/opa-envoy-plugin#example-input).
+An example of the complete input received by OPA can be seen [here](https://github.com/meta-quick/opax-envoy-plugin#example-input).
 
 ### 4. Publish OPA Bundle
 
@@ -224,7 +224,7 @@ OPA is started with a configuration that sets the listening address of Envoy
 External Authorization gRPC server and specifies the name of the policy decision
 to query. OPA will also periodically download the policy bundle from the local Nginx server
 configured in the previous step. More information on the configuration options can be found
-[here](https://github.com/meta-quick/opa-envoy-plugin#configuration).
+[here](https://github.com/meta-quick/opax-envoy-plugin#configuration).
 
 Save the deployment as **deployment.yaml**:
 
@@ -427,4 +427,4 @@ to be sent to the downstream client or upstream. An example of a rule that
 returns an object that not only indicates if a request is allowed or not but
 also provides optional response headers, body and HTTP status that can be sent
 to the downstream client or upstream can be seen
-[here](https://github.com/meta-quick/opa-envoy-plugin#example-policy-with-object-response).
+[here](https://github.com/meta-quick/opax-envoy-plugin#example-policy-with-object-response).

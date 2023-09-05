@@ -7,7 +7,7 @@ package topdown
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 var errBadPath = fmt.Errorf("bad document path")

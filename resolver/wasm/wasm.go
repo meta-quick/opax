@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/rego/opa"
-	"github.com/meta-quick/opa/resolver"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/rego/opa"
+	"github.com/meta-quick/opax/resolver"
 )
 
 // New creates a new Resolver instance which is using the Wasm module

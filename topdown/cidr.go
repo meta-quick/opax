@@ -8,9 +8,9 @@ import (
 	"net"
 	"sort"
 
-	"github.com/meta-quick/opa/ast"
-	cidrMerge "github.com/meta-quick/opa/internal/cidr/merge"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	cidrMerge "github.com/meta-quick/opax/internal/cidr/merge"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 func getNetFromOperand(v ast.Value) (*net.IPNet, error) {

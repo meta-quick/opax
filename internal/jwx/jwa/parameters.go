@@ -3,7 +3,7 @@ package jwa
 import (
 	"crypto/elliptic"
 
-	"github.com/meta-quick/opa/internal/jwx/buffer"
+	"github.com/meta-quick/opax/internal/jwx/buffer"
 )
 
 // EllipticCurve provides a indirect type to standard elliptic curve such that we can

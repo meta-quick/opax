@@ -12,10 +12,10 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/ref"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/ref"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/version"
 )
 
 // Config represents the configuration file that OPA can be started with.

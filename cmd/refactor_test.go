@@ -8,9 +8,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/format"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/format"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestDoMoveRenamePackage(t *testing.T) {

@@ -15,8 +15,8 @@ import (
 
 	"github.com/foxcpp/go-mockdns"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
 )
 
 // TestNetLookupIPAddr replaces the resolver used by builtinLookupIPAddr.

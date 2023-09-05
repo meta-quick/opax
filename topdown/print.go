@@ -9,9 +9,9 @@ import (
 	"io"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/topdown/builtins"
-	"github.com/meta-quick/opa/topdown/print"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/topdown/builtins"
+	"github.com/meta-quick/opax/topdown/print"
 )
 
 func NewPrintHook(w io.Writer) print.Hook {

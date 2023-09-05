@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 func TestParseCachingConfig(t *testing.T) {

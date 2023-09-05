@@ -3,7 +3,7 @@ package print
 import (
 	"context"
 
-	"github.com/meta-quick/opa/ast"
+	"github.com/meta-quick/opax/ast"
 )
 
 // Context provides the Hook implementation context about the print() call.

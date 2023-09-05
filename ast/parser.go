@@ -18,9 +18,9 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 
-	"github.com/meta-quick/opa/ast/internal/scanner"
-	"github.com/meta-quick/opa/ast/internal/tokens"
-	"github.com/meta-quick/opa/ast/location"
+	"github.com/meta-quick/opax/ast/internal/scanner"
+	"github.com/meta-quick/opax/ast/internal/tokens"
+	"github.com/meta-quick/opax/ast/location"
 )
 
 // Note: This state is kept isolated from the parser so that we

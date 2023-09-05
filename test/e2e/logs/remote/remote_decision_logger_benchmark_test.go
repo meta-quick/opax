@@ -2,6 +2,7 @@
 // Use of this source code is governed by an Apache2
 // license that can be found in the LICENSE file.
 
+//go:build noisy
 // +build noisy
 
 package remote
@@ -16,11 +17,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meta-quick/opa/test/authz"
-	testAuthz "github.com/meta-quick/opa/test/authz"
-	"github.com/meta-quick/opa/test/e2e"
-	testLogs "github.com/meta-quick/opa/test/e2e/logs"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/test/authz"
+	testAuthz "github.com/meta-quick/opax/test/authz"
+	"github.com/meta-quick/opax/test/e2e"
+	testLogs "github.com/meta-quick/opax/test/e2e/logs"
+	"github.com/meta-quick/opax/util"
 )
 
 var testRuntime *e2e.TestRuntime

@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/version"
 )
 
 var versionPath = storage.MustParsePath("/system/version")

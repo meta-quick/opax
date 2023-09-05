@@ -13,9 +13,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/meta-quick/opa/internal/report"
-	"github.com/meta-quick/opa/internal/uuid"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/internal/report"
+	"github.com/meta-quick/opax/internal/uuid"
+	"github.com/meta-quick/opax/version"
 )
 
 func init() {

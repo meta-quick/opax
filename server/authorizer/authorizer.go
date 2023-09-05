@@ -12,15 +12,15 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/rego"
-	"github.com/meta-quick/opa/server/identifier"
-	"github.com/meta-quick/opa/server/types"
-	"github.com/meta-quick/opa/server/writer"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/topdown/print"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/rego"
+	"github.com/meta-quick/opax/server/identifier"
+	"github.com/meta-quick/opax/server/types"
+	"github.com/meta-quick/opax/server/writer"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/topdown/print"
+	"github.com/meta-quick/opax/util"
 )
 
 // Basic provides policy-based authorization over incoming requests.

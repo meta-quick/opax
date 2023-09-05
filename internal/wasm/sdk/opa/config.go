@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/meta-quick/opa/internal/wasm/sdk/opa/errors"
-	"github.com/meta-quick/opa/internal/wasm/util"
+	"github.com/meta-quick/opax/internal/wasm/sdk/opa/errors"
+	"github.com/meta-quick/opax/internal/wasm/util"
 )
 
 // WithPolicyFile configures a policy file to load.

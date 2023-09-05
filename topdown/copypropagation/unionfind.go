@@ -7,8 +7,8 @@ package copypropagation
 import (
 	"fmt"
 
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/util"
 )
 
 type rankFunc func(*unionFindRoot, *unionFindRoot) (*unionFindRoot, *unionFindRoot)

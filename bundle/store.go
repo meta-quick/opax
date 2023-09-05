@@ -9,11 +9,11 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/bytedance/sonic"
-	"github.com/meta-quick/opa/ast"
-	"github.com/meta-quick/opa/internal/json/patch"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/storage"
-	"github.com/meta-quick/opa/util"
+	"github.com/meta-quick/opax/ast"
+	"github.com/meta-quick/opax/internal/json/patch"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/storage"
+	"github.com/meta-quick/opax/util"
 	"strings"
 )
 

@@ -5,10 +5,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/meta-quick/opa/cmd/internal/exec"
-	sdk_test "github.com/meta-quick/opa/sdk/test"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/util/test"
+	"github.com/meta-quick/opax/cmd/internal/exec"
+	sdk_test "github.com/meta-quick/opax/sdk/test"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/util/test"
 )
 
 func TestExecBasic(t *testing.T) {

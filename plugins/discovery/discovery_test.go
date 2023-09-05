@@ -18,25 +18,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/meta-quick/opa/storage"
+	"github.com/meta-quick/opax/storage"
 
-	"github.com/meta-quick/opa/rego"
+	"github.com/meta-quick/opax/rego"
 
-	"github.com/meta-quick/opa/logging/test"
+	"github.com/meta-quick/opax/logging/test"
 
-	"github.com/meta-quick/opa/ast"
-	bundleApi "github.com/meta-quick/opa/bundle"
-	"github.com/meta-quick/opa/download"
-	"github.com/meta-quick/opa/metrics"
-	"github.com/meta-quick/opa/plugins"
-	"github.com/meta-quick/opa/plugins/bundle"
-	"github.com/meta-quick/opa/plugins/logs"
-	"github.com/meta-quick/opa/plugins/status"
-	"github.com/meta-quick/opa/server"
-	"github.com/meta-quick/opa/storage/inmem"
-	"github.com/meta-quick/opa/topdown/cache"
-	"github.com/meta-quick/opa/util"
-	"github.com/meta-quick/opa/version"
+	"github.com/meta-quick/opax/ast"
+	bundleApi "github.com/meta-quick/opax/bundle"
+	"github.com/meta-quick/opax/download"
+	"github.com/meta-quick/opax/metrics"
+	"github.com/meta-quick/opax/plugins"
+	"github.com/meta-quick/opax/plugins/bundle"
+	"github.com/meta-quick/opax/plugins/logs"
+	"github.com/meta-quick/opax/plugins/status"
+	"github.com/meta-quick/opax/server"
+	"github.com/meta-quick/opax/storage/inmem"
+	"github.com/meta-quick/opax/topdown/cache"
+	"github.com/meta-quick/opax/util"
+	"github.com/meta-quick/opax/version"
 )
 
 func TestMain(m *testing.M) {

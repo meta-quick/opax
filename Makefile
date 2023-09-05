@@ -65,14 +65,14 @@ RELEASE_BUILD_IMAGE := golang:$(GOVERSION)
 RELEASE_DIR ?= _release/$(VERSION)
 
 ifneq (,$(TELEMETRY_URL))
-TELEMETRY_FLAG := -X github.com/meta-quick/opa/internal/report.ExternalServiceURL=$(TELEMETRY_URL)
+TELEMETRY_FLAG := -X github.com/meta-quick/opax/internal/report.ExternalServiceURL=$(TELEMETRY_URL)
 endif
 
 LDFLAGS := "$(TELEMETRY_FLAG) \
-	-X github.com/meta-quick/opa/version.Version=$(VERSION) \
-	-X github.com/meta-quick/opa/version.Vcs=$(BUILD_COMMIT) \
-	-X github.com/meta-quick/opa/version.Timestamp=$(BUILD_TIMESTAMP) \
-	-X github.com/meta-quick/opa/version.Hostname=$(BUILD_HOSTNAME)"
+	-X github.com/meta-quick/opax/version.Version=$(VERSION) \
+	-X github.com/meta-quick/opax/version.Vcs=$(BUILD_COMMIT) \
+	-X github.com/meta-quick/opax/version.Timestamp=$(BUILD_TIMESTAMP) \
+	-X github.com/meta-quick/opax/version.Hostname=$(BUILD_HOSTNAME)"
 
 
 ######################################################

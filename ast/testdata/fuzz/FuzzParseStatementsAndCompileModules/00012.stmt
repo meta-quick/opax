@@ -1,2 +1,2 @@
 go test fuzz v1
-string("github.com/meta-quick/opa/storage/inmem")
+string("github.com/meta-quick/opax/storage/inmem")
