@@ -17,7 +17,7 @@ require (
 	github.com/gobwas/glob v0.2.3
 	github.com/gorilla/mux v1.8.0
 	github.com/meta-quick/jsonpath v0.1.2
-	github.com/meta-quick/mask v0.1.5
+	github.com/meta-quick/mask v0.1.6
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/peterh/liner v1.2.2
 	github.com/pkg/errors v0.9.1
