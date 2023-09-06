@@ -591,6 +591,8 @@ github.com/meta-quick/mask v0.1.4/go.mod h1:/QZIWtMn+G9ZzZ1bsnVL4QZKRkoZKJM2x2Oe
 github.com/meta-quick/mask v0.1.5/go.mod h1:j5b0j9rJb81qKqISjyGdkzCnaN44cs2FYgT2xuEMss8=
 github.com/meta-quick/mask v0.1.6/go.mod h1:j5b0j9rJb81qKqISjyGdkzCnaN44cs2FYgT2xuEMss8=
 github.com/meta-quick/mask v0.1.7/go.mod h1:FbfV73ATZpref39YHjLSC3I2KhJWeGYYTUuA4OGvocc=
+github.com/meta-quick/mask v0.1.8/go.mod h1:FbfV73ATZpref39YHjLSC3I2KhJWeGYYTUuA4OGvocc=
+github.com/meta-quick/mask v0.1.9/go.mod h1:FbfV73ATZpref39YHjLSC3I2KhJWeGYYTUuA4OGvocc=
 github.com/mgechev/dots v0.0.0-20190921121421-c36f7dcfbb81/go.mod h1:KQ7+USdGKfpPjXk4Ga+5XxQM4Lm4e3gAogrreFAYpOg=
 github.com/mgechev/revive v1.0.6/go.mod h1:Lj5gIVxjBlH8REa3icEOkdfchwYc291nShzZ4QYWyMo=
 github.com/microcosm-cc/bluemonday v1.0.2/go.mod h1:iVP4YcDBq+n/5fb23BhYFvIMq/leAFZyRl6bYmGDlGc=
