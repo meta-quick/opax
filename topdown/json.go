@@ -20,7 +20,16 @@ import (
 var (
 	shuffle_mutex sync.Mutex
 	shuffleModel  = make(map[string]*interface{})
+	smKeyMap      = make(map[string]string)
 )
+
+func SmKeyAdd(key string, value string) {
+	smKeyMap[key] = value
+}
+
+func SmKeyGet(key string) string {
+	return smKeyMap[key]
+}
 
 func ShuffleModelAddString(key string, value string) {
 	var v interface{}
@@ -1075,18 +1084,10 @@ func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string) 
 
 	// 设置SM2秘钥
 	if f == types.SM2_MASK_STR.Name {
-		sm2Key := ShuffleModelGet(sm2)
-		switch v := (*sm2Key).(type) {
-		case string:
-			args[0] = v
-		}
+		args[0] = SmKeyGet(sm2)
 	}
 	if f == types.SM2_MASK_STR.Name {
-		sm4Key := ShuffleModelGet(sm4)
-		switch v := (*sm4Key).(type) {
-		case string:
-			args[0] = v
-		}
+		args[0] = SmKeyGet(sm4)
 	}
 	return f, args
 }

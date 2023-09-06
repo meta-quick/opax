@@ -2565,3 +2565,11 @@ func ShuffleModelGet(ns, key string) *interface{} {
 	lkey := ns + "/" + key
 	return topdown.ShuffleModelGet(lkey)
 }
+
+func SmKeyAdd(key string, value string) {
+	topdown.SmKeyAdd(key, value)
+}
+
+func SmKeyGet(key string) string {
+	return topdown.SmKeyGet(key)
+}
