@@ -1081,13 +1081,13 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string) {
 	f := fn.(jsonmask.ProcessHandle).Fn
 	args := fn.(jsonmask.ProcessHandle).Args
-
 	// 设置SM2秘钥
 	if f == types.SM2_MASK_STR.Name {
-		args[0] = SmKeyGet(sm2)
+		args = []string{SmKeyGet(sm2)}
 	}
-	if f == types.SM2_MASK_STR.Name {
-		args[0] = SmKeyGet(sm4)
+	// SM4秘钥
+	if f == types.SM4_MASK_STR.Name {
+		args = []string{SmKeyGet(sm4)}
 	}
 	return f, args
 }
