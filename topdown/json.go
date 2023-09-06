@@ -887,14 +887,13 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 	originTarget := target
 
 	// Shuffle model namesapce.
-	model := string(operands[1].Value.(ast.String))
-	// Shuffle model namesapce.
-	model = model + "/" + string(operands[2].Value.(ast.String))
-
+	ns := string(operands[1].Value.(ast.String))
 	// sm2 model namesapce.
-	sm2 := model + "/sm2"
+	sm2 := ns + "/sm2"
 	// sm4 model namesapce.
-	sm4 := model + "/sm4"
+	sm4 := ns + "/sm4"
+	// Shuffle model namesapce.
+	model := ns + "/" + string(operands[2].Value.(ast.String))
 
 	// Expect an array of operations.
 	operations, err := builtins.ArrayOperand(operands[3].Value, 2)
@@ -1027,9 +1026,10 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 									for i := 0; i < vv.Len(); i++ {
 										v := vv.Elem(i)
 										step, _ := ast.ValueToInterfaceX(v.Value)
+										f, args := autoAddMaskArgs(fn, sm2, sm4)
 										ctx := types.BuiltinContext{
-											Fn:      fn.(jsonmask.ProcessHandle).Fn,
-											Args:    fn.(jsonmask.ProcessHandle).Args,
+											Fn:      f,
+											Args:    args,
 											Current: typeCasting(step),
 										}
 										types.Eval(&ctx)
@@ -1043,25 +1043,7 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 									}
 								default:
 									step, _ := ast.ValueToInterfaceX(vv)
-									f := fn.(jsonmask.ProcessHandle).Fn
-									args := fn.(jsonmask.ProcessHandle).Args
-
-									// 设置SM2秘钥
-									if f == types.SM2_MASK_STR.Name {
-										sm2Key := ShuffleModelGet(sm2)
-										switch v := (*sm2Key).(type) {
-										case string:
-											args[0] = v
-										}
-									}
-									if f == types.SM2_MASK_STR.Name {
-										sm4Key := ShuffleModelGet(sm4)
-										switch v := (*sm4Key).(type) {
-										case string:
-											args[0] = v
-										}
-									}
-
+									f, args := autoAddMaskArgs(fn, sm2, sm4)
 									ctx := types.BuiltinContext{
 										Fn:      f,
 										Args:    args,
@@ -1085,6 +1067,28 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 	}
 
 	return iter(target)
+}
+
+func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string) {
+	f := fn.(jsonmask.ProcessHandle).Fn
+	args := fn.(jsonmask.ProcessHandle).Args
+
+	// 设置SM2秘钥
+	if f == types.SM2_MASK_STR.Name {
+		sm2Key := ShuffleModelGet(sm2)
+		switch v := (*sm2Key).(type) {
+		case string:
+			args[0] = v
+		}
+	}
+	if f == types.SM2_MASK_STR.Name {
+		sm4Key := ShuffleModelGet(sm4)
+		switch v := (*sm4Key).(type) {
+		case string:
+			args[0] = v
+		}
+	}
+	return f, args
 }
 
 func typeCasting(d interface{}) string {
