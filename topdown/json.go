@@ -20,15 +20,19 @@ import (
 var (
 	shuffle_mutex sync.Mutex
 	shuffleModel  = make(map[string]*interface{})
-	smKeyMap      = make(map[string]string)
+	smKeyMap      = sync.Map{}
 )
 
 func SmKeyAdd(key string, value string) {
-	smKeyMap[key] = value
+	smKeyMap.Store(key, value)
 }
 
 func SmKeyGet(key string) string {
-	return smKeyMap[key]
+	v, ok := smKeyMap.Load(key)
+	if ok {
+		return v.(string)
+	}
+	return ""
 }
 
 func ShuffleModelAddString(key string, value string) {
