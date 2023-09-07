@@ -1035,7 +1035,10 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 									for i := 0; i < vv.Len(); i++ {
 										v := vv.Elem(i)
 										step, _ := ast.ValueToInterfaceX(v.Value)
-										f, args := autoAddMaskArgs(fn, sm2, sm4)
+										f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
+										if !doNext {
+											continue
+										}
 										ctx := types.BuiltinContext{
 											Fn:      f,
 											Args:    args,
@@ -1052,7 +1055,10 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 									}
 								default:
 									step, _ := ast.ValueToInterfaceX(vv)
-									f, args := autoAddMaskArgs(fn, sm2, sm4)
+									f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
+									if !doNext {
+										continue
+									}
 									ctx := types.BuiltinContext{
 										Fn:      f,
 										Args:    args,
@@ -1078,18 +1084,24 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 	return iter(target)
 }
 
-func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string) {
+func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string, bool) {
 	f := fn.(jsonmask.ProcessHandle).Fn
 	args := fn.(jsonmask.ProcessHandle).Args
 	// 设置SM2秘钥
 	if f == types.SM2_MASK_STR.Name {
+		if &sm2 == nil || sm2 == "" {
+			return f, args, false
+		}
 		args = []string{SmKeyGet(sm2)}
 	}
 	// SM4秘钥
 	if f == types.SM4_MASK_STR.Name {
+		if &sm4 == nil || sm4 == "" {
+			return f, args, false
+		}
 		args = []string{SmKeyGet(sm4)}
 	}
-	return f, args
+	return f, args, true
 }
 
 func typeCasting(d interface{}) string {
