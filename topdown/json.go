@@ -899,14 +899,24 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 	target := ast.NewTerm(operands[0].Value)
 	originTarget := target
 
+	fmt.Println("=================进入builtinJSONShuffle方法=================")
+
 	// Shuffle model namesapce.
 	ns := string(operands[1].Value.(ast.String))
 	// sm2 model namesapce.
 	sm2 := ns + "/sm2"
+
+	fmt.Println("=================获取到sm2 namesapce================= " + sm2)
+
 	// sm4 model namesapce.
 	sm4 := ns + "/sm4"
+
+	fmt.Println("=================获取到sm4 namesapce================= " + sm4)
+
 	// Shuffle model namesapce.
 	model := ns + "/" + string(operands[2].Value.(ast.String))
+
+	fmt.Println("=================获取到model namesapce================= " + model)
 
 	// Expect an array of operations.
 	operations, err := builtins.ArrayOperand(operands[3].Value, 2)
@@ -1040,6 +1050,7 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 										v := vv.Elem(i)
 										step, _ := ast.ValueToInterfaceX(v.Value)
 										f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
+										fmt.Sprintln("准备执行方法 ================" + f)
 										if !doNext {
 											continue
 										}
@@ -1048,18 +1059,22 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 											Args:    args,
 											Current: typeCasting(step),
 										}
+										fmt.Sprintln("开发执行方法 ================" + ctx.Fn)
 										types.Eval(&ctx)
 										newValue, err := ast.InterfaceToValue(ctx.Result)
+										fmt.Sprintln("执行结果为 ================" + newValue.String())
 										if err == nil {
 											target = jsonPatchReplace(target, extpath[i], ast.NewTerm(newValue))
 											if target == nil {
 												return iter(originTarget)
 											}
 										}
+										fmt.Sprintln("执行出错 ================")
 									}
 								default:
 									step, _ := ast.ValueToInterfaceX(vv)
 									f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
+									fmt.Sprintln("准备执行方法 ================" + f)
 									if !doNext {
 										continue
 									}
@@ -1068,14 +1083,17 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 										Args:    args,
 										Current: typeCasting(step),
 									}
+									fmt.Sprintln("开发执行方法 ================" + ctx.Fn)
 									types.Eval(&ctx)
 									newValue, err := ast.InterfaceToValue(ctx.Result)
+									fmt.Sprintln("执行结果为 ================" + newValue.String())
 									if err == nil {
 										target = jsonPatchReplace(target, path, ast.NewTerm(newValue))
 										if target == nil {
 											return iter(originTarget)
 										}
 									}
+									fmt.Sprintln("执行出错 ================")
 								}
 							}
 						}
@@ -1089,10 +1107,18 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 }
 
 func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string, bool) {
+
+	fmt.Println("=================进入 autoAddMaskArgs 方法================= ")
+
 	f := fn.(jsonmask.ProcessHandle).Fn
 	args := fn.(jsonmask.ProcessHandle).Args
+
+	fmt.Println("=================检测到 f 方法================= " + f)
+
 	// 设置SM2秘钥
 	if f == types.SM2_MASK_STR.Name {
+		fmt.Println("=================检测到 sm2 脱敏================= " + f)
+
 		if &sm2 == nil || sm2 == "" {
 			return f, args, false
 		}
@@ -1100,11 +1126,16 @@ func autoAddMaskArgs(fn interface{}, sm2 string, sm4 string) (string, []string, 
 	}
 	// SM4秘钥
 	if f == types.SM4_MASK_STR.Name {
+		fmt.Println("=================检测到 sm4 脱敏================= " + f)
+
 		if &sm4 == nil || sm4 == "" {
 			return f, args, false
 		}
 		args = []string{SmKeyGet(sm4)}
 	}
+
+	fmt.Println("=================从 autoAddMaskArgs 返回================= " + f)
+
 	return f, args, true
 }
 
