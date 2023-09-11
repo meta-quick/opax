@@ -1050,7 +1050,7 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 										v := vv.Elem(i)
 										step, _ := ast.ValueToInterfaceX(v.Value)
 										f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
-										fmt.Sprintln("准备执行方法 ================" + f)
+										fmt.Println("准备执行方法 ================" + f)
 										if !doNext {
 											continue
 										}
@@ -1059,22 +1059,22 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 											Args:    args,
 											Current: typeCasting(step),
 										}
-										fmt.Sprintln("开发执行方法 ================" + ctx.Fn)
+										fmt.Println("开发执行方法 ================" + ctx.Fn)
 										types.Eval(&ctx)
 										newValue, err := ast.InterfaceToValue(ctx.Result)
-										fmt.Sprintln("执行结果为 ================" + newValue.String())
+										fmt.Println("执行结果为 ================" + newValue.String())
 										if err == nil {
 											target = jsonPatchReplace(target, extpath[i], ast.NewTerm(newValue))
 											if target == nil {
 												return iter(originTarget)
 											}
 										}
-										fmt.Sprintln("执行出错 ================")
+										fmt.Println("执行出错 ================")
 									}
 								default:
 									step, _ := ast.ValueToInterfaceX(vv)
 									f, args, doNext := autoAddMaskArgs(fn, sm2, sm4)
-									fmt.Sprintln("准备执行方法 ================" + f)
+									fmt.Println("准备执行方法 ================" + f)
 									if !doNext {
 										continue
 									}
@@ -1083,17 +1083,17 @@ func builtinJSONShuffle(_ BuiltinContext, operands []*ast.Term, iter func(*ast.T
 										Args:    args,
 										Current: typeCasting(step),
 									}
-									fmt.Sprintln("开发执行方法 ================" + ctx.Fn)
+									fmt.Println("开发执行方法 ================" + ctx.Fn)
 									types.Eval(&ctx)
 									newValue, err := ast.InterfaceToValue(ctx.Result)
-									fmt.Sprintln("执行结果为 ================" + newValue.String())
+									fmt.Println("执行结果为 ================" + newValue.String())
 									if err == nil {
 										target = jsonPatchReplace(target, path, ast.NewTerm(newValue))
 										if target == nil {
 											return iter(originTarget)
 										}
 									}
-									fmt.Sprintln("执行出错 ================")
+									fmt.Println("执行出错 ================")
 								}
 							}
 						}
