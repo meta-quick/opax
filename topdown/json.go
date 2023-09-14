@@ -74,6 +74,9 @@ func ShuffleModelAdd(key string, value *interface{}) {
 }
 
 func ShuffleModelGet(key string) *interface{} {
+	shuffle_mutex.Lock()
+	defer shuffle_mutex.Unlock()
+
 	if v, ok := shuffleModel[key]; ok {
 		return v
 	} else {
